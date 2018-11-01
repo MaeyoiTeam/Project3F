@@ -8,6 +8,8 @@ import {
     Button
 } from 'react-native-elements';
 import LeftComponent from './LeftComponent';
+
+
 class HeaderComponent extends Component{
     render(){
         return(
@@ -26,7 +28,8 @@ class HeaderComponent extends Component{
 
 const mapStateToProps = (state) => ({
     fetchReducer: state.fetchReducer,
-    authReducer: state.authReducer
+    authReducer: state.authReducer,
+    nav:state.nav
 });
 //Used to add dispatch (action) into props
 const mapDispatchToProps={

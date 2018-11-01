@@ -32,18 +32,20 @@ const Tabs = createBottomTabNavigator({
 
 const Navigator = createStackNavigator({
     Home: {
-        screen: Tabs,
+        screen: Profile,
         navigationOptions: {
-           header:(<Headbar/>) // เพิ่ม title ให้ส่วนหัวเป้นคำว่า Home
+            header: (<Headbar/>)
         }
     },
     Profile2:{
-        screen:Profile,
+        screen:AddData,
         navigationOptions: {
             header:(<Headbar/>)
         },
     }
     
+}, {
+    initialRouteName: 'Home',
 });
 
 

@@ -16,9 +16,6 @@ render(){
                     rounded
                     source={{ uri: this.props.authReducer.data.photoURL }}
                       activeOpacity={0}
-                   onPress={()=>{
-                       NavigationService.navigate("Profile",{})
-                   }}
                 />}
         </View>
     );
@@ -28,7 +25,7 @@ render(){
 
 const mapStateToProps = (state) => ({
     fetchReducer: state.fetchReducer,
-    authReducer: state.authReducer
+    authReducer: state.authReducer,
 });
 //Used to add dispatch (action) into props
 const mapDispatchToProps={
