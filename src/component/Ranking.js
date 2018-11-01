@@ -25,7 +25,7 @@ class Ranking extends Component{
                                 this.current={data:item,index:i}
                              }
                             return <View key={i}>
-                                <Text>{i} : {item.name}</Text>
+                                <Text>Rank: {i+1} : {item.name}</Text>
                                 <Text>     Score:  {item.score}</Text>
                             </View>
         })
@@ -33,7 +33,7 @@ class Ranking extends Component{
                      <Text>Your Score</Text>
                      {
                          this.current!=null &&<View>
-                          <Text>{this.current.index} : {this.current.data.name}</Text>
+                          <Text>Rank: {this.current.index+1} : {this.current.data.name}</Text>
                         <Text>     Score:  {this.current.data.score}</Text>
                          </View>
                       }

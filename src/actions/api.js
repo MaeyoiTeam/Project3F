@@ -40,11 +40,6 @@ export const updateScore = (uid,point) => {
 });
 }
 
-
-
-
-
-
 //Update Database when Login
 export const updateDataUser=(uid,user)=>{
     const personalRef = userRef.child(uid);
