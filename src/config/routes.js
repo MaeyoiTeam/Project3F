@@ -32,7 +32,7 @@ const Tabs = createBottomTabNavigator({
 
 const Navigator = createStackNavigator({
     Home: {
-        screen: Profile,
+        screen: Ranking,
         navigationOptions: {
             header: (<Headbar/>)
         }

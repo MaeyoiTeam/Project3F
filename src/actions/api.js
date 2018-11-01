@@ -12,15 +12,12 @@ export const rankingUser=()=>{
                              uid:item.key
                 });
                 });
-//ดึงข้อมูล ชื่อ และ สกอร์(ใช้uidไปก่อน) มาได้แล้วทั้งหมด
-//TODOS: have to Sort all of data by score
-/*
-HERE SORT (data)
-*/
-                return resolve(data);
-            });
+                return resolve(data.sort((a, b) => {
+                return b.score - a.score;
+            }));
+});
         });
-}
+    }
 //
 export const updateScore = (uid,point) => {
     return new Promise((resolve, reject) => {
