@@ -4,22 +4,20 @@ import { connect } from 'react-redux';
 import Ranking from './component/Ranking';
 import SignIn from './component/SignIn';
 import AddData from './component/AddData';
-
+import {Button} from 'react-native-elements';
 import {fetchUser} from './actions/signIn';
 
 class Container extends Component {
-
   render() {
       props=this.props;
     return (
         <View>
         <Text>Home Screen</Text>
+        <Button title="GO SignIn" onPress={()=>this.props.navigation.navigate('Profile')}/>
             </View>
         );   
 }
 }
-
-
 
 const mapStateToProps = (state) => ({
     fetchReducer:state.fetchReducer,

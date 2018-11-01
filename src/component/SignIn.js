@@ -5,6 +5,13 @@ import {signOut,signInWithFacebook,signInWithGoogle,fetchUser} from '../actions/
 import {Button,Avatar} from 'react-native-elements';
 
 class SingIn extends Component{
+  static navigationOptions = ({
+      navigation
+  }) => {
+      return {
+          title: navigation.getParam('otherParam', 'Sign in'),
+      };
+  };
 
      componentWillMount() {
          this.props.fetchUser();
@@ -32,6 +39,7 @@ class SingIn extends Component{
                     onPress={() => console.log("Works!")}
                     activeOpacity={0.7}
                 />
+                 <Button title="GO Profile" onPress={()=>this.props.navigation.navigate("Profile")}/>
         </View>  }
       </View>
     );
@@ -41,7 +49,9 @@ class SingIn extends Component{
               <View>
         <Button title="Login With Facebook" onPress={props.signInWithFacebook}/>
         <Button title="Login With Google" onPress={props.signInWithGoogle}/>
-
+            
+            
+            
       </View>
           );
       }
