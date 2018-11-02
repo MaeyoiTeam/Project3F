@@ -20,7 +20,7 @@ class Ranking extends Component{
                 <View>
                 <Text>Ranking</Text>
                      {
-                         props.rankReducer.data.map((item, i) => {
+                        props.rankReducer.data.map((item, i) => {
                              if(item.uid==props.authReducer.data.uid){
                                 this.current={data:item,index:i}
                              }
@@ -44,7 +44,7 @@ class Ranking extends Component{
         return(<View><Text>Rank: Please Login</Text></View>);
     }
     }
-    
+   d
 }
 // Used to add reducer's states into the props
 const mapStateToProps = (state) => ({

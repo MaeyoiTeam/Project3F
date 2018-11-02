@@ -15,9 +15,9 @@ export const rankingUser=()=>{
                 return resolve(data.sort((a, b) => {
                 return b.score - a.score;
             }));
-});
+            });
         });
-    }
+}
 //
 export const updateScore = (uid,point) => {
     return new Promise((resolve, reject) => {
@@ -49,9 +49,9 @@ export const updateDataUser=(uid,user)=>{
 }
 
 //ดึงข้อมูล จากDataตามUserนั้นๆ
-export default (data)=>{
+export default (data,path)=>{
     return new Promise((resolve,reject)=>{
-        const personalRef = userRef.child(data.uid);
+        const personalRef = userRef.child(data.uid+"/"+path);
         personalRef.on("value", snapshot => {
             if(snapshot.exists()){
             var myJSON = JSON.stringify(snapshot.val());

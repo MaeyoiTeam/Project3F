@@ -3,8 +3,6 @@ import { Provider, connect } from 'react-redux';
 import React from 'react';
 import ReduxNavigation,{store} from './src/ReduxNavigation'
 
-
-
 class App extends React.Component {
 
   constructor(){
@@ -21,4 +19,5 @@ class App extends React.Component {
     );
   }
 }
+
 export default App;

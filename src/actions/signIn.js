@@ -1,9 +1,9 @@
 import {FETCH_USER,FETCH_USER_FAIL,FETCH_USER_SUCCESS} from '../constants';
 import firebase from '../config/firebase'
-import loadData,{updateDataUser} from './api';
+import {updateDataUser} from './api';
+import { NavigationActions } from 'react-navigation'
 export const signOut = () => dispatch => {
     firebase.auth().signOut().then(() => {
-        console.log("SignOut");
         dispatch({
                 type: FETCH_USER_FAIL
             });
@@ -70,7 +70,7 @@ export const fetchUser = () => dispatch => {
                     }
                 });
         } else {
-            console.log("Work")
+             dispatch(NavigationActions.navigate({routeName:"SignIn"}));
             dispatch({
                 type: FETCH_USER_FAIL
             });

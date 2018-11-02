@@ -1,51 +1,110 @@
-import React from 'react';
-
-import { createStackNavigator, createBottomTabNavigator,StackNavigator } from 'react-navigation';
+import React, { Component }  from 'react';
+import { Platform } from 'react-native';
+import { createStackNavigator,createDrawerNavigator } from 'react-navigation';
+import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
+import Icon from 'react-native-vector-icons/Ionicons';
+//Containers
+import Ranking from '../containers/Ranking';
+import SignIn from '../containers/SignIn';
+import Notifications from '../containers/Notifications';
+import Profile from '../containers/Profile';
+import Home from '../containers/Home';
+import Setting from '../containers/Setting';
+import QuestList from '../containers/QuestList';
 //Component
-import Ranking from '../component/Ranking';
-import SignIn from '../component/SignIn';
-import AddData from '../component/AddData';
-import Profile from '../component/Profile';
 import LeftComponent from '../component/Header/LeftComponent';
-import Container from '../Container';
-import Headbar from '../component/Header/Headbar';
-const Tabs = createBottomTabNavigator({
-    SignIn: {
-        screen: SignIn,
-    },
+import MidComponent from '../component/Header/MidComponent';
+import RightComponent from '../component/Header/RightComponent';
+
+
+
+const BottomTabs = createMaterialBottomTabNavigator(
+  {
     Profile: {
-        router:Profile,
-        screen: Profile,
-        navigationOptions: {
-            headerTitle: 'Home', // เพิ่ม title ให้ส่วนหัวเป้นคำว่า Home
-        }
+      screen: Profile,
+      navigationOptions: {
+        tabBarLabel: 'Profile',
+        tabBarColor: '#1e1e1d',
+        tabBarIcon: ({ tintColor, focused }) => (
+          <Icon size={30} name={ Platform.OS === 'ios' ? (focused ? 'ios-contact' : 'ios-contact-outline') : 'md-contact' } style={{ color: tintColor }} />
+        )
+      }
     },
-
-    Ranking: {
-        screen: Ranking
+    QuestList: {
+      screen: QuestList,
+      navigationOptions: {
+        tabBarLabel: 'Ranking',
+        tabBarColor: '#ff7538',
+        tabBarIcon: ({ tintColor, focused }) => (
+          <Icon size={30} name={ Platform.OS === 'ios' ? (focused ? 'ios-settings' : 'ios-settings-outline') : 'md-list-box' } style={{ color: tintColor }} />
+        )
+      }
     },
-    AddData:{
-        screen:AddData 
+     Home: {
+      screen: Home,
+      navigationOptions: {
+        tabBarLabel: 'Home',
+        tabBarColor: '#842655',
+        tabBarIcon: ({ tintColor, focused }) => (
+          <Icon size={30} name={ Platform.OS === 'ios' ? (focused ? 'ios-home' : 'ios-home-outline') : 'md-home' } style={{ color: tintColor }} />
+        )
+      }
     },
-    
-});
-
-const Navigator = createStackNavigator({
-    Home: {
-        screen: Tabs,
-        navigationOptions: {
-            header: (<Headbar/>)
-        }
+    Notifications: {
+      screen: Notifications,
+      navigationOptions: {
+        tabBarLabel: 'Settings',
+        tabBarColor: '#ff3899',
+        tabBarIcon: ({ tintColor, focused }) => (
+          <Icon size={30} name={ Platform.OS === 'ios' ? (focused ? 'ios-settings' : 'ios-settings-outline') : 'md-notifications-outline' } style={{ color: tintColor }} />
+        )
+      }
     },
-    Profile2:{
-        screen:AddData,
-        navigationOptions: {
-            header:(<Headbar/>)
-        },
+    Settings: {
+      screen: Setting,
+      navigationOptions: {
+        tabBarLabel: 'Settings',
+        tabBarColor: '#ff3899',
+        tabBarIcon: ({ tintColor, focused }) => (
+          <Icon size={30} name={ Platform.OS === 'ios' ? (focused ? 'ios-settings' : 'ios-settings-outline') : 'md-settings' } style={{ color: tintColor }} />
+        )
+      }
     }
-    
-}, {
-    initialRouteName: 'Home',
+  },{
+    shifting: true,
+    activeTintColor: 'white',
+    inactiveTintColor: '#ddd',
+    barStyle: {
+      height: 55
+    }
+  }
+);
+const Navigator =createStackNavigator({
+Home:{    screen:BottomTabs,
+          navigationOptions:{
+            
+            headerLeft:(<LeftComponent/>),
+            headerTitle:(<MidComponent/>),
+            headerRight:(<RightComponent/>),
+            headerStyle: {
+            }
+          }
+    },
+QuestList:{ screen:QuestList,
+            navigationOptions: {
+            headerTitle: "Quest",
+            headerStyle: {}
+            }
+          },
+SignIn: {
+      screen: SignIn,
+      navigationOptions: {
+      }
+    },
+
+},{
+  mode:"modal",
+  headerLayoutPreset:"center"
 });
 
 

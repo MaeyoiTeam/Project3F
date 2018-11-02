@@ -1,27 +1,39 @@
 import React,{Component} from 'react';
-import { View,Text } from 'react-native';
+import {StyleSheet,View,Text } from 'react-native';
 import { connect } from 'react-redux';
 import {Avatar} from 'react-native-elements';
 import {fetchUser} from '../../actions/signIn';
 import {Header} from 'react-native-elements';
+import {navigate} from '../../actions'
 class LeftComponent extends Component{
+
          componentWillMount() {
-             this.props.fetchUser();
+            this.props.fetchUser()
          }
 render(){
     return(
-        <View>
-        {this.props.authReducer.isAuth && <Avatar
-                    size = "small"
+        <View style={styles.container}>
+                {   this.props.authReducer.isAuth && <View>
+                <Avatar
+                    size="small"
                     rounded
                     source={{ uri: this.props.authReducer.data.photoURL }}
-                      activeOpacity={0}
-                />}
+                    onPress={() => this.props.navigate("Profile")}
+                    activeOpacity={0.7}
+                />
+                <Text>{this.props.authReducer.data.displayName}</Text>
+                </View>
+                }
         </View>
     );
 }
 }
 
+const styles = StyleSheet.create({
+    container:{
+
+    }
+})
 
 const mapStateToProps = (state) => ({
     fetchReducer: state.fetchReducer,
@@ -29,7 +41,7 @@ const mapStateToProps = (state) => ({
 });
 //Used to add dispatch (action) into props
 const mapDispatchToProps={
-  fetchUser
+  fetchUser, navigate
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(LeftComponent)

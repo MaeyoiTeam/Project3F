@@ -39,7 +39,7 @@ class SingIn extends Component{
                     onPress={() => console.log("Works!")}
                     activeOpacity={0.7}
                 />
-                 <Button title="GO Profile" onPress={()=>this.props.navigation.navigate("Profile")}/>
+                 <Button title="GO Profile" onPress={()=>this.props.navigation.navigate("Profile2")}/>
         </View>  }
       </View>
     );
@@ -49,9 +49,7 @@ class SingIn extends Component{
               <View>
         <Button title="Login With Facebook" onPress={props.signInWithFacebook}/>
         <Button title="Login With Google" onPress={props.signInWithGoogle}/>
-            
-            
-            
+    
       </View>
           );
       }

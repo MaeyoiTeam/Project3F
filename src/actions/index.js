@@ -1,8 +1,7 @@
 import {FETCHING_DATA,FETCHING_DATA_FAILURE,FETCHING_DATA_SUCCESS,FETCH_USER, RANK_DATA, RANK_DATA_SUCCESS, RANK_DATA_FAILURE} from '../constants';
 import firebase from '../config/firebase'
 import loadData,{updateDataUser,rankingUser,updateScore} from './api';
-
-
+import { NavigationActions } from 'react-navigation'
 export const SetStageToSuccess =(data)=>({
     type:FETCHING_DATA_SUCCESS,
     payload:data
@@ -15,11 +14,12 @@ export const SetStageToFailure = (data) => ({
 });
 
 
+export const getQuest=(data) => fetchData(loadData(data))
 
-export const fetchData = (data) => {
+export const fetchData = (fn) => {
     return (dispatch) => {
         dispatch(SetStageToFetching());
-        loadData(data)
+        fn
         .then(result=>{
              dispatch(SetStageToSuccess(result))
         }).catch(error=>{
@@ -29,10 +29,22 @@ export const fetchData = (data) => {
     }
 }
 
-export const fetchRanking = () => {
+
+export const navigate = (nav)=>{
+    console.log("work")
+    return (dispatch)=>{
+        dispatch(NavigationActions.navigate({routeName:nav}));
+    }
+} 
+
+
+export const fetchRanking = () => fetchRank(rankingUser());
+
+
+const fetchRank = (fn) => {
     return (dispatch) => {
         dispatch({ type:RANK_DATA });
-        rankingUser()
+        fn
             .then(result => {
                 dispatch({type:RANK_DATA_SUCCESS,payload:result})
             }).catch(error => {

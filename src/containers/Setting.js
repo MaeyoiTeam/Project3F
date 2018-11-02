@@ -1,14 +1,18 @@
 import { View,Text,StyleSheet } from 'react-native';
 import React,{Component} from 'react';
-class Profile extends Component{
+
+class Setting extends Component {
+    static navigationOptions = () => ({
+ 
+  });
 
     render(){
         return(
             <View>
-                <Text>This is Profile</Text>
+                <Text>This is Setting</Text>
             </View>
         );
     }
 }
 
-export default Profile;
+export default Setting;
