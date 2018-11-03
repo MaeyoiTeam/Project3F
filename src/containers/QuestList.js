@@ -9,18 +9,18 @@ class QuestList extends Component {
     }
     render(){
         const {fetchReducer,authReducer} = this.props;
-        const obj = Object.values(fetchReducer.data);
         return(
             <View>
             {
                 
-                 obj.map((data)=>{ const quest = Object.values(data)
+                fetchReducer.data.map((data)=>{ const quest = Object.values(data)
                     return quest.map((info,i)=><View key={i}>
-                                <Text>{info.name}</Text>
-                                <Text>{info.detail}</Text>
-                                <Text>{info.type}</Text>
-                                <Text>{info.target}</Text>
-                                <Text>{info.current}</Text>
+                                <Text>Quest name: {info.name}</Text>
+                                <Text>Quest detail: {info.detail}</Text>
+                                <Text>Quest type: {info.type}</Text>
+                                <Text>Quest target: {info.target}</Text>
+                                <Text>Quest current: {info.current}</Text>
+                                <Text>  </Text>
                             </View>
                                     )
                     })
@@ -29,9 +29,6 @@ class QuestList extends Component {
         );
     }
 }
-
-
-
 
 // Used to add reducer's states into the props
 const mapStateToProps = (state) => ({

@@ -1,4 +1,4 @@
-import {FETCH_USER,FETCH_USER_FAIL,FETCH_USER_SUCCESS} from '../constants';
+import {FETCH_USER_FAIL,FETCH_USER_SUCCESS} from '../constants';
 import firebase from '../config/firebase'
 import {updateDataUser} from './api';
 import { NavigationActions } from 'react-navigation'
@@ -15,10 +15,7 @@ export const signOut = () => dispatch => {
 export const signInWithFacebook = () => async dispatch => {
 
     try {
-        const {
-            type,
-            token
-        } = await Expo.Facebook.logInWithReadPermissionsAsync('345061262917638', {
+        const {type, token} = await Expo.Facebook.logInWithReadPermissionsAsync('345061262917638', {
             permissions: ['public_profile']
         });
         if (type === 'success') {
@@ -60,15 +57,18 @@ export const signInWithGoogle = async () => {
 export const fetchUser = () => dispatch => {
     firebase.auth().onAuthStateChanged(user => {
         if (user) {
-            updateDataUser(user.uid, user.providerData[0]);
-                dispatch({
+            updateDataUser(user.uid, user.providerData[0]).then((result)=>{
+            dispatch({
                     type: FETCH_USER_SUCCESS,
-                    payload:{ uid:user.uid,
-                        displayName:user.providerData[0].displayName,
-                        photoURL:user.providerData[0].photoURL,
-                        email:user.providerData[0].email
+                    payload:{   uid:result.uid,
+                        displayName: result.displayName,
+                        photoURL: result.photoURL+"?width=512",
+                        email: result.email,
+                        levelQ:result.levelQ
                     }
-                });
+                })}
+                );
+                
         } else {
              dispatch(NavigationActions.navigate({routeName:"SignIn"}));
             dispatch({

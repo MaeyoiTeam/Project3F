@@ -9,7 +9,7 @@ class SingIn extends Component{
       navigation
   }) => {
       return {
-          title: navigation.getParam('otherParam', 'Sign in'),
+          title: navigation.getParam('otherParam', 'Switch Account'),
       };
   };
 
@@ -27,29 +27,29 @@ class SingIn extends Component{
       if(props.authReducer.isAuth){
           return (
         <View>
+                  {
+                      props.authReducer.data != null && <View>
+                          <Text>{props.authReducer.data.displayName}</Text>
+                          <Text>{props.authReducer.data.email}</Text>
+                          <Avatar
+                              xlarge
+                              rounded
+                              source={{ uri: props.authReducer.data.photoURL }}
+                              onPress={() => console.log("Works!")}
+                              activeOpacity={0.7}
+                          />
+                      </View>}
+
+
         <Button title="Logout" onPress={props.signOut}/>
-        {
-    props.authReducer.data!= null && <View>
-        <Text>{props.authReducer.data.displayName}</Text>
-            <Text>{props.authReducer.data.email}</Text>
-                <Avatar
-                    size="small"
-                    rounded
-                    source={{ uri: props.authReducer.data.photoURL }}
-                    onPress={() => console.log("Works!")}
-                    activeOpacity={0.7}
-                />
-                 <Button title="GO Profile" onPress={()=>this.props.navigation.navigate("Profile2")}/>
-        </View>  }
       </View>
     );
       }
       else{
           return(
               <View>
-        <Button title="Login With Facebook" onPress={props.signInWithFacebook}/>
-        <Button title="Login With Google" onPress={props.signInWithGoogle}/>
-    
+        <Button title="Login With Facebook" onPress={this.props.signInWithFacebook}/>
+        <Button title="Login With Google" onPress={this.props.signInWithGoogle}/>
       </View>
           );
       }

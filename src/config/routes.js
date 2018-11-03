@@ -30,13 +30,13 @@ const BottomTabs = createMaterialBottomTabNavigator(
         )
       }
     },
-    QuestList: {
-      screen: QuestList,
+    Ranking: {
+      screen: Ranking,
       navigationOptions: {
         tabBarLabel: 'Ranking',
         tabBarColor: '#ff7538',
         tabBarIcon: ({ tintColor, focused }) => (
-          <Icon size={30} name={ Platform.OS === 'ios' ? (focused ? 'ios-settings' : 'ios-settings-outline') : 'md-list-box' } style={{ color: tintColor }} />
+          <Icon size={30} name={ Platform.OS === 'ios' ? (focused ? 'ios-settings' : 'ios-settings-outline') : 'md-trending-up' } style={{ color: tintColor }} />
         )
       }
     },

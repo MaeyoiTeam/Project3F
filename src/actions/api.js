@@ -1,7 +1,22 @@
 import firebase from '../config/firebase';
 const databaseRef = firebase.database().ref();
 const userRef = databaseRef.child('users/');
+const systemRef = databaseRef.child('system/')
 
+
+// fetch System data
+export const fetchSystem =(type)=>{
+    return new Promise((resolve,reject)=>{
+        systemRef.on('value',snap=>{
+            if(type=="questList") {
+                return resolve(snap.val().questList); }
+            else if(type=="achieve") {return resolve(snap.val().achieve);}
+            else return reject("wrong Type") 
+        })
+    })
+}
+
+//fetch Ranking
 export const rankingUser=()=>{
         return new Promise((resolve, reject) => {
             userRef.on('value',snapshot=>{
@@ -18,7 +33,8 @@ export const rankingUser=()=>{
             });
         });
 }
-//
+
+//TEST update User data
 export const updateScore = (uid,point) => {
     return new Promise((resolve, reject) => {
     const personalRef = userRef.child(uid);
@@ -42,10 +58,15 @@ export const updateScore = (uid,point) => {
 
 //Update Database when Login
 export const updateDataUser=(uid,user)=>{
-    const personalRef = userRef.child(uid);
-    personalRef.update({
-        ...user
+    return new Promise((resolve,reject)=>{
+        const personalRef = userRef.child(uid);
+        personalRef.update({ ...user }).then(()=>{
+            personalRef.on("value",snap=>{
+                return resolve(snap.val());
+            });
+        });
     });
+   
 }
 
 //ดึงข้อมูล จากDataตามUserนั้นๆ
@@ -54,7 +75,6 @@ export default (data,path)=>{
         const personalRef = userRef.child(data.uid+"/"+path);
         personalRef.on("value", snapshot => {
             if(snapshot.exists()){
-            var myJSON = JSON.stringify(snapshot.val());
             return resolve(snapshot.val());
         }
             else{
