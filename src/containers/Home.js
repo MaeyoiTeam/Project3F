@@ -5,12 +5,21 @@ import { connect } from 'react-redux';
 import { randomQuest } from '../actions/quest'
 class Home extends Component {
 
+
+    randomQ=()=>{
+       return new Promise((resolve, reject) => {
+           this.props.randomQuest(this.props.authReducer.data.uid)
+           return resolve("QuestList")
+       })
+    }
+
     render(){
-        console.log(this.props.questReducer.data);
         return(
             <View>
                 <Button title="Let's Achieve!" 
-                    onPress={()=>this.props.randomQuest()}
+                    onPress={async ()=>{let path = await this.randomQ();
+                    this.props.navigation.navigate(path);
+                    }}
                 />
                 <Button title="Go QuestList" 
                     onPress={()=>this.props.navigation.navigate('QuestList')}

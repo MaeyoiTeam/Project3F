@@ -1,7 +1,7 @@
 import { View,Text,StyleSheet } from 'react-native';
 import React,{Component} from 'react';
 import { connect } from 'react-redux';
-import {getQuest} from '../actions/quest'
+import {getQuest} from '../../actions/quest'
 class QuestList extends Component {
     componentDidMount(){
          this.props.getQuest(this.props.authReducer.data)

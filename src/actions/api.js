@@ -16,6 +16,14 @@ export const fetchSystem =(type)=>{
     })
 }
 
+//update User data quest
+export const updateUserQuest=(quest,uid)=>{
+    const personalRef = userRef.child(uid);
+        personalRef.child("quest/undone/").update({
+            ...quest
+        });
+}
+
 //fetch Ranking
 export const rankingUser=()=>{
         return new Promise((resolve, reject) => {

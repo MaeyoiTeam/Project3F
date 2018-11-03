@@ -13,15 +13,15 @@ class LeftComponent extends Component{
 render(){
     return(
         <View style={styles.container}>
-                {   this.props.authReducer.isAuth && <View>
-                <Avatar
-                    size="small"
-                    rounded
-                    source={{ uri: this.props.authReducer.data.photoURL }}
-                    onPress={() => this.props.navigate("Profile")}
-                    activeOpacity={0.7}
-                />
-                <Text>{this.props.authReducer.data.displayName}</Text>
+                {   this.props.authReducer.isAuth &&
+                <View>
+                    <Avatar
+                        size="small"
+                        rounded
+                        source={{ uri: this.props.authReducer.data.photoURL }}
+                        onPress={() => this.props.navigate("Profile")}
+                        activeOpacity={0.7}
+                    />
                 </View>
                 }
         </View>

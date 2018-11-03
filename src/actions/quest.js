@@ -1,5 +1,5 @@
 import {fetchData,fetchQuest} from './index';
-import loadUserData,{fetchSystem} from './api';
+import loadUserData,{fetchSystem,updateUserQuest} from './api';
 
 
 export const getQuest = (data) => {
@@ -8,11 +8,14 @@ export const getQuest = (data) => {
 }
 
 
-export const randomQuest=()=>{
-  const result = fetchSystem("questList");
-  result.then((data)=>{
+export const randomQuest=(uid)=>{
+  const result = fetchSystem("questList").then((data)=>{
     //TODO Random Quest and Select 3 quest then return
-    console.log(data);
+      var keys = Object.keys(data)
+      const selectQ = data[keys[keys.length * Math.random() << 0]];
+      console.log(uid)
+      updateUserQuest(selectQ,uid)
+      return selectQ;
   })
   return fetchQuest(result);
 }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {  View, Text } from 'react-native';
 import { connect } from 'react-redux';
-import {signOut,signInWithFacebook,signInWithGoogle,fetchUser} from '../actions/signIn';
+import {signOut,signInWithFacebook,signInWithGoogle,fetchUser} from '../../actions/signIn';
 import {Button,Avatar} from 'react-native-elements';
 
 class SingIn extends Component{

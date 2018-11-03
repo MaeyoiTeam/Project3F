@@ -5,12 +5,12 @@ import { createMaterialBottomTabNavigator } from 'react-navigation-material-bott
 import Icon from 'react-native-vector-icons/Ionicons';
 //Containers
 import Ranking from '../containers/Ranking';
-import SignIn from '../containers/SignIn';
 import Notifications from '../containers/Notifications';
 import Profile from '../containers/Profile';
 import Home from '../containers/Home';
 import Setting from '../containers/Setting';
-import QuestList from '../containers/QuestList';
+import QuestList from '../containers/stacks/QuestList';
+import SignIn from '../containers/stacks/SignIn';
 //Component
 import LeftComponent from '../component/Header/LeftComponent';
 import MidComponent from '../component/Header/MidComponent';

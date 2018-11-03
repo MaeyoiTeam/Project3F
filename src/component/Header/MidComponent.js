@@ -19,7 +19,7 @@ class MidComponent extends Component {
 
     easter9=()=>{
         if(this.state.num>=9){Alert.alert('BELIEVE!!!!!',
-            'Create by JB',
+            'Nine9Belive',
             [
                 {text: 'Press for Believe'},
             ],

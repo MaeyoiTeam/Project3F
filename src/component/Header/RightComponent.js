@@ -11,7 +11,10 @@ class RightComponent extends Component{
 render(){
     return(
         <View style={styles.container}>
-                <Text>Right</Text>
+        {   this.props.authReducer.isAuth && <View>
+                <Text>{this.props.authReducer.data.displayName} </Text>
+            </View>
+                }
         </View>
     );
 }

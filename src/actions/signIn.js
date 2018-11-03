@@ -60,7 +60,7 @@ export const fetchUser = () => dispatch => {
             updateDataUser(user.uid, user.providerData[0]).then((result)=>{
             dispatch({
                     type: FETCH_USER_SUCCESS,
-                    payload:{   uid:result.uid,
+                    payload:{   uid:user.uid,
                         displayName: result.displayName,
                         photoURL: result.photoURL+"?width=512",
                         email: result.email,
