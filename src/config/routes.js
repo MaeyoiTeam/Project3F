@@ -11,6 +11,7 @@ import Home from '../containers/Home';
 import Setting from '../containers/Setting';
 import QuestList from '../containers/stacks/QuestList';
 import SignIn from '../containers/stacks/SignIn';
+import Quest from '../containers/stacks/Quest';
 //Component
 import LeftComponent from '../component/Header/LeftComponent';
 import MidComponent from '../component/Header/MidComponent';
@@ -101,7 +102,10 @@ SignIn: {
       navigationOptions: {
       }
     },
-
+Quest: {
+  screen: Quest,
+  navigationOptions: {}
+},
 },{
   mode:"modal",
   headerLayoutPreset:"center"

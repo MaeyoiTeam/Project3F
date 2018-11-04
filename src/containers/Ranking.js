@@ -30,11 +30,11 @@ class Ranking extends Component{
                             </View>
         })
                      }
-                     <Text>Your Score</Text>
+                     <Text>Your Star</Text>
                      {
                          this.current!=null &&<View>
                           <Text>Rank: {this.current.index+1} : {this.current.data.name}</Text>
-                        <Text>     Score:  {this.current.data.score}</Text>
+                        <Text>     Star:  {this.current.data.score}</Text>
                          </View>
                       }
                 </View>

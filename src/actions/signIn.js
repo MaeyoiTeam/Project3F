@@ -31,7 +31,7 @@ export const signInWithFacebook = () => async dispatch => {
     }
 }
 
-export const signInWithGoogle = async () => {
+export const signInWithGoogle = async dispatch => {
     try {
         const result = await Expo.Google.logInAsync({
             androidClientId: '895255967672-7h7v7t5r97c3cpj8rijahirbcqjjcifv.apps.googleusercontent.com',
@@ -41,11 +41,7 @@ export const signInWithGoogle = async () => {
         if (result.type === 'success') {
             const provider = firebase.auth.GoogleAuthProvider;
             const credential = provider.credential(null, result.accessToken);
-            return firebase.auth().signInAndRetrieveDataWithCredential(credential);
-        } else {
-            return {
-                cancelled: true
-            };
+            const data = firebase.auth().signInAndRetrieveDataWithCredential(credential);
         }
     } catch (e) {
         return {

@@ -81,13 +81,11 @@ export const updateDataUser=(uid,user)=>{
 export default (data,path)=>{
     return new Promise((resolve,reject)=>{
         const personalRef = userRef.child(data.uid+"/"+path);
-        personalRef.on("value", snapshot => {
+        const result = personalRef.on("value", snapshot => {
             if(snapshot.exists()){
             return resolve(snapshot.val());
         }
-            else{
-                return reject("Fail");
-            }
     });
+    return reject("Fail");
 });
 }

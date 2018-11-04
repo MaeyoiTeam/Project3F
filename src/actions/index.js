@@ -20,8 +20,7 @@ export const SetStageToFailure = (data) => ({
 export const fetchData = (fn) => {
     return (dispatch) => {
         dispatch(SetStageToFetching());
-        fn
-        .then(result=>{
+        fn.then(result=>{
              dispatch(SetStageToSuccess(result))
         }).catch(error=>{
              dispatch(SetStageToFailure())

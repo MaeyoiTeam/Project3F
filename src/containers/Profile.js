@@ -8,6 +8,9 @@ class Profile extends Component{
 
 
 
+
+
+
     render(){
         const {authReducer} = this.props
         return <View>
@@ -16,9 +19,7 @@ class Profile extends Component{
                 <Avatar xlarge rounded source={{ uri: authReducer.data.photoURL }} onPress={() => console.log("Works!")} />
                 <Text>{authReducer.data.displayName}</Text>
                 <Text>{authReducer.data.Email}</Text>
-                {authReducer.data.levelQ!=null &&
-                    Object.keys(authReducer.data.levelQ).map((key, index)=> <Text key={index}>{key} level: {authReducer.data.levelQ[key]}</Text>)
-                } 
+{/* //TODO แสดง เลเวล ค่าประสบการณ์ Objectที่เก็บข้อมูล = authReducer.data.levelQ */}
               </View>}
           </View>;
     }

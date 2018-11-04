@@ -12,6 +12,7 @@ import {
   createReactNavigationReduxMiddleware,
 } from 'react-navigation-redux-helpers';
 import { connect } from 'react-redux';
+import logger from 'redux-logger'
 import {NavigationActions,addNavigationHelpers} from 'react-navigation'
 // Note: createReactNavigationReduxMiddleware must be run before reduxifyNavigator
 const middleware = createReactNavigationReduxMiddleware(
