@@ -31,13 +31,13 @@ export const signInWithFacebook = () => async dispatch => {
     }
 }
 
-export const signInWithGoogle = async dispatch => {
+export const signInWithGoogle = async () => {
     try {
         const result = await Expo.Google.logInAsync({
             androidClientId: '895255967672-7h7v7t5r97c3cpj8rijahirbcqjjcifv.apps.googleusercontent.com',
             iosClientId: '895255967672-bg7pp8ojou3cfrsjqcssm0s6km3nvevq.apps.googleusercontent.com',
             scopes: ['profile', 'email'],
-        });
+        })
         if (result.type === 'success') {
             const provider = firebase.auth.GoogleAuthProvider;
             const credential = provider.credential(null, result.accessToken);
@@ -53,6 +53,7 @@ export const signInWithGoogle = async dispatch => {
 export const fetchUser = () => dispatch => {
     firebase.auth().onAuthStateChanged(user => {
         if (user) {
+            console.log("Work")
             updateDataUser(user.uid, user.providerData[0]).then((result)=>{
             dispatch({
                     type: FETCH_USER_SUCCESS,

@@ -17,7 +17,7 @@ export const fetchSystem =(type)=>{
 }
 
 //update User data quest
-export const updateUserQuest=(quest,uid)=>{
+export const updateUserQuest= (quest,uid)=>{
     const personalRef = userRef.child(uid);
         personalRef.child("quest/undone/").update({
             ...quest

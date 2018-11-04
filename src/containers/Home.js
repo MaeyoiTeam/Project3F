@@ -5,9 +5,6 @@ import { connect } from 'react-redux';
 import { randomQuest,getQuestList } from '../actions/quest'
 class Home extends Component {
 
-    componentDidMount() {
-            this.props.getQuestList(this.props.authReducer.data)
-    }
 //TODO rerender หลังจากได้ค่าAuthReducerมาจากHeader เพื่อเรียกส่งauthReducer.data ให้ getQuest
 //? ไปอ่านLife cylce reactมา
     
@@ -30,7 +27,10 @@ class Home extends Component {
                 <Button title="Go QuestList" 
                     onPress={()=>this.props.navigation.navigate('QuestList')}
                 />
-                {this.props.questReducer.haveQuest&& <Text>YESS</Text>}
+                <Button title="Go Pedo" 
+                    onPress={()=>this.props.navigation.navigate('Pedo')}
+                />
+                
             </View>
         );
         }

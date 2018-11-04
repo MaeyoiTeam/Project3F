@@ -12,6 +12,7 @@ import Setting from '../containers/Setting';
 import QuestList from '../containers/stacks/QuestList';
 import SignIn from '../containers/stacks/SignIn';
 import Quest from '../containers/stacks/Quest';
+import Pedo from '../containers/stacks/Pedo';
 //Component
 import LeftComponent from '../component/Header/LeftComponent';
 import MidComponent from '../component/Header/MidComponent';
@@ -102,6 +103,10 @@ SignIn: {
       navigationOptions: {
       }
     },
+ Pedo: {
+  screen: Pedo,
+  navigationOptions: {}
+}, 
 Quest: {
   screen: Quest,
   navigationOptions: {}
