@@ -2,11 +2,11 @@ import { View,Text,StyleSheet } from 'react-native';
 import React,{Component} from 'react';
 import {Button} from 'react-native-elements'
 import { connect } from 'react-redux';
-import { randomQuest,getQuest } from '../actions/quest'
+import { randomQuest,getQuestList } from '../actions/quest'
 class Home extends Component {
 
     componentDidMount() {
-            this.props.getQuest(this.props.authReducer.data)
+            this.props.getQuestList(this.props.authReducer.data)
     }
 //TODO rerender หลังจากได้ค่าAuthReducerมาจากHeader เพื่อเรียกส่งauthReducer.data ให้ getQuest
 //? ไปอ่านLife cylce reactมา
@@ -19,7 +19,6 @@ class Home extends Component {
     }
 
     render(){
-        console.log(this.props.questReducer)
         if(this.props.authReducer.isAuth){
               return(
             <View>
@@ -48,7 +47,7 @@ const mapStateToProps = (state) => ({
 });
 //Used to add dispatch (action) into props
 const mapDispatchToProps = {
-    randomQuest, getQuest
+    randomQuest, getQuestList
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home)

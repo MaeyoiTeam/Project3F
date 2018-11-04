@@ -1,12 +1,24 @@
-import {fetchData,fetchQuest} from './index';
-import loadUserData,{fetchSystem,updateUserQuest} from './api';
+import {fetchData,fetchQuestList} from './index';
+import loadUserData,{fetchSystem,updateUserQuest,updateScore} from './api';
+
+export const updateQuest=(uid,key,point)=>{
+//! ปัญหาคือ point ทำUpdate มันแทนที่เลย จริงๆต้องแค่อัพเดทเข้าไปผ
+ return fetchData(updateScore(uid,key,point));
+}
 
 
-export const getQuest = (data) => {
+export const fetchQuest = (data) => {
+  const result = new Promise((resolve,reject)=>{
+    return resolve(data)
+  })
+    return fetchData(result);
+}
+
+
+export const getQuestList = (data) => {
   const result = loadUserData(data, "quest").then((obj)=>{
     return Object.values(obj)});
-
-   return fetchQuest(result);
+   return fetchQuestList(result);
 }
 
 

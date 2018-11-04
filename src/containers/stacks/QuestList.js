@@ -1,11 +1,11 @@
 import { View,Text,StyleSheet } from 'react-native';
 import React,{Component} from 'react';
 import { connect } from 'react-redux';
-import {getQuest} from '../../actions/quest'
+import {getQuestList,fetchQuest} from '../../actions/quest'
 import {Button} from 'react-native-elements';
 class QuestList extends Component {
     componentDidMount(){
-          this.props.getQuest(this.props.authReducer.data) 
+          this.props.getQuestList(this.props.authReducer.data)
     }
 //TODO Update Component หลังจาก สุ่มQuestมา 
 
@@ -16,15 +16,20 @@ class QuestList extends Component {
             <View>
             {
                 
-                questReducer.data.map((data)=>{ const quest = Object.values(data)
+                questReducer.data.map((data)=>{
+                     const quest = Object.entries(data)
                     return quest.map((info,i)=><View key={i}>
-                                <Text>Quest name: {info.name}</Text>
-                                <Text>Quest detail: {info.detail}</Text>
-                                <Text>Quest type: {info.type}</Text>
-                                <Text>Quest target: {info.target}</Text>
-                                <Text>Quest current: {info.current}</Text>
-                                <Button title="Go to Quest"
-                                onPress={()=>this.props.navigation.navigate({routeName:'Quest'})}
+                                <Text>Quest name: {info[1].name}</Text>
+                                <Text>Quest type: {info[1].type}</Text>
+                                <Button title={"Play "+info[1].name}
+                                onPress = {
+                                        () => {
+                                            this.props.fetchQuest({key:info[0],quest:info[1]})
+                                            this.props.navigation.navigate({
+                                                routeName: 'Quest'
+                                            });
+                                        }
+                                }
                                 />
                             </View>
                                     )
@@ -43,7 +48,7 @@ const mapStateToProps = (state) => ({
 });
 //Used to add dispatch (action) into props
 const mapDispatchToProps = {
-    getQuest
+    getQuestList, fetchQuest
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(QuestList)

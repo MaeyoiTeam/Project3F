@@ -42,20 +42,21 @@ export const rankingUser=()=>{
         });
 }
 
-//TEST update User data
-export const updateScore = (uid,point) => {
+// update QuestUser data
+//!  Bug เวลาเปลี่ยนเควส แล้วPoint เด้ง
+export const updateScore = (uid,key,point) => {
     return new Promise((resolve, reject) => {
-    const personalRef = userRef.child(uid);
-    personalRef.child('score').once("value",snap=>{
-        if(snap.exists){
-            const newScore = snap.val()+point
-            personalRef.update({
-                score: newScore
-            });
+    const qusetUserRef = userRef.child(uid+"/quest/undone/"+key);
+     qusetUserRef.once("value", snap => {
+        if(snap.exists()){
+            const newScore = snap.val().current + point
             
-                return resolve(newScore);
+            qusetUserRef.update({current:newScore});
+            let result =snap.val();
+            result['current']=newScore;
+            console.log(result)
+                return resolve({key:key,quest:result});
             }
-        
         else {
             console.log("Error");
             return reject("Fail");

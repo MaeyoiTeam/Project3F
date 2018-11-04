@@ -49,7 +49,7 @@ export const fetchRanking  = () => {
     }
 }
 
-export const fetchQuest = (fn) => {
+export const fetchQuestList = (fn) => {
     return (dispatch) => {
         dispatch({ type:QUEST_DATA });
         fn.then(result => {
@@ -61,17 +61,3 @@ export const fetchQuest = (fn) => {
     }
 }
 
-export const upScore = (uid,point) => dispatch => {
-            dispatch({type:FETCHING_DATA})
-            updateScore(uid,point).then(result => {
-                dispatch({
-                    type: FETCHING_DATA_SUCCESS,
-                    payload: result
-                })
-            }).catch(err => {
-                dispatch({
-                    type: FETCHING_DATA_FAILURE
-                })
-                console.log(err)
-            })
-    }
