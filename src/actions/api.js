@@ -43,19 +43,18 @@ export const rankingUser=()=>{
 }
 
 // update QuestUser data
-//!  Bug เวลาเปลี่ยนเควส แล้วPoint เด้ง
 export const updateScore = (uid,key,point) => {
-    return new Promise((resolve, reject) => {
-    const qusetUserRef = userRef.child(uid+"/quest/undone/"+key);
+    return new Promise(async (resolve, reject) => {
+    const qusetUserRef = await userRef.child(uid+"/quest/undone/"+key);
      qusetUserRef.once("value", snap => {
         if(snap.exists()){
             const newScore = snap.val().current + point
-            
+            console.log(newScore+" ="+snap.val().current+"+ "+point+" From "+snap.key)
             qusetUserRef.update({current:newScore});
             let result =snap.val();
             result['current']=newScore;
             console.log(result)
-                return resolve({key:key,quest:result});
+                return resolve({key:key,...result});
             }
         else {
             console.log("Error");
@@ -79,9 +78,10 @@ export const updateDataUser=(uid,user)=>{
 }
 
 //ดึงข้อมูล จากDataตามUserนั้นๆ
-export default (data,path)=>{
+export default (uid,path)=>{
+    console.log(path)
     return new Promise((resolve,reject)=>{
-        const personalRef = userRef.child(data.uid+"/"+path);
+        const personalRef = userRef.child(uid+"/"+path);
         const result = personalRef.on("value", snapshot => {
             if(snapshot.exists()){
             return resolve(snapshot.val());

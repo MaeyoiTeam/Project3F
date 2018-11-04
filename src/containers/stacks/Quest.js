@@ -2,9 +2,15 @@ import { View,Text,StyleSheet } from 'react-native';
 import React,{Component} from 'react';
 import { connect } from 'react-redux';
 import {Button} from 'react-native-elements'
-import {updateQuest} from '../../actions/quest'
+import {updateQuest,fetchQuest} from '../../actions/quest'
 class Quest extends Component {
-
+  static navigationOptions = ({
+      navigation
+  }) => {
+      return {
+          title: navigation.getParam('otherParam', "Quest"),
+      };
+  };
     constructor(props){
         super(props);
         this.state={
@@ -15,21 +21,31 @@ class Quest extends Component {
             target:0
         }
     }
-    render(){
+    componentDidUpdate(prevProps, prevState, snapshot){
+        if(prevProps.fetchReducer!=this.props.fetchReducer){
+            this.setState({
+                ...this.props.fetchReducer.data
+            })
+        }
+    }
+// rerender Update Quest
 
+    render(){
+        console.log(this.state)
+
+// น่าจะใช้ lifecyle แก้
         const {fetchReducer,authReducer} = this.props;
         const {name,type,detail,current,target}=this.state;
-        console.log(fetchReducer.data.key)
         return(
             <View>
                 <Text>QUEST</Text>
-                {   fetchReducer.data.quest!=null   &&<View>
-                    <Text>Name: {fetchReducer.data.quest.name||name} Type: {fetchReducer.data.quest.type||type}</Text>
-                <Text>Detail: {fetchReducer.data.quest.detail||detail} </Text>
-                <Text>Exp: {fetchReducer.data.quest.current||current}/{fetchReducer.data.quest.target||target}</Text>
-                <Button title="Up 10" onPress={()=>this.props.updateQuest(authReducer.data.uid,fetchReducer.data.key,10)}/> {/*//!!บัค เวลาเปลี่ยนเควสแล้วพ้อยเด้ง */}
+                <View>
+                    <Text>Name: {name} Type: {type}</Text>
+                <Text>Detail: {detail} </Text>
+                <Text>Exp: {current}/{target}</Text>
+                <Button title="Up 10" onPress={()=>this.props.updateQuest(authReducer.data.uid,fetchReducer.data.key,10)}/> 
                 </View>
-                }
+                
             </View>
         );
     }
@@ -42,7 +58,7 @@ const mapStateToProps = (state) => ({
 });
 //Used to add dispatch (action) into props
 const mapDispatchToProps = {
-    updateQuest
+    updateQuest,fetchQuest
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Quest)

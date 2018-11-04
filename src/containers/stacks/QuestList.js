@@ -5,11 +5,10 @@ import {getQuestList,fetchQuest} from '../../actions/quest'
 import {Button} from 'react-native-elements';
 class QuestList extends Component {
     componentDidMount(){
-          this.props.getQuestList(this.props.authReducer.data)
+          this.props.getQuestList(this.props.authReducer.data.uid)
     }
 //TODO Update Component หลังจาก สุ่มQuestมา 
 
-    
     render(){
         const {questReducer,authReducer,fetchReducer} = this.props;
         return(
@@ -24,7 +23,7 @@ class QuestList extends Component {
                                 <Button title={"Play "+info[1].name}
                                 onPress = {
                                         () => {
-                                            this.props.fetchQuest({key:info[0],quest:info[1]})
+                                            this.props.fetchQuest(authReducer.data.uid,info[0])
                                             this.props.navigation.navigate({
                                                 routeName: 'Quest'
                                             });

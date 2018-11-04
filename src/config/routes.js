@@ -93,7 +93,7 @@ Home:{    screen:BottomTabs,
     },
 QuestList:{ screen:QuestList,
             navigationOptions: {
-            headerTitle: "Quest",
+            headerTitle: "Quest List",
             headerStyle: {}
             }
           },
