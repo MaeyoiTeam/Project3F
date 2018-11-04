@@ -5,6 +5,7 @@ import { StyleSheet, Text, View } from "react-native";
 
 export default class PedometerSensor extends React.Component {
   state = {
+    start: new Date("2018-11-03T23:10:00-06:00"),
     time:new Date(),
     isPedometerAvailable: "checking",
     pastStepCount: 0,
@@ -41,9 +42,7 @@ export default class PedometerSensor extends React.Component {
         });
       }
     );
-    const start = new Date();
-    start.setDate(this.state.time.getDate() -1);
-    Pedometer.getStepCountAsync(start, this.state.time).then(
+    Pedometer.getStepCountAsync(this.state.start, this.state.time).then(
       result => {
         this.setState({ pastStepCount: result.steps });
       },
@@ -62,7 +61,6 @@ export default class PedometerSensor extends React.Component {
   };
 
   render() {
-      console.log(this.state.pastStepCount)
     return (
       <View style={styles.container}>
         <Text>
