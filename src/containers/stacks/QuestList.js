@@ -8,16 +8,15 @@ class QuestList extends Component {
           this.props.getQuestList(this.props.authReducer.data.uid)
     }
 //TODO Update Component หลังจาก สุ่มQuestมา 
-
+// แสดงเฉพาะเควสที่ยังไม่เสร็จ
     render(){
         const {questReducer,authReducer,fetchReducer} = this.props;
+
         return(
             <View>
-            {
-                
-                questReducer.data.map((data)=>{
-                     const quest = Object.entries(data)
-                    return quest.map((info,i)=><View key={i}>
+            {          
+                questReducer.data.map((info, i) =>
+                            <View key={i}>
                                 <Text>Quest name: {info[1].name}</Text>
                                 <Text>Quest type: {info[1].type}</Text>
                                 <Button title={"Play "+info[1].name}
@@ -31,9 +30,8 @@ class QuestList extends Component {
                                 }
                                 />
                             </View>
-                                    )
-                    })
-            }
+            )
+            } 
             </View>
         );
     }

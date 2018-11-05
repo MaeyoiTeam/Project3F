@@ -1,26 +1,44 @@
 import {fetchData,fetchQuestList} from './index';
 import loadUserData,{fetchSystem,updateUserQuest,updateScore} from './api';
 
-export const updateQuest=(uid,key,point)=>{
- return fetchData(updateScore(uid,key,point));
+
+
+const checkComplete =(current,target)=>{
+    console.log(current + "/" + target)
+      if (current >= target) {
+        //TODO นำเควสนี้ ย้ายไปยัง done
+        //TODO เพิ่ม  Star
+        //TODO เช็ค Achieve
+        console.log("Sucess")
+      } 
 }
+
+// Update Quest while During Quest
+export const updateQuest=(uid,key,point)=>{
+ return fetchData(updateScore(uid,key,point).then((obj)=>{
+      checkComplete(obj.current,obj.target);
+return obj 
+}));
+}
+// Fetch during Quest Firsttime 
 export const fetchQuest = (uid,key) => {
   const path = "quest/undone/"+key;
   const result = loadUserData(uid,path).then((obj)=>{
+
     return {key:key,...obj}
   });
     return fetchData(result);
 }
 
-
+// Get during Quest List form userData 
 export const getQuestList = (uid) => {
   const result = loadUserData(uid, "quest").then((obj)=>{
-    return Object.values(obj)});
+    return Object.entries(obj.undone)});
    return fetchQuestList(result);
 }
 
-
-export const randomQuest=(uid)=>{
+//Random Quest from system
+export const randomQuest=(data)=>{
 //? จะเอาข้อมูลUserQuest จาก รับมาจากfunction หรือเอาUIDไปหาใหม่อีกทีดี  
   const result = fetchSystem("questList").then((data)=>{
 //* *สุ่มเควสจากแต่ละtype 1อัน
@@ -36,7 +54,7 @@ export const randomQuest=(uid)=>{
           ...selectQ
         }
       })
-      updateUserQuest(selectQ,uid)
+      updateUserQuest(selectQ,data.uid)
       return selectQ;
   })
   return fetchData(result);

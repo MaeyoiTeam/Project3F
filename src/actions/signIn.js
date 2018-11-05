@@ -53,7 +53,7 @@ export const signInWithGoogle = async () => {
 export const fetchUser = () => dispatch => {
     firebase.auth().onAuthStateChanged(user => {
         if (user) {
-            console.log("Work")
+//TODO add UserAchievement
             updateDataUser(user.uid, user.providerData[0]).then((result)=>{
             dispatch({
                     type: FETCH_USER_SUCCESS,
@@ -61,7 +61,8 @@ export const fetchUser = () => dispatch => {
                         displayName: result.displayName,
                         photoURL: result.photoURL+"?width=512",
                         email: result.email,
-                        levelQ:result.levelQ
+                        levelQ:result.levelQ,
+                        quest:Object.keys(result.quest.done)
                     }
                 })}
                 );

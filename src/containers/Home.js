@@ -10,7 +10,7 @@ class Home extends Component {
     
     randomQ=()=>{
        return new Promise((resolve, reject) => {
-           this.props.randomQuest(this.props.authReducer.data.uid)
+           this.props.randomQuest(this.props.authReducer.data)
            return resolve("QuestList")
        })
     }

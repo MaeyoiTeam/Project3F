@@ -49,11 +49,9 @@ export const updateScore = (uid,key,point) => {
      qusetUserRef.once("value", snap => {
         if(snap.exists()){
             const newScore = snap.val().current + point
-            console.log(newScore+" ="+snap.val().current+"+ "+point+" From "+snap.key)
             qusetUserRef.update({current:newScore});
             let result =snap.val();
             result['current']=newScore;
-            console.log(result)
                 return resolve({key:key,...result});
             }
         else {
@@ -79,7 +77,6 @@ export const updateDataUser=(uid,user)=>{
 
 //ดึงข้อมูล จากDataตามUserนั้นๆ
 export default (uid,path)=>{
-    console.log(path)
     return new Promise((resolve,reject)=>{
         const personalRef = userRef.child(uid+"/"+path);
         const result = personalRef.on("value", snapshot => {
