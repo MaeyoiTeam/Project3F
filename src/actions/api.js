@@ -66,11 +66,15 @@ export const updateScore = (uid,key,point) => {
 export const updateDataUser=(uid,user)=>{
     return new Promise((resolve,reject)=>{
         const personalRef = userRef.child(uid);
-        personalRef.update({ ...user }).then(()=>{
-            personalRef.on("value",snap=>{
+        personalRef.on("value",snap=>{
+            if(snap.val().quest==null){
+                console.log("first time login")
+                 personalRef.update({ ...user,score:0,quest:{done:{none:"none"},undone:{none:"none"}} })
+            }
+            else{ personalRef.update({ ...user })
+            }
                 return resolve(snap.val());
             });
-        });
     });
    
 }

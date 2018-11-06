@@ -19,7 +19,8 @@ class Quest extends Component {
             type: "none",
             detail:"none",
             current:0,
-            target:0
+            target:0,
+            point:0
         }
     }
      componentDidUpdate(prevProps, prevState, snapshot){
@@ -29,13 +30,11 @@ class Quest extends Component {
             })
         }
     } 
-// rerender Update Quest
+//TODO Quest สำเร็จ (current>=target) ให้เด้งป๊อปอัพ
 
     render(){
-        
-// น่าจะใช้ lifecyle แก้
         const {fetchReducer,authReducer} = this.props;
-        const {name,type,detail,current,target,key}=this.state;
+        const {name,type,detail,current,target,key,point}=this.state;
         return(
             <View>
                 <Text>QUEST</Text>
@@ -43,7 +42,7 @@ class Quest extends Component {
                     <Text>Name: {name} Type: {type}</Text>
                 <Text>Detail: {detail} </Text>
                 <Text>Exp: {current}/{target}</Text>
-                <Button title="Up 10" onPress={()=>this.props.updateQuest(authReducer.data.uid,key,10)}/> 
+                <Button title={"Up "+point+" point"} onPress={()=>this.props.updateQuest(authReducer.data.uid,key,point)}/> 
                 </View>
                 
             </View>
