@@ -38,8 +38,8 @@ class Quest extends Component {
         if (isComplete){   //Quest Complete
                     return(<View>
                     <Text>Quest is Complete</Text>
-                    <Button title="Go QuestList" 
-                    onPress={()=>this.props.navigation.navigate('QuestList')}/>
+                    <Button title="Go Home" 
+                    onPress={()=>this.props.navigation.navigate('Home')}/>
                     </View>);
         }
         else{    //Quest Continue

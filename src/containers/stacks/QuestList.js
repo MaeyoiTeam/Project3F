@@ -10,9 +10,9 @@ class QuestList extends Component {
 // แสดงเฉพาะเควสที่ยังไม่เสร็จ
 //! เวลากลับจากหน้าQuest Questในหน้านี้ไม่หาย
     render(){
-
         const {questReducer,authReducer,fetchReducer} = this.props;
-        return(
+
+                        return(
             <View>
             {          
                 questReducer.data.map((info, i) =>
@@ -30,7 +30,7 @@ class QuestList extends Component {
                                 }
                                 />
                             </View>
-            )
+                        )
             } 
             </View>
         );

@@ -55,11 +55,20 @@ export const randomQuest= (user)=>{
               keysType.map((keyType,i)=>{
                 const quest = data[keyType];
                 var keysQuest = Object.keys(data[keyType])
-                //TODO เควสที่สุ่มต้องไม่มีในUserนั้น ดูใน userData
-                console.log(keysQuest)
-                console.log(user.quest)  //how to go inside type
 
-                var selectKeyQuest = keysQuest[keysQuest.length * Math.random() << 0];
+                //TODO เควสที่สุ่มต้องไม่มีในUserนั้น ดูใน userData
+                const keyQuestUser = Object.entries(user.quest).filter((type) => type[0] == keyType);
+                console.log("have"+keyQuestUser)
+                const filteredKeysQuest = keysQuest.filter(quest =>{
+                  const questlist = keyQuestUser[0];
+                  console.log(questlist[1])
+                  console.log(quest)
+                  console.log(!questlist[1].includes(quest))
+                 return !questlist[1].includes(quest)
+                });
+                console.log(filteredKeysQuest)
+
+                var selectKeyQuest = filteredKeysQuest[filteredKeysQuest.length * Math.random() << 0];
                 const source =quest[selectKeyQuest]
                 slectQuests = {
                     [selectKeyQuest]: {
