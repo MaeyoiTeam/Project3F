@@ -3,8 +3,8 @@ const databaseRef = firebase.database().ref();
 const userRef = databaseRef.child('users/');
 const systemRef = databaseRef.child('system/')
 
-
-// fetch System data
+//############################################### Quset ###############################################
+// fetch questList System data
 export const fetchSystem =(type)=>{
     return new Promise((resolve,reject)=>{
         systemRef.on('value',snap=>{
@@ -16,33 +16,15 @@ export const fetchSystem =(type)=>{
     })
 }
 
-//update User data quest
-export const updateUserQuest= (quest,uid)=>{
+// Add Quest to UserData
+export const updateUserQuest = (quest, uid) => {
     const personalRef = userRef.child(uid);
-        personalRef.child("quest/undone/").update({
-            ...quest
-        });
+    personalRef.child("quest/undone/").update({
+        ...quest
+    });
 }
 
-//fetch Ranking
-export const rankingUser=()=>{
-        return new Promise((resolve, reject) => {
-            userRef.on('value',snapshot=>{
-                let data =[];
-                snapshot.forEach((item)=>{
-                   data.push({name:item.val().displayName,
-                             score: item.val().score,
-                             uid:item.key
-                });
-                });
-                return resolve(data.sort((a, b) => {
-                return b.score - a.score;
-            }));
-            });
-        });
-}
-
-// update QuestUser data
+// update Quest in Userdata
 export const updateScore = (uid,key,point) => {
     return new Promise(async (resolve, reject) => {
     const qusetUserRef = await userRef.child(uid+"/quest/undone/"+key);
@@ -62,6 +44,42 @@ export const updateScore = (uid,key,point) => {
 });
 }
 
+//Move undone to done
+export const moveToDone=(uid,key,quest)=>{
+    return new Promise(async(resolve,reject)=>{
+        const userQuestRef =await userRef.child(uid+"/quest/");
+        userQuestRef.child('undone/'+key).remove();
+        userQuestRef.child('done/'+quest.type).update({[key]:quest});
+        return resolve('Success')
+    });
+    
+}
+
+
+//############################################### Ranking ###############################################
+
+//fetch Ranking
+export const rankingUser=()=>{
+        return new Promise((resolve, reject) => {
+            userRef.on('value',snapshot=>{
+                let data =[];
+                snapshot.forEach((item)=>{
+                   data.push({name:item.val().displayName,
+                             score: item.val().score,
+                             uid:item.key
+                });
+                });
+                return resolve(data.sort((a, b) => {
+                return b.score - a.score;
+            }));
+            });
+        });
+}
+
+
+
+//############################################### Authentication ###############################################
+
 //Update Database when Login
 export const updateDataUser=(uid,user)=>{
     return new Promise((resolve,reject)=>{
@@ -79,15 +97,16 @@ export const updateDataUser=(uid,user)=>{
    
 }
 
+//############################################### Common Data User ###############################################
 //ดึงข้อมูล จากDataตามUserนั้นๆ
-export default (uid,path)=>{
-    return new Promise((resolve,reject)=>{
-        const personalRef = userRef.child(uid+"/"+path);
+export default (uid, path) => {
+    return new Promise((resolve, reject) => {
+        const personalRef = userRef.child(uid + "/" + path);
         const result = personalRef.on("value", snapshot => {
-            if(snapshot.exists()){
-            return resolve(snapshot.val());
-        }
+            if (snapshot.exists()) {
+                return resolve(snapshot.val());
+            }
+        });
+        return reject("Fail");
     });
-    return reject("Fail");
-});
 }

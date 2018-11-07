@@ -1,25 +1,31 @@
 import {fetchData,fetchQuestList} from './index';
-import loadUserData,{fetchSystem,updateUserQuest,updateScore} from './api';
+import loadUserData,{fetchSystem,updateUserQuest,updateScore,moveToDone} from './api';
 import {navigate} from './index'
 
-const checkComplete =(current,target)=>{
-    console.log(current + "/" + target)
-      if (current >= target) {
+const checkComplete = (uid,key,quest) => {
+    console.log(quest.current + "/" + quest.target);
+      if (quest.current >= quest.target) {
         //TODO นำเควสนี้ ย้ายไปยัง done
+        moveToDone(uid,key,quest);
         //TODO เพิ่ม  Star
         //TODO เช็ค Achieve
-        console.log("Sucess")
-      } 
+        return true;
+      }
+      else{return false;} 
 }
 
 // Update Quest while During Quest
 export const updateQuest=(uid,key,point)=>{
-     return fetchData(updateScore(uid,key,point).then((obj)=>{
-          checkComplete(obj.current,obj.target);
-          return obj 
+     return fetchData(updateScore(uid,key,point).then((quest)=>{
+          if (checkComplete(uid,key,quest)) {
+            return {isComplete:true}
+          }
+          else {
+            return quest
+          }
       }));
-
 }
+
 // Fetch during Quest Firsttime 
 export const fetchQuest = (uid,key) => {
   const path = "quest/undone/"+key;
@@ -51,7 +57,8 @@ export const randomQuest= (user)=>{
                 var keysQuest = Object.keys(data[keyType])
                 //TODO เควสที่สุ่มต้องไม่มีในUserนั้น ดูใน userData
                 console.log(keysQuest)
-                console.log(user.quest)
+                console.log(user.quest)  //how to go inside type
+
                 var selectKeyQuest = keysQuest[keysQuest.length * Math.random() << 0];
                 const source =quest[selectKeyQuest]
                 slectQuests = {

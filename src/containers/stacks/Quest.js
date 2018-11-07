@@ -20,7 +20,8 @@ class Quest extends Component {
             detail:"none",
             current:0,
             target:0,
-            point:0
+            point:0,
+            isComplete:false
         }
     }
      componentDidUpdate(prevProps, prevState, snapshot){
@@ -30,12 +31,19 @@ class Quest extends Component {
             })
         }
     } 
-//TODO Quest สำเร็จ (current>=target) ให้เด้งป๊อปอัพ
 
     render(){
         const {fetchReducer,authReducer} = this.props;
-        const {name,type,detail,current,target,key,point}=this.state;
-        return(
+        const {name,type,detail,current,target,key,point,isComplete}=this.state;
+        if (isComplete){   //Quest Complete
+                    return(<View>
+                    <Text>Quest is Complete</Text>
+                    <Button title="Go QuestList" 
+                    onPress={()=>this.props.navigation.navigate('QuestList')}/>
+                    </View>);
+        }
+        else{    //Quest Continue
+            return(
             <View>
                 <Text>QUEST</Text>
                 <View>
@@ -46,7 +54,8 @@ class Quest extends Component {
                 </View>
                 
             </View>
-        );
+            );
+        }
     }
 }
 

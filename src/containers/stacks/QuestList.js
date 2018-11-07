@@ -8,6 +8,7 @@ class QuestList extends Component {
           this.props.getQuestList(this.props.authReducer.data.uid)
     }
 // แสดงเฉพาะเควสที่ยังไม่เสร็จ
+//! เวลากลับจากหน้าQuest Questในหน้านี้ไม่หาย
     render(){
 
         const {questReducer,authReducer,fetchReducer} = this.props;
