@@ -66,7 +66,7 @@ const BottomTabs = createMaterialBottomTabNavigator(
       screen: Setting,
       navigationOptions: {
         tabBarLabel: 'Settings',
-        tabBarColor: '##1E90FF',
+        tabBarColor: '#1E90FF',
         tabBarIcon: ({ tintColor, focused }) => (
           <Icon size={30} name={ Platform.OS === 'ios' ? (focused ? 'ios-settings' : 'ios-settings-outline') : 'md-settings' } style={{ color: tintColor }} />
         )
