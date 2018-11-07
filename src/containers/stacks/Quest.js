@@ -19,7 +19,9 @@ class Quest extends Component {
             type: "none",
             detail:"none",
             current:0,
-            target:0
+            target:0,
+            point:0,
+            isComplete:false
         }
     }
      componentDidUpdate(prevProps, prevState, snapshot){
@@ -29,25 +31,31 @@ class Quest extends Component {
             })
         }
     } 
-// rerender Update Quest
 
     render(){
-        
-// น่าจะใช้ lifecyle แก้
         const {fetchReducer,authReducer} = this.props;
-        const {name,type,detail,current,target,key}=this.state;
-        return(
+        const {name,type,detail,current,target,key,point,isComplete}=this.state;
+        if (isComplete){   //Quest Complete
+                    return(<View>
+                    <Text>Quest is Complete</Text>
+                    <Button title="Go QuestList" 
+                    onPress={()=>this.props.navigation.navigate('QuestList')}/>
+                    </View>);
+        }
+        else{    //Quest Continue
+            return(
             <View>
                 <Text>QUEST</Text>
                 <View>
                     <Text>Name: {name} Type: {type}</Text>
                 <Text>Detail: {detail} </Text>
                 <Text>Exp: {current}/{target}</Text>
-                <Button title="Up 10" onPress={()=>this.props.updateQuest(authReducer.data.uid,key,10)}/> 
+                <Button title={"Up "+point+" point"} onPress={()=>this.props.updateQuest(authReducer.data.uid,key,point)}/> 
                 </View>
                 
             </View>
-        );
+            );
+        }
     }
 }
 

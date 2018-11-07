@@ -1,4 +1,4 @@
-import {FETCH_USER_FAIL,FETCH_USER_SUCCESS } from "../constants";
+import {FETCH_USER_FAIL,FETCH_USER_SUCCESS,FETCH_USER } from "../constants";
 
 
 const initialState = {
@@ -6,6 +6,10 @@ const initialState = {
 }
 export default (state = initialState, action) => {
     switch (action.type) {
+        case FETCH_USER:
+            return {...state,
+                isAuth: false,
+        }
         case FETCH_USER_SUCCESS:
             return {...state,
                 isAuth: true,

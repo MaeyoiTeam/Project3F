@@ -55,8 +55,13 @@ const BottomTabs = createMaterialBottomTabNavigator(
     Notifications: {
       screen: Notifications,
       navigationOptions: {
+<<<<<<< HEAD
         tabBarLabel: 'Settings',
         tabBarColor: '#1E90FF',
+=======
+        tabBarLabel: 'Notifications',
+        tabBarColor: '#ff3899',
+>>>>>>> 913610cf87c01b3add0a9f0c879e625edb3f5bf5
         tabBarIcon: ({ tintColor, focused }) => (
           <Icon size={30} name={ Platform.OS === 'ios' ? (focused ? 'ios-settings' : 'ios-settings-outline') : 'md-notifications-outline' } style={{ color: tintColor }} />
         )
