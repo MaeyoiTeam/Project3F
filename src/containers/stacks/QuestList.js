@@ -7,11 +7,11 @@ class QuestList extends Component {
     componentDidMount(){
           this.props.getQuestList(this.props.authReducer.data.uid)
     }
-//TODO Update Component หลังจาก สุ่มQuestมา 
 // แสดงเฉพาะเควสที่ยังไม่เสร็จ
+//! เวลากลับจากหน้าQuest Questในหน้านี้ไม่หาย
     render(){
-        const {questReducer,authReducer,fetchReducer} = this.props;
 
+        const {questReducer,authReducer,fetchReducer} = this.props;
         return(
             <View>
             {          

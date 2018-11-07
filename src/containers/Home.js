@@ -9,9 +9,15 @@ class Home extends Component {
 //? ไปอ่านLife cylce reactมา
     
     randomQ=()=>{
-       return new Promise((resolve, reject) => {
-           this.props.randomQuest(this.props.authReducer.data)
-           return resolve("QuestList")
+       return new Promise(async (resolve, reject) => {
+           this.props.randomQuest(this.props.authReducer.data).then(()=>{
+               if (this.props.authReducer.isAuth) {
+                   return resolve("QuestList")
+               } else {
+                   return reject("SignIn")
+               }
+           })
+            
        })
     }
 

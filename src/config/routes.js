@@ -26,7 +26,7 @@ const BottomTabs = createMaterialBottomTabNavigator(
       screen: Profile,
       navigationOptions: {
         tabBarLabel: 'Profile',
-        tabBarColor: '#1e1e1d',
+        tabBarColor: '#1E90FF',
         tabBarIcon: ({ tintColor, focused }) => (
           <Icon size={30} name={ Platform.OS === 'ios' ? (focused ? 'ios-contact' : 'ios-contact-outline') : 'md-contact' } style={{ color: tintColor }} />
         )
@@ -36,7 +36,7 @@ const BottomTabs = createMaterialBottomTabNavigator(
       screen: Ranking,
       navigationOptions: {
         tabBarLabel: 'Ranking',
-        tabBarColor: '#ff7538',
+        tabBarColor: '#1E90FF',
         tabBarIcon: ({ tintColor, focused }) => (
           <Icon size={30} name={ Platform.OS === 'ios' ? (focused ? 'ios-settings' : 'ios-settings-outline') : 'md-trending-up' } style={{ color: tintColor }} />
         )
@@ -46,7 +46,7 @@ const BottomTabs = createMaterialBottomTabNavigator(
       screen: Home,
       navigationOptions: {
         tabBarLabel: 'Home',
-        tabBarColor: '#842655',
+        tabBarColor: '#1E90FF',
         tabBarIcon: ({ tintColor, focused }) => (
           <Icon size={30} name={ Platform.OS === 'ios' ? (focused ? 'ios-home' : 'ios-home-outline') : 'md-home' } style={{ color: tintColor }} />
         )
@@ -55,7 +55,7 @@ const BottomTabs = createMaterialBottomTabNavigator(
     Notifications: {
       screen: Notifications,
       navigationOptions: {
-        tabBarLabel: 'Settings',
+        tabBarLabel: 'Notifications',
         tabBarColor: '#ff3899',
         tabBarIcon: ({ tintColor, focused }) => (
           <Icon size={30} name={ Platform.OS === 'ios' ? (focused ? 'ios-settings' : 'ios-settings-outline') : 'md-notifications-outline' } style={{ color: tintColor }} />
@@ -66,7 +66,7 @@ const BottomTabs = createMaterialBottomTabNavigator(
       screen: Setting,
       navigationOptions: {
         tabBarLabel: 'Settings',
-        tabBarColor: '#ff3899',
+        tabBarColor: '#1E90FF',
         tabBarIcon: ({ tintColor, focused }) => (
           <Icon size={30} name={ Platform.OS === 'ios' ? (focused ? 'ios-settings' : 'ios-settings-outline') : 'md-settings' } style={{ color: tintColor }} />
         )

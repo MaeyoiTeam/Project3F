@@ -30,7 +30,6 @@ export const fetchData = (fn) => {
 }
 
 export const navigate = (nav)=>{
-    console.log("work")
     return (dispatch)=>{
         dispatch(NavigationActions.navigate({routeName:nav}));
     }

@@ -1,4 +1,4 @@
-import {FETCH_USER_FAIL,FETCH_USER_SUCCESS} from '../constants';
+import {FETCH_USER_FAIL,FETCH_USER_SUCCESS,FETCH_USER} from '../constants';
 import firebase from '../config/firebase'
 import {updateDataUser} from './api';
 import { NavigationActions } from 'react-navigation'
@@ -31,18 +31,23 @@ export const signInWithFacebook = () => async dispatch => {
     }
 }
 
-export const signInWithGoogle = async () => {
+export const signInWithGoogle = ()  => {
     try {
-        const result = await Expo.Google.logInAsync({
-            androidClientId: '895255967672-7h7v7t5r97c3cpj8rijahirbcqjjcifv.apps.googleusercontent.com',
-            iosClientId: '895255967672-bg7pp8ojou3cfrsjqcssm0s6km3nvevq.apps.googleusercontent.com',
-            scopes: ['profile', 'email'],
-        })
+        return async (dispatch) => {
+            const result = await Expo.Google.logInAsync({
+                androidClientId: '895255967672-7h7v7t5r97c3cpj8rijahirbcqjjcifv.apps.googleusercontent.com',
+                iosClientId: '895255967672-bg7pp8ojou3cfrsjqcssm0s6km3nvevq.apps.googleusercontent.com',
+                scopes: ['profile', 'email'],
+            })
         if (result.type === 'success') {
             const provider = firebase.auth.GoogleAuthProvider;
             const credential = provider.credential(null, result.accessToken);
             const data = firebase.auth().signInAndRetrieveDataWithCredential(credential);
+            console.log("Work")
         }
+        }
+        
+        
     } catch (e) {
         return {
             error: true
@@ -51,10 +56,19 @@ export const signInWithGoogle = async () => {
 }
 
 export const fetchUser = () => dispatch => {
-    firebase.auth().onAuthStateChanged(user => {
+try{
+        firebase.auth().onAuthStateChanged(user => {
         if (user) {
 //TODO add UserAchievement
             updateDataUser(user.uid, user.providerData[0]).then((result)=>{
+                let questListdone = {};
+                const quest = result.quest.done;
+                Object.keys(result.quest.done).map((key) => {
+                    questListdone = {
+                       [key]:Object.keys(quest[key]),
+                        ...questListdone
+                    }
+                })
             dispatch({
                     type: FETCH_USER_SUCCESS,
                     payload:{   uid:user.uid,
@@ -62,11 +76,10 @@ export const fetchUser = () => dispatch => {
                         photoURL: result.photoURL+"?width=512",
                         email: result.email,
                         levelQ:result.levelQ,
-                        quest:Object.keys(result.quest.done)
+                        quest: questListdone
                     }
                 })}
                 );
-                
         } else {
              dispatch(NavigationActions.navigate({routeName:"SignIn"}));
             dispatch({
@@ -74,4 +87,10 @@ export const fetchUser = () => dispatch => {
             });
         }
     });
+}
+catch (e) {
+    return {
+        error: true
+    };
+}
 };
