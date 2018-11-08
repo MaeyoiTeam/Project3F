@@ -1,24 +1,15 @@
 import {fetchData,fetchQuestList} from './index';
 import loadUserData,{fetchSystem,updateUserQuest,updateScore,moveToDone} from './api';
 import {navigate} from './index'
-
-const checkComplete = (uid,key,quest) => {
-    console.log(quest.current + "/" + quest.target);
-      if (quest.current >= quest.target) {
-        //TODO นำเควสนี้ ย้ายไปยัง done
-        moveToDone(uid,key,quest);
-        //TODO เพิ่ม  Star
-        //TODO เช็ค Achieve
-        return true;
-      }
-      else{return false;} 
-}
-
+import {fetchUser} from './signIn'
+//! บัคเวลอัพเรื่อยๆ น่าจะอยู่แถวๆนี้
 // Update Quest while During Quest
 export const updateQuest=(uid,key,point)=>{
      return fetchData(updateScore(uid,key,point).then((quest)=>{
-          if (checkComplete(uid,key,quest)) {
-            return {isComplete:true}
+          if (quest.current >= quest.target) {
+            return moveToDone(uid, key, quest).then((obj)=>{
+              return {...obj,isComplete:true}
+            });
           }
           else {
             return quest
@@ -58,15 +49,15 @@ export const randomQuest= (user)=>{
 
                 //TODO เควสที่สุ่มต้องไม่มีในUserนั้น ดูใน userData
                 const keyQuestUser = Object.entries(user.quest).filter((type) => type[0] == keyType);
-                console.log("have"+keyQuestUser)
+                console.log("have : "+keyQuestUser)
                 const filteredKeysQuest = keysQuest.filter(quest =>{
                   const questlist = keyQuestUser[0];
-                  console.log(questlist[1])
-                  console.log(quest)
-                  console.log(!questlist[1].includes(quest))
+                  console.log("list : "+questlist[1])
+                  console.log("with this : " +quest)
+                  console.log("not have this "+!questlist[1].includes(quest))
                  return !questlist[1].includes(quest)
                 });
-                console.log(filteredKeysQuest)
+                console.log("filtered: "+filteredKeysQuest)
 
                 var selectKeyQuest = filteredKeysQuest[filteredKeysQuest.length * Math.random() << 0];
                 const source =quest[selectKeyQuest]

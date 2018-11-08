@@ -47,14 +47,44 @@ export const updateScore = (uid,key,point) => {
 //Move undone to done
 export const moveToDone=(uid,key,quest)=>{
     return new Promise(async(resolve,reject)=>{
-        const userQuestRef =await userRef.child(uid+"/quest/");
+        const personalRef = await userRef.child(uid)
+        const userQuestRef = await personalRef.child("quest");
+        const levelUserRef = await personalRef.child('levelQ/'+quest.type);
         userQuestRef.child('undone/'+key).remove();
         userQuestRef.child('done/'+quest.type).update({[key]:quest});
-        return resolve('Success')
-    });
-    
+        personalRef.once('value',snap=>personalRef.update({
+            star:snap.val().star+quest.star,           
+        }));
+        //TODO อัพเวล
+        levelUserRef.once('value', snap => {
+            const result = updateLevel(snap.val(), quest.star);
+            levelUserRef.update(result);
+            return resolve(result)
+        });
+        
+    });   
 }
-
+//  updateLevel &Check Levelup
+//! บัค แม่งเด้งเรื่อยๆเลย
+export const updateLevel=(data,star)=>{
+    console.log(Object.values(data) + "/" + star)
+    var currentStar = data.star+star;
+    var level = data.level;
+    const lvlup = Math.floor(currentStar / data.target);
+    var target = data.target;
+    if (currentStar >= data.target) {
+        systemRef.once('value', snap => {
+            currentStar =currentStar-data.target;
+            level = level + lvlup
+            target = snap.val().level[level]
+        })
+    }
+        return {
+            level: level,
+            star: currentStar,
+            target: target
+    }
+}
 
 //############################################### Ranking ###############################################
 
@@ -87,14 +117,13 @@ export const updateDataUser=(uid,user)=>{
         personalRef.on("value",snap=>{
             if(snap.val().quest==null){
                 console.log("first time login")
-                 personalRef.update({ ...user,score:0,quest:{done:{none:"none"},undone:{none:"none"}} })
+                 personalRef.update({ ...user,score:0,star:0,quest:{done:{none:"none"},undone:{none:"none"}} })
             }
             else{ personalRef.update({ ...user })
             }
                 return resolve(snap.val());
             });
     });
-   
 }
 
 //############################################### Common Data User ###############################################

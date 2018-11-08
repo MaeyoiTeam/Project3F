@@ -76,7 +76,8 @@ try{
                         photoURL: result.photoURL+"?width=512",
                         email: result.email,
                         levelQ:result.levelQ,
-                        quest: questListdone
+                        quest: questListdone,
+                        star:result.star
                     }
                 })}
                 );

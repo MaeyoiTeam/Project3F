@@ -6,7 +6,13 @@ import { Button, Avatar } from 'react-native-elements';
 
 class Profile extends Component{
     
-    
+         componentDidUpdate(prevProps, prevState, snapshot) {
+             if (prevProps.authReducer.data != this.props.authReducer.data) {
+                 this.setState({
+                     ...this.props.authReducer.data
+                 })
+             }
+         }
 
     render(){
         const styles = StyleSheet.create({
@@ -32,12 +38,13 @@ class Profile extends Component{
                 <Avatar style = {styles.litle} xlarge rounded source={{ uri: authReducer.data.photoURL }} onPress={() => console.log("Works!")} />
                 <Text>{authReducer.data.displayName}</Text>
                 <Text>{authReducer.data.Email}</Text>
+                <Text>Star:{authReducer.data.star}</Text>
 {/* //TODO แสดง เลเวล ค่าประสบการณ์ Objectที่เก็บข้อมูล = authReducer.data.levelQ */}
                  <Text>Your Score</Text>
                      {
                          this.current!=null &&<View>
                           <Text>Rank: {this.current.index+1} : {this.current.data.name}</Text>
-                        <Text>     Star:  {this.current.data.score}</Text>
+                        <Text>     Star:  {this.current.data.star}</Text>
                          </View>
                       }
                 <Text style = {styles.litle} >Level:</Text>
