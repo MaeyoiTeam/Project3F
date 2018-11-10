@@ -1,4 +1,5 @@
 import firebase from '../config/firebase';
+import { initializeApp } from 'firebase';
 const databaseRef = firebase.database().ref();
 const userRef = databaseRef.child('users/');
 const systemRef = databaseRef.child('system/')
@@ -61,13 +62,10 @@ export const moveToDone=(uid,key,quest)=>{
             levelUserRef.update(result);
             return resolve(result)
         });
-        
     });   
 }
 //  updateLevel &Check Levelup
-//! บัค แม่งเด้งเรื่อยๆเลย
 export const updateLevel=(data,star)=>{
-    console.log(Object.values(data) + "/" + star)
     var currentStar = data.star+star;
     var level = data.level;
     const lvlup = Math.floor(currentStar / data.target);
@@ -115,9 +113,20 @@ export const updateDataUser=(uid,user)=>{
     return new Promise((resolve,reject)=>{
         const personalRef = userRef.child(uid);
         personalRef.on("value",snap=>{
-            if(snap.val().quest==null){
+            if (snap.val().star == null || snap.val().levelQ == null) { //FirstTime Login
                 console.log("first time login")
-                 personalRef.update({ ...user,score:0,star:0,quest:{done:{none:"none"},undone:{none:"none"}} })
+                initializeLevel = {
+                    level: 1,
+                    star: 0,
+                    target: 5
+                }
+                 personalRef.update({ ...user,
+                    star:0,
+                    levelQ:{
+                        food:initializeLevel,
+                        etc: initializeLevel
+                    }
+                })
             }
             else{ personalRef.update({ ...user })
             }

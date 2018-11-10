@@ -62,13 +62,17 @@ try{
 //TODO add UserAchievement
             updateDataUser(user.uid, user.providerData[0]).then((result)=>{
                 let questListdone = {};
+                if(result.quest!=null){
+                    if (result.quest.done != null){
                 const quest = result.quest.done;
-                Object.keys(result.quest.done).map((key) => {
-                    questListdone = {
-                       [key]:Object.keys(quest[key]),
-                        ...questListdone
-                    }
-                })
+                Object.keys(quest).map((key) => {
+                questListdone = {
+                            [key]: Object.keys(quest[key]),
+                            ...questListdone
+                        }
+                    });
+                }
+            }
             dispatch({
                     type: FETCH_USER_SUCCESS,
                     payload:{   uid:user.uid,

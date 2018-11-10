@@ -46,29 +46,31 @@ export const randomQuest= (user)=>{
               keysType.map((keyType,i)=>{
                 const quest = data[keyType];
                 var keysQuest = Object.keys(data[keyType])
-
                 //TODO เควสที่สุ่มต้องไม่มีในUserนั้น ดูใน userData
-                const keyQuestUser = Object.entries(user.quest).filter((type) => type[0] == keyType);
-                console.log("have : "+keyQuestUser)
-                const filteredKeysQuest = keysQuest.filter(quest =>{
-                  const questlist = keyQuestUser[0];
-                  console.log("list : "+questlist[1])
-                  console.log("with this : " +quest)
-                  console.log("not have this "+!questlist[1].includes(quest))
-                 return !questlist[1].includes(quest)
-                });
-                console.log("filtered: "+filteredKeysQuest)
-
-                var selectKeyQuest = filteredKeysQuest[filteredKeysQuest.length * Math.random() << 0];
+                 if(user.quest.length!=undefined){
+                  const keyQuestUser = Object.entries(user.quest).filter((type) => type[0] == keyType);
+                  console.log("have : " + keyQuestUser);
+                  keysQuest = keysQuest.filter(quest => {
+                    const questlist = keyQuestUser[0];
+                    console.log("list : " + questlist[1])
+                    console.log("with this : " + quest)
+                    console.log("not have this " + !questlist[1].includes(quest))
+                    return !questlist[1].includes(quest)
+                  });
+                } 
+                console.log("filtered: " + keysQuest)
+                var selectKeyQuest = keysQuest[keysQuest.length * Math.random() << 0];
                 const source =quest[selectKeyQuest]
-                slectQuests = {
+                if(selectKeyQuest!=null){
+                  slectQuests = {
                     [selectKeyQuest]: {
                       type: keyType,
                       current: 0,
                       ...source
                     },
                     ...slectQuests
-                };
+                  };
+                }
               })
               updateUserQuest(slectQuests, user.uid)
               return slectQuests;

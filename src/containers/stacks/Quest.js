@@ -22,7 +22,8 @@ class Quest extends Component {
             target:0,
             point:0,
             star:0,
-            isComplete:false
+            level:0,
+            isComplete:false,
         }
     }
      componentDidUpdate(prevProps, prevState, snapshot){
@@ -34,11 +35,13 @@ class Quest extends Component {
     } 
 
     render(){
+
         const {fetchReducer,authReducer} = this.props;
-        const {name,type,detail,current,target,key,point,star,isComplete}=this.state;
+        const {name,type,detail,current,target,key,point,star,level,isComplete}=this.state;
         if (isComplete){   //Quest Complete
                     return(<View>
-                    <Text>You got {type} star :{star}</Text>
+                    <Text>Current {type} star :{star}/{target}</Text>
+                    <Text>level: {level}</Text>
                     <Text>Quest is Complete</Text>
                     <Button title="Go Home" 
                     onPress={()=>this.props.navigation.navigate('Home')}/>
