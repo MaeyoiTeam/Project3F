@@ -2,11 +2,11 @@ import React,{Component} from 'react';
 import { StyleSheet,View,Text } from 'react-native';
 import { connect } from 'react-redux';
 import {Avatar} from 'react-native-elements';
-import {fetchUser} from '../../actions/signIn';
+import {authChanged} from '../../actions/signIn';
 import {Header} from 'react-native-elements';
 class RightComponent extends Component{
          componentWillMount() {
-             this.props.fetchUser();
+             this.props.authChanged();
          }
 render(){
     return(
@@ -32,7 +32,7 @@ const mapStateToProps = (state) => ({
 });
 //Used to add dispatch (action) into props
 const mapDispatchToProps={
-  fetchUser
+  authChanged
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(RightComponent)

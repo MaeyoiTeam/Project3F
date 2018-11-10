@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {  View, Text } from 'react-native';
 import { connect } from 'react-redux';
-import {signOut,signInWithFacebook,signInWithGoogle,fetchUser} from '../../actions/signIn';
+import {signOut,signInWithFacebook,signInWithGoogle,authChanged} from '../../actions/signIn';
 import {Button,Avatar} from 'react-native-elements';
 
 class SingIn extends Component{
@@ -14,7 +14,7 @@ class SingIn extends Component{
   };
 
      componentWillMount() {
-         this.props.fetchUser();
+         this.props.authChanged();
      }
 
      componentDidUpdate = (prevProps, prevState) => {
@@ -63,7 +63,7 @@ const mapStateToProps = (state) => ({
 });
 //Used to add dispatch (action) into props
 const mapDispatchToProps={
- signInWithFacebook, signInWithGoogle, signOut, fetchUser
+ signInWithFacebook, signInWithGoogle, signOut, authChanged
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SingIn)

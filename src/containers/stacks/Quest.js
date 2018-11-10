@@ -24,12 +24,15 @@ class Quest extends Component {
             star:0,
             level:0,
             isComplete:false,
+            prevLevel:{}
         }
     }
      componentDidUpdate(prevProps, prevState, snapshot){
         if(prevProps.fetchReducer.data!=this.props.fetchReducer.data){
             this.setState({
-                ...this.props.fetchReducer.data
+                ...this.props.fetchReducer.data,
+                prevLevel: { ...prevProps.authReducer.data.levelQ[this.state.type]
+                }
             })
         }
     } 
@@ -37,11 +40,12 @@ class Quest extends Component {
     render(){
 
         const {fetchReducer,authReducer} = this.props;
-        const {name,type,detail,current,target,key,point,star,level,isComplete}=this.state;
+        const {name,type,detail,current,target,key,point,star,level,isComplete,prevLevel}=this.state;
+        console.log(authReducer.data.quest)
         if (isComplete){   //Quest Complete
                     return(<View>
-                    <Text>Current {type} star :{star}/{target}</Text>
-                    <Text>level: {level}</Text>
+                    <Text>Current {type} star :{prevLevel.star}/{prevLevel.target}->{star}/{target}</Text>
+                    <Text>level: {prevLevel.level}/{level}</Text>
                     <Text>Quest is Complete</Text>
                     <Button title="Go Home" 
                     onPress={()=>this.props.navigation.navigate('Home')}/>
@@ -55,7 +59,7 @@ class Quest extends Component {
                     <Text>Name: {name} Type: {type}</Text>
                 <Text>Detail: {detail} </Text>
                 <Text>Exp: {current}/{target}</Text>
-                <Button title={"Up "+point+" point"} onPress={()=>this.props.updateQuest(authReducer.data.uid,key,point)}/> 
+                <Button title={"Up "+point+" point"} onPress={()=>this.props.updateQuest(authReducer.data,key,point,type)}/> 
                 </View>
                 
             </View>

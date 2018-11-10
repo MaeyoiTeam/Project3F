@@ -55,7 +55,7 @@ export const signInWithGoogle = ()  => {
     }
 }
 
-export const fetchUser = () => dispatch => {
+export const authChanged = () => dispatch => {
 try{
         firebase.auth().onAuthStateChanged(user => {
         if (user) {
@@ -87,9 +87,6 @@ try{
                 );
         } else {
              dispatch(NavigationActions.navigate({routeName:"SignIn"}));
-            dispatch({
-                type: FETCH_USER_FAIL
-            });
         }
     });
 }
@@ -99,3 +96,4 @@ catch (e) {
     };
 }
 };
+

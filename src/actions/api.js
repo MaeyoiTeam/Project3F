@@ -1,5 +1,4 @@
 import firebase from '../config/firebase';
-import { initializeApp } from 'firebase';
 const databaseRef = firebase.database().ref();
 const userRef = databaseRef.child('users/');
 const systemRef = databaseRef.child('system/')
