@@ -5,8 +5,22 @@ import {navigate} from './index'
 import { resolve } from 'url';
 
 //!middleware ไม่อัพเดทททท
+
+export const updateQuestDone = (user,key,type)=>{
+    return (dispatch)=>{
+        dispatch({
+          type:FETCH_USER_SUCCESS,
+          payload:{ ...user,
+            quest:{ [type]:user.quest[type].push(key),
+              ...user.quest
+            }
+          }
+        });
+    }
+} 
+
 // Update Quest while During Quest
-export const updateQuest=(user,key,point,type)=>{
+export const updateQuest=(user,key,point)=>{
     const result = updateScore(user.uid, key, point).then((quest) => {
       if (quest.current >= quest.target) {
         return moveToDone(user.uid, key, quest).then((obj) => {
@@ -18,7 +32,6 @@ export const updateQuest=(user,key,point,type)=>{
         return quest
       }
     });
-
      return fetchData(result);
 }
 

@@ -2,7 +2,7 @@ import { View,Text,StyleSheet } from 'react-native';
 import React,{Component} from 'react';
 import { connect } from 'react-redux';
 import {Button} from 'react-native-elements'
-import {updateQuest,fetchQuest} from '../../actions/quest'
+import {updateQuest,fetchQuest,updateQuestDone} from '../../actions/quest'
 class Quest extends Component {
   static navigationOptions = ({
       navigation
@@ -37,8 +37,25 @@ class Quest extends Component {
         }
     } 
 
-    render(){
 
+    update=(user,key,point,type)=>{
+        const result = this.props.updateQuest(user, key, point);
+        if(result.isComplete){
+            this.props.updateQuestDone(user,key,type);
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+    render(){
         const {fetchReducer,authReducer} = this.props;
         const {name,type,detail,current,target,key,point,star,level,isComplete,prevLevel}=this.state;
         console.log(authReducer.data.quest)
@@ -59,7 +76,7 @@ class Quest extends Component {
                     <Text>Name: {name} Type: {type}</Text>
                 <Text>Detail: {detail} </Text>
                 <Text>Exp: {current}/{target}</Text>
-                <Button title={"Up "+point+" point"} onPress={()=>this.props.updateQuest(authReducer.data,key,point,type)}/> 
+                <Button title={"Up "+point+" point"} onPress={update(authReducer.data,key,point,type)}/> 
                 </View>
                 
             </View>
@@ -75,7 +92,7 @@ const mapStateToProps = (state) => ({
 });
 //Used to add dispatch (action) into props
 const mapDispatchToProps = {
-    updateQuest,fetchQuest
+    updateQuest, fetchQuest, updateQuestDone
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Quest)
