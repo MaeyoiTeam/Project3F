@@ -34,9 +34,6 @@ class Ranking extends Component{
         props=this.props;
         if(this.props.authReducer.isAuth &&this.state.fontLoaded){
         return(<View style={styles.container}>
-        <View style={styles.ku1}></View>
-        <Text style={styles.ku4}>Ranking</Text>
-        <View style={styles.ku2}></View>
             
 
                 <View>
