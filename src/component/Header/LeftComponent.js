@@ -4,9 +4,8 @@ import { connect } from 'react-redux';
 import {Avatar} from 'react-native-elements';
 import {authChanged} from '../../actions/signIn';
 import {Header} from 'react-native-elements';
-import {navigate} from '../../actions'
+import {navigate} from '../../actions';
 class LeftComponent extends Component{
-
          componentWillMount() {
             this.props.authChanged()
          }

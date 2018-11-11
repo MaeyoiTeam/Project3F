@@ -1,7 +1,8 @@
 import {FETCH_USER_FAIL,FETCH_USER_SUCCESS,FETCH_USER} from '../constants';
 import firebase from '../config/firebase'
-import {updateDataUser} from './api';
+import {updateDataUser,updateToken} from './api';
 import { NavigationActions } from 'react-navigation'
+
 export const signOut = () => dispatch => {
     firebase.auth().signOut().then(() => {
         dispatch({
@@ -55,11 +56,12 @@ export const signInWithGoogle = ()  => {
     }
 }
 
-export const authChanged = () => dispatch => {
+export const authChanged = () => async dispatch => {
 try{
         firebase.auth().onAuthStateChanged(user => {
         if (user) {
 //TODO add UserAchievement
+            const token = updateToken(user.uid);
             updateDataUser(user.uid, user.providerData[0]).then((result)=>{
                 let questListdone = {};
                 if(result.quest!=null){
@@ -82,7 +84,8 @@ try{
                         levelQ:result.levelQ,
                         quest: questListdone,
                         star:result.star,
-                        achieve:result.achieve
+                        achieve:result.achieve,
+                        pushToken:token
                     }
                 })}
                 );

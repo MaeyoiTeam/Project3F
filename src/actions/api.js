@@ -1,4 +1,5 @@
 import firebase from '../config/firebase';
+import { Permissions, Notifications } from 'expo';
 const databaseRef = firebase.database().ref();
 const userRef = databaseRef.child('users/');
 const systemRef = databaseRef.child('system/')
@@ -174,7 +175,9 @@ export const updateDataUser=(uid,user)=>{
                         star: 0,
                         target: 10
                     }
-                    personalRef.update({ ...user,
+                    personalRef.update({ 
+                       // pushToken:token,
+                        ...user,
                         star: 0,
                         levelQ: {
                             food: initializeLevel,
@@ -183,12 +186,34 @@ export const updateDataUser=(uid,user)=>{
                     })
                 }
             }
-            else{ personalRef.update({ ...user })
+            else{ personalRef.update({ ...user //,pushToken:token
+            })
             }
                 return resolve(snap.val());
             });
     });
 }
+
+export const updateToken=async (uid)=>{
+let { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
+
+  // Stop here if the user did not grant permissions
+  if (status !== 'granted') {
+    return;
+  }
+  // Get the token that uniquely identifies this device
+  let token = await Notifications.getExpoPushTokenAsync();
+
+
+
+  userID = firebase.auth().currentUser.uid;
+
+  userRef.child(uid).update({ pushToken: token });
+  return token;
+}
+
+
+
 
 //############################################### Common Data User ###############################################
 //ดึงข้อมูล จากDataตามUserนั้นๆ

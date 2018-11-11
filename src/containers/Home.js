@@ -4,7 +4,6 @@ import {Button} from 'react-native-elements'
 import { connect } from 'react-redux';
 import { randomQuest,getQuestList } from '../actions/quest'
 class Home extends Component {
-
 //TODO rerender หลังจากได้ค่าAuthReducerมาจากHeader เพื่อเรียกส่งauthReducer.data ให้ getQuest
 //? ไปอ่านLife cylce reactมา
     
@@ -34,9 +33,8 @@ class Home extends Component {
                     onPress={()=>this.props.navigation.navigate('QuestList')}
                 />
                 <Button title="Go Pedo" 
-                    onPress={()=>this.props.navigation.navigate('Pedo')}
+                    onPress={()=>this.props.navigation.navigate('Pedo')}    
                 />
-                
             </View>
         );
         }
