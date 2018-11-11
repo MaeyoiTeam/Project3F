@@ -2,6 +2,8 @@ import {FETCH_USER_FAIL,FETCH_USER_SUCCESS,FETCH_USER} from '../constants';
 import firebase from '../config/firebase'
 import {updateDataUser} from './api';
 import { NavigationActions } from 'react-navigation'
+import { Button } from 'react-native-elements';
+
 export const signOut = () => dispatch => {
     firebase.auth().signOut().then(() => {
         dispatch({

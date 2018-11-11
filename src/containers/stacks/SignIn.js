@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
-import {  View, Text } from 'react-native';
+import {  View, Text ,StyleSheet,ImageBackground } from 'react-native';
 import { connect } from 'react-redux';
 import {signOut,signInWithFacebook,signInWithGoogle,fetchUser} from '../../actions/signIn';
-import {Button,Avatar} from 'react-native-elements';
+import {Button,Avatar, colors} from 'react-native-elements';
 
 class SingIn extends Component{
   static navigationOptions = ({
       navigation
   }) => {
       return {
-          title: navigation.getParam('otherParam', 'Switch Account'),
+          title: navigation.getParam('otherParam', 'kuy'),
       };
   };
 
@@ -21,11 +21,13 @@ class SingIn extends Component{
        return props.authReducer.isAuth;
      };
      
-
+  
      render() {
       props=this.props;
       if(props.authReducer.isAuth){
           return (
+         
+          
         <View>
                   {
                       props.authReducer.data != null && <View>
@@ -47,10 +49,44 @@ class SingIn extends Component{
       }
       else{
           return(
-              <View>
-        <Button title="Login With Facebook" onPress={this.props.signInWithFacebook}/>
-        <Button title="Login With Google" onPress={this.props.signInWithGoogle}/>
-      </View>
+              
+        
+       
+          <ImageBackground source={require('../../../image/k1.png')}style={Styles.container}>
+        <View style={Styles.ki1}></View>
+         <View style={Styles.ki2}>
+            <Text>ACHIVE</Text>
+        <Text>4YOURSELF</Text> 
+        </View>
+        <View style={Styles.ki3}>
+        <Text>Logun via</Text>
+        </View> 
+        <View style={Styles.ki4}>
+        <Button  title="Login With Facebook" onPress={this.props.signInWithFacebook}
+
+        buttonStyle={{
+            backgroundColor: "pink",
+            width: 100,
+            height: 100,
+            borderColor: "gray",
+            borderWidth: 1,
+            borderRadius: 360   
+        }}/>
+        </View>
+        
+        <Button title="Login With Google" onPress={this.props.signInWithGoogle}
+        buttonStyle={{
+            backgroundColor: "pink",
+            width: 100,
+            height: 100,
+            borderColor: "gray",
+            borderWidth: 1,
+            borderRadius: 360,
+        }}/>
+    
+      
+  </ImageBackground>
+  
           );
       }
     
@@ -65,5 +101,25 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps={
  signInWithFacebook, signInWithGoogle, signOut, fetchUser
 };
+const Styles = StyleSheet.create({
+    container:{
+        flex: 1, 
+        alignItems: 'center'
+      },
+    ki3: {
+        flex: 0.12,
+        
+      },
+    ki2: {
+        flex: 0.2,
+      },
+    ki1: {
+        flex: 0.25,   
+      },
+    ki4:{
+        
+        flex: 0.3,
+    }
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(SingIn)

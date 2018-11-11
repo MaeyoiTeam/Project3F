@@ -1,4 +1,4 @@
-import { View,Text,StyleSheet } from 'react-native';
+import { View,Text,StyleSheet,ImageBackground } from 'react-native';
 import React,{Component} from 'react';
 
 class Notifications extends Component {
@@ -8,11 +8,17 @@ class Notifications extends Component {
 
     render(){
         return(
-            <View>
+            <ImageBackground source={require('../../image/aaa.jpg')}
+            style={Styles.container1}>
                 <Text>This is Notifications</Text>
-            </View>
+            </ImageBackground>
         );
     }
 }
 
+const Styles = StyleSheet.create({
+    container1:{
+        flex: 1,     
+    },
+})
 export default Notifications;
