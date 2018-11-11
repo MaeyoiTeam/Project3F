@@ -5,7 +5,7 @@ import {getQuestList,fetchQuest} from '../../actions/quest'
 import {Button} from 'react-native-elements';
 class QuestList extends Component {
     componentDidMount(){
-          this.props.getQuestList(this.props.authReducer.data.uid)
+          this.props.getQuestList(this.props.authReducer.data.uid,"undone")
     }
 // แสดงเฉพาะเควสที่ยังไม่เสร็จ
 //! เวลากลับจากหน้าQuest Questในหน้านี้ไม่หาย
@@ -22,7 +22,7 @@ class QuestList extends Component {
                                 <Button title={"Play "+info[1].name}
                                 onPress = {
                                         () => {
-                                            this.props.fetchQuest(authReducer.data.uid,info[0])
+                                            this.props.fetchQuest(authReducer.data.uid,info[0],"undone")
                                             this.props.navigation.navigate({
                                                 routeName: 'Quest'
                                             });

@@ -53,8 +53,8 @@ export const updateQuest=(user,key,point)=>{
 }
 
 // Fetch during Quest Firsttime 
-export const fetchQuest = (uid,key) => {
-  const path = "quest/undone/"+key;
+export const fetchQuest = (uid,key,type) => {
+  const path = "quest/"+type+"/"+key;
   const result = loadUserData(uid,path).then((obj)=>{
 
     return {key:key,...obj}
@@ -63,9 +63,12 @@ export const fetchQuest = (uid,key) => {
 }
 
 // Get during Quest List form userData 
-export const getQuestList = (uid) => {
+export const getQuestList = (uid,type) => {
   const result = loadUserData(uid, "quest").then((obj)=>{
-    return Object.entries(obj.undone)});
+  if(type=="undone"){return Object.entries(obj.undone)}
+  else if(type =="done"){return Object.entries(obj.done)}
+  else{return null}
+  });
    return fetchQuestList(result);
 }
 

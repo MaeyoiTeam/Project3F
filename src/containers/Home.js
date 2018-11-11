@@ -30,6 +30,9 @@ class Home extends Component {
                 <Button title="Go QuestList" 
                     onPress={()=>this.props.navigation.navigate('QuestList')}
                 />
+                <Button title="History QuestList" 
+                    onPress={()=>this.props.navigation.navigate('HistoryQuestList')}
+                />
                 <Button title="Go Pedo" 
                     onPress={()=>this.props.navigation.navigate('Pedo')}    
                 />

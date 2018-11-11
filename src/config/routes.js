@@ -13,6 +13,7 @@ import QuestList from '../containers/stacks/QuestList';
 import SignIn from '../containers/stacks/SignIn';
 import Quest from '../containers/stacks/Quest';
 import Pedo from '../containers/stacks/Pedo';
+import HistoryQuestList from '../containers/stacks/HistoryQuestList';
 //Component
 import LeftComponent from '../component/Header/LeftComponent';
 import MidComponent from '../component/Header/MidComponent';
@@ -98,6 +99,12 @@ QuestList:{ screen:QuestList,
             headerStyle: {}
             }
           },
+HistoryQuestList:{ screen:HistoryQuestList,
+            navigationOptions: {
+            headerTitle: "HistoryQuestList",
+            headerStyle: {}
+            }
+          },
 SignIn: {
       screen: SignIn,
       navigationOptions: {
@@ -118,3 +125,4 @@ Quest: {
 
 
 export default Navigator;
+
