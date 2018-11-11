@@ -22,6 +22,7 @@ class Home extends Component {
     }
 
     render(){
+        
         if(this.props.authReducer.isAuth){
               return(
             <View>
@@ -41,14 +42,10 @@ class Home extends Component {
         );
         }
         else{
-          
           return <Text>Signing...</Text>
-          
         }
     }
 }
-
-
 // Used to add reducer's states into the props
 const mapStateToProps = (state) => ({
     fetchReducer: state.fetchReducer,
@@ -59,6 +56,5 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
     randomQuest, getQuestList
 };
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home)

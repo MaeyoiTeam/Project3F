@@ -2,8 +2,15 @@
 import { Provider, connect } from 'react-redux';
 import React from 'react';
 import ReduxNavigation,{store} from './src/ReduxNavigation'
+import { Font } from 'expo';
 
-class App extends React.Component {
+export default class App extends React.Component {
+  componentDidMount() {
+    Font.loadAsync({
+      'asd': require('./assets/fonts/seguiemj.ttf'),
+    });
+  }
+
 
   constructor(){
     super();
@@ -19,5 +26,3 @@ class App extends React.Component {
     );
   }
 }
-
-export default App;

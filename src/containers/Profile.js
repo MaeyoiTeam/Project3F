@@ -11,29 +11,25 @@ class Profile extends Component{
     render(){
         const styles = StyleSheet.create({
             container: {
-              borderRadius: 4,
-              borderWidth: 0.5,
-              borderColor: '#d6d7da',
               alignItems: 'center'
             },
             title: {
               fontSize: 30,
               fontWeight: 'bold',
               textAlign: 'center',
+              fontFamily: 'asd'
             },
-            activeTitle: {
-              color: 'red',
-            },
+           
           });
         const {authReducer} = this.props
         return <View style={styles.container}>
-            <Text style={[styles.title, this.props.isActive && styles.activeTitle]}>Your Profile</Text>
+            <Text style = {{fontFamily:'asd',fontSize:30,fontWeight:'bold',textAlign:'center'}}>Your Profile</Text>
             {authReducer.isAuth && <View>
                 <Avatar style = {styles.litle} xlarge rounded source={{ uri: authReducer.data.photoURL }} onPress={() => console.log("Works!")} />
                 <Text>{authReducer.data.displayName}</Text>
                 <Text>{authReducer.data.Email}</Text>
 {/* //TODO แสดง เลเวล ค่าประสบการณ์ Objectที่เก็บข้อมูล = authReducer.data.levelQ */}
-                 <Text>Your Score</Text>
+                 <Text>Your Star</Text>
                      {
                          this.current!=null &&<View>
                           <Text>Rank: {this.current.index+1} : {this.current.data.name}</Text>

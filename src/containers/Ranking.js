@@ -3,6 +3,7 @@ import {ScrollView, View,Text } from 'react-native';
 import {Button,Avatar} from 'react-native-elements';
 import { connect } from 'react-redux';
 import {fetchData,fetchRanking} from '../actions'
+
 class Ranking extends Component{
     constructor(props){
         super(props)
@@ -12,13 +13,22 @@ class Ranking extends Component{
     }
 
     render(){
+        const styles = {container: {
+            alignItems: 'center'
+          },
+          title: {
+            fontSize: 40,
+            fontWeight: 'bold',
+            textAlign: 'center',
+          }};
+          
         const current={};
         props=this.props;
         if(this.props.authReducer.isAuth){
         return(
             <ScrollView>
                 <View>
-                <Text>Ranking</Text>
+                <Text style = {styles.title}>Ranking</Text>
                      {
                         props.rankReducer.data.map((item, i) => {
                              if(item.uid==props.authReducer.data.uid){
