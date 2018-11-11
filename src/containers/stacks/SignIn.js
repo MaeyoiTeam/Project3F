@@ -9,7 +9,8 @@ class SingIn extends Component{
       navigation
   }) => {
       return {
-          title: navigation.getParam('otherParam', 'Switch Account'),
+          header: null,
+        //  title: navigation.getParam('otherParam', 'Switch Account'),
       };
   };
 
@@ -18,13 +19,15 @@ class SingIn extends Component{
      }
 
      componentDidUpdate = (prevProps, prevState) => {
-       return props.authReducer.isAuth;
+         if(this.props.authReducer.isAuth){
+             this.props.navigation.navigate('Profile')
+         }
      };
      
 
      render() {
       props=this.props;
-      if(props.authReducer.isAuth){
+      if(props.authReducer.isAuth){         //Should be Loading
           return (
         <View>
                   {
@@ -39,9 +42,6 @@ class SingIn extends Component{
                               activeOpacity={0.7}
                           />
                       </View>}
-
-
-        <Button title="Logout" onPress={props.signOut}/>
       </View>
     );
       }

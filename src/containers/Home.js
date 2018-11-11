@@ -4,9 +4,7 @@ import {Button} from 'react-native-elements'
 import { connect } from 'react-redux';
 import { randomQuest,getQuestList } from '../actions/quest'
 class Home extends Component {
-//TODO rerender หลังจากได้ค่าAuthReducerมาจากHeader เพื่อเรียกส่งauthReducer.data ให้ getQuest
-//? ไปอ่านLife cylce reactมา
-    
+
      randomQ=()=>{
        return new Promise(async (resolve, reject) => {
            this.props.randomQuest(this.props.authReducer.data).then(()=>{

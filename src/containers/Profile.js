@@ -51,12 +51,6 @@ class Profile extends Component{
                 <Text style = {styles.litle} >Level:</Text>
                 <Text style = {styles.litle} >Experience</Text>
                 <Text>Achievement</Text>
-                {
-                    authReducer.data.achieve &&
-                    authReducer.data.achieve.map((obj,i) =>
-                        <Text key={i}>{i} : {obj}</Text>
-                    )
-                }
               </View>}
           </View>;
     }

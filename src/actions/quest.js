@@ -19,12 +19,11 @@ export const updateQuestDone = (user,key,type)=>{
             }
   //TODO update Achievement
  const newAchieve = updateAchieve(user.uid,quest,user.achieve);
- console.log(newAchieve);
  var achievement = user.achieve;
-  if (Array.isArray(achievement)) {
-     achievement.push(newAchieve);
+  if (achievement!=null) {
+     achievement={...newAchieve,...achievement}
   } else {
-    achievement = [newAchieve];
+    achievement = {...newAchieve};
   }
     return (dispatch)=>{
         dispatch({

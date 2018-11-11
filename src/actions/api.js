@@ -51,9 +51,16 @@ export const moveToDone=(uid,key,quest)=>{
         const personalRef = await userRef.child(uid)
         const userQuestRef = await personalRef.child("quest");
         const levelUserRef = await personalRef.child('levelQ/'+quest.type);
+        var now = new Date();
         userQuestRef.child('undone/'+key).remove();
-        userQuestRef.child('done/'+quest.type).update({[key]:quest});
-
+        userQuestRef.child('done/' + quest.type).update({
+            [key]: { ...quest,
+                time:now
+            }
+        });
+        personalRef.child('star').transaction((star)=>{
+            return (star||0) + quest.star
+        })
         levelUserRef.once('value', snap => {
             const result = updateLevel(snap.val(), quest.star);
             levelUserRef.update(result);
@@ -64,7 +71,7 @@ export const moveToDone=(uid,key,quest)=>{
 // UpdateAchieve & check Achieve
 export const updateAchieve=(uid,quest,achieve)=>{
         const personalRef = userRef.child(uid)
-        var listResult = [];
+        var listResult = {};
         systemRef.once('value',snap=>{
                 const achE = Object.entries(snap.val().achieve)
                 const result = achE.filter((ach) => {
@@ -90,7 +97,6 @@ export const updateAchieve=(uid,quest,achieve)=>{
                             }
                         }
                    })
-                   //! compare ผิด
                 if (filterCon.sort().join() == keyCon.sort().join()){
                     return true;
                 }
@@ -98,22 +104,37 @@ export const updateAchieve=(uid,quest,achieve)=>{
                     return false;
                 }
                 }) 
-               const filterResult = result.filter((obj)=>{
-                   if (Array.isArray(achieve)){
-                        return !achieve.includes(obj)
-                   }
-                   else{
-                       return true
-                   }
-               }) 
-               //Update in DataUser
 
-               filterResult.map((obj)=>{
-                   listResult.push(obj[0]);
+               const filterResult = result.filter((obj)=>{
+                if(achieve!=null){
+                   if (Object.keys(achieve).length!=0){
+                        return !Object.keys(achieve).includes(obj[0])
+                   }
+                }
+                       return true
                });
-               personalRef.child('achieve').update(listResult);
+               //Update in DataUser
+               var now = new Date();
+               var sumStar=0;
+               //!Filter ไม่ได้เลยย
+               if(filterResult!=[]){
+                    filterResult.map((obj) => {
+                        sumStar += Number(obj[1].star);
+                        listResult = {
+                            [obj[0]]: {
+                                ...obj[1],
+                                time: now,
+                            },
+                            ...listResult
+                        };
+                    });
+                     personalRef.child('achieve').update(listResult);
+               }
+        personalRef.child('star').transaction((star) => {
+            return (star || 0) + sumStar
+        })
             });
-            return listResult
+            return listResult       //? ควรเก็บเวลาที่ทำสำเร็จไหม??
     } 
 
             //  updateLevel &Check Levelup
