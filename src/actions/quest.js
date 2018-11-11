@@ -19,7 +19,6 @@ export const updateQuestDone = (user,key,type)=>{
             }
   //TODO update Achievement
  const newAchieve = updateAchieve(user.uid,quest,user.achieve);
- //!ติดปัญหา middleware
  console.log(newAchieve);
  var achievement = user.achieve;
   if (Array.isArray(achievement)) {
@@ -83,7 +82,7 @@ export const randomQuest= (user)=>{
               keysType.map((keyType,i)=>{
                 const quest = data[keyType];
                 var keysQuest = Object.keys(data[keyType])
-                //TODO เควสที่สุ่มต้องไม่มีในUserนั้น ดูใน userData
+                //TODO แบ่งระดับความยากง่าย
                 if(Object.keys(user.quest).includes(keyType)){
                     const keyQuestUser = Object.entries(user.quest).filter(type => type[0] == keyType);
                     keysQuest = keysQuest.filter(quest => {

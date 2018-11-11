@@ -15,7 +15,6 @@ class Profile extends Component{
          }
 
     render(){
-        console.log(this.props.authReducer.data.achieve)
         const styles = StyleSheet.create({
             container: {
               borderRadius: 4,
@@ -33,6 +32,7 @@ class Profile extends Component{
             },
           });
         const {authReducer} = this.props
+        
         return <View style={styles.container}>
             <Text style={[styles.title, this.props.isActive && styles.activeTitle]}>Your Profile</Text>
             {authReducer.isAuth && <View>
@@ -50,6 +50,12 @@ class Profile extends Component{
                       }
                 <Text style = {styles.litle} >Level:</Text>
                 <Text style = {styles.litle} >Experience</Text>
+                <Text>Achievement</Text>
+                {
+                    authReducer.data.achieve.map((obj,i) =>
+                        <Text key={i}>{i} : {obj}</Text>
+                    )
+                }
               </View>}
           </View>;
     }

@@ -81,7 +81,8 @@ try{
                         email: result.email,
                         levelQ:result.levelQ,
                         quest: questListdone,
-                        star:result.star
+                        star:result.star,
+                        achieve:result.achieve
                     }
                 })}
                 );

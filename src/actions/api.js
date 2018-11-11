@@ -62,9 +62,9 @@ export const moveToDone=(uid,key,quest)=>{
 }
 // UpdateAchieve & check Achieve
 export const updateAchieve=(uid,quest,achieve)=>{
-        return new Promise(async(resolve,reject)=>{
-            const personalRef = await userRef.child(uid)
-            systemRef.once('value',snap=>{
+        const personalRef = userRef.child(uid)
+        var listResult = [];
+        systemRef.once('value',snap=>{
                 const achE = Object.entries(snap.val().achieve)
                 const result = achE.filter((ach) => {
                 const condition = ach[1].condition;
@@ -106,14 +106,13 @@ export const updateAchieve=(uid,quest,achieve)=>{
                    }
                }) 
                //Update in DataUser
-               var listResult = []
+
                filterResult.map((obj)=>{
                    listResult.push(obj[0]);
                });
                personalRef.child('achieve').update(listResult);
-               return resolve(listResult);
             });
-        });
+            return listResult
     } 
 
             //  updateLevel &Check Levelup
