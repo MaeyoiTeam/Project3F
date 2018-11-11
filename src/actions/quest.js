@@ -19,6 +19,7 @@ export const updateQuestDone = (user,key,type)=>{
             }
   //TODO update Achievement
  const newAchieve = updateAchieve(user.uid,quest,user.achieve);
+ //!ติดปัญหา middleware
  console.log(newAchieve);
  var achievement = user.achieve;
   if (Array.isArray(achievement)) {

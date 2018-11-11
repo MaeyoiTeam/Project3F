@@ -15,6 +15,7 @@ class Profile extends Component{
          }
 
     render(){
+        console.log(this.props.authReducer.data.achieve)
         const styles = StyleSheet.create({
             container: {
               borderRadius: 4,

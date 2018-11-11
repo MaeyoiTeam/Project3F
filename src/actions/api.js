@@ -69,27 +69,19 @@ export const updateAchieve=(uid,quest,achieve)=>{
                 const result = achE.filter((ach) => {
                 const condition = ach[1].condition;
                 const keyCon = Object.keys(condition);
-                console.log("key "+ keyCon)
                 const filterCon = keyCon.filter((key)=>{
                         if (Array.isArray(condition[key])) { // เจาะจงเควส
                             //TODO เจาะจง
-                            console.log("array")
                             const test = condition[key];
                             const have = quest[key];
-                            console.log("con "+test)
-                            console.log("have " + have)
                             const result = have.filter((obj)=>{
-                                console.log(Object.values(test))
-                                console.log(obj)
                                 return Object.values(test).includes(Number(obj));
                             })
-                            console.log(result)
                             return result.sort().join() == test.sort().join();
                         }
                         else{   
                             // จำนวนเควส type มากกว่าหรือเท่ากับ condition
                             if (quest[key]!=null) {
-                            console.log("have :" + quest[key].length + "/" + condition[key])
                                 return quest[key].length >= condition[key];
                             }
                             else{
@@ -97,9 +89,6 @@ export const updateAchieve=(uid,quest,achieve)=>{
                             }
                         }
                    })
-
-                   console.log(filterCon.sort().join() + " / " + keyCon.sort().join())
-                   console.log(filterCon.sort().join() == keyCon.sort().join()) 
                    //! compare ผิด
                 if (filterCon.sort().join() == keyCon.sort().join()){
                     return true;
@@ -108,7 +97,6 @@ export const updateAchieve=(uid,quest,achieve)=>{
                     return false;
                 }
                 }) 
-                console.log(result)
                const filterResult = result.filter((obj)=>{
                    if (Array.isArray(achieve)){
                         return !achieve.includes(obj)
@@ -122,7 +110,6 @@ export const updateAchieve=(uid,quest,achieve)=>{
                filterResult.map((obj)=>{
                    listResult.push(obj[0]);
                });
-               
                personalRef.child('achieve').update(listResult);
                return resolve(listResult);
             });
