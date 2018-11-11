@@ -34,26 +34,15 @@ class Quest extends Component {
                 prevLevel: { ...prevProps.authReducer.data.levelQ[this.state.type]
                 }
             })
+             if (this.props.fetchReducer.data.isComplete) {
+                 this.props.updateQuestDone(this.props.authReducer.data,this.state.key,this.state.type);
+             }
         }
     } 
 
-
     update=(user,key,point,type)=>{
-        const result = this.props.updateQuest(user, key, point);
-        if(result.isComplete){
-            this.props.updateQuestDone(user,key,type);
-        }
+        this.props.updateQuest(user, key, point);
     }
-
-
-
-
-
-
-
-
-
-
 
     render(){
         const {fetchReducer,authReducer} = this.props;
@@ -76,7 +65,7 @@ class Quest extends Component {
                     <Text>Name: {name} Type: {type}</Text>
                 <Text>Detail: {detail} </Text>
                 <Text>Exp: {current}/{target}</Text>
-                <Button title={"Up "+point+" point"} onPress={update(authReducer.data,key,point,type)}/> 
+                <Button title={"Up "+point+" point"} onPress={()=>this.update(authReducer.data,key,point,type)}/> 
                 </View>
                 
             </View>

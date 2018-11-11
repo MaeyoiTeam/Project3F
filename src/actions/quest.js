@@ -4,14 +4,17 @@ import {FETCH_USER_FAIL,FETCH_USER_SUCCESS,FETCH_USER} from '../constants';
 import {navigate} from './index'
 import { resolve } from 'url';
 
-//!middleware ไม่อัพเดทททท
-
 export const updateQuestDone = (user,key,type)=>{
+  console.log("work")
+  var data =user.quest;
+  var dataType = data[type];
+  dataType.push(key);
+   console.log()
     return (dispatch)=>{
         dispatch({
           type:FETCH_USER_SUCCESS,
           payload:{ ...user,
-            quest:{ [type]:user.quest[type].push(key),
+            quest:{ [type]:dataType,
               ...user.quest
             }
           }
