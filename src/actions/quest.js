@@ -18,13 +18,20 @@ export const updateQuestDone = (user,key,type)=>{
               ...user.quest
             }
   //TODO update Achievement
- const result = updateAchieve(user.uid,quest,user.achieve);
- console.log(result);
+ const newAchieve = updateAchieve(user.uid,quest,user.achieve);
+ console.log(newAchieve);
+ var achievement = user.achieve;
+  if (Array.isArray(achievement)) {
+     achievement.push(newAchieve);
+  } else {
+    achievement = [newAchieve];
+  }
     return (dispatch)=>{
         dispatch({
           type:FETCH_USER_SUCCESS,
           payload:{ ...user,
-            quest:quest
+            quest:quest,
+            achieve:achievement
           }
         });
     }
