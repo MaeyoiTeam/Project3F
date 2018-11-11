@@ -52,10 +52,7 @@ export const moveToDone=(uid,key,quest)=>{
         const levelUserRef = await personalRef.child('levelQ/'+quest.type);
         userQuestRef.child('undone/'+key).remove();
         userQuestRef.child('done/'+quest.type).update({[key]:quest});
-        personalRef.once('value',snap=>personalRef.update({
-            star:snap.val().star+quest.star,           
-        }));
-        //TODO อัพเวล
+
         levelUserRef.once('value', snap => {
             const result = updateLevel(snap.val(), quest.star);
             levelUserRef.update(result);
@@ -63,8 +60,56 @@ export const moveToDone=(uid,key,quest)=>{
         });
     });   
 }
+// UpdateAchieve & check Achieve
+export const updateAchieve=(uid,quest,achieve)=>{
+        return new Promise(async(resolve,reject)=>{
+            const personalRef = await userRef.child(uid)
+            systemRef.once('value',snap=>{
+                const achKeys = Object.values(snap.val().achieve)
+                 const result = achKeys.filter((ach) => {
+                const condition = ach.condition;
+                const keyCon = Object.keys(condition);
+                const filterCon = keyCon.filter((key)=>{
+                        if (Array.isArray(condition[key])) { // เจาะจงเควส
+                            console.log("array")
+                             return true
+                        }
+                        else{   
+                            // จำนวนเควส type มากกว่าหรือเท่ากับ condition
+                            if (quest[key]!=null) {
+                                if (quest[key].length >= condition[key]) {
+                                    return true
+                                }
+                            }
+                            else{
+                                return false
+                            }
+                        }
+                   })
+                if (Object.values(filterCon).every(e => Object.values(keyCon).includes(e))) {
+                    return true;
+                }
+                else{
+                    return false;
+                }
+                }) 
+               const filterResult = result.filter((obj)=>{
+                   if (Array.isArray(achieve)){
+                        return !achieve.includes(obj)
+                   }
+                   else{
+                       return true
+                   }
+               }) 
+               //Update in DataUser
+               personalRef.child('achieve').update(filterResult);
+               return resolve(filterResult);
+            });
+        });
+    } 
+
 //  updateLevel &Check Levelup
-export const updateLevel=(data,star)=>{
+     const updateLevel=(data,star)=>{
     var currentStar = data.star+star;
     var level = data.level;
     const lvlup = Math.floor(currentStar / data.target);
@@ -83,12 +128,14 @@ export const updateLevel=(data,star)=>{
     }
 }
 
+//
+
 //############################################### Ranking ###############################################
 
 //fetch Ranking
 export const rankingUser=()=>{
         return new Promise((resolve, reject) => {
-            userRef.on('value',snapshot=>{
+            userRef.orderByChild("score").once('value', snapshot => {
                 let data =[];
                 snapshot.forEach((item)=>{
                    data.push({name:item.val().displayName,
@@ -112,20 +159,22 @@ export const updateDataUser=(uid,user)=>{
     return new Promise((resolve,reject)=>{
         const personalRef = userRef.child(uid);
         personalRef.on("value",snap=>{
-            if (snap.val().star == null || snap.val().levelQ == null) { //FirstTime Login
-                console.log("first time login")
-                initializeLevel = {
-                    level: 1,
-                    star: 0,
-                    target: 5
-                }
-                 personalRef.update({ ...user,
-                    star:0,
-                    levelQ:{
-                        food:initializeLevel,
-                        etc: initializeLevel
+            if(snap.val()!=null){
+                if (snap.val().star == null || snap.val().levelQ == null) { //FirstTime Login
+                    console.log("first time login")
+                    initializeLevel = {
+                        level: 1,
+                        star: 0,
+                        target: 10
                     }
-                })
+                    personalRef.update({ ...user,
+                        star: 0,
+                        levelQ: {
+                            food: initializeLevel,
+                            etc: initializeLevel
+                        }
+                    })
+                }
             }
             else{ personalRef.update({ ...user })
             }

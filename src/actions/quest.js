@@ -1,22 +1,30 @@
 import {fetchData,fetchQuestList} from './index';
-import loadUserData,{fetchSystem,updateUserQuest,updateScore,moveToDone} from './api';
+import loadUserData,{fetchSystem,updateUserQuest,updateScore,moveToDone,updateAchieve} from './api';
 import {FETCH_USER_FAIL,FETCH_USER_SUCCESS,FETCH_USER} from '../constants';
 import {navigate} from './index'
 import { resolve } from 'url';
+//Update Middleware 
 
 export const updateQuestDone = (user,key,type)=>{
-  console.log("work")
-  var data =user.quest;
-  var dataType = data[type];
-  dataType.push(key);
-   console.log()
+  var quest =user.quest;
+  var quest = quest[type];
+  if (Array.isArray(quest)) {
+      quest.push(key);
+  }
+  else{
+    quest = [key];
+  }
+  quest = { [type]:quest,
+              ...user.quest
+            }
+  //TODO update Achievement
+ const result = updateAchieve(user.uid,quest,user.achieve);
+ console.log(result);
     return (dispatch)=>{
         dispatch({
           type:FETCH_USER_SUCCESS,
           payload:{ ...user,
-            quest:{ [type]:dataType,
-              ...user.quest
-            }
+            quest:quest
           }
         });
     }
@@ -26,11 +34,11 @@ export const updateQuestDone = (user,key,type)=>{
 export const updateQuest=(user,key,point)=>{
     const result = updateScore(user.uid, key, point).then((quest) => {
       if (quest.current >= quest.target) {
-        return moveToDone(user.uid, key, quest).then((obj) => {
+         return moveToDone(user.uid, key, quest).then((obj) => {
           return { ...obj,
             isComplete: true
           }
-        })
+        }) 
       } else {
         return quest
       }
@@ -70,17 +78,11 @@ export const randomQuest= (user)=>{
                 //TODO เควสที่สุ่มต้องไม่มีในUserนั้น ดูใน userData
                 if(Object.keys(user.quest).includes(keyType)){
                     const keyQuestUser = Object.entries(user.quest).filter(type => type[0] == keyType);
-                    console.log("have : " + keyQuestUser);
                     keysQuest = keysQuest.filter(quest => {
                       const questlist = keyQuestUser[0];
-                      console.log("list : " + questlist[1]);
-                      console.log("with this : " + quest);
-                      console.log("not have this " + !questlist[1].includes(quest));
                       return !questlist[1].includes(quest);
                     });
                 }
-                 
-                console.log("filtered: " + keysQuest)
                 var selectKeyQuest = keysQuest[keysQuest.length * Math.random() << 0];
                 const source =quest[selectKeyQuest]
                 if(selectKeyQuest!=null){

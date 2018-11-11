@@ -8,7 +8,7 @@ class Home extends Component {
 //TODO rerender หลังจากได้ค่าAuthReducerมาจากHeader เพื่อเรียกส่งauthReducer.data ให้ getQuest
 //? ไปอ่านLife cylce reactมา
     
-    randomQ=()=>{
+     randomQ=()=>{
        return new Promise(async (resolve, reject) => {
            this.props.randomQuest(this.props.authReducer.data).then(()=>{
                if (this.props.authReducer.isAuth) {
@@ -19,17 +19,17 @@ class Home extends Component {
            })
             
        })
-    }
+    } 
 
     render(){
         if(this.props.authReducer.isAuth){
               return(
             <View>
-                <Button title="Let's Achieve!" 
+                { <Button title="Let's Achieve!" 
                     onPress={async ()=>{let path = await this.randomQ();
                     this.props.navigation.navigate(path);
                     }}
-                />
+                /> }
                 <Button title="Go QuestList" 
                     onPress={()=>this.props.navigation.navigate('QuestList')}
                 />
@@ -53,7 +53,7 @@ const mapStateToProps = (state) => ({
 });
 //Used to add dispatch (action) into props
 const mapDispatchToProps = {
-    randomQuest, getQuestList
+     getQuestList ,randomQuest
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home)
