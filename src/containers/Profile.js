@@ -26,7 +26,7 @@ class Profile extends Component{
             <Text style = {{fontFamily:'asd',fontSize:30,fontWeight:'bold'}}>Your Profile</Text>
             {authReducer.isAuth && <View>
                 <Avatar xlarge rounded source={{ uri: authReducer.data.photoURL }} onPress={() => console.log("Works!")} />
-                <Text style={{paddingTop:20,fontSize:15}}>{authReducer.data.displayName}</Text>
+                <Text style={{paddingTop:20,fontSize:15,textAlign:'center'}}>{authReducer.data.displayName}</Text>
                 <Text>{authReducer.data.Email}</Text>
 {/* //TODO แสดง เลเวล ค่าประสบการณ์ Objectที่เก็บข้อมูล = authReducer.data.levelQ */}
                 <Text style={{paddingBottom:70,textAlign:'center',paddingTop:60}}>Level:</Text>
@@ -56,5 +56,12 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
     
 };
+const styles = StyleSheet.create({  
+    container: {
+    flex: 1,
+    backgroundColor: 'white',  
+    alignItems: 'center'
+  },
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile)
