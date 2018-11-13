@@ -23,21 +23,25 @@ class Profile extends Component{
           });
         const {authReducer} = this.props
         return <View style={styles.container}>
-            <Text style = {{fontFamily:'asd',fontSize:30,fontWeight:'bold',textAlign:'center'}}>Your Profile</Text>
+            <Text style = {{fontFamily:'asd',fontSize:30,fontWeight:'bold'}}>Your Profile</Text>
             {authReducer.isAuth && <View>
-                <Avatar style = {styles.litle} xlarge rounded source={{ uri: authReducer.data.photoURL }} onPress={() => console.log("Works!")} />
-                <Text>{authReducer.data.displayName}</Text>
+                <Avatar xlarge rounded source={{ uri: authReducer.data.photoURL }} onPress={() => console.log("Works!")} />
+                <Text style={{paddingTop:20,fontSize:15}}>{authReducer.data.displayName}</Text>
                 <Text>{authReducer.data.Email}</Text>
 {/* //TODO แสดง เลเวล ค่าประสบการณ์ Objectที่เก็บข้อมูล = authReducer.data.levelQ */}
-                 <Text>Your Star</Text>
-                     {
-                         this.current!=null &&<View>
-                          <Text>Rank: {this.current.index+1} : {this.current.data.name}</Text>
-                        <Text>     Star:  {this.current.data.score}</Text>
-                         </View>
-                      }
-                <Text style = {styles.litle} >Level:</Text>
-                <Text style = {styles.litle} >Experience</Text>
+                <Text style={{paddingBottom:70,textAlign:'center',paddingTop:60}}>Level:</Text>
+                <Button title="Achievement History" 
+                    onPress={async ()=>{let path = await this.randomQ();
+                    this.props.navigation.navigate(path);}}
+                    buttonStyle={{
+                        backgroundColor: "rgba(00, 99,216, 1)",
+                        width: 120,
+                        height: 40,
+                        borderColor: "transparent",
+                        borderWidth: 0,
+                       
+                      }}  
+                />
               </View>}
           </View>;
     }
