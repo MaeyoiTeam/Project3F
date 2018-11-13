@@ -16,7 +16,6 @@ class Ranking extends Component{
             'Segoe-Script' : require('../../assets/fonts/segoesc.ttf')
         }).then(()=>{
             this.setState({fontLoaded:true});
-            this.defaultFonts();
         })
     }
 
