@@ -3,7 +3,6 @@ import {FETCHING_DATA,FETCHING_DATA_FAILURE,FETCHING_DATA_SUCCESS,
     RANK_DATA, RANK_DATA_SUCCESS, RANK_DATA_FAILURE,
     QUEST_DATA, QUEST_DATA_SUCCESS, QUEST_DATA_FAILURE,
 } from '../constants';
-import firebase from '../config/firebase'
 import {rankingUser,updateScore} from './api';
 import { NavigationActions } from 'react-navigation'
 export const SetStageToSuccess =(data)=>({

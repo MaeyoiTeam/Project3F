@@ -20,7 +20,7 @@ class SingIn extends Component{
 
      componentDidUpdate = (prevProps, prevState) => {
          if(this.props.authReducer.isAuth){
-             this.props.navigation.navigate('Profile')
+             this.props.navigation.navigate('Home')
          }
      };
      

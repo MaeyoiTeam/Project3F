@@ -56,9 +56,9 @@ export const updateQuest=(user,key,point)=>{
 export const fetchQuest = (uid,key,type) => {
   const path = "quest/"+type+"/"+key;
   const result = loadUserData(uid,path).then((obj)=>{
-
     return {key:key,...obj}
   });
+
     return fetchData(result);
 }
 

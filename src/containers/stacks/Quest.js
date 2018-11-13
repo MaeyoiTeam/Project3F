@@ -13,6 +13,7 @@ class Quest extends Component {
   };
     constructor(props){
         super(props);
+
         this.state={
             key:"none",
             name: "none",
@@ -52,8 +53,8 @@ class Quest extends Component {
                     <Text>Current {type} star :{prevLevel.star}/{prevLevel.target}->{star}/{target}</Text>
                     <Text>level: {prevLevel.level}/{level}</Text>
                     <Text>Quest is Complete</Text>
-                    <Button title="Go Home" 
-                    onPress={()=>this.props.navigation.navigate('Home')}/>
+                      <Button title="Go Home" 
+                    onPress={()=>this.props.navigation.navigate('Home')}/>  
                     </View>);
         }
         else{    //Quest Continue
@@ -64,7 +65,7 @@ class Quest extends Component {
                     <Text>Name: {name} Type: {type}</Text>
                 <Text>Detail: {detail} </Text>
                 <Text>Exp: {current}/{target}</Text>
-                <Button title={"Up "+point+" point"} onPress={()=>this.update(authReducer.data,key,point,type)}/> 
+                  <Button title={"Up "+point+" point"} onPress={()=>this.update(authReducer.data,key,point,type)}/>  
                 </View>
                 
             </View>

@@ -5,9 +5,6 @@ import {Avatar} from 'react-native-elements';
 import {authChanged} from '../../actions/signIn';
 import {Header} from 'react-native-elements';
 class RightComponent extends Component{
-         componentWillMount() {
-             this.props.authChanged();
-         }
 render(){
     return(
         <View style={styles.container}>
