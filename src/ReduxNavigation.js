@@ -30,7 +30,7 @@ class ReduxNavigation extends PureComponent {
     }
     onBackPress=()=>{
         const {dispatch,state} =this.props;
-        if (state.index === 0) {
+        if (state.index === 1||state.index===0) {
             return false;
         }
         dispatch(NavigationActions.back());

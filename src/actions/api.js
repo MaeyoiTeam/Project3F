@@ -197,17 +197,17 @@ export const updateDataUser=(uid,user)=>{
                         target: 10
                     }
                     personalRef.update({ 
-                       // pushToken:token,
                         ...user,
                         star: 0,
                         levelQ: {
                             food: initializeLevel,
-                            etc: initializeLevel
+                            rest: initializeLevel,
+                            walk: initializeLevel,
                         }
                     })
                 }
             }
-            else{ personalRef.update({ ...user //,pushToken:token
+            else{ personalRef.update({ ...user 
             })
             }
                 return resolve(snap.val());

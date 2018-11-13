@@ -2,7 +2,7 @@ import { View,Text,StyleSheet } from 'react-native';
 import React,{Component} from 'react';
 import { connect } from 'react-redux';
 import {Button} from 'react-native-elements'
-import {updateQuest,fetchQuest,updateQuestDone} from '../../actions/quest'
+import {updateQuest,fetchQuest,updateQuestDone,getQuestList} from '../../actions/quest'
 class Quest extends Component {
   static navigationOptions = ({
       navigation
@@ -36,6 +36,7 @@ class Quest extends Component {
                 }
             })
              if (this.props.fetchReducer.data.isComplete) {
+                 this.props.getQuestList(this.props.authReducer.data.uid, "undone");
                  this.props.updateQuestDone(this.props.authReducer.data,this.state.key,this.state.type);
              }
         }
@@ -81,7 +82,7 @@ const mapStateToProps = (state) => ({
 });
 //Used to add dispatch (action) into props
 const mapDispatchToProps = {
-    updateQuest, fetchQuest, updateQuestDone
+    updateQuest, fetchQuest, updateQuestDone, getQuestList
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Quest)
