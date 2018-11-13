@@ -25,8 +25,8 @@ class Profile extends Component{
         return <View style={styles.container}>
             <Text style = {{fontFamily:'asd',fontSize:30,fontWeight:'bold'}}>Your Profile</Text>
             {authReducer.isAuth && <View>
-                <Avatar style = {{flex:1}}xlarge rounded source={{ uri: authReducer.data.photoURL }} onPress={() => console.log("Works!")} />
-                <Text style={{paddingTop:20,fontSize:15,flex:1}}>{authReducer.data.displayName}</Text>
+                <Avatar xlarge rounded source={{ uri: authReducer.data.photoURL }} onPress={() => console.log("Works!")} />
+                <Text style={{paddingTop:20,fontSize:15}}>{authReducer.data.displayName}</Text>
                 <Text>{authReducer.data.Email}</Text>
 {/* //TODO แสดง เลเวล ค่าประสบการณ์ Objectที่เก็บข้อมูล = authReducer.data.levelQ */}
                 <Text style={{paddingBottom:70,textAlign:'center',paddingTop:60}}>Level:</Text>
