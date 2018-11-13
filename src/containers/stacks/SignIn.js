@@ -10,6 +10,7 @@ class SingIn extends Component{
   }) => {
       return {
           title: navigation.getParam('otherParam', 'kuy'),
+          header: null
       };
   };
 
