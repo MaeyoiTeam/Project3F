@@ -18,6 +18,8 @@ import HistoryQuestList from '../containers/stacks/HistoryQuestList';
 import LeftComponent from '../component/Header/LeftComponent';
 import MidComponent from '../component/Header/MidComponent';
 import RightComponent from '../component/Header/RightComponent';
+import { colors } from 'react-native-elements';
+import { Colors } from 'react-native-paper';
 
 
 
@@ -84,13 +86,14 @@ const BottomTabs = createMaterialBottomTabNavigator(
 );
 const Stack = createStackNavigator({
 Home:{    screen:BottomTabs,
-          navigationOptions:{
+          navigationOptions:{ /* header:null */
             
-            headerLeft:(<LeftComponent/>),
-            headerTitle:(<MidComponent/>),
-            headerRight:(<RightComponent/>),
+             headerLeft:(<LeftComponent/>),
+            //headerTitle:(<MidComponent/>),
+            headerRight:(<RightComponent/>), 
             headerStyle: {
-            }
+              height:40
+            } 
           }
     },
 HistoryQuestList:{ screen:HistoryQuestList,
@@ -124,6 +127,7 @@ const Navigator = createSwitchNavigator({
   Stack: {
     screen: Stack,
     navigationOptions: {}
+    
   },
 });
 

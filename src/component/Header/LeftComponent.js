@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import {StyleSheet,View,Text } from 'react-native';
+import {StyleSheet,View,Text,Image } from 'react-native';
 import { connect } from 'react-redux';
 import {Avatar} from 'react-native-elements';
 import {authChanged} from '../../actions/signIn';
@@ -11,9 +11,19 @@ class LeftComponent extends Component{
          }
 render(){
     return(
-        <View style={styles.container}>
+        <View>
+            <Image
+                 source={require('../../../image/RedStar.png')}
+                 fadeDuration={0}
+                 style={{width: 25, height: 25,marginLeft:20}}
+                 
+                 
+                 />
+        </View>
+
+        /*<View style={styles.container}>
                 {   this.props.authReducer.isAuth &&
-                <View>
+                <View style={{marginLeft:20}}>
                     <Avatar
                         size="small"
                         rounded
@@ -23,7 +33,7 @@ render(){
                     />
                 </View>
                 }
-        </View>
+        </View>*/
     );
 }
 }
