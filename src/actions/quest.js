@@ -1,4 +1,4 @@
-import {fetchData,fetchQuestList} from './index';
+import {fetchData,fetchQuestList,fetchHistoryList} from './index';
 import loadUserData,{fetchSystem,updateUserQuest,updateScore,moveToDone,updateAchieve} from './api';
 import {FETCH_USER_FAIL,FETCH_USER_SUCCESS,FETCH_USER} from '../constants';
 import {navigate} from './index'
@@ -69,7 +69,13 @@ export const getQuestList = (uid,type) => {
   else if(type =="done"){return Object.entries(obj.done)}
   else{return null}
   });
-   return fetchQuestList(result);
+  if (type == "undone") {
+    return fetchQuestList(result);
+  } else if (type == "done") {
+    return fetchHistoryList(result);
+  } else {
+    return null
+  }
 }
 
 //Random Quest from system
