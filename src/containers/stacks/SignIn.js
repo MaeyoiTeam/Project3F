@@ -1,31 +1,33 @@
 import React, { Component } from 'react';
 import {  View, Text ,StyleSheet,ImageBackground } from 'react-native';
 import { connect } from 'react-redux';
-import {signOut,signInWithFacebook,signInWithGoogle,fetchUser} from '../../actions/signIn';
-import {Button,Avatar, colors} from 'react-native-elements';
+import {signOut,signInWithFacebook,signInWithGoogle,authChanged} from '../../actions/signIn';
+import {Button,Avatar,colors} from 'react-native-elements';
 
 class SingIn extends Component{
   static navigationOptions = ({
       navigation
   }) => {
       return {
-          title: navigation.getParam('otherParam', 'kuy'),
-          header: null
+          header: null,
+        //  title: navigation.getParam('otherParam', 'Switch Account'),
       };
   };
 
      componentWillMount() {
-         this.props.fetchUser();
+         this.props.authChanged();
      }
 
      componentDidUpdate = (prevProps, prevState) => {
-       return props.authReducer.isAuth;
+         if(this.props.authReducer.isAuth){
+             this.props.navigation.navigate('Home')
+         }
      };
      
   
      render() {
       props=this.props;
-      if(props.authReducer.isAuth){
+      if(props.authReducer.isAuth){         //Should be Loading
           return (
          
           
@@ -42,9 +44,6 @@ class SingIn extends Component{
                               activeOpacity={0.7}
                           />
                       </View>}
-
-
-        <Button title="Logout" onPress={props.signOut}/>
       </View>
     );
       }
@@ -100,7 +99,7 @@ const mapStateToProps = (state) => ({
 });
 //Used to add dispatch (action) into props
 const mapDispatchToProps={
- signInWithFacebook, signInWithGoogle, signOut, fetchUser
+ signInWithFacebook, signInWithGoogle, signOut, authChanged
 };
 const Styles = StyleSheet.create({
     container:{

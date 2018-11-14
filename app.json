@@ -22,6 +22,9 @@
     ],
     "ios": {
       "supportsTablet": true
+    },
+    "android": {
+      "googleServicesFile": "./src/config/google-services.json"
     }
   }
 }

@@ -1,6 +1,6 @@
 import {FETCH_USER_FAIL,FETCH_USER_SUCCESS,FETCH_USER} from '../constants';
 import firebase from '../config/firebase'
-import {updateDataUser} from './api';
+import {updateDataUser,updateToken} from './api';
 import { NavigationActions } from 'react-navigation'
 import { Button } from 'react-native-elements';
 
@@ -58,20 +58,25 @@ export const signInWithGoogle = ()  => {
     }
 }
 
-export const fetchUser = () => dispatch => {
+export const authChanged = () => async dispatch => {
 try{
         firebase.auth().onAuthStateChanged(user => {
         if (user) {
 //TODO add UserAchievement
+            const token = updateToken(user.uid);
             updateDataUser(user.uid, user.providerData[0]).then((result)=>{
                 let questListdone = {};
+                if(result.quest!=null){
+                    if (result.quest.done != null){
                 const quest = result.quest.done;
-                Object.keys(result.quest.done).map((key) => {
-                    questListdone = {
-                       [key]:Object.keys(quest[key]),
-                        ...questListdone
-                    }
-                })
+                Object.keys(quest).map((key) => {
+                questListdone = {
+                            [key]: Object.keys(quest[key]),
+                            ...questListdone
+                        }
+                    });
+                }
+            }
             dispatch({
                     type: FETCH_USER_SUCCESS,
                     payload:{   uid:user.uid,
@@ -79,15 +84,15 @@ try{
                         photoURL: result.photoURL+"?width=512",
                         email: result.email,
                         levelQ:result.levelQ,
-                        quest: questListdone
+                        quest: questListdone,
+                        star:result.star,
+                        achieve:result.achieve,
+                        pushToken:token
                     }
                 })}
                 );
         } else {
              dispatch(NavigationActions.navigate({routeName:"SignIn"}));
-            dispatch({
-                type: FETCH_USER_FAIL
-            });
         }
     });
 }
@@ -97,3 +102,4 @@ catch (e) {
     };
 }
 };
+

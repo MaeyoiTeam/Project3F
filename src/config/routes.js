@@ -1,6 +1,6 @@
 import React, { Component }  from 'react';
 import { Platform } from 'react-native';
-import { createStackNavigator,createDrawerNavigator } from 'react-navigation';
+import { createStackNavigator,createSwitchNavigator } from 'react-navigation';
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
 import Icon from 'react-native-vector-icons/Ionicons';
 //Containers
@@ -9,10 +9,11 @@ import Notifications from '../containers/Notifications';
 import Profile from '../containers/Profile';
 import Home from '../containers/Home';
 import Setting from '../containers/Setting';
-import QuestList from '../containers/stacks/QuestList';
 import SignIn from '../containers/stacks/SignIn';
+import Loading from '../containers/stacks/Loading';
 import Quest from '../containers/stacks/Quest';
 import Pedo from '../containers/stacks/Pedo';
+import HistoryQuestList from '../containers/stacks/HistoryQuestList';
 //Component
 import LeftComponent from '../component/Header/LeftComponent';
 import MidComponent from '../component/Header/MidComponent';
@@ -81,7 +82,7 @@ const BottomTabs = createMaterialBottomTabNavigator(
     }
   }
 );
-const Navigator =createStackNavigator({
+const Stack = createStackNavigator({
 Home:{    screen:BottomTabs,
           navigationOptions:{
             
@@ -92,17 +93,12 @@ Home:{    screen:BottomTabs,
             }
           }
     },
-QuestList:{ screen:QuestList,
+HistoryQuestList:{ screen:HistoryQuestList,
             navigationOptions: {
-            headerTitle: "Quest List",
+            headerTitle: "HistoryQuestList",
             headerStyle: {}
             }
           },
-SignIn: {
-      screen: SignIn,
-      navigationOptions: {
-      }
-    },
  Pedo: {
   screen: Pedo,
   navigationOptions: {}
@@ -116,5 +112,20 @@ Quest: {
   headerLayoutPreset:"center"
 });
 
+const Navigator = createSwitchNavigator({
+  Loading: {
+    screen: Loading,
+    navigationOptions: {}
+  },
+  SignIn: {
+    screen: SignIn,
+    navigationOptions: {}
+  },
+  Stack: {
+    screen: Stack,
+    navigationOptions: {}
+  },
+});
 
 export default Navigator;
+
