@@ -28,6 +28,13 @@ class QuestWalk extends Component {
             prevLevel:{}
         }
     }
+    
+
+
+
+
+
+
      componentDidUpdate(prevProps, prevState, snapshot){
         if(prevProps.fetchReducer.data!=this.props.fetchReducer.data){
             this.setState({

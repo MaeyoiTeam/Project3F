@@ -3,6 +3,8 @@ import React,{Component} from 'react';
 import { connect } from 'react-redux';
 import {Button} from 'react-native-elements'
 import {updateQuest,fetchQuest,updateQuestDone,getQuestList} from '../../actions/quest'
+import TimerCountdown from 'react-native-timer-countdown';
+import Accel from '../../component/Accel';
 class QuestRest extends Component {
   static navigationOptions = ({
       navigation
@@ -25,10 +27,13 @@ class QuestRest extends Component {
             star:0,
             level:0,
             isComplete:false,
-            prevLevel:{}
+            prevLevel:{},
+            isPressed: false,
+            accelerometerData: {},
         }
     }
-     componentDidUpdate(prevProps, prevState, snapshot){
+
+    componentDidUpdate(prevProps, prevState, snapshot){
         if(prevProps.fetchReducer.data!=this.props.fetchReducer.data){
             this.setState({
                 ...this.props.fetchReducer.data,
@@ -40,15 +45,26 @@ class QuestRest extends Component {
                  this.props.updateQuestDone(this.props.authReducer.data,this.state.key,this.state.type);
              }
         }
-    } 
-
-    update=(user,key,point,type)=>{
-        this.props.updateQuest(user, key, point);
     }
+
+
+    update=(time)=>{
+        console.log(time)
+    }
+
+    updateDone = (user, key, point) => {
+            this.props.updateQuest(user, key, point)
+        console.log(this.state.current)
+    }
+    toggleAlert=(toggle)=>{
+         this.setState({isAlert: toggle});
+    }
+
 
     render(){
         const {fetchReducer,authReducer} = this.props;
         const {name,type,detail,current,target,key,point,star,level,isComplete,prevLevel}=this.state;
+
         if (isComplete){   //Quest Complete
                     return(<View>
                     <Text>Current {type} star :{prevLevel.star}/{prevLevel.target}->{star}/{target}</Text>
@@ -65,8 +81,33 @@ class QuestRest extends Component {
                 <View>
                     <Text>Name: {name} Type: {type}</Text>
                 <Text>Detail: {detail} </Text>
-                <Text>Exp: {current}/{target}</Text>
-                  <Button title={"Up "+point+" point"} onPress={()=>this.update(authReducer.data,key,point,type)}/>  
+                {   this.state.isPressed &&<View>
+                <TimerCountdown
+                    initialSecondsRemaining={1000*(target-current)}
+                     onTick={secondsRemaining => this.update(secondsRemaining)} 
+                    onTimeElapsed={() => this.updateDone(authReducer.data,key,target)}
+                    allowFontScaling={true}
+                    style={{ fontSize: 20 }}
+                />
+                <Accel isAlert={this.toggleAlert}/>
+                </View>
+                }
+                {
+                    this.state.isPressed ? <Button
+                    title= "Reset Button"
+                    onPress={() => {
+                        this.setState({ isPressed: false });
+                    }}
+                    /> :                    
+                    <Button
+                    title="Start Button"
+                    onPress={() => {
+                        this.setState({ isPressed: true });
+                    }}
+                    />
+                }
+
+                    
                 </View>
                 
             </View>

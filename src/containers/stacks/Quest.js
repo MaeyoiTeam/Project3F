@@ -42,8 +42,8 @@ class Quest extends Component {
         }
     } 
 
-    update=(user,key,point,type)=>{
-        this.props.updateQuest(user, key, point);
+    update=(user,key,point)=>{
+        this.props.updateQuest(user, key, this.state.current+point);
     }
 
     render(){
@@ -65,8 +65,8 @@ class Quest extends Component {
                 <View>
                     <Text>Name: {name} Type: {type}</Text>
                 <Text>Detail: {detail} </Text>
-                <Text>Exp: {current}/{target}</Text>
-                  <Button title={"Up "+point+" point"} onPress={()=>this.update(authReducer.data,key,point,type)}/>  
+                <Text>Quest: {current}/{target}</Text>
+                  <Button title={"Up "+point+" point"} onPress={()=>this.update(authReducer.data,key,point)}/>  
                 </View>
                 
             </View>

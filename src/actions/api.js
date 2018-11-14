@@ -31,7 +31,7 @@ export const updateScore = (uid,key,point) => {
     const qusetUserRef = await userRef.child(uid+"/quest/undone/"+key);
      qusetUserRef.once("value", snap => {
         if(snap.exists()){
-            const newScore = snap.val().current + point
+            const newScore = point
             qusetUserRef.update({current:newScore});
             let result =snap.val();
             result['current']=newScore;

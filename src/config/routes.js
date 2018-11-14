@@ -108,7 +108,6 @@ HistoryQuestList: {
 const Stack = createStackNavigator({
 Home:{    screen:BottomTabs,
           navigationOptions:{
-            
             headerLeft:(<LeftComponent/>),
             headerTitle:(<MidComponent/>),
             headerRight:(<RightComponent/>),
