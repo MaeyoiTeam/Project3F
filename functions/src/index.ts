@@ -11,27 +11,27 @@ exports.sendPushNotification = functions.database.ref("contacts/{id}").onCreate(
     //return the main promise
     return root
       .child("/users")
-      .once("value")
-      .then(function(snapshot) {
-        snapshot.forEach(function(childSnapshot) {
-            const pushToken:any = childSnapshot.val().pushToken;
-            console.log(pushToken)
-            if (pushToken) {
+      .once("value", (function (snapshot) {
+        snapshot.forEach(function (childSnapshot) {
+          const pushToken: any = childSnapshot.val().pushToken;
+          console.log(pushToken)
+          if (pushToken) {
             messages.push({
-                to: pushToken,
+              to: pushToken,
               body: "New Note Added"
             });
           }
         });
-
         return Promise.all(messages);
       })
+      )
       .then(message => {
         fetch("https://exp.host/--/api/v2/push/send", {
           method: "POST",
           headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json"
+            "accept": "application/json",
+            "accept-encoding": "gzip , deflate",
+            "content-type": "application/json"
           },
           body: JSON.stringify(message)
         });
