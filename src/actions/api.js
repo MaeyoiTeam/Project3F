@@ -82,10 +82,15 @@ export const updateAchieve=(uid,quest,achieve)=>{
                             //TODO เจาะจง
                             const test = condition[key];
                             const have = quest[key];
-                            const result = have.filter((obj)=>{
-                                return Object.values(test).includes(Number(obj));
-                            })
-                            return result.sort().join() == test.sort().join();
+                            if(have==null){
+                                const result = [];
+                            }else{
+                                const result = have.filter((obj) => {
+                                    console.log(obj)
+                                    return Object.values(test).includes(Number(obj));
+                                }).sort().join()
+                            }
+                            return result == test.sort().join();
                         }
                         else{   
                             // จำนวนเควส type มากกว่าหรือเท่ากับ condition
