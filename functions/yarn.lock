@@ -926,6 +926,7 @@ expand-brackets@^2.1.4:
 expo-server-sdk@^3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/expo-server-sdk/-/expo-server-sdk-3.0.1.tgz#2e3100937d8831624611e3175db81b7608a4554f"
+  integrity sha512-EhasWSKs9CY9nLibtc6DegXQ4fQ3j9ZQAfkmOoGuyYBYxm0VhQs0AFgajSe+GO1ylk3C5RChpEHn4vurrqeNHg==
   dependencies:
     "@types/invariant" "^2.2.29"
     "@types/node-fetch" "^2.1.2"

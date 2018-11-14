@@ -1,39 +1,38 @@
 const functions = require("firebase-functions");
-let fetch = require("node-fetch");
+const fetch = require("node-fetch");
 
-const admin = require("firebase-admin");
-admin.initializeApp(functions.config().firebase);
 
-exports.sendPushNotification = functions.database.ref("contacts/{id}").onCreate((snap, context)=> {
-  const root = snap.ref.root;
-    let messages:any = [];
 
-    //return the main promise
-    return root
-      .child("/users")
-      .once("value", (function (snapshot) {
-        snapshot.forEach(function (childSnapshot) {
-          const pushToken: any = childSnapshot.val().pushToken;
-          console.log(pushToken)
-          if (pushToken) {
-            messages.push({
-              to: pushToken,
-              body: "New Note Added"
+/* exports.sendPushNotification = functions.database.ref("contacts/{id}").onCreate((snap, context) => {
+         return fetch("https://exp.host/--/api/v2/push/send", {
+            body: JSON.stringify({
+                to: "ExponentPushToken[BYh79LF4M-w7UrLLi31BRO]",
+                title: "Title notification",
+                body: "Test1!",
+                data: {
+                message: "kuy"
+                }
+            }),
+            headers: {
+                "Content-Type": "application/json"
+            },
+            method: "POST"
             });
-          }
-        });
-        return Promise.all(messages);
-      })
-      )
-      .then(message => {
-        fetch("https://exp.host/--/api/v2/push/send", {
-          method: "POST",
-          headers: {
-            "accept": "application/json",
-            "accept-encoding": "gzip , deflate",
-            "content-type": "application/json"
-          },
-          body: JSON.stringify(message)
-        });
-      });
-  });
+}); */
+
+exports.testNoti = function helloWorld(req,res){
+    return fetch("https://exp.host/--/api/v2/push/send", {
+        body: JSON.stringify({
+            to: "ExponentPushToken[BYh79LF4M-w7UrLLi31BRO]",
+            title: "Title notification",
+            body: "Test1!",
+            data: {
+                message: "kuy"
+            }
+        }),
+        headers: {
+            "Content-Type": "application/json"
+        },
+        method: "POST"
+    });
+}
