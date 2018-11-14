@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import {signOut,signInWithFacebook,signInWithGoogle,authChanged} from '../../actions/signIn';
 import {Button,Avatar,colors} from 'react-native-elements';
 import { SocialIcon } from 'react-native-elements'
-
+import Loading from '../../containers/stacks/Loading'
 class SingIn extends Component{
   static navigationOptions = ({
       navigation
@@ -33,18 +33,7 @@ class SingIn extends Component{
          
           
         <View>
-                  {
-                      props.authReducer.data != null && <View>
-                          <Text>{props.authReducer.data.displayName}</Text>
-                          <Text>{props.authReducer.data.email}</Text>
-                          <Avatar
-                              xlarge
-                              rounded
-                              source={{ uri: props.authReducer.data.photoURL }}
-                              onPress={() => console.log("Works!")}
-                              activeOpacity={0.7}
-                          />
-                      </View>}
+                  <Loading/>
       </View>
     );
       }

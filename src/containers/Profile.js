@@ -6,6 +6,7 @@ import ProgressBarAnimated from 'react-native-progress-bar-animated';
 
 
 class Profile extends Component{
+
     
          componentDidUpdate(prevProps, prevState, snapshot) {
              if (prevProps.authReducer.data != this.props.authReducer.data) {
@@ -29,47 +30,63 @@ class Profile extends Component{
            
           });
         const {authReducer} = this.props
+        const {food,walk,rest}= authReducer.data.levelQ;
         
         return <View style={styles.container}>
             <Text style = {{fontFamily:'asd',fontSize:30,fontWeight:'bold'}}>Your Profile</Text>
             {authReducer.isAuth && <View>
-                <Avatar containerStyle = {{left:80}} large rounded source={{ uri: authReducer.data.photoURL }} onPress={() => console.log("Works!")} />
+                <Avatar containerStyle = {{left:90}} large rounded source={{ uri: authReducer.data.photoURL }} onPress={() => console.log("Works!")} />
                 <Text style={{paddingTop:20,fontSize:15,textAlign:'center'}}>{authReducer.data.displayName}</Text>
                 <Text>{authReducer.data.Email}</Text>
-                <Text>Star:{authReducer.data.star}</Text>
-{/* //TODO แสดง เลเวล ค่าประสบการณ์ Objectที่เก็บข้อมูล = authReducer.data.levelQ */}
-                <Text style={{textAlign:'center',paddingTop:10,paddingBottom:30}}>Level:</Text>
                 
-                <View style = {{padding:5, flexDirection: 'row'}}>
+{/* //TODO แสดง เลเวล ค่าประสบการณ์ Objectที่เก็บข้อมูล = authReducer.data.levelQ */}
+                <Text style={{textAlign:'center',paddingTop:10,paddingBottom:30}}>Star:{authReducer.data.star  }</Text>
+                
+                <View style = {{
+                    padding:5, 
+                    flexDirection: 'row'
+                    }}>
                 <Image
                  source={require('../../image/steps.png')}
                  fadeDuration={0}
-                 style={{width: 25, height: 25}}
+                 style={{width: 25, height: 25,right:10}}
                 />
                 <ProgressBarAnimated width = {200}
-                backgroundColorOnComplete="#6CC644"
-                value = {80}/>
+                backgroundColor = "#6CC644"
+                value = {(authReducer.data.levelQ.walk.star*100)/authReducer.data.levelQ.walk.target}/>
+                <Text style = {{left:10}}>{walk.star}/{walk.target}</Text> 
                 </View>
-                <View style = {{padding:5, flexDirection: 'row'}}>
+                <Text>Level:{walk.level}</Text>
+                <View style = {{
+                    padding:5, 
+                    flexDirection: 'row'
+                    }}>
                 <Image
                  source={require('../../image/food2.png')}
                  fadeDuration={0}
-                 style={{width: 25, height: 25}}
+                 style={{width: 25, height: 25,right:10}}
                  />
                 <ProgressBarAnimated width = {200}
-                backgroundColorOnComplete="#6CC644"
-                value = {30}/>
+                backgroundColor = "#6CC644"
+                value = {(authReducer.data.levelQ.food.star*100)/authReducer.data.levelQ.food.target}/>
+                <Text style = {{left:10}}>{food.star}/{food.target}</Text>         
                 </View>
-                <View style = {{padding:5, flexDirection: 'row'}}>
+                <Text>Level:{food.level}</Text>
+                <View style = {{
+                    padding:5, 
+                    flexDirection: 'row'
+                    }}>
                 <Image
-                 source={require('../../image/meditation.png')}
+                 source={require('../../image/yoga.png')}
                  fadeDuration={0}
-                 style={{width: 25, height: 25}}
+                 style={{width: 25, height: 25,right:10}}
                  />
                 <ProgressBarAnimated width = {200}
-                backgroundColorOnComplete="#6CC644"
-                value = {50}/>
+                backgroundColor = "#6CC644"
+                value = {(authReducer.data.levelQ.rest.star*100)/authReducer.data.levelQ.rest.target}/>
+                <Text style = {{left:10}}>{rest.star}/{rest.target}</Text>   
                 </View>
+                <Text>Level:{rest.level}</Text>
                 <View style = {{paddingTop:10}}>
                 <Button title="Share Now!" 
                     buttonStyle={{
@@ -79,7 +96,7 @@ class Profile extends Component{
                         borderColor: "transparent",
                         borderWidth: 0,
                         borderRadius:360,
-                        left:30
+                        left:55
                       }}  
                 />
                 </View>
@@ -91,7 +108,7 @@ class Profile extends Component{
                         height: 40,
                         borderColor: "transparent",
                         borderWidth: 0,
-                        left:-10
+                        left:15
                       }}  
                 />
                 </View>
