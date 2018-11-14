@@ -24,7 +24,8 @@
       "supportsTablet": true
     },
     "android": {
-      "googleServicesFile": "./src/config/google-services.json"
+      "googleServicesFile": "./src/config/google-services.json",
+      "package":"meayoi.Team"
     }
   }
 }

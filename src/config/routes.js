@@ -1,6 +1,6 @@
 import React, { Component }  from 'react';
 import { Platform } from 'react-native';
-import { createStackNavigator,createSwitchNavigator } from 'react-navigation';
+import { createStackNavigator,createSwitchNavigator,createMaterialTopTabNavigator } from 'react-navigation';
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
 import Icon from 'react-native-vector-icons/Ionicons';
 //Containers
@@ -12,8 +12,11 @@ import Setting from '../containers/Setting';
 import SignIn from '../containers/stacks/SignIn';
 import Loading from '../containers/stacks/Loading';
 import Quest from '../containers/stacks/Quest';
+import QuestWalk from '../containers/stacks/QuestWalk';
+import QuestRest from '../containers/stacks/QuestRest';
 import Pedo from '../containers/stacks/Pedo';
 import HistoryQuestList from '../containers/stacks/HistoryQuestList';
+import Achievement from '../containers/stacks/Achievement';
 //Component
 import LeftComponent from '../component/Header/LeftComponent';
 import MidComponent from '../component/Header/MidComponent';
@@ -82,6 +85,26 @@ const BottomTabs = createMaterialBottomTabNavigator(
     }
   }
 );
+
+const History = createMaterialTopTabNavigator({
+Achievement: {
+  screen: Achievement,
+  navigationOptions: {
+    headerTitle: "Achievement",
+    headerStyle: {}
+  }
+},
+HistoryQuestList: {
+  screen: HistoryQuestList,
+  navigationOptions: {
+    headerTitle: "HistoryQuestList",
+    headerStyle: {}
+  }
+},
+})
+
+
+
 const Stack = createStackNavigator({
 Home:{    screen:BottomTabs,
           navigationOptions:{
@@ -93,18 +116,25 @@ Home:{    screen:BottomTabs,
             }
           }
     },
-HistoryQuestList:{ screen:HistoryQuestList,
-            navigationOptions: {
-            headerTitle: "HistoryQuestList",
-            headerStyle: {}
-            }
-          },
+    
+ History: {
+   screen: History,
+   navigationOptions: {}
+ },
  Pedo: {
   screen: Pedo,
   navigationOptions: {}
 }, 
 Quest: {
   screen: Quest,
+  navigationOptions: {}
+},
+QuestWalk: {
+  screen: QuestWalk,
+  navigationOptions: {}
+},
+QuestRest: {
+  screen: QuestRest,
   navigationOptions: {}
 },
 },{

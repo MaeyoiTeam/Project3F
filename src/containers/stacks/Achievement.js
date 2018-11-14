@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { Button, Avatar } from 'react-native-elements';
 
 
-class Profile extends Component{
+class Achievement extends Component{
     
          componentDidUpdate(prevProps, prevState, snapshot) {
              if (prevProps.authReducer.data != this.props.authReducer.data) {
@@ -39,7 +39,6 @@ class Profile extends Component{
 {/* //TODO แสดง เลเวล ค่าประสบการณ์ Objectที่เก็บข้อมูล = authReducer.data.levelQ */}
                 <Text style={{paddingBottom:70,textAlign:'center',paddingTop:60}}>Level:</Text>
                 <Button title="Achievement Earned" 
-                    onPress={()=>this.props.navigation.navigate("History")}
                     buttonStyle={{
                         backgroundColor: "rgba(00, 99,216, 1)",
                         width: 120,
@@ -70,4 +69,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Profile)
+export default connect(mapStateToProps, mapDispatchToProps)(Achievement)

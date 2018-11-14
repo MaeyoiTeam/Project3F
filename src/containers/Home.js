@@ -52,10 +52,18 @@ class Home extends Component {
                                 <Button title={"Play "+info[1].name}
                                 onPress = {
                                         () => {
-                                            this.props.fetchQuest(authReducer.data.uid,info[0],"undone")
-                                            this.props.navigation.navigate({
-                                                routeName: 'Quest'
-                                            });
+                                            this.props.fetchQuest(authReducer.data.uid,info[0],"undone");
+                                            let path='Home';
+                                            switch(info[1].type){
+                                                case "food": path='Quest'; 
+                                                                break;
+                                                case "walk": path='QuestWalk';
+                                                                break;
+                                                case "rest": path="QuestRest";
+                                                                break;
+                                                default: path="Home";
+                                            }
+                                            this.props.navigation.navigate(path);
                                         }
                                 }
                                 />

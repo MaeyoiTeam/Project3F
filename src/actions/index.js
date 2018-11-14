@@ -2,6 +2,7 @@ import {FETCHING_DATA,FETCHING_DATA_FAILURE,FETCHING_DATA_SUCCESS,
     FETCH_USER, 
     RANK_DATA, RANK_DATA_SUCCESS, RANK_DATA_FAILURE,
     QUEST_DATA, QUEST_DATA_SUCCESS, QUEST_DATA_FAILURE,
+    HISTORY_DATA, HISTORY_DATA_FAILURE, HISTORY_DATA_SUCCESS
 } from '../constants';
 import {rankingUser,updateScore} from './api';
 import { NavigationActions } from 'react-navigation'
@@ -54,6 +55,17 @@ export const fetchQuestList = (fn) => {
                 dispatch({type:QUEST_DATA_SUCCESS,payload:result})
             }).catch(error => {
                 dispatch({type:QUEST_DATA_FAILURE})
+                console.log(error)
+            })
+    }
+}
+export const fetchHistoryList = (fn) => {
+    return (dispatch) => {
+        dispatch({ type:HISTORY_DATA });
+        fn.then(result => {
+                dispatch({type:HISTORY_DATA_SUCCESS,payload:result})
+            }).catch(error => {
+                dispatch({type:HISTORY_DATA_FAILURE})
                 console.log(error)
             })
     }

@@ -17,11 +17,11 @@ class HistoryQuestList extends Component {
     }
 
     render(){
-        const {questReducer,authReducer,fetchReducer} = this.props;
+        const {historyReducer,authReducer,fetchReducer} = this.props;
                         return(
             <View>
              {          
-                questReducer.data.map((type,index) => {
+                historyReducer.data.map((type, index) => {
                     const arr = type[1]
                 return  <View key={index}><Text>{type[0]}</Text>
                     {Object.values(arr).map((info, i) =>{
@@ -42,7 +42,7 @@ class HistoryQuestList extends Component {
 // Used to add reducer's states into the props
 const mapStateToProps = (state) => ({
     fetchReducer: state.fetchReducer,
-    questReducer:state.questReducer,
+    historyReducer: state.historyReducer,
     authReducer: state.authReducer
 });
 //Used to add dispatch (action) into props
