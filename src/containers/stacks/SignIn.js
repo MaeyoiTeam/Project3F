@@ -3,6 +3,7 @@ import {  View, Text ,StyleSheet,ImageBackground } from 'react-native';
 import { connect } from 'react-redux';
 import {signOut,signInWithFacebook,signInWithGoogle,authChanged} from '../../actions/signIn';
 import {Button,Avatar,colors} from 'react-native-elements';
+import { SocialIcon } from 'react-native-elements'
 
 class SingIn extends Component{
   static navigationOptions = ({
@@ -55,34 +56,26 @@ class SingIn extends Component{
           <ImageBackground source={require('../../../image/k1.png')}style={Styles.container}>
         <View style={Styles.ki1}></View>
          <View style={Styles.ki2}>
-            <Text>ACHIVE</Text>
-        <Text>4YOURSELF</Text> 
+            <Text style = {{fontFamily:'asd',fontSize:30,fontWeight:'bold'}}>    ACHIVE</Text>
+        <Text style = {{fontFamily:'asd',fontSize:30,fontWeight:'bold'}}>4YOURSELF</Text> 
         </View>
         <View style={Styles.ki3}>
-        <Text>Logun via</Text>
+        <Text style = {{fontFamily:'asd',fontSize:25,fontWeight:'bold'}}>Login via</Text>
         </View> 
         <View style={Styles.ki4}>
-        <Button  title="Login With Facebook" onPress={this.props.signInWithFacebook}
-
-        buttonStyle={{
-            backgroundColor: "pink",
-            width: 100,
-            height: 100,
-            borderColor: "gray",
-            borderWidth: 1,
-            borderRadius: 360   
-        }}/>
+        <SocialIcon onPress={this.props.signInWithFacebook}
+        type='facebook'
+        style={{width: 100, height: 100, borderRadius: 100}}
+        iconSize={70}
+      />
         </View>
         
-        <Button title="Login With Google" onPress={this.props.signInWithGoogle}
-        buttonStyle={{
-            backgroundColor: "pink",
-            width: 100,
-            height: 100,
-            borderColor: "gray",
-            borderWidth: 1,
-            borderRadius: 360,
-        }}/>
+        <SocialIcon onPress={this.props.signInWithGoogle}
+        type='google-plus-official'
+        style={{width: 100, height: 100, borderRadius: 100, backgroundColor:'white'}}
+        iconSize={100}
+        iconColor='red'
+      />
     
       
   </ImageBackground>

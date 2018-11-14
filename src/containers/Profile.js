@@ -1,4 +1,4 @@
-import { View,Text,StyleSheet } from 'react-native';
+import { View,Text,StyleSheet,Image } from 'react-native';
 import React,{Component} from 'react';
 import { connect } from "react-redux";
 import { Button, Avatar } from 'react-native-elements';
@@ -33,20 +33,42 @@ class Profile extends Component{
         return <View style={styles.container}>
             <Text style = {{fontFamily:'asd',fontSize:30,fontWeight:'bold'}}>Your Profile</Text>
             {authReducer.isAuth && <View>
-                <Avatar containerStyle = {{left:70}} large rounded source={{ uri: authReducer.data.photoURL }} onPress={() => console.log("Works!")} />
+                <Avatar containerStyle = {{left:80}} large rounded source={{ uri: authReducer.data.photoURL }} onPress={() => console.log("Works!")} />
                 <Text style={{paddingTop:20,fontSize:15,textAlign:'center'}}>{authReducer.data.displayName}</Text>
                 <Text>{authReducer.data.Email}</Text>
                 <Text>Star:{authReducer.data.star}</Text>
 {/* //TODO แสดง เลเวล ค่าประสบการณ์ Objectที่เก็บข้อมูล = authReducer.data.levelQ */}
                 <Text style={{textAlign:'center',paddingTop:10,paddingBottom:30}}>Level:</Text>
-                <View style = {{padding:5}}>
-                <ProgressBarAnimated width = {200}/>
+                
+                <View style = {{padding:5, flexDirection: 'row'}}>
+                <Image
+                 source={require('../../image/steps.png')}
+                 fadeDuration={0}
+                 style={{width: 25, height: 25}}
+                />
+                <ProgressBarAnimated width = {200}
+                backgroundColorOnComplete="#6CC644"
+                value = {80}/>
                 </View>
-                <View style = {{padding:5}}>
-                <ProgressBarAnimated width = {200}/>
+                <View style = {{padding:5, flexDirection: 'row'}}>
+                <Image
+                 source={require('../../image/food2.png')}
+                 fadeDuration={0}
+                 style={{width: 25, height: 25}}
+                 />
+                <ProgressBarAnimated width = {200}
+                backgroundColorOnComplete="#6CC644"
+                value = {30}/>
                 </View>
-                <View style = {{padding:5}}>
-                <ProgressBarAnimated width = {200}/>
+                <View style = {{padding:5, flexDirection: 'row'}}>
+                <Image
+                 source={require('../../image/meditation.png')}
+                 fadeDuration={0}
+                 style={{width: 25, height: 25}}
+                 />
+                <ProgressBarAnimated width = {200}
+                backgroundColorOnComplete="#6CC644"
+                value = {50}/>
                 </View>
                 <View style = {{paddingTop:10}}>
                 <Button title="Share Now!" 
@@ -65,11 +87,11 @@ class Profile extends Component{
                 <Button title="Achievement Earned" 
                     buttonStyle={{
                         backgroundColor: "rgba(00, 99,216, 1)",
-                        width: 120,
+                        width: 200,
                         height: 40,
                         borderColor: "transparent",
                         borderWidth: 0,
-                        left:30
+                        left:-10
                       }}  
                 />
                 </View>
