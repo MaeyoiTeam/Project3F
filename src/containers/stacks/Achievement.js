@@ -3,6 +3,7 @@ import React,{Component} from 'react';
 import { connect } from "react-redux";
 import { Button, Avatar } from 'react-native-elements';
 import firebase from '../../config/firebase';
+import { updateLocale } from 'moment';
 class Achievement extends Component{
 constructor(props){
     super(props);
@@ -23,27 +24,9 @@ constructor(props){
              }
          }
 
-     getUrlImage=(path)=>{
-        var storage = firebase.storage();
-        var Ref = storage.child(path).getDownloadURL().then(function (url) {
-            // `url` is the download URL for 'images/stars.jpg'
-
-            // This can be downloaded directly:
-            var xhr = new XMLHttpRequest();
-            xhr.responseType = 'blob';
-            xhr.onload = function (event) {
-                var blob = xhr.response;
-            };
-            xhr.open('GET', url);
-            xhr.send();
-
-            // Or inserted into an <img> element:
-            var img = document.getElementById('myimg');
-            img.src = url;
-        }).catch(function (error) {
-            // Handle any errors
-        });
-        return Ref;
+     getUrlImage(path){
+        var result = 'https://firebasestorage.googleapis.com/v0/b/project3f-4a950.appspot.com/o/achieve%2Ficon.png?alt=media&token=e95c5c83-7b5c-4db3-96f7-258b06b925a1';
+        return result
     } 
 
     render(){
@@ -53,7 +36,9 @@ constructor(props){
             <Text>Your Achievement</Text>
             <Image style={{width: 50, height: 50}}
           source = {
-              {uri:'https://firebasestorage.googleapis.com/v0/b/project3f-4a950.appspot.com/o/achieve%2Ficon.png?alt=media&token=e95c5c83-7b5c-4db3-96f7-258b06b925a1'}
+              {
+                  uri: this.getUrlImage("achieve/icon.png")
+              }
           }
         />
             {
@@ -63,13 +48,13 @@ constructor(props){
                 <Text>Detail: {obj.detail}</Text>
                 <Text>Time: {obj.time}</Text>
                 <Text>star: {obj.star}</Text>
-                <Image style={{width: 50, height: 50}}
+{/*                 <Image style={{width: 50, height: 50}}
           source = {
               {
-                  uri: this.getUrlImage(obj.path) || 'https://firebasestorage.googleapis.com/v0/b/project3f-4a950.appspot.com/o/achieve%2Ficon.png?alt=media&token=e95c5c83-7b5c-4db3-96f7-258b06b925a1'
+                  uri: this.getUrlImage("achieve/icon.png") //obj.path
               }
           }
-        />
+        /> */}
                 <Text> </Text>
             </View>)}
           </View>;
