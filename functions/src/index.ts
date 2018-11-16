@@ -1,58 +1,31 @@
-import * as functions from 'firebase-functions';
+import * as functions from "firebase-functions";
 import * as admin from 'firebase-admin';
-import Expo from "expo-server-sdk";
-
+/* import Expo from "expo-server-sdk";
+ */
 admin.initializeApp();
-// Create a new Expo SDK client
-let expo = new Expo();
-
-exports.pushNotifications = functions.https.onRequest((req,res) => {
-  if(req.method !== 'GET'){
-    return res.status(403).send('Forbidden!')
-  }
-
-  let allTokens = [];
-  let messages = [];
-
-  admin.database().ref('/users/').once('value', (snapshot) => {
-      let pushToken = snapshot.val().pushToken;
-      if (Expo.isExpoPushToken(pushToken)){
-          allTokens.push(pushToken)
-    } else {
-          console.error(`Push token ${pushToken} is not a valid Expo push token`);
-        return null
-    }
-  })
-  .then(() => {
-    for (var token in allTokens){
-      messages.push({
-        to: token,
-        sound: 'default',
-        title: 'NXET',
-        body: ' NEW ACTIVITIES ADDED!'
-      })
-    }
-  })
-  .then(() => {
-    let chunks = expo.chunkPushNotifications(messages)
-
-    async (chunks) => {
-      for (let chunk of chunks) {
-        try {
-          await expo.sendPushNotificationsAsync(chunk);
-        } catch (error){
-          console.error(error);
-        }
+/* // Create a new Expo SDK client
+let expo = new Expo(); */
+ 
+//TODO MOVE UNDONE TO UNSUCCESS
+exports.addMessage = functions.https.onRequest(async (req, res) => {
+    const allUserRef = await admin.database().ref('/users');
+    let usersKey = [];
+   const test = await allUserRef.on("value", (usersSnap) => {
+    usersSnap.forEach((user) => {
+      let key = user.key;
+      usersKey.push(key);
+      const personalQuestRef = allUserRef.child(key).child("/quest"); 
+      if (user.child(key+"/quest/undone").exists){
+        personalQuestRef.child("undone").remove().catch((e) => res.send(e))
       }
-    }
-
-    return res.status(200).send('SUCCESS - NOTIFICATIONS SENT!!')
-
+      return false;
+    })
   })
-  .catch(() => {
-    return res.status(403).send('Forbidden!')
-  });
+  res.send("Remove Undone in userkey: "+usersKey);
+});
 
-  return res.status(200).send('Function Executing')
-
-})
+exports.addTest = functions.https.onRequest(async (req, res) => {
+  const contacts = await admin.database().ref('/contacts');
+  let time = new Date().getTime();
+  contacts.push(time);
+});

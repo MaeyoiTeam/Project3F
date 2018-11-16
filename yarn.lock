@@ -456,12 +456,11 @@
     mv "~2"
     safe-json-stringify "~1"
 
-"@expo/dev-tools@^0.1.6":
-  version "0.1.6"
-  resolved "https://registry.yarnpkg.com/@expo/dev-tools/-/dev-tools-0.1.6.tgz#31f44c69a55428d1bedacdd74b96ce8c2650f299"
+"@expo/dev-tools@^0.2.13":
+  version "0.2.13"
+  resolved "https://registry.yarnpkg.com/@expo/dev-tools/-/dev-tools-0.2.13.tgz#a35556e5c2fa8610dbfd3e2ed216de7b7f59c555"
   dependencies:
-    body-parser "1.18.2"
-    express "4.16.3"
+    express "4.16.4"
     freeport-async "1.1.1"
     graphql "0.13.2"
     graphql-tools "3.0.0"
@@ -469,9 +468,9 @@
     lodash "4.17.5"
     subscriptions-transport-ws "0.9.8"
 
-"@expo/json-file@^8.0.1":
-  version "8.0.1"
-  resolved "https://registry.yarnpkg.com/@expo/json-file/-/json-file-8.0.1.tgz#6109f0c1e18c0f84aa5e052406c861cd7ae347a8"
+"@expo/json-file@^8.1.0":
+  version "8.1.0"
+  resolved "https://registry.yarnpkg.com/@expo/json-file/-/json-file-8.1.0.tgz#adcbadb20b9ac4e945a354b879b5b307c19df91f"
   dependencies:
     "@babel/code-frame" "^7.0.0-beta.44"
     json5 "^1.0.1"
@@ -550,17 +549,17 @@
     request "^2.81.0"
     uuid "^3.0.0"
 
-"@expo/osascript@^1.8.2":
-  version "1.8.2"
-  resolved "https://registry.yarnpkg.com/@expo/osascript/-/osascript-1.8.2.tgz#4e7c9da0d947495df6cf170b9b51c635edd7529a"
+"@expo/osascript@^1.9.0":
+  version "1.9.0"
+  resolved "https://registry.yarnpkg.com/@expo/osascript/-/osascript-1.9.0.tgz#88bdcd7eb3acad2f41c00847c1f7d62e87b6e93c"
   dependencies:
     "@expo/spawn-async" "^1.2.8"
     babel-runtime "^6.23.0"
     exec-async "^2.2.0"
 
-"@expo/schemer@^1.1.1":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@expo/schemer/-/schemer-1.1.1.tgz#3c9d007a55ca30b369c80a6fde774e315343f717"
+"@expo/schemer@^1.2.1":
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/@expo/schemer/-/schemer-1.2.1.tgz#aec8acc3123dfb85f0430182250ad4cbd28ce128"
   dependencies:
     ajv "^5.2.2"
     babel-polyfill "^6.23.0"
@@ -581,13 +580,13 @@
   dependencies:
     cross-spawn "^5.1.0"
 
-"@expo/traveling-fastlane-darwin@1.5.0":
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/@expo/traveling-fastlane-darwin/-/traveling-fastlane-darwin-1.5.0.tgz#5cb4a0afde891a92b50edb916a6b9003735ff357"
+"@expo/traveling-fastlane-darwin@1.6.0":
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/@expo/traveling-fastlane-darwin/-/traveling-fastlane-darwin-1.6.0.tgz#c441e8ff718b88fe13da4bbb4e377c53505b0648"
 
-"@expo/traveling-fastlane-linux@1.5.0":
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/@expo/traveling-fastlane-linux/-/traveling-fastlane-linux-1.5.0.tgz#74a461361d854a2d3b6408f1e3e0a99974143d89"
+"@expo/traveling-fastlane-linux@1.6.0":
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/@expo/traveling-fastlane-linux/-/traveling-fastlane-linux-1.6.0.tgz#82604cdd67704075c7985d80693c1e498561deec"
 
 "@expo/vector-icons@^6.3.1":
   version "6.3.1"
@@ -739,9 +738,19 @@
     "@types/minimatch" "*"
     "@types/node" "*"
 
+"@types/invariant@^2.2.29":
+  version "2.2.29"
+  resolved "https://registry.yarnpkg.com/@types/invariant/-/invariant-2.2.29.tgz#aa845204cd0a289f65d47e0de63a6a815e30cc66"
+
 "@types/minimatch@*":
   version "3.0.3"
   resolved "https://registry.yarnpkg.com/@types/minimatch/-/minimatch-3.0.3.tgz#3dca0e3f33b200fc7d1139c0cd96c1268cadfd9d"
+
+"@types/node-fetch@^2.1.2":
+  version "2.1.3"
+  resolved "https://registry.yarnpkg.com/@types/node-fetch/-/node-fetch-2.1.3.tgz#80538fbaee61bdc01449f4e00a11e11291e52dec"
+  dependencies:
+    "@types/node" "*"
 
 "@types/node@*":
   version "10.12.2"
@@ -1781,22 +1790,7 @@ bl@^1.0.0:
     readable-stream "^2.3.5"
     safe-buffer "^5.1.1"
 
-body-parser@1.18.2:
-  version "1.18.2"
-  resolved "https://registry.yarnpkg.com/body-parser/-/body-parser-1.18.2.tgz#87678a19d84b47d859b83199bd59bce222b10454"
-  dependencies:
-    bytes "3.0.0"
-    content-type "~1.0.4"
-    debug "2.6.9"
-    depd "~1.1.1"
-    http-errors "~1.6.2"
-    iconv-lite "0.4.19"
-    on-finished "~2.3.0"
-    qs "6.5.1"
-    raw-body "2.3.2"
-    type-is "~1.6.15"
-
-body-parser@1.18.3, body-parser@^1.15.2:
+body-parser@1.18.3:
   version "1.18.3"
   resolved "https://registry.yarnpkg.com/body-parser/-/body-parser-1.18.3.tgz#5b292198ffdd553b3a0f20ded0592b956955c8b4"
   dependencies:
@@ -2330,10 +2324,6 @@ deep-diff@0.3.4:
   version "0.3.4"
   resolved "https://registry.yarnpkg.com/deep-diff/-/deep-diff-0.3.4.tgz#aac5c39952236abe5f037a2349060ba01b00ae48"
 
-deep-diff@^0.3.5:
-  version "0.3.8"
-  resolved "https://registry.yarnpkg.com/deep-diff/-/deep-diff-0.3.8.tgz#c01de63efb0eec9798801d40c7e0dae25b582c84"
-
 deep-extend@^0.6.0:
   version "0.6.0"
   resolved "https://registry.yarnpkg.com/deep-extend/-/deep-extend-0.6.0.tgz#c4fa7c95404a17a9c3e8ca7e1537312b736330ac"
@@ -2387,11 +2377,7 @@ denodeify@^1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/denodeify/-/denodeify-1.2.1.tgz#3a36287f5034e699e7577901052c2e6c94251631"
 
-depd@1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/depd/-/depd-1.1.1.tgz#5783b4e1c459f06fa5ca27f991f3d06e7a310359"
-
-depd@~1.1.1, depd@~1.1.2:
+depd@~1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/depd/-/depd-1.1.2.tgz#9bcd52e14c097763e749b274c4346ed2e560b5a9"
 
@@ -2516,6 +2502,10 @@ escape-html@~1.0.3:
 escape-string-regexp@^1.0.2, escape-string-regexp@^1.0.5:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/escape-string-regexp/-/escape-string-regexp-1.0.5.tgz#1b61c0562190a8dff6ae3bb2cf0200ca130b86d4"
+
+eslint-config-google@^0.11.0:
+  version "0.11.0"
+  resolved "https://registry.yarnpkg.com/eslint-config-google/-/eslint-config-google-0.11.0.tgz#fd0fc70be2e9114df097cac93a9b5b0d4e1c6830"
 
 eslint-plugin-react-native-globals@^0.1.1:
   version "0.1.2"
@@ -2660,13 +2650,13 @@ expo-camera@~1.1.0:
     lodash.mapvalues "^4.6.0"
     prop-types "^15.6.0"
 
-expo-cli@^2.2.5:
-  version "2.2.5"
-  resolved "https://registry.yarnpkg.com/expo-cli/-/expo-cli-2.2.5.tgz#eebcbe71456d15d530364998da59a9d4d52ad99b"
+expo-cli@^2.3.6:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/expo-cli/-/expo-cli-2.4.0.tgz#98041e79d495d3a12eb778dc4d9d66861bcbee54"
   dependencies:
     "@expo/bunyan" "3.0.2"
-    "@expo/dev-tools" "^0.1.6"
-    "@expo/json-file" "^8.0.1"
+    "@expo/dev-tools" "^0.2.13"
+    "@expo/json-file" "^8.1.0"
     "@expo/simple-spinner" "^1.0.2"
     "@expo/spawn-async" "^1.3.0"
     babel-runtime "^6.9.2"
@@ -2681,11 +2671,9 @@ expo-cli@^2.2.5:
     indent-string "^3.1.0"
     inquirer "^5.0.1"
     klaw-sync "^6.0.0"
-    latest-version "^4.0.0"
     lodash "^4.17.4"
     match-require "^2.1.0"
     ora "^1.3.0"
-    p-timeout "^2.0.1"
     progress "^2.0.0"
     qrcode-terminal "^0.11.0"
     semver "^5.0.1"
@@ -2695,10 +2683,10 @@ expo-cli@^2.2.5:
     untildify "^3.0.2"
     validator "^10.4.0"
     wordwrap "^1.0.0"
-    xdl "^51.4.5"
+    xdl "^51.6.0"
   optionalDependencies:
-    "@expo/traveling-fastlane-darwin" "1.5.0"
-    "@expo/traveling-fastlane-linux" "1.5.0"
+    "@expo/traveling-fastlane-darwin" "1.6.0"
+    "@expo/traveling-fastlane-linux" "1.6.0"
 
 expo-constants-interface@~1.0.2:
   version "1.0.2"
@@ -2833,7 +2821,7 @@ expo-print@~1.0.0:
     babel-preset-expo "^4.0.0"
     expo-core "~1.1.0"
 
-expo-react-native-adapter@~1.1.1:
+expo-react-native-adapter@~1.1.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/expo-react-native-adapter/-/expo-react-native-adapter-1.1.1.tgz#a8a4bcd8d17323924aac991ac727e9bcab9da6e1"
   dependencies:
@@ -2858,6 +2846,15 @@ expo-sensors@~1.0.2:
     expo-sensors-interface "~1.0.2"
     invariant "^2.2.4"
 
+expo-server-sdk@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/expo-server-sdk/-/expo-server-sdk-3.0.1.tgz#2e3100937d8831624611e3175db81b7608a4554f"
+  dependencies:
+    "@types/invariant" "^2.2.29"
+    "@types/node-fetch" "^2.1.2"
+    node-fetch "^2.2.0"
+    promise-limit "^2.7.0"
+
 expo-sms@~1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/expo-sms/-/expo-sms-1.0.2.tgz#9856b4fbd2c6c62de14a5a3213c1d67aad46d72d"
@@ -2865,9 +2862,9 @@ expo-sms@~1.0.2:
     expo-core "~1.1.0"
     expo-permissions-interface "~1.1.0"
 
-expo@^30.0.1:
-  version "30.0.1"
-  resolved "https://registry.yarnpkg.com/expo/-/expo-30.0.1.tgz#2fae2d20b2f71d90e9533030d3671f70d4a18814"
+expo@^30.0.2:
+  version "30.0.2"
+  resolved "https://registry.yarnpkg.com/expo/-/expo-30.0.2.tgz#f320f4f5d9da04746ebb6a478e5a11e56d14b7cd"
   dependencies:
     "@expo/vector-icons" "^6.3.1"
     "@expo/websql" "^1.0.1"
@@ -2890,7 +2887,7 @@ expo@^30.0.1:
     expo-payments-stripe "~1.0.0"
     expo-permissions "~1.1.0"
     expo-print "~1.0.0"
-    expo-react-native-adapter "~1.1.1"
+    expo-react-native-adapter "~1.1.0"
     expo-sensors "~1.0.2"
     expo-sms "~1.0.2"
     fbemitter "^2.1.1"
@@ -2912,42 +2909,7 @@ expo@^30.0.1:
     uuid-js "^0.7.5"
     whatwg-fetch "^2.0.4"
 
-express@4.16.3:
-  version "4.16.3"
-  resolved "http://registry.npmjs.org/express/-/express-4.16.3.tgz#6af8a502350db3246ecc4becf6b5a34d22f7ed53"
-  dependencies:
-    accepts "~1.3.5"
-    array-flatten "1.1.1"
-    body-parser "1.18.2"
-    content-disposition "0.5.2"
-    content-type "~1.0.4"
-    cookie "0.3.1"
-    cookie-signature "1.0.6"
-    debug "2.6.9"
-    depd "~1.1.2"
-    encodeurl "~1.0.2"
-    escape-html "~1.0.3"
-    etag "~1.8.1"
-    finalhandler "1.1.1"
-    fresh "0.5.2"
-    merge-descriptors "1.0.1"
-    methods "~1.1.2"
-    on-finished "~2.3.0"
-    parseurl "~1.3.2"
-    path-to-regexp "0.1.7"
-    proxy-addr "~2.0.3"
-    qs "6.5.1"
-    range-parser "~1.2.0"
-    safe-buffer "5.1.1"
-    send "0.16.2"
-    serve-static "1.13.2"
-    setprototypeof "1.1.0"
-    statuses "~1.4.0"
-    type-is "~1.6.16"
-    utils-merge "1.0.1"
-    vary "~1.1.2"
-
-express@^4.13.4:
+express@4.16.4, express@^4.16.4:
   version "4.16.4"
   resolved "https://registry.yarnpkg.com/express/-/express-4.16.4.tgz#fddef61926109e24c515ea97fd2f1bdbf62df12e"
   dependencies:
@@ -3586,9 +3548,9 @@ hashids@^1.1.4:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/hashids/-/hashids-1.2.2.tgz#28635c7f2f7360ba463686078eee837479e8eafb"
 
-hoek@4.x.x:
-  version "4.2.1"
-  resolved "http://registry.npmjs.org/hoek/-/hoek-4.2.1.tgz#9634502aa12c445dd5a7c5734b572bb8738aacbb"
+hoek@6.x.x:
+  version "6.0.3"
+  resolved "https://registry.yarnpkg.com/hoek/-/hoek-6.0.3.tgz#7884360426d927865a0a1251fc9c59313af5b798"
 
 hoist-non-react-statics@^2.2.0, hoist-non-react-statics@^2.3.1, hoist-non-react-statics@^2.5.0:
   version "2.5.5"
@@ -3623,15 +3585,6 @@ http-cache-semantics@3.8.1:
   version "3.8.1"
   resolved "https://registry.yarnpkg.com/http-cache-semantics/-/http-cache-semantics-3.8.1.tgz#39b0e16add9b605bf0a9ef3d9daaf4843b4cacd2"
 
-http-errors@1.6.2:
-  version "1.6.2"
-  resolved "https://registry.yarnpkg.com/http-errors/-/http-errors-1.6.2.tgz#0a002cc85707192a7e7946ceedc11155f60ec736"
-  dependencies:
-    depd "1.1.1"
-    inherits "2.0.3"
-    setprototypeof "1.0.3"
-    statuses ">= 1.3.1 < 2"
-
 http-errors@1.6.3, http-errors@~1.6.2, http-errors@~1.6.3:
   version "1.6.3"
   resolved "http://registry.npmjs.org/http-errors/-/http-errors-1.6.3.tgz#8b55680bb4be283a0b5bf4ea2e38580be1d9320d"
@@ -3652,10 +3605,6 @@ http-signature@~1.2.0:
     assert-plus "^1.0.0"
     jsprim "^1.2.2"
     sshpk "^1.7.0"
-
-iconv-lite@0.4.19:
-  version "0.4.19"
-  resolved "https://registry.yarnpkg.com/iconv-lite/-/iconv-lite-0.4.19.tgz#f7468f60135f5e5dad3399c0a81be9a1603a082b"
 
 iconv-lite@0.4.23:
   version "0.4.23"
@@ -4006,9 +3955,11 @@ isarray@1.0.0, isarray@~1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/isarray/-/isarray-1.0.0.tgz#bb935d48582cba168c06834957a54a3e07124f11"
 
-isemail@2.x.x:
-  version "2.2.1"
-  resolved "http://registry.npmjs.org/isemail/-/isemail-2.2.1.tgz#0353d3d9a62951080c262c2aa0a42b8ea8e9e2a6"
+isemail@3.x.x:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/isemail/-/isemail-3.2.0.tgz#59310a021931a9fb06bbb51e155ce0b3f236832c"
+  dependencies:
+    punycode "2.x.x"
 
 isexe@^2.0.0:
   version "2.0.0"
@@ -4041,10 +3992,6 @@ isurl@^1.0.0-alpha5:
   dependencies:
     has-to-string-tag-x "^1.2.0"
     is-object "^1.0.1"
-
-items@2.x.x:
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/items/-/items-2.1.1.tgz#8bd16d9c83b19529de5aea321acaada78364a198"
 
 iterall@1.2.2, iterall@^1.1.3, iterall@^1.2.1:
   version "1.2.2"
@@ -4090,14 +4037,13 @@ jest-worker@^22.2.2:
   dependencies:
     merge-stream "^1.0.1"
 
-joi@^10.0.2:
-  version "10.6.0"
-  resolved "https://registry.yarnpkg.com/joi/-/joi-10.6.0.tgz#52587f02d52b8b75cdb0c74f0b164a191a0e1fc2"
+joi@^14.0.4:
+  version "14.0.6"
+  resolved "https://registry.yarnpkg.com/joi/-/joi-14.0.6.tgz#8c72314af6dba13ca48028a4f0af992ddc5a7472"
   dependencies:
-    hoek "4.x.x"
-    isemail "2.x.x"
-    items "2.x.x"
-    topo "2.x.x"
+    hoek "6.x.x"
+    isemail "3.x.x"
+    topo "3.x.x"
 
 join-component@^1.1.0:
   version "1.1.0"
@@ -4163,7 +4109,7 @@ json5@^1.0.1:
   dependencies:
     minimist "^1.2.0"
 
-jsonfile@^2.1.0, jsonfile@^2.3.1:
+jsonfile@^2.1.0:
   version "2.4.0"
   resolved "http://registry.npmjs.org/jsonfile/-/jsonfile-2.4.0.tgz#3736a2b428b87bbda0cc83b53fa3d633a35c2ae8"
   optionalDependencies:
@@ -4826,6 +4772,10 @@ node-fetch@^1.0.1, node-fetch@^1.3.3:
     encoding "^0.1.11"
     is-stream "^1.0.1"
 
+node-fetch@^2.2.0, node-fetch@^2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.3.0.tgz#1a1d940bbfb916a1d3e0219f037e89e71f8c5fa5"
+
 node-forge@^0.7.4:
   version "0.7.6"
   resolved "https://registry.yarnpkg.com/node-forge/-/node-forge-0.7.6.tgz#fdf3b418aee1f94f0ef642cd63486c77ca9724ac"
@@ -5319,6 +5269,10 @@ progress@^2.0.0:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/progress/-/progress-2.0.1.tgz#c9242169342b1c29d275889c95734621b1952e31"
 
+promise-limit@^2.7.0:
+  version "2.7.0"
+  resolved "https://registry.yarnpkg.com/promise-limit/-/promise-limit-2.7.0.tgz#eb5737c33342a030eaeaecea9b3d3a93cb592b26"
+
 promise-polyfill@7.1.2:
   version "7.1.2"
   resolved "https://registry.yarnpkg.com/promise-polyfill/-/promise-polyfill-7.1.2.tgz#ab05301d8c28536301622d69227632269a70ca3b"
@@ -5345,7 +5299,7 @@ protobufjs@^5.0.3:
     glob "^7.0.5"
     yargs "^3.10.0"
 
-proxy-addr@~2.0.3, proxy-addr@~2.0.4:
+proxy-addr@~2.0.4:
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/proxy-addr/-/proxy-addr-2.0.4.tgz#ecfc733bf22ff8c6f407fa275327b9ab67e48b93"
   dependencies:
@@ -5371,6 +5325,10 @@ punycode@1.3.2:
   version "1.3.2"
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-1.3.2.tgz#9653a036fb7c1ee42342f2325cceefea3926c48d"
 
+punycode@2.x.x:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/punycode/-/punycode-2.1.1.tgz#b58b010ac40c22c5657616c8d2c2c02c7bf479ec"
+
 punycode@^1.4.1:
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-1.4.1.tgz#c0d5a63b2718800ad8e1eb0fa5269c84dd41845e"
@@ -5378,10 +5336,6 @@ punycode@^1.4.1:
 qrcode-terminal@^0.11.0:
   version "0.11.0"
   resolved "https://registry.yarnpkg.com/qrcode-terminal/-/qrcode-terminal-0.11.0.tgz#ffc6c28a2fc0bfb47052b47e23f4f446a5fbdb9e"
-
-qs@6.5.1:
-  version "6.5.1"
-  resolved "https://registry.yarnpkg.com/qs/-/qs-6.5.1.tgz#349cdf6eef89ec45c12d7d5eb3fc0c870343a6d8"
 
 qs@6.5.2, qs@^6.5.0, qs@^6.5.1, qs@~6.5.2:
   version "6.5.2"
@@ -5432,15 +5386,6 @@ raven@^2.1.1:
     timed-out "4.0.1"
     uuid "3.3.2"
 
-raw-body@2.3.2:
-  version "2.3.2"
-  resolved "https://registry.yarnpkg.com/raw-body/-/raw-body-2.3.2.tgz#bcd60c77d3eb93cde0050295c3f379389bc88f89"
-  dependencies:
-    bytes "3.0.0"
-    http-errors "1.6.2"
-    iconv-lite "0.4.19"
-    unpipe "1.0.0"
-
 raw-body@2.3.3:
   version "2.3.3"
   resolved "https://registry.yarnpkg.com/raw-body/-/raw-body-2.3.3.tgz#1b324ece6b5706e153855bc1148c65bb7f6ea0c3"
@@ -5481,6 +5426,10 @@ react-is@^16.3.2, react-is@^16.6.0:
 react-lifecycles-compat@^3, react-lifecycles-compat@^3.0.0, react-lifecycles-compat@^3.0.4:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
+
+react-native-background-task@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/react-native-background-task/-/react-native-background-task-0.2.1.tgz#9d110ed14b245e0d8b9ec8114ce24b33ddda65de"
 
 react-native-branch@2.2.5:
   version "2.2.5"
@@ -5581,6 +5530,14 @@ react-native-tab-view@^1.0.0:
   resolved "https://registry.yarnpkg.com/react-native-tab-view/-/react-native-tab-view-1.2.0.tgz#0cc26a1c8e49b6c0d58a30363dbbe43954907c31"
   dependencies:
     prop-types "^15.6.1"
+
+react-native-timer-countdown@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/react-native-timer-countdown/-/react-native-timer-countdown-2.0.3.tgz#84866bf2dc0cdcec27d148290a8fd8977004d5ef"
+
+react-native-timer@^1.3.4:
+  version "1.3.4"
+  resolved "https://registry.yarnpkg.com/react-native-timer/-/react-native-timer-1.3.4.tgz#3aedc59fed43a74314416a36cb28b093b685f393"
 
 react-native-vector-icons@4.5.0:
   version "4.5.0"
@@ -5841,12 +5798,6 @@ redux-logger@^2.7.4:
   dependencies:
     deep-diff "0.3.4"
 
-redux-logger@^3.0.6:
-  version "3.0.6"
-  resolved "https://registry.yarnpkg.com/redux-logger/-/redux-logger-3.0.6.tgz#f7555966f3098f3c88604c449cf0baf5778274bf"
-  dependencies:
-    deep-diff "^0.3.5"
-
 redux-thunk@^2.3.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/redux-thunk/-/redux-thunk-2.3.0.tgz#51c2c19a185ed5187aaa9a2d08b666d0d6467622"
@@ -5981,7 +5932,7 @@ request-promise-native@^1.0.5:
     stealthy-require "^1.1.0"
     tough-cookie ">=2.3.3"
 
-request@^2.81.0, request@^2.83.0:
+request@^2.81.0, request@^2.83.0, request@^2.88.0:
   version "2.88.0"
   resolved "https://registry.yarnpkg.com/request/-/request-2.88.0.tgz#9c2fca4f7d35b592efe57c7f0a55e81052124fef"
   dependencies:
@@ -6086,10 +6037,6 @@ rxjs@^5.5.2:
   resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-5.5.12.tgz#6fa61b8a77c3d793dbaf270bee2f43f652d741cc"
   dependencies:
     symbol-observable "1.0.1"
-
-safe-buffer@5.1.1:
-  version "5.1.1"
-  resolved "https://registry.yarnpkg.com/safe-buffer/-/safe-buffer-5.1.1.tgz#893312af69b2123def71f57889001671eeb2c853"
 
 safe-buffer@5.1.2, safe-buffer@^5.0.1, safe-buffer@^5.1.1, safe-buffer@^5.1.2, safe-buffer@~5.1.0, safe-buffer@~5.1.1:
   version "5.1.2"
@@ -6203,10 +6150,6 @@ set-value@^2.0.0:
 setimmediate@^1.0.5:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/setimmediate/-/setimmediate-1.0.5.tgz#290cbb232e306942d7d7ea9b83732ab7856f8285"
-
-setprototypeof@1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/setprototypeof/-/setprototypeof-1.0.3.tgz#66567e37043eeb4f04d91bd658c0cbefb55b8e04"
 
 setprototypeof@1.1.0:
   version "1.1.0"
@@ -6408,7 +6351,7 @@ static-extend@^0.1.1:
     define-property "^0.2.5"
     object-copy "^0.1.0"
 
-"statuses@>= 1.3.1 < 2", "statuses@>= 1.4.0 < 2":
+"statuses@>= 1.4.0 < 2":
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/statuses/-/statuses-1.5.0.tgz#161c7dac177659fd9811f43771fa99381478628c"
 
@@ -6670,11 +6613,11 @@ to-regex@^3.0.1, to-regex@^3.0.2:
     regex-not "^1.0.2"
     safe-regex "^1.1.0"
 
-topo@2.x.x:
-  version "2.0.2"
-  resolved "http://registry.npmjs.org/topo/-/topo-2.0.2.tgz#cd5615752539057c0dc0491a621c3bc6fbe1d182"
+topo@3.x.x:
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/topo/-/topo-3.0.3.tgz#d5a67fb2e69307ebeeb08402ec2a2a6f5f7ad95c"
   dependencies:
-    hoek "4.x.x"
+    hoek "6.x.x"
 
 tough-cookie@>=2.3.3, tough-cookie@~2.4.3:
   version "2.4.3"
@@ -6705,7 +6648,7 @@ tweetnacl@^0.14.3, tweetnacl@~0.14.0:
   version "0.14.5"
   resolved "https://registry.yarnpkg.com/tweetnacl/-/tweetnacl-0.14.5.tgz#5ae68177f192d4456269d108afa93ff8743f4f64"
 
-type-is@~1.6.15, type-is@~1.6.16:
+type-is@~1.6.16:
   version "1.6.16"
   resolved "https://registry.yarnpkg.com/type-is/-/type-is-1.6.16.tgz#f89ce341541c672b25ee7ae3c73dee3b2be50194"
   dependencies:
@@ -6987,19 +6930,18 @@ xcode@^0.9.1:
     simple-plist "^0.2.1"
     uuid "3.0.1"
 
-xdl@^51.4.5:
-  version "51.4.5"
-  resolved "https://registry.yarnpkg.com/xdl/-/xdl-51.4.5.tgz#4d1ecd4c672902dfa44ca718bc2cff8940922f13"
+xdl@^51.6.0:
+  version "51.6.0"
+  resolved "https://registry.yarnpkg.com/xdl/-/xdl-51.6.0.tgz#e50680fe6e366c421f04f9dc6c508f19996d125a"
   dependencies:
     "@expo/bunyan" "3.0.2"
-    "@expo/json-file" "^8.0.1"
+    "@expo/json-file" "^8.1.0"
     "@expo/ngrok" "2.4.2"
-    "@expo/osascript" "^1.8.2"
-    "@expo/schemer" "^1.1.1"
+    "@expo/osascript" "^1.9.0"
+    "@expo/schemer" "^1.2.1"
     "@expo/spawn-async" "^1.2.8"
     analytics-node "^2.1.0"
     axios v0.19.0-beta.1
-    body-parser "^1.15.2"
     chalk "^2.4.1"
     command-exists "^1.2.7"
     concat-stream "^1.6.0"
@@ -7007,7 +6949,7 @@ xdl@^51.4.5:
     delay-async "^1.0.0"
     es6-error "^4.0.2"
     escape-string-regexp "^1.0.5"
-    express "^4.13.4"
+    express "4.16.4"
     file-type "^4.0.0"
     follow-redirects "^1.4.1"
     form-data "^2.1.4"
@@ -7024,8 +6966,8 @@ xdl@^51.4.5:
     indent-string "^3.1.0"
     inquirer "^5.0.1"
     invariant "^2.2.4"
-    joi "^10.0.2"
-    jsonfile "^2.3.1"
+    joi "^14.0.4"
+    latest-version "^4.0.0"
     lodash "^4.14.1"
     md5hex "^1.0.0"
     minimatch "^3.0.4"
@@ -7033,6 +6975,7 @@ xdl@^51.4.5:
     ncp "^2.0.0"
     node-forge "^0.7.4"
     opn "^4.0.2"
+    p-timeout "^2.0.1"
     plist "^2.1.0"
     prop-types "^15.5.10"
     querystring "^0.2.0"
