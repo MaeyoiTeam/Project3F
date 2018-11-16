@@ -17,6 +17,7 @@ import QuestRest from '../containers/stacks/QuestRest';
 import Pedo from '../containers/stacks/Pedo';
 import HistoryQuestList from '../containers/stacks/HistoryQuestList';
 import Achievement from '../containers/stacks/Achievement';
+import OtherProfile from '../containers/stacks/OtherProfile'
 //Component
 import LeftComponent from '../component/Header/LeftComponent';
 import MidComponent from '../component/Header/MidComponent';
@@ -112,14 +113,17 @@ Home:{    screen:BottomTabs,
           navigationOptions:{ /* header:null */
             
              headerLeft:(<LeftComponent/>),
-            //headerTitle:(<MidComponent/>),
+            headerTitle:(<MidComponent/>),
             headerRight:(<RightComponent/>), 
             headerStyle: {
               height:40
             } 
           }
     },
-    
+  OtherProfile: {
+    screen: OtherProfile,
+    navigationOptions: {}
+  },
  History: {
    screen: History,
    navigationOptions: {}

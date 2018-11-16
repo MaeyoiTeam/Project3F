@@ -4,7 +4,7 @@ import {FETCHING_DATA,FETCHING_DATA_FAILURE,FETCHING_DATA_SUCCESS,
     QUEST_DATA, QUEST_DATA_SUCCESS, QUEST_DATA_FAILURE,
     HISTORY_DATA, HISTORY_DATA_FAILURE, HISTORY_DATA_SUCCESS
 } from '../constants';
-import {rankingUser,updateScore} from './api';
+import loadUserData,{rankingUser,updateScore}  from './api';
 import { NavigationActions } from 'react-navigation'
 export const SetStageToSuccess =(data)=>({
     type:FETCHING_DATA_SUCCESS,
@@ -34,6 +34,17 @@ export const navigate = (nav)=>{
         dispatch(NavigationActions.navigate({routeName:nav}));
     }
 } 
+
+//############################################### Ranking ###############################################
+export const fetchProfile = (uid) => {
+    console.log(uid)
+    const result = loadUserData(uid).then((obj) => {
+        return {
+            ...obj
+        }
+    });
+    return fetchData(result);
+}
 
 export const fetchRanking  = () => {
     return (dispatch) => {

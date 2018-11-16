@@ -81,7 +81,7 @@ try{
                     type: FETCH_USER_SUCCESS,
                     payload:{   uid:user.uid,
                         displayName: result.displayName,
-                        photoURL: result.photoURL+"?width=512",
+                        photoURL: result.photoURL+"?width=256",
                         email: result.email,
                         levelQ:result.levelQ,
                         quest: questListdone,

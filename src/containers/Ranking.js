@@ -40,19 +40,22 @@ class Ranking extends Component{
                 
                 
                 
-
                      {
                         props.rankReducer.data.map((item, i) => {
                              if(item.uid==props.authReducer.data.uid){
                                 this.current={data:item,index:i}
                              }
-                            return <View key={i} >
-                                <View style = {{padding:3,flexDirection: 'row'}} onPress={() => console.log("Works!")}>
-                                <Avatar rounded small source = {{uri: item.photoURL}} onPress={() => console.log("Works!")}/>
-                                <Text style = {{left:10}} onPress={() => console.log("Works!")}>Rank: {i+1} : {item.name}</Text>
+                            return  <TouchableHighlight onPress={()=>this.props.navigation.navigate('OtherProfile',{
+                                data:item
+                            })} key={i}>
+                               <View>
+                                    <View style = {{padding:3,flexDirection: 'row'}}>
+                                <Avatar rounded small source = {{uri: item.photoURL}} />
+                                <Text style = {{left:10}} >Rank: {i+1} : {item.name}</Text>
                             </View>
-                            <Text style={{left:50}} onPress={() => console.log("Works!")}>   Star:  {item.star}</Text>
-                            </View>                   
+                            <Text style={{left:50}}>   Star:  {item.star}</Text>
+                               </View>
+                            </TouchableHighlight>
         })
                      }
                 <View style={styles.container}>

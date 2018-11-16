@@ -175,7 +175,9 @@ export const rankingUser=()=>{
                    data.push({name:item.val().displayName,
                              star: item.val().star,
                              uid:item.key,
-                             photoURL:item.val().photoURL
+                             photoURL: item.val().photoURL + "?width=256",
+                             achieve:item.val().achieve,
+                             levelQ:item.val().levelQ
                 });
                 });
                 return resolve(data.sort((a, b) => {
@@ -244,7 +246,7 @@ let { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
 
 //############################################### Common Data User ###############################################
 //ดึงข้อมูล จากDataตามUserนั้นๆ
-export default (uid, path) => {
+export default (uid, path='') => {
     return new Promise((resolve, reject) => {
         const personalRef = userRef.child(uid + "/" + path);
         const result = personalRef.on("value", snapshot => {
