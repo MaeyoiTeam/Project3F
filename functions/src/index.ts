@@ -7,10 +7,10 @@ admin.initializeApp();
 let expo = new Expo(); */
  
 //TODO MOVE UNDONE TO UNSUCCESS
-exports.addMessage = functions.https.onRequest(async (req, res) => {
+exports.resetMidnight = functions.https.onRequest(async (req, res) => {
     const allUserRef = await admin.database().ref('/users');
     let usersKey = [];
-   const test = await allUserRef.on("value", (usersSnap) => {
+   const test = await allUserRef.once("value", (usersSnap) => {
     usersSnap.forEach((user) => {
       let key = user.key;
       usersKey.push(key);
@@ -23,9 +23,9 @@ exports.addMessage = functions.https.onRequest(async (req, res) => {
   })
   res.send("Remove Undone in userkey: "+usersKey);
 });
-
+/* 
 exports.addTest = functions.https.onRequest(async (req, res) => {
   const contacts = await admin.database().ref('/contacts');
   let time = new Date().getTime();
   contacts.push(time);
-});
+}); */

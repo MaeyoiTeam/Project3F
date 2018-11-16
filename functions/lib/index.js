@@ -16,10 +16,10 @@ admin.initializeApp();
 /* // Create a new Expo SDK client
 let expo = new Expo(); */
 //TODO MOVE UNDONE TO UNSUCCESS
-exports.addMessage = functions.https.onRequest((req, res) => __awaiter(this, void 0, void 0, function* () {
+exports.resetMidnight = functions.https.onRequest((req, res) => __awaiter(this, void 0, void 0, function* () {
     const allUserRef = yield admin.database().ref('/users');
     let usersKey = [];
-    const test = yield allUserRef.on("value", (usersSnap) => {
+    const test = yield allUserRef.once("value", (usersSnap) => {
         usersSnap.forEach((user) => {
             let key = user.key;
             usersKey.push(key);
@@ -32,9 +32,10 @@ exports.addMessage = functions.https.onRequest((req, res) => __awaiter(this, voi
     });
     res.send("Remove Undone in userkey: " + usersKey);
 }));
-exports.addTest = functions.https.onRequest((req, res) => __awaiter(this, void 0, void 0, function* () {
-    const contacts = yield admin.database().ref('/contacts');
-    let time = new Date().getTime();
-    contacts.push(time);
-}));
+/*
+exports.addTest = functions.https.onRequest(async (req, res) => {
+  const contacts = await admin.database().ref('/contacts');
+  let time = new Date().getTime();
+  contacts.push(time);
+}); */ 
 //# sourceMappingURL=index.js.map

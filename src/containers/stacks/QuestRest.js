@@ -54,7 +54,6 @@ class QuestRest extends Component {
 
     updateDone = (user, key, point) => {
             this.props.updateQuest(user, key, point)
-        console.log(this.state.current)
     }
     toggleAlert=(toggle)=>{
          this.setState({isAlert: toggle});

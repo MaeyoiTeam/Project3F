@@ -5,7 +5,7 @@ import { StyleSheet, Text, View } from "react-native";
 
 export default class PedometerSensor extends React.Component {
   state = {
-    start: new Date("2018-11-03T23:10:00-06:00"),
+    start: new Date("2018-11-15T12:00:00-11:00"),
     time:new Date(),
     isPedometerAvailable: "checking",
     pastStepCount: 0,
