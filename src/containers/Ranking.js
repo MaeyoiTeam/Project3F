@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {ScrollView, View,Text,StyleSheet } from 'react-native';
+import {ScrollView, View,Text,StyleSheet,TouchableHighlight } from 'react-native';
 import {Button,Avatar} from 'react-native-elements';
 import { connect } from 'react-redux';
 import {fetchData,fetchRanking} from '../actions'
@@ -46,20 +46,23 @@ class Ranking extends Component{
                              if(item.uid==props.authReducer.data.uid){
                                 this.current={data:item,index:i}
                              }
-                            return <View key={i}>
-                                <Text>Rank: {i+1} : {item.name}</Text>
-                                <Text>     Score:  {item.score}</Text>
-                            </View>             
+                            return <View key={i} >
+                                <View style = {{padding:3,flexDirection: 'row'}} onPress={() => console.log("Works!")}>
+                                <Avatar rounded small source = {{uri: item.photoURL}} onPress={() => console.log("Works!")}/>
+                                <Text style = {{left:10}} onPress={() => console.log("Works!")}>Rank: {i+1} : {item.name}</Text>
+                            </View>
+                            <Text style={{left:50}} onPress={() => console.log("Works!")}>   Star:  {item.star}</Text>
+                            </View>                   
         })
                      }
                 <View style={styles.container}>
                 
-                <Text style={styles.ku4}>Your Star</Text>
+                <Text style={{fontSize:25,fontWeight: 'bold',fontFamily: "Segoe-Script",padding:5}}>Your Star</Text>
                 </View>   
                      {
                          this.current!=null &&<View>
                           <Text>Rank: {this.current.index+1} : {this.current.data.name}</Text>
-                        <Text>     Star:  {this.current.data.score}</Text>
+                        <Text>     Star:  {this.current.data.star}</Text>
                          </View>
                       }
             </View>
@@ -88,12 +91,6 @@ const styles = StyleSheet.create({
     },
     ku3: {
         flex: 0.4,
-    },
-    ku4:{
-        color: 'blue',
-        fontSize:20,
-        fontWeight: 'bold',
-        fontFamily: "Segoe-Script",
     }
   });
 // Used to add reducer's states into the props

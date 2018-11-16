@@ -21,6 +21,8 @@ import Achievement from '../containers/stacks/Achievement';
 import LeftComponent from '../component/Header/LeftComponent';
 import MidComponent from '../component/Header/MidComponent';
 import RightComponent from '../component/Header/RightComponent';
+import { colors } from 'react-native-elements';
+import { Colors } from 'react-native-paper';
 
 
 
@@ -107,12 +109,14 @@ HistoryQuestList: {
 
 const Stack = createStackNavigator({
 Home:{    screen:BottomTabs,
-          navigationOptions:{
-            headerLeft:(<LeftComponent/>),
-            headerTitle:(<MidComponent/>),
-            headerRight:(<RightComponent/>),
+          navigationOptions:{ /* header:null */
+            
+             headerLeft:(<LeftComponent/>),
+            //headerTitle:(<MidComponent/>),
+            headerRight:(<RightComponent/>), 
             headerStyle: {
-            }
+              height:40
+            } 
           }
     },
     
@@ -153,6 +157,7 @@ const Navigator = createSwitchNavigator({
   Stack: {
     screen: Stack,
     navigationOptions: {}
+    
   },
 });
 

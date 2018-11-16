@@ -1,5 +1,5 @@
 import React,{Component} from 'react'
-import {Text,View } from 'react-native'
+import {Text,View,StyleSheet,AppRegistry,ProgressBarAndroid } from 'react-native'
 import { connect } from 'react-redux';
 import {signOut,signInWithFacebook,signInWithGoogle,authChanged} from '../../actions/signIn';
 import {Button,Avatar} from 'react-native-elements';
@@ -18,16 +18,23 @@ class Loading extends Component{
      };
     render(){
         return(
-            <View>
-                <Text>Loading...</Text>
-                <Text>Loading...</Text>
-                <Text>Loading...</Text>
-                <Text>Loading...</Text>
-                <Text>Loading...</Text>
+            <View style={styles.container}>
+               <ProgressBarAndroid
+          styleAttr="Large"
+          indeterminate={true}
+        />
             </View>
         );
     }
 }
+
+const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      justifyContent: "space-evenly",
+      padding: 10
+    }
+  });
 // Used to add reducer's states into the props
 const mapStateToProps = (state) => ({
     fetchReducer: state.fetchReducer,
