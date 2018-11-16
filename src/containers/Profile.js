@@ -40,8 +40,16 @@ class Profile extends Component{
                 <Text>{authReducer.data.Email}</Text>
                 
 {/* //TODO แสดง เลเวล ค่าประสบการณ์ Objectที่เก็บข้อมูล = authReducer.data.levelQ */}
-                <Text style={{textAlign:'center',paddingTop:10,paddingBottom:30}}>Star:{authReducer.data.star  }</Text>
-                
+                <View style = {{                  
+                    flexDirection: 'row'
+                    }}>
+                <Image
+                 source={require('../../image/star.jpg')}
+                 fadeDuration={0}
+                 style={{width: 25, height: 25,left:90}}
+                />    
+                <Text style={{textAlign:'center',paddingTop:10,paddingBottom:30,left:100}}> X Star : {authReducer.data.star  }</Text>
+                </View>
                 <View style = {{
                     padding:5, 
                     flexDirection: 'row'
