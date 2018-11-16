@@ -1,4 +1,4 @@
-import { View,Text,StyleSheet,ImageBackground,TouchableOpacity,,Dimensions,Button,Alert } from 'react-native';
+import { View,Text,StyleSheet,ImageBackground,TouchableOpacity,Dimensions,Button,Alert } from 'react-native';
 import React,{Component} from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { Image } from 'react-native';
