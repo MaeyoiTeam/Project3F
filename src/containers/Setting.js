@@ -22,7 +22,6 @@ class Setting extends Component {
             <View style={styles.container}>
             <View style={styles.pa1}></View>
             <View style={styles.pa2}>
-                <Text>This is Setting I am nutza007</Text>
                 <Button title="Logout Account"
                     onPress={async ()=>{let path = await this.logOut();
                     this.props.navigation.navigate(path);

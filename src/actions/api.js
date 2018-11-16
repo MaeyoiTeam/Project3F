@@ -169,16 +169,17 @@ export const updateAchieve=(uid,quest,achieve)=>{
 //fetch Ranking
 export const rankingUser=()=>{
         return new Promise((resolve, reject) => {
-            userRef.orderByChild("score").once('value', snapshot => {
+            userRef.orderByChild("star").once('value', snapshot => {
                 let data =[];
                 snapshot.forEach((item)=>{
                    data.push({name:item.val().displayName,
-                             score: item.val().score,
-                             uid:item.key
+                             star: item.val().star,
+                             uid:item.key,
+                             photoURL:item.val().photoURL
                 });
                 });
                 return resolve(data.sort((a, b) => {
-                return b.score - a.score;
+                return b.star - a.star;
             }));
             });
         });
