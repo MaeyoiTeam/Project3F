@@ -3,7 +3,7 @@ import firebase from '../config/firebase'
 import {updateDataUser,updateToken} from './api';
 import { NavigationActions } from 'react-navigation'
 import { Button } from 'react-native-elements';
-
+import * as Expo from 'expo';
 
 export const signOut = () => dispatch => {
     firebase.auth().signOut().then(() => {

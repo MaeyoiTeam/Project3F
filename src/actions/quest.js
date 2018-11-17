@@ -87,7 +87,8 @@ export const randomQuest= (user)=>{
 
               var keysType = Object.keys(data)
               var slectQuests = {};
-              keysType.map((keyType,i)=>{
+//            keysType.map((keyType,i)=>{
+              const keyType="food"; 
                 const quest = data[keyType];
                 var keysQuest = Object.keys(data[keyType])
                 //TODO แบ่งระดับความยากง่าย
@@ -110,7 +111,12 @@ export const randomQuest= (user)=>{
                     ...slectQuests
                   };
                 }
-              })
+//  })
+                //test Walk Quest
+              slectQuests = {
+                walk:{type:"walk",start:new Date().toISOString()},
+                ...slectQuests,
+              }
               updateUserQuest(slectQuests, user.uid)
               return slectQuests;
           })

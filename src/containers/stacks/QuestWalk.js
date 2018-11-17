@@ -2,7 +2,9 @@ import { View,Text,StyleSheet } from 'react-native';
 import React,{Component} from 'react';
 import { connect } from 'react-redux';
 import {Button} from 'react-native-elements'
-import {updateQuest,fetchQuest,updateQuestDone,getQuestList} from '../../actions/quest'
+import { Pedometer } from "expo";
+import {updateQuest,fetchQuest,updateQuestDone,getQuestList} from '../../actions/quest';
+import * as Expo from "expo";
 class QuestWalk extends Component {
   static navigationOptions = ({
       navigation
@@ -25,15 +27,10 @@ class QuestWalk extends Component {
             star:0,
             level:0,
             isComplete:false,
-            prevLevel:{}
+            prevLevel:{},
+            pastStepCount: 0,
         }
     }
-    
-
-
-
-
-
 
      componentDidUpdate(prevProps, prevState, snapshot){
         if(prevProps.fetchReducer.data!=this.props.fetchReducer.data){
@@ -49,9 +46,45 @@ class QuestWalk extends Component {
         }
     } 
 
-    update=(user,key,point,type)=>{
-        this.props.updateQuest(user, key, point);
-    }
+      componentDidMount() {
+          this.timerID = setInterval(() => this._subscribe(), 1000);
+      }
+
+
+      componentWillUnmount() {
+          clearInterval(this.timerID)
+          this._unsubscribe();
+      }
+
+     _subscribe = () => {
+         let startTime = new Date(this.state.start.replace('Z', ''));
+         let currentTime  = new Date();
+        this._subscription = Pedometer.watchStepCount(result => {
+                this.setState({
+                time: new Date(),
+            });
+        });
+         console.log("Start: "+startTime);
+         console.log("current: "+currentTime);
+         Pedometer.getStepCountAsync(startTime, currentTime).then(
+             result => {
+                 console.log("result: " + result.steps)
+                 this.setState({
+                     pastStepCount: result.steps
+                 });
+             },
+             error => {
+                 this.setState({
+                     pastStepCount: "Could not get stepCount: " + error
+                 });
+             }
+         );
+     };
+
+     _unsubscribe = () => {
+         this._subscription && this._subscription.remove();
+         this._subscription = null;
+     };
 
     render(){
         const {fetchReducer,authReducer} = this.props;
@@ -63,19 +96,18 @@ class QuestWalk extends Component {
                     <Text>Quest is Complete</Text>
                       <Button title="Go Home" 
                     onPress={()=>this.props.navigation.navigate('Home')}/>  
-                    </View>);
+                    </View>
+                    );
         }
+
         else{    //Quest Continue
             return(
             <View>
                 <Text>QUEST</Text>
-                <View>
                     <Text>Name: {name} Type: {type}</Text>
                 <Text>Detail: {detail} </Text>
                 <Text>Exp: {current}/{target}</Text>
-                  <Button title={"Up "+point+" point"} onPress={()=>this.update(authReducer.data,key,point,type)}/>  
-                </View>
-                
+                <Text>Steps taken in the last 24 hours: {this.state.pastStepCount==0 ? "Loading":this.state.pastStepCount}</Text>
             </View>
             );
         }
@@ -91,5 +123,5 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
     updateQuest, fetchQuest, updateQuestDone, getQuestList
 };
-
+Expo.registerRootComponent(QuestWalk);
 export default connect(mapStateToProps, mapDispatchToProps)(QuestWalk)
