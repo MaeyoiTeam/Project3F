@@ -4,19 +4,33 @@ const databaseRef = firebase.database().ref();
 const userRef = databaseRef.child('users/');
 const systemRef = databaseRef.child('system/')
 
-//############################################### Quset ###############################################
+
+
+//############################################### System ###############################################
+
 // fetch questList System data
-export const fetchSystem =(type)=>{
-    return new Promise((resolve,reject)=>{
-        systemRef.on('value',snap=>{
-            if(type=="questList") {
-                return resolve(snap.val().questList); }
-            else if(type=="achieve") {return resolve(snap.val().achieve);}
-            else return reject("wrong Type") 
+export const fetchSystem = (type) => {
+    return new Promise((resolve, reject) => {
+        systemRef.on('value', snap => {
+            switch (type) {
+                case "questList": resolve(snap.val().questList);
+                    break;
+                case "achieve": resolve(snap.val().achieve);
+                    break;
+                case "walkScore": resolve(snap.val().walkScore);
+                    break;
+                default: reject("wrong Type")
+                    break;
+            }
         })
     })
 }
 
+
+
+
+
+//############################################### Quset ###############################################
 // Add Quest to UserData
 export const updateUserQuest = (quest, uid) => {
     const personalRef = userRef.child(uid);
@@ -257,3 +271,4 @@ export default (uid, path='') => {
         return reject("Fail");
     });
 }
+

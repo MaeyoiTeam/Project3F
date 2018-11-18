@@ -3,7 +3,7 @@ import React,{Component} from 'react';
 import { connect } from 'react-redux';
 import {Button} from 'react-native-elements'
 import { Pedometer } from "expo";
-import {updateQuest,fetchQuest,updateQuestDone,getQuestList} from '../../actions/quest';
+import {updateQuest,fetchQuest,updateQuestDone,getQuestList,compareScore} from '../../actions/quest';
 import * as Expo from "expo";
 class QuestWalk extends Component {
   static navigationOptions = ({
@@ -29,11 +29,13 @@ class QuestWalk extends Component {
             isComplete:false,
             prevLevel:{},
             pastStepCount: 0,
+            targetSteps: []
         }
     }
 
      componentDidUpdate(prevProps, prevState, snapshot){
         if(prevProps.fetchReducer.data!=this.props.fetchReducer.data){
+            console.log("work")
             this.setState({
                 ...this.props.fetchReducer.data,
                 prevLevel: { ...prevProps.authReducer.data.levelQ[this.state.type]
@@ -64,14 +66,14 @@ class QuestWalk extends Component {
                 time: new Date(),
             });
         });
-         console.log("Start: "+startTime);
-         console.log("current: "+currentTime);
+/*          console.log("Start: "+startTime);
+         console.log("current: "+currentTime); */
          Pedometer.getStepCountAsync(startTime, currentTime).then(
              result => {
-                 console.log("result: " + result.steps)
-                 this.setState({
+                 this.update(result.steps)
+                  this.setState({
                      pastStepCount: result.steps
-                 });
+                 }); 
              },
              error => {
                  this.setState({
@@ -81,6 +83,9 @@ class QuestWalk extends Component {
          );
      };
 
+    update = (steps) => {
+             this.props.compareScore(this.props.fetchReducer.data,steps);
+    }
      _unsubscribe = () => {
          this._subscription && this._subscription.remove();
          this._subscription = null;
@@ -88,7 +93,7 @@ class QuestWalk extends Component {
 
     render(){
         const {fetchReducer,authReducer} = this.props;
-        const {name,type,detail,current,target,key,point,star,level,isComplete,prevLevel}=this.state;
+        const {name,type,detail,current,target,key,point,star,level,isComplete,prevLevel,targetSteps}=this.state;
         if (isComplete){   //Quest Complete
                     return(<View>
                     <Text>Current {type} star :{prevLevel.star}/{prevLevel.target}->{star}/{target}</Text>
@@ -107,7 +112,14 @@ class QuestWalk extends Component {
                     <Text>Name: {name} Type: {type}</Text>
                 <Text>Detail: {detail} </Text>
                 <Text>Exp: {current}/{target}</Text>
-                <Text>Steps taken in the last 24 hours: {this.state.pastStepCount==0 ? "Loading":this.state.pastStepCount}</Text>
+                <Text>Steps : {this.state.pastStepCount==0 ? "Loading":this.state.pastStepCount}</Text>
+                {   
+                    targetSteps.map((obj,i) =><View key={i}>
+                        <Text>You got more: {obj[0]}</Text>
+                        <Text>Name: {obj[1].name}</Text>
+                        <Text>Star: {obj[1].star}</Text>
+                    </View>)
+                }
             </View>
             );
         }
@@ -121,7 +133,7 @@ const mapStateToProps = (state) => ({
 });
 //Used to add dispatch (action) into props
 const mapDispatchToProps = {
-    updateQuest, fetchQuest, updateQuestDone, getQuestList
+    updateQuest, fetchQuest, updateQuestDone, getQuestList, compareScore
 };
 Expo.registerRootComponent(QuestWalk);
 export default connect(mapStateToProps, mapDispatchToProps)(QuestWalk)

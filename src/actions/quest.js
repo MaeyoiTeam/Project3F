@@ -123,3 +123,18 @@ export const randomQuest= (user)=>{
           return fetchData(result);
   }
 }
+
+//############################################### Quest Walk ###################################################
+
+export const compareScore = (data,currentScore)=>{
+        let result = fetchSystem("walkScore").then((allScore)=>{
+          const filterScore = Object.entries(allScore).filter((systemScore)=>{
+            return currentScore >= systemScore[0]
+          })
+          return {
+            targetSteps: filterScore,
+            ...data
+          }
+        })
+      return fetchData(result);
+}
