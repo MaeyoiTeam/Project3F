@@ -2,7 +2,8 @@ import {FETCHING_DATA,FETCHING_DATA_FAILURE,FETCHING_DATA_SUCCESS,
     FETCH_USER, 
     RANK_DATA, RANK_DATA_SUCCESS, RANK_DATA_FAILURE,
     QUEST_DATA, QUEST_DATA_SUCCESS, QUEST_DATA_FAILURE,
-    HISTORY_DATA, HISTORY_DATA_FAILURE, HISTORY_DATA_SUCCESS
+    HISTORY_DATA, HISTORY_DATA_FAILURE, HISTORY_DATA_SUCCESS,
+    MODAL_CLOSE,MODAL_OPEN
 } from '../constants';
 import loadUserData,{rankingUser,updateScore}  from './api';
 import { NavigationActions } from 'react-navigation'
@@ -82,3 +83,14 @@ export const fetchHistoryList = (fn) => {
     }
 }
 
+
+export const fetchModal = (fn) => {
+    return (dispatch) => {
+        fn.then(result => {
+                dispatch({type:MODAL_OPEN,payload:result})
+            }).catch(error => {
+                dispatch({type:MODAL_CLOSE})
+                console.log(error)
+            })
+    }
+}

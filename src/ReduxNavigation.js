@@ -38,9 +38,7 @@ class ReduxNavigation extends PureComponent {
     };
     render(){
         const {dispatch,state,nav } =this.props;
-        return <View>
-        <ReduxAppNavigator dispatch={dispatch} state={state}/>
-        </View>;
+        return <ReduxAppNavigator dispatch={dispatch} state={state}/>;
     }
 }
 const mapStateToProps = (state) => ({

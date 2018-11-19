@@ -1,12 +1,14 @@
 import React,{Component} from 'react'
 import {Text,View,StyleSheet,AppRegistry,ProgressBarAndroid } from 'react-native'
 import { connect } from 'react-redux';
-import {signOut,signInWithFacebook,signInWithGoogle,authChanged} from '../../actions/signIn';
+import {authChanged} from '../../actions/signIn';
+
 import {Button,Avatar} from 'react-native-elements';
 
 class Loading extends Component{
      componentWillMount() {
          this.props.authChanged();
+          
      }
      componentDidUpdate = (prevProps, prevState) => {
          if (this.props.authReducer.isAuth) {
@@ -37,15 +39,13 @@ const styles = StyleSheet.create({
   });
 // Used to add reducer's states into the props
 const mapStateToProps = (state) => ({
+    modal:state.modalReducer,
     fetchReducer: state.fetchReducer,
     authReducer: state.authReducer
 });
 //Used to add dispatch (action) into props
 const mapDispatchToProps = {
-    signInWithFacebook,
-    signInWithGoogle,
-    signOut,
-    authChanged
+    authChanged,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Loading)

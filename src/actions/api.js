@@ -135,7 +135,6 @@ export const updateAchieve=(uid,quest,achieve)=>{
                //Update in DataUser
                var now = new Date();
                var sumStar=0;
-               //!Filter ไม่ได้เลยย
                if(filterResult!=[]){
                     filterResult.map((obj) => {
                         sumStar += Number(obj[1].star);
@@ -156,7 +155,7 @@ export const updateAchieve=(uid,quest,achieve)=>{
             return listResult       //? ควรเก็บเวลาที่ทำสำเร็จไหม??
     } 
 
-            //  updateLevel &Check Levelup
+            //  updateLevel &Check Levelup ตาม typeนั้นๆ
      const updateLevel=(data,star)=>{
     var currentStar = data.star+star;
     var level = data.level;

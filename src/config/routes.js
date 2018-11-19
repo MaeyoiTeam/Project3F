@@ -22,8 +22,7 @@ import OtherProfile from '../containers/stacks/OtherProfile'
 import LeftComponent from '../component/Header/LeftComponent';
 import MidComponent from '../component/Header/MidComponent';
 import RightComponent from '../component/Header/RightComponent';
-import { colors } from 'react-native-elements';
-import { Colors } from 'react-native-paper';
+import  ModalScreen  from '../component/Modal/ModalScreen';
 
 
 
@@ -161,8 +160,13 @@ const Navigator = createSwitchNavigator({
   Stack: {
     screen: Stack,
     navigationOptions: {}
-    
   },
+  MyModal: {
+      screen: ModalScreen,
+    },
+}, {
+  mode: 'modal',
+  headerMode: 'none',
 });
 
 export default Navigator;

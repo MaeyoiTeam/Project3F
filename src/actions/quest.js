@@ -1,10 +1,40 @@
-import {fetchData,fetchQuestList,fetchHistoryList} from './index';
+import {fetchData,fetchQuestList,fetchHistoryList,fetchModal} from './index';
 import loadUserData,{fetchSystem,updateUserQuest,updateScore,moveToDone,updateAchieve} from './api';
 import {FETCH_USER_FAIL,FETCH_USER_SUCCESS,FETCH_USER} from '../constants';
 import {navigate} from './index'
 import { resolve } from 'url';
-//Update Middleware 
 
+
+// Get during Quest List form userData 
+export const getQuestList = (uid, type) => {
+  const result = loadUserData(uid, "quest").then((obj) => {
+    switch (type) {
+      case "undone":
+        return Object.entries(obj.undone)
+      case "done":
+        return Object.entries(obj.done)
+      case "over":
+        return Object.entries(obj.over)
+      default:
+        return null
+    }
+  });
+  switch (type) {
+    case "undone":
+      return fetchQuestList(result);
+    case "done":
+      return fetchHistoryList(result);
+    case "over":
+      return fetchModal(result);
+    default:
+      return null
+  }
+}
+
+
+
+
+//Update Middleware
 export const updateQuestDone = (user,key,type)=>{
   var quest =user.quest;
   var quest = quest[type];
@@ -60,22 +90,6 @@ export const fetchQuest = (uid,key,type) => {
   });
 
     return fetchData(result);
-}
-
-// Get during Quest List form userData 
-export const getQuestList = (uid,type) => {
-  const result = loadUserData(uid, "quest").then((obj)=>{
-  switch (type) {
-    case "undone": return Object.entries(obj.undone)
-    case "done": return Object.entries(obj.done)
-    default: return null
-  }
-  });
-    switch (type) {
-    case "undone": return fetchQuestList(result);
-    case "done": return fetchHistoryList(result);
-    default: return null
-  }
 }
 
 //Random Quest from system
@@ -140,3 +154,4 @@ export const compareScore = (data, stepCount) => {
         })
       return fetchData(result);
 }
+

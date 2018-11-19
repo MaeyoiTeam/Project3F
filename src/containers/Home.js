@@ -3,7 +3,6 @@ import React,{Component} from 'react';
 import {Button} from 'react-native-elements'
 import { connect } from 'react-redux';
 import { randomQuest,getQuestList,fetchQuest } from '../actions/quest'
-import FinishDate from '../component/popUps/FinishDate';
 class Home extends Component {
     constructor(props){
         super(props);
@@ -15,6 +14,7 @@ class Home extends Component {
 
     componentWillMount() {
         this.props.getQuestList(this.props.authReducer.data.uid, "undone")
+       
     }
     componentDidUpdate(prevProps, prevState, snapshot) {
          if (prevProps.questReducer.data != this.props.questReducer.data) {
@@ -105,9 +105,6 @@ class Home extends Component {
                             }}
                         />
                     </View>
-                    {
-                        <FinishDate/>
-                    }  
             </View>
         );
             }
