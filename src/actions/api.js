@@ -229,7 +229,7 @@ export const rankingUser=()=>{
 
 
 
-//############################################### Authentication ###############################################
+//############################################### Authentication && Profile ###############################################
 
 //Update Database when Login
 export const updateDataUser=(uid,user)=>{
@@ -277,7 +277,16 @@ let { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
   return token;
 }
 
-
+export const onOffNotification = (user, permission) => {
+    return new Promise((resolve, reject) => {
+        userRef.child(user.uid).update({
+            isShowNotification: permission
+        });
+        return resolve({ ...user,
+            isShowNotification: permission
+        })
+    })
+}
 
 
 //############################################### Common Data User ###############################################
@@ -285,7 +294,7 @@ let { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
 export default (uid, path='') => {
     return new Promise((resolve, reject) => {
         const personalRef = userRef.child(uid + "/" + path);
-        const result = personalRef.on("value", snapshot => {
+        const result = personalRef.once("value", snapshot => {
             if (snapshot.exists()) {
                 return resolve(snapshot.val());
             }
@@ -297,13 +306,10 @@ export default (uid, path='') => {
 
 //############################################### Notification ###############################################
 
-export const onOffNotification = (user,permission)=>{
+export const updateDataUserNotification=(uid,NotiLogs)=>{
     return new Promise((resolve,reject)=>{
-        userRef.child(user.uid).update({
-            isShowNotification: permission
-        });
-        return resolve({ ...user,
-            isShowNotification: permission
-        })
+        const personalRef = userRef.child(uid);
+        const result = personalRef.child('notificationLog').update(NotiLogs)
+        return resolve(result);
     })
 }

@@ -8,7 +8,10 @@ constructor(props){
     super(props);
     this.getUrlImage = this.getUrlImage.bind(this);
     this.state={
-        achieve:{}
+        showImg: false,
+        achieve:{
+            
+        }
     }
 }
     componentDidMount(){
@@ -36,7 +39,9 @@ constructor(props){
                                 sRef.getDownloadURL().then((url) => {
                                     achieve[1].path = url;
                                     this.setState({
+                                        showImg: true,
                                         achieve: {
+                                            
                                             [achieve[0]]: achieve[1],
                                             ...this.state.achieve
                                         }
@@ -60,8 +65,12 @@ constructor(props){
                             <Text>Detail: {obj.detail}</Text>
                             <Text>Time: {obj.time}</Text>
                             <Text>star: {obj.star}</Text>
-                            {   <Image style={{width: 50, height: 50}}
+                            {   this.state.showImg ? 
+                                <Image style={{width: 50, height: 50}}          
                                 source = {{uri: obj.path}}/>
+                                :
+                                 <Image style={{width: 50, height: 50}}      
+                                source = { require('../../../image/icon.png')}/> //Temp Imag
                             }
                             <Text> </Text>
                         </View>

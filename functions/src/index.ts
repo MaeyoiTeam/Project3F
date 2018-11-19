@@ -14,7 +14,7 @@ exports.resetMidnight = functions.https.onRequest(async (req, res) => {
     usersSnap.forEach((user) => {
       let key = user.key;
       usersKey.push(key);
-      if (user.val().pushToken!=null){
+      if (user.val().pushToken != null && user.val().isShowNotification){
         message.push({
           to: user.val().pushToken,
           sound: "default",

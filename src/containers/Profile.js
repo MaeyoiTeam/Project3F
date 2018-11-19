@@ -15,7 +15,7 @@ class Profile extends Component{
                  })
              }
          }
-
+//TODO ทำให้เมื่อเวลอัพ starเพิ่ม อัพเดทอัตโนมัติ
     render(){
         const styles = StyleSheet.create({
             container: {

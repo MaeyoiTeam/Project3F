@@ -3,6 +3,7 @@ import React,{Component} from 'react';
 import { connect } from 'react-redux';
 import {Button} from 'react-native-elements'
 import {updateQuest,fetchQuest,updateQuestDone,getQuestList} from '../../../actions/quest'
+import {updateNotification} from '../../../actions/notification'
 class Quest extends Component {
   static navigationOptions = ({
       navigation
@@ -38,6 +39,9 @@ class Quest extends Component {
              if (this.props.fetchReducer.data.isComplete) {
                  this.props.getQuestList(this.props.authReducer.data.uid, "undone");
                  this.props.updateQuestDone(this.props.authReducer.data,this.state.key,this.state.type);
+                 this.props.updateNotification(this.props.authReducer.data.uid,{
+                     name: "Food Quest Success",newStar:prevProps.fetchReducer.data.star, currentStar: this.props.fetchReducer.data.star, date: new Date()
+                 },this.props.notification.data)
              }
         }
     } 
@@ -90,12 +94,13 @@ class Quest extends Component {
 
 // Used to add reducer's states into the props
 const mapStateToProps = (state) => ({
+    notification: state.notification,
     fetchReducer: state.fetchReducer,
     authReducer: state.authReducer
 });
 //Used to add dispatch (action) into props
 const mapDispatchToProps = {
-    updateQuest, fetchQuest, updateQuestDone, getQuestList
+    updateQuest, fetchQuest, updateQuestDone, getQuestList, updateNotification
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Quest)
