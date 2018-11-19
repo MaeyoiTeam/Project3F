@@ -1,4 +1,4 @@
-import { View,Text,StyleSheet } from 'react-native';
+import { View,Text,StyleSheet,Image} from 'react-native';
 import React,{Component} from 'react';
 import { connect } from 'react-redux';
 import {getQuestList,fetchQuest} from '../../actions/quest'
@@ -19,16 +19,19 @@ class HistoryQuestList extends Component {
     render(){
         const {historyReducer,authReducer,fetchReducer} = this.props;
                         return(
-            <View>
+            <View style={styles.container}>
              {          
                 historyReducer.data.map((type, index) => {
                     const arr = type[1]
                 return  <View key={index}><Text>{type[0]}</Text>
                     {Object.values(arr).map((info, i) =>{
                         return <View key={i}>
+                        <View style={styles.pa1}>
                                 <Text>Quest name: {info.name}</Text>
                                 <Text>Quest type: {info.type}</Text>
-                            </View> 
+                                <View key={i} style = {styles.separator}></View>
+                            </View>
+                        </View> 
                         })
                     }
                 </View>       
@@ -49,5 +52,20 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
     getQuestList, fetchQuest
 };
+const styles = StyleSheet.create({  
+    container: {
+    flex: 1,
+    backgroundColor: 'white', alignItems: 'center',
+  },
+    pa1:{
+    flex: 0.18,
+    },
+    separator: {
+        marginVertical: 10,
+        borderWidth: 1,
+        width:400,
+        borderColor: '#000',
 
+      },
+});
 export default connect(mapStateToProps, mapDispatchToProps)(HistoryQuestList)
