@@ -246,6 +246,7 @@ export const updateDataUser=(uid,user)=>{
                     }
                     personalRef.update({ 
                         ...user,
+                        isShowNotification:true,
                         star: 0,
                         levelQ: {
                             food: initializeLevel,
@@ -265,18 +266,13 @@ export const updateDataUser=(uid,user)=>{
 
 export const updateToken=async (uid)=>{
 let { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
-
   // Stop here if the user did not grant permissions
   if (status !== 'granted') {
     return;
   }
   // Get the token that uniquely identifies this device
   let token = await Notifications.getExpoPushTokenAsync();
-
-
-
   userID = firebase.auth().currentUser.uid;
-
   userRef.child(uid).update({ pushToken: token });
   return token;
 }
@@ -298,3 +294,16 @@ export default (uid, path='') => {
     });
 }
 
+
+//############################################### Notification ###############################################
+
+export const onOffNotification = (user,permission)=>{
+    return new Promise((resolve,reject)=>{
+        userRef.child(user.uid).update({
+            isShowNotification: permission
+        });
+        return resolve({ ...user,
+            isShowNotification: permission
+        })
+    })
+}

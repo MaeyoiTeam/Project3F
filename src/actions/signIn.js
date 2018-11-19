@@ -1,6 +1,6 @@
 import {FETCH_USER_FAIL,FETCH_USER_SUCCESS,FETCH_USER} from '../constants';
 import firebase from '../config/firebase'
-import {updateDataUser,updateToken} from './api';
+import {updateDataUser,updateToken,onOffNotification} from './api';
 import { NavigationActions } from 'react-navigation'
 import { Button } from 'react-native-elements';
 import * as Expo from 'expo';
@@ -88,7 +88,8 @@ try{
                         star:result.star,
                         achieve:result.achieve,
                         walkStacks:result.walkStacks,
-                        pushToken:token
+                        pushToken:token,
+                        isShowNotification:result.isShowNotification,
                     }
                 })}
                 );
@@ -104,3 +105,9 @@ catch (e) {
 }
 };
 
+
+export const updateIsShowNotification = (user,permission) =>async dispatch => {
+    onOffNotification(user,permission).then(result=>dispatch({type: FETCH_USER_SUCCESS,
+        payload:result
+    }))
+}

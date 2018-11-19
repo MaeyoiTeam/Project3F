@@ -2,7 +2,7 @@ import { View,Text,StyleSheet,Image,Platform,TextInput,TouchableOpacity,Activity
 import React,{Component} from 'react';
 import {Button,CheckBox} from 'react-native-elements'
 import { connect } from 'react-redux';
-import {signOut} from '../actions/signIn';
+import {signOut,updateIsShowNotification} from '../actions/signIn';
 class Setting extends Component {
     static navigationOptions = () => ({
  
@@ -10,8 +10,7 @@ class Setting extends Component {
     constructor(props){
         super(props);
         this.state={
-            isC:true,
-            showMe:false
+            showMe: false
         }
     }
 
@@ -24,11 +23,19 @@ class Setting extends Component {
      }
 
     render(){
+        const {authReducer } = this.props;
         return(     
         <View style={styles.container}>
         
             <View style={styles.pa3}></View>
-            <CheckBox title='On-Off Notification' checked={this.state.isC} iconRight/>
+            <CheckBox title = 'On-Off Notification'
+            checked = {
+               authReducer.data.isShowNotification
+            }
+            iconRight onPress = {
+                () => this.props.updateIsShowNotification(authReducer.data,!authReducer.data.isShowNotification)
+            }
+            />
   
             <View style={styles.pa4}></View>
                 <View style={styles.container1}>
@@ -116,7 +123,7 @@ const mapStateToProps = (state) => ({
 });
 //Used to add dispatch (action) into props
 const mapDispatchToProps = {
-    signOut,
+    signOut, updateIsShowNotification
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Setting)
