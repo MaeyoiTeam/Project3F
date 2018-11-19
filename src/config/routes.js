@@ -11,18 +11,18 @@ import Home from '../containers/Home';
 import Setting from '../containers/Setting';
 import SignIn from '../containers/stacks/SignIn';
 import Loading from '../containers/stacks/Loading';
-import Quest from '../containers/stacks/Quest';
-import QuestWalk from '../containers/stacks/QuestWalk';
-import QuestRest from '../containers/stacks/QuestRest';
+import Quest from '../containers/stacks/quests/Quest';
+import QuestWalk from '../containers/stacks/quests/QuestWalk';
+import QuestRest from '../containers/stacks/quests/QuestRest';
 import Pedo from '../containers/stacks/Pedo';
 import HistoryQuestList from '../containers/stacks/HistoryQuestList';
 import Achievement from '../containers/stacks/Achievement';
+import OtherProfile from '../containers/stacks/OtherProfile'
 //Component
 import LeftComponent from '../component/Header/LeftComponent';
 import MidComponent from '../component/Header/MidComponent';
 import RightComponent from '../component/Header/RightComponent';
-import { colors } from 'react-native-elements';
-import { Colors } from 'react-native-paper';
+import  ModalScreen  from '../component/Modal/ModalScreen';
 
 
 
@@ -112,14 +112,17 @@ Home:{    screen:BottomTabs,
           navigationOptions:{ /* header:null */
             
              headerLeft:(<LeftComponent/>),
-            //headerTitle:(<MidComponent/>),
+            headerTitle:(<MidComponent/>),
             headerRight:(<RightComponent/>), 
             headerStyle: {
               height:40
             } 
           }
     },
-    
+  OtherProfile: {
+    screen: OtherProfile,
+    navigationOptions: {}
+  },
  History: {
    screen: History,
    navigationOptions: {}
@@ -142,7 +145,8 @@ QuestRest: {
 },
 },{
   mode:"modal",
-  headerLayoutPreset:"center"
+  headerLayoutPreset:"center",
+
 });
 
 const Navigator = createSwitchNavigator({
@@ -157,8 +161,17 @@ const Navigator = createSwitchNavigator({
   Stack: {
     screen: Stack,
     navigationOptions: {}
-    
   },
+  ModalScreen: {
+      screen: ModalScreen,
+    },
+}, {
+  mode: 'modal',
+  headerMode: 'none',
+  cardStyle:{
+    backgroundColor:"transparent",
+    opacity:0.50
+  }
 });
 
 export default Navigator;

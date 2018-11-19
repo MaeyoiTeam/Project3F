@@ -14,6 +14,7 @@ class Home extends Component {
 
     componentWillMount() {
         this.props.getQuestList(this.props.authReducer.data.uid, "undone")
+       
     }
     componentDidUpdate(prevProps, prevState, snapshot) {
          if (prevProps.questReducer.data != this.props.questReducer.data) {
@@ -52,7 +53,7 @@ class Home extends Component {
                                 <Button title={"Play "+info[1].name}
                                 buttonStyle={{
                                     backgroundColor: "rgba(10, 10,100, 1)",
-                                    height:80,
+                                    height:50,
                                     borderColor: "transparent",
                                     borderWidth: 0,
                                     borderRadius:360,
@@ -110,7 +111,7 @@ class Home extends Component {
                                 borderRadius: 360  
                             }}
                         />
-                    </View>  
+                    </View>
             </View>
         );
             }

@@ -2,7 +2,7 @@ import { View,Text,StyleSheet } from 'react-native';
 import React,{Component} from 'react';
 import { connect } from 'react-redux';
 import {Button} from 'react-native-elements'
-import {updateQuest,fetchQuest,updateQuestDone,getQuestList} from '../../actions/quest'
+import {updateQuest,fetchQuest,updateQuestDone,getQuestList} from '../../../actions/quest'
 class Quest extends Component {
   static navigationOptions = ({
       navigation
@@ -49,8 +49,9 @@ class Quest extends Component {
     render(){
         const {fetchReducer,authReducer} = this.props;
         const {name,type,detail,current,target,key,point,star,level,isComplete,prevLevel}=this.state;
+
         if (isComplete){   //Quest Complete
-                    return(<View>
+                    return(<View style = {{paddingTop:180}}>
                     <Text>Current {type} star :{prevLevel.star}/{prevLevel.target}->{star}/{target}</Text>
                     <Text>level: {prevLevel.level}/{level}</Text>
                     <Text>Quest is Complete</Text>
@@ -68,7 +69,7 @@ class Quest extends Component {
         else{    //Quest Continue
             return(
             <View>
-                <View>
+                <View style = {{paddingTop:180}}>
                     <Text style = {{textAlign: 'center',fontSize:15}}>{name} Type: {type}</Text>
                 <Text style = {{textAlign: 'center',fontSize:15}}>Detail: {detail} </Text>
                 <Text style = {{textAlign: 'center',fontSize:15}}>Finished: {current}/{target}</Text>

@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { BackHandler } from "react-native";
+import { BackHandler,View } from "react-native";
 import thunk from 'redux-thunk'
 import reducer from './reducers';
 import Navigator from './config/routes'
