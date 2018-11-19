@@ -3,7 +3,7 @@ import React,{Component} from 'react';
 import { connect } from 'react-redux';
 import {Button} from 'react-native-elements'
 import { Pedometer } from "expo";
-import {updateQuest,fetchQuest,updateQuestDone,getQuestList,compareScore} from '../../actions/quest';
+import {updateQuest,fetchQuest,updateQuestDone,getQuestList,compareScore} from '../../../actions/quest';
 import * as Expo from "expo";
 class QuestWalk extends Component {
   static navigationOptions = ({
@@ -26,16 +26,22 @@ class QuestWalk extends Component {
             point:0,
             star:0,
             level:0,
+            start:'',
+            time: new Date(),
             isComplete:false,
             prevLevel:{},
-            pastStepCount: 0,
+            stepCount: 0,
             targetSteps: []
         }
     }
-
      componentDidUpdate(prevProps, prevState, snapshot){
-        if(prevProps.fetchReducer.data!=this.props.fetchReducer.data){
-            console.log("work")
+         if(prevState.stepCount!=this.state.stepCount){
+             console.log("Update StepCount")
+             //TODO แสดงป๊อปอัพว่า ปลดคล๊อกอันใหม่
+             this.update(this.state.stepCount)
+         }
+        if (prevProps.fetchReducer.data.targetSteps != this.props.fetchReducer.data.targetSteps){
+            console.log("Update targetSteps")
             this.setState({
                 ...this.props.fetchReducer.data,
                 prevLevel: { ...prevProps.authReducer.data.levelQ[this.state.type]
@@ -47,8 +53,7 @@ class QuestWalk extends Component {
              }
         }
     } 
-
-      componentDidMount() {
+    componentDidMount() {
           this.timerID = setInterval(() => this._subscribe(), 1000);
       }
 
@@ -59,7 +64,7 @@ class QuestWalk extends Component {
       }
 
      _subscribe = () => {
-         let startTime = new Date(this.state.start.replace('Z', ''));
+         let startTime = new Date(this.props.fetchReducer.data.start.replace('Z', ''));
          let currentTime  = new Date();
         this._subscription = Pedometer.watchStepCount(result => {
                 this.setState({
@@ -70,14 +75,15 @@ class QuestWalk extends Component {
          console.log("current: "+currentTime); */
          Pedometer.getStepCountAsync(startTime, currentTime).then(
              result => {
-                 this.update(result.steps)
-                  this.setState({
-                     pastStepCount: result.steps
-                 }); 
+                // console.log(result.steps);
+                
+                    this.setState({
+                      stepCount: result.steps||0
+                 });  
              },
              error => {
                  this.setState({
-                     pastStepCount: "Could not get stepCount: " + error
+                     stepCount: "Could not get stepCount: " + error
                  });
              }
          );
@@ -94,6 +100,7 @@ class QuestWalk extends Component {
     render(){
         const {fetchReducer,authReducer} = this.props;
         const {name,type,detail,current,target,key,point,star,level,isComplete,prevLevel,targetSteps}=this.state;
+     //   console.log(targetSteps)
         if (isComplete){   //Quest Complete
                     return(<View>
                     <Text>Current {type} star :{prevLevel.star}/{prevLevel.target}->{star}/{target}</Text>
@@ -112,7 +119,7 @@ class QuestWalk extends Component {
                     <Text>Name: {name} Type: {type}</Text>
                 <Text>Detail: {detail} </Text>
                 <Text>Exp: {current}/{target}</Text>
-                <Text>Steps : {this.state.pastStepCount==0 ? "Loading":this.state.pastStepCount}</Text>
+                    <Text>Steps : {this.state.stepCount==0 ? "Loading":this.state.stepCount}</Text>
                 {   
                     targetSteps.map((obj,i) =><View key={i}>
                         <Text>You got more: {obj[0]}</Text>

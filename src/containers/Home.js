@@ -3,6 +3,7 @@ import React,{Component} from 'react';
 import {Button} from 'react-native-elements'
 import { connect } from 'react-redux';
 import { randomQuest,getQuestList,fetchQuest } from '../actions/quest'
+import FinishDate from '../component/popUps/FinishDate';
 class Home extends Component {
     constructor(props){
         super(props);
@@ -103,7 +104,10 @@ class Home extends Component {
                                 borderRadius: 360  
                             }}
                         />
-                    </View>  
+                    </View>
+                    {
+                        <FinishDate/>
+                    }  
             </View>
         );
             }

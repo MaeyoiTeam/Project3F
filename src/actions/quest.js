@@ -65,16 +65,16 @@ export const fetchQuest = (uid,key,type) => {
 // Get during Quest List form userData 
 export const getQuestList = (uid,type) => {
   const result = loadUserData(uid, "quest").then((obj)=>{
-  if(type=="undone"){return Object.entries(obj.undone)}
-  else if(type =="done"){return Object.entries(obj.done)}
-  else{return null}
+  switch (type) {
+    case "undone": return Object.entries(obj.undone)
+    case "done": return Object.entries(obj.done)
+    default: return null
+  }
   });
-  if (type == "undone") {
-    return fetchQuestList(result);
-  } else if (type == "done") {
-    return fetchHistoryList(result);
-  } else {
-    return null
+    switch (type) {
+    case "undone": return fetchQuestList(result);
+    case "done": return fetchHistoryList(result);
+    default: return null
   }
 }
 
@@ -113,8 +113,9 @@ export const randomQuest= (user)=>{
                 }
 //  })
                 //test Walk Quest
+                date = new Date()
               slectQuests = {
-                walk:{type:"walk",start:new Date().toISOString()},
+                walk:{type:"walk",start:date.toISOString(),last:new Date(date.setHours(24,0,0,0)).toISOString()},
                 ...slectQuests,
               }
               updateUserQuest(slectQuests, user.uid)
@@ -126,12 +127,13 @@ export const randomQuest= (user)=>{
 
 //############################################### Quest Walk ###################################################
 
-export const compareScore = (data,currentScore)=>{
+export const compareScore = (data, stepCount) => {
         let result = fetchSystem("walkScore").then((allScore)=>{
           const filterScore = Object.entries(allScore).filter((systemScore)=>{
-            return currentScore >= systemScore[0]
+            return stepCount >= systemScore[0]
           })
           return {
+            stepCount: stepCount,
             targetSteps: filterScore,
             ...data
           }

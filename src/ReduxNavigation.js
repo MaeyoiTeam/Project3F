@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { BackHandler } from "react-native";
+import { BackHandler,View } from "react-native";
 import thunk from 'redux-thunk'
 import reducer from './reducers';
 import Navigator from './config/routes'
@@ -38,7 +38,9 @@ class ReduxNavigation extends PureComponent {
     };
     render(){
         const {dispatch,state,nav } =this.props;
-        return <ReduxAppNavigator dispatch={dispatch} state={state}/>;
+        return <View>
+        <ReduxAppNavigator dispatch={dispatch} state={state}/>
+        </View>;
     }
 }
 const mapStateToProps = (state) => ({
