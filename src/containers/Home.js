@@ -14,6 +14,7 @@ class Home extends Component {
 
     componentWillMount() {
         this.props.getQuestList(this.props.authReducer.data.uid, "undone")
+       
     }
     componentDidUpdate(prevProps, prevState, snapshot) {
          if (prevProps.questReducer.data != this.props.questReducer.data) {
@@ -110,7 +111,7 @@ class Home extends Component {
                                 borderRadius: 360  
                             }}
                         />
-                    </View>  
+                    </View>
             </View>
         );
             }

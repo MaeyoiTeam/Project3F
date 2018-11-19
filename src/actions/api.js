@@ -4,19 +4,33 @@ const databaseRef = firebase.database().ref();
 const userRef = databaseRef.child('users/');
 const systemRef = databaseRef.child('system/')
 
-//############################################### Quset ###############################################
+
+
+//############################################### System ###############################################
+
 // fetch questList System data
-export const fetchSystem =(type)=>{
-    return new Promise((resolve,reject)=>{
-        systemRef.on('value',snap=>{
-            if(type=="questList") {
-                return resolve(snap.val().questList); }
-            else if(type=="achieve") {return resolve(snap.val().achieve);}
-            else return reject("wrong Type") 
+export const fetchSystem = (type) => {
+    return new Promise((resolve, reject) => {
+        systemRef.on('value', snap => {
+            switch (type) {
+                case "questList": resolve(snap.val().questList);
+                    break;
+                case "achieve": resolve(snap.val().achieve);
+                    break;
+                case "walkScore": resolve(snap.val().walkScore);
+                    break;
+                default: reject("wrong Type")
+                    break;
+            }
         })
     })
 }
 
+
+
+
+
+//############################################### Quset ###############################################
 // Add Quest to UserData
 export const updateUserQuest = (quest, uid) => {
     const personalRef = userRef.child(uid);
@@ -46,20 +60,23 @@ export const updateScore = (uid,key,point) => {
 }
 
 //Move undone to done
-export const moveToDone=(uid,key,quest)=>{
+export const moveToDone=(uid,key,quest)=>{              //quest คือข้อมูลที่เอาไปลงในdone
     return new Promise(async(resolve,reject)=>{
         const personalRef = await userRef.child(uid)
         const userQuestRef = await personalRef.child("quest");
         const levelUserRef = await personalRef.child('levelQ/'+quest.type);
         var now = new Date();
-        userQuestRef.child('undone/'+key).remove();
+        if(quest.type =="food"||quest.type =="rest"){
+           userQuestRef.child('undone/' + key).remove();
+        }
         userQuestRef.child('done/' + quest.type).update({
             [key]: { ...quest,
                 time:now
             }
         });
         personalRef.child('star').transaction((star)=>{
-            return (star||0) + quest.star
+            const sum = (Number(star) || 0) + Number(quest.star)
+            return sum
         })
         levelUserRef.once('value', snap => {
             const result = updateLevel(snap.val(), quest.star);
@@ -121,7 +138,6 @@ export const updateAchieve=(uid,quest,achieve)=>{
                //Update in DataUser
                var now = new Date();
                var sumStar=0;
-               //!Filter ไม่ได้เลยย
                if(filterResult!=[]){
                     filterResult.map((obj) => {
                         sumStar += Number(obj[1].star);
@@ -136,15 +152,16 @@ export const updateAchieve=(uid,quest,achieve)=>{
                      personalRef.child('achieve').update(listResult);
                }
         personalRef.child('star').transaction((star) => {
-            return (star || 0) + sumStar
+            
+            return (Number(star) || 0) + Number(sumStar)
         })
             });
             return listResult       //? ควรเก็บเวลาที่ทำสำเร็จไหม??
     } 
 
-            //  updateLevel &Check Levelup
+            //  updateLevel &Check Levelup ตาม typeนั้นๆ
      const updateLevel=(data,star)=>{
-    var currentStar = data.star+star;
+    var currentStar = Number(data.star) + Number(star);
     var level = data.level;
     const lvlup = Math.floor(currentStar / data.target);
     var target = data.target;
@@ -162,7 +179,30 @@ export const updateAchieve=(uid,quest,achieve)=>{
     }
 }
 
-//
+//############################################### QuestWalk #############################################
+
+export const updateWalkStacks = (uid,walkStacks)=>{
+    return new Promise(async (resolve,reject)=>{
+        const personalRef = userRef.child(uid);
+        const userWalkStacksRef =personalRef.child('walkStacks');
+        await walkStacks.map(stack=>{
+            userWalkStacksRef.child(stack).transaction(score=>{
+                score++;
+                return score
+            })
+        })
+        userWalkStacksRef.once("value",snap=>resolve(snap.val()));
+    })
+}
+export const clearOver =(uid)=>{
+    return new Promise(async (resolve,reject)=>{
+        const personalRef = userRef.child(uid);
+       const questUserRef = personalRef.child('quest');
+       questUserRef.child('over').remove();
+       resolve("success")
+    })
+}
+
 
 //############################################### Ranking ###############################################
 
@@ -175,7 +215,9 @@ export const rankingUser=()=>{
                    data.push({name:item.val().displayName,
                              star: item.val().star,
                              uid:item.key,
-                             photoURL:item.val().photoURL
+                             photoURL: item.val().photoURL + "?width=256",
+                             achieve:item.val().achieve,
+                             levelQ:item.val().levelQ
                 });
                 });
                 return resolve(data.sort((a, b) => {
@@ -244,7 +286,7 @@ let { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
 
 //############################################### Common Data User ###############################################
 //ดึงข้อมูล จากDataตามUserนั้นๆ
-export default (uid, path) => {
+export default (uid, path='') => {
     return new Promise((resolve, reject) => {
         const personalRef = userRef.child(uid + "/" + path);
         const result = personalRef.on("value", snapshot => {
@@ -255,3 +297,4 @@ export default (uid, path) => {
         return reject("Fail");
     });
 }
+

@@ -1,4 +1,4 @@
-import Expo from "expo";
+import * as Expo from "expo";
 import React from "react";
 import { Pedometer } from "expo";
 import { StyleSheet, Text, View } from "react-native";

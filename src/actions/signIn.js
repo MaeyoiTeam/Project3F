@@ -3,7 +3,7 @@ import firebase from '../config/firebase'
 import {updateDataUser,updateToken} from './api';
 import { NavigationActions } from 'react-navigation'
 import { Button } from 'react-native-elements';
-
+import * as Expo from 'expo';
 
 export const signOut = () => dispatch => {
     firebase.auth().signOut().then(() => {
@@ -81,12 +81,13 @@ try{
                     type: FETCH_USER_SUCCESS,
                     payload:{   uid:user.uid,
                         displayName: result.displayName,
-                        photoURL: result.photoURL+"?width=512",
+                        photoURL: result.photoURL+"?width=256",
                         email: result.email,
                         levelQ:result.levelQ,
                         quest: questListdone,
                         star:result.star,
                         achieve:result.achieve,
+                        walkStacks:result.walkStacks,
                         pushToken:token
                     }
                 })}

@@ -29,7 +29,7 @@ class Accel extends Component{
     _subscribe = () => {
         this._subscription = Accelerometer.addListener(accelerometerData => {
             let { x, y, z } = this.state.accelerometerData; 
-            if(x>=0.5||y>=0.5||x<=-0.5){
+            if(x>=0.5||y>=0.5||x<=-0.5||y<=-0.5){
                 this.props.isAlert(true)
                 this.setState({
                     isAlert:true,
