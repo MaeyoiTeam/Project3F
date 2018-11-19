@@ -5,7 +5,7 @@ import { Button, Avatar } from 'react-native-elements';
 import {fetchProfile} from '../../actions';
 import ProgressBarAnimated from 'react-native-progress-bar-animated';
 
-class OtherProfile extends Component{
+class OtherProfile extends Component {
     
     constructor(props) {
         super(props);
