@@ -40,17 +40,21 @@ class QuestWalk extends Component {
              //TODO แสดงป๊อปอัพว่า ปลดคล๊อกอันใหม่
              this.update(this.state.stepCount)
          }
-        if (prevProps.fetchReducer.data.targetSteps != this.props.fetchReducer.data.targetSteps){
-            console.log("Update targetSteps")
-            this.setState({
-                ...this.props.fetchReducer.data,
-                prevLevel: { ...prevProps.authReducer.data.levelQ[this.state.type]
+
+        if (this.props.fetchReducer.data.targetSteps!=null&&prevProps.fetchReducer.data.targetSteps!=null) {
+         console.log(prevProps.fetchReducer.data.targetSteps.length + " / " + this.props.fetchReducer.data.targetSteps.length)
+            if (prevProps.fetchReducer.data.targetSteps.length != this.props.fetchReducer.data.targetSteps.length) {
+                console.log("Update targetSteps")
+                this.setState({
+                    ...this.props.fetchReducer.data,
+                    prevLevel: { ...prevProps.authReducer.data.levelQ[this.state.type]
+                    }
+                })
+                if (this.props.fetchReducer.data.isComplete) {
+                    this.props.getQuestList(this.props.authReducer.data.uid, "undone");
+                    this.props.updateQuestDone(this.props.authReducer.data, this.state.key, this.state.type);
                 }
-            })
-             if (this.props.fetchReducer.data.isComplete) {
-                 this.props.getQuestList(this.props.authReducer.data.uid, "undone");
-                 this.props.updateQuestDone(this.props.authReducer.data,this.state.key,this.state.type);
-             }
+            }
         }
     } 
     componentDidMount() {
@@ -119,8 +123,8 @@ class QuestWalk extends Component {
                 <Text>Detail: {detail} </Text>
                 <Text>Exp: {current}/{target}</Text>
                     <Text>Steps : {this.state.stepCount}</Text>
-                {   
-                    targetSteps.map((obj,i) =><View key={i}>
+                {   this.props.fetchReducer.data.targetSteps!=null &&
+                    this.props.fetchReducer.data.targetSteps.map((obj,i) =><View key={i}>
                         <Text>You got more: {obj[0]}</Text>
                         <Text>Name: {obj[1].name}</Text>
                         <Text>Star: {obj[1].star}</Text>
