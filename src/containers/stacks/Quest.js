@@ -54,19 +54,31 @@ class Quest extends Component {
                     <Text>Current {type} star :{prevLevel.star}/{prevLevel.target}->{star}/{target}</Text>
                     <Text>level: {prevLevel.level}/{level}</Text>
                     <Text>Quest is Complete</Text>
-                      <Button title="Go Home" 
+                      <Button title="Go Home"
+                      buttonStyle={{
+                        backgroundColor: "rgba(10, 10,100, 1)",
+                        height:80,
+                        borderColor: "transparent",
+                        borderWidth: 0,
+                        borderRadius:360,
+                        }}
                     onPress={()=>this.props.navigation.navigate('Home')}/>  
                     </View>);
         }
         else{    //Quest Continue
             return(
             <View>
-                <Text>QUEST</Text>
                 <View>
-                    <Text>Name: {name} Type: {type}</Text>
-                <Text>Detail: {detail} </Text>
-                <Text>Quest: {current}/{target}</Text>
-                  <Button title={"Up "+point+" point"} onPress={()=>this.update(authReducer.data,key,point)}/>  
+                    <Text style = {{textAlign: 'center',fontSize:15}}>{name} Type: {type}</Text>
+                <Text style = {{textAlign: 'center',fontSize:15}}>Detail: {detail} </Text>
+                <Text style = {{textAlign: 'center',fontSize:15}}>Finished: {current}/{target}</Text>
+                  <Button buttonStyle={{
+                                    backgroundColor: "rgba(10, 10,100, 1)",
+                                    height:80,
+                                    borderColor: "transparent",
+                                    borderWidth: 0,
+                                    borderRadius:360,
+                                    }} title={"Up "+point+" point"} onPress={()=>this.update(authReducer.data,key,point)}/>  
                 </View>
                 
             </View>

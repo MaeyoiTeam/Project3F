@@ -76,17 +76,16 @@ class QuestRest extends Component {
         else{    //Quest Continue
             return(
             <View>
-                <Text>QUEST</Text>
                 <View>
-                    <Text>Name: {name} Type: {type}</Text>
-                <Text>Detail: {detail} </Text>
+                    <Text style = {{textAlign: 'center',fontSize:15}}>{name} Type: {type}</Text>
+                <Text style = {{textAlign: 'center',fontSize:15}}>Detail: {detail} </Text>
                 {   this.state.isPressed &&<View>
                 <TimerCountdown
                     initialSecondsRemaining={1000*(target-current)}
                      onTick={secondsRemaining => this.update(secondsRemaining)} 
                     onTimeElapsed={() => this.updateDone(authReducer.data,key,target)}
                     allowFontScaling={true}
-                    style={{ fontSize: 20 }}
+                    style={{ fontSize: 50,textAlign:'center' }}
                 />
                 <Accel isAlert={this.toggleAlert}/>
                 </View>
@@ -94,12 +93,26 @@ class QuestRest extends Component {
                 {
                     this.state.isPressed ? <Button
                     title= "Reset Button"
+                    buttonStyle={{
+                        backgroundColor: "rgba(10, 10,100, 1)",
+                        height:80,
+                        borderColor: "transparent",
+                        borderWidth: 0,
+                        borderRadius:360,
+                        }}
                     onPress={() => {
                         this.setState({ isPressed: false });
                     }}
                     /> :                    
                     <Button
                     title="Start Button"
+                    buttonStyle={{
+                        backgroundColor: "rgba(10, 10,100, 1)",
+                        height:80,
+                        borderColor: "transparent",
+                        borderWidth: 0,
+                        borderRadius:360,
+                        }}
                     onPress={() => {
                         this.setState({ isPressed: true });
                     }}
