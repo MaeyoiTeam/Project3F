@@ -46,10 +46,17 @@ class Home extends Component {
                 return(
                     <View>
                 {    haveQuest &&   questlist.map((info, i) =>
-                            <View key={i}>
-                                <Text>Quest name: {info[1].name}</Text>
-                                <Text>Quest type: {info[1].type}</Text>
+                            <View key={i} style = {styles.separator}>
+                                <Text style = {{textAlign:'center',fontSize:15,paddingTop:20}}>{info[1].name}</Text>
+                                <Text style = {{textAlign:'center',fontSize:15,paddingBottom:10}}>type: {info[1].type}</Text>
                                 <Button title={"Play "+info[1].name}
+                                buttonStyle={{
+                                    backgroundColor: "rgba(10, 10,100, 1)",
+                                    height:80,
+                                    borderColor: "transparent",
+                                    borderWidth: 0,
+                                    borderRadius:360,
+                                    }}
                                 onPress = {
                                         () => {
                                             this.props.fetchQuest(authReducer.data.uid,info[0],"undone");
@@ -137,8 +144,12 @@ const styles = StyleSheet.create({
     ku3: {
       backgroundColor: 'white', 
       flex: 0.2,
-    }
-    
+    },
+    separator: {
+        marginVertical: 10,
+        borderWidth: 0.5,
+        borderColor: '#DCDCDC',
+      },
 });
 //Used to add dispatch (action) into props
 const mapDispatchToProps = {

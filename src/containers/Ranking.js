@@ -57,7 +57,7 @@ class Ranking extends Component{
                      }
                 <View style={styles.container}>
                 
-                <Text style={{fontSize:25,fontWeight: 'bold',fontFamily: "Segoe-Script",padding:5}}>Your Star</Text>
+                <Text style={{fontSize:25,fontWeight: 'bold',fontFamily: "Segoe-Script",padding:5}}>Your Rank!</Text>
                 </View>   
                      {
                          this.current!=null &&<View>
