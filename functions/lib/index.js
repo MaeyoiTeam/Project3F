@@ -15,7 +15,7 @@ const admin = require("firebase-admin");
 admin.initializeApp();
 /* // Create a new Expo SDK client
 let expo = new Expo(); */
-//TODO MOVE UNDONE TO UNSUCCESS
+//https://us-central1-project3f-4a950.cloudfunctions.net/resetMidnight
 exports.resetMidnight = functions.https.onRequest((req, res) => __awaiter(this, void 0, void 0, function* () {
     const allUserRef = yield admin.database().ref('/users');
     let usersKey = [];
@@ -25,28 +25,17 @@ exports.resetMidnight = functions.https.onRequest((req, res) => __awaiter(this, 
             usersKey.push(key);
             const personalQuestRef = allUserRef.child(key).child("/quest");
             if (user.child(key + "/quest/undone").exists) {
-                personalQuestRef.child("undone").remove().catch((e) => res.send(e));
-            }
-            return false;
-        });
-    });
-    res.send("Remove Undone in userkey2: " + usersKey);
-}));
-exports.addTest = functions.https.onRequest((req, res) => __awaiter(this, void 0, void 0, function* () {
-    const allUserRef = yield admin.database().ref('/users');
-    let usersKey = [];
-    const test = yield allUserRef.once("value", (usersSnap) => {
-        usersSnap.forEach((user) => {
-            let key = user.key;
-            usersKey.push(key);
-            const personalQuestRef = allUserRef.child(key).child("/quest");
-            if (user.child(key + "/quest/undone").exists) {
-                personalQuestRef
-                    .child("undone")
-                    .once("value", unSnap => {
-                    personalQuestRef
-                        .child("over")
-                        .set(Object.assign({}, unSnap.val().walk))
+                personalQuestRef.child("undone").once("value", unSnap => {
+                    let questWalk = {};
+                    unSnap.forEach(childSnap => {
+                        if (childSnap.val().type === "walk") {
+                            questWalk = {
+                                [childSnap.key]: childSnap.val()
+                            };
+                        }
+                        return childSnap.val().type !== "walk";
+                    });
+                    personalQuestRef.child("over").set(Object.assign({}, questWalk))
                         .catch(e => res.send(e));
                 })
                     .then(() => { personalQuestRef.child("undone").remove().catch((e) => res.send(e)); })

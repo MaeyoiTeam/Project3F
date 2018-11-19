@@ -1,9 +1,9 @@
 import {fetchData,fetchQuestList,fetchHistoryList,fetchModal} from './index';
-import loadUserData,{fetchSystem,updateUserQuest,updateScore,moveToDone,updateAchieve} from './api';
-import {FETCH_USER_FAIL,FETCH_USER_SUCCESS,FETCH_USER} from '../constants';
+import loadUserData,{fetchSystem,updateUserQuest,updateScore,
+  moveToDone,updateAchieve, updateWalkStacks,clearOver} from './api';
+import {FETCH_USER_FAIL,FETCH_USER_SUCCESS,FETCH_USER,MODAL_OPEN, MODAL_CLOSE} from '../constants';
 import {navigate} from './index'
-import { resolve } from 'url';
-
+const moment = require('moment')
 
 // Get during Quest List form userData 
 export const getQuestList = (uid, type) => {
@@ -14,7 +14,7 @@ export const getQuestList = (uid, type) => {
       case "done":
         return Object.entries(obj.done)
       case "over":
-        return Object.entries(obj.over)
+        return obj.over
       default:
         return null
     }
@@ -101,35 +101,37 @@ export const randomQuest= (user)=>{
 
               var keysType = Object.keys(data)
               var slectQuests = {};
-//            keysType.map((keyType,i)=>{
-              const keyType="food"; 
-                const quest = data[keyType];
-                var keysQuest = Object.keys(data[keyType])
-                //TODO แบ่งระดับความยากง่าย
-                if(Object.keys(user.quest).includes(keyType)){
-                    const keyQuestUser = Object.entries(user.quest).filter(type => type[0] == keyType);
-                    keysQuest = keysQuest.filter(quest => {
-                      const questlist = keyQuestUser[0];
-                      return !questlist[1].includes(quest);
-                    });
-                }
-                var selectKeyQuest = keysQuest[keysQuest.length * Math.random() << 0];
-                const source =quest[selectKeyQuest]
-                if(selectKeyQuest!=null){
-                  slectQuests = {
-                    [selectKeyQuest]: {
-                      type: keyType,
-                      current: 0,
-                      ...source
-                    },
-                    ...slectQuests
-                  };
-                }
-//  })
+              const keys = ["food","rest"];
+            for (keyType of keys) {
+                              const quest = data[keyType];
+                              var keysQuest = Object.keys(data[keyType])
+                              //TODO แบ่งระดับความยากง่าย
+                              if (Object.keys(user.quest).includes(keyType)) {
+                                const keyQuestUser = Object.entries(user.quest).filter(type => type[0] == keyType);
+                                keysQuest = keysQuest.filter(quest => {
+                                  const questlist = keyQuestUser[0];
+                                  return !questlist[1].includes(quest);
+                                });
+                              }
+                              var selectKeyQuest = keysQuest[keysQuest.length * Math.random() << 0];
+                              const source = quest[selectKeyQuest]
+                              if (selectKeyQuest != null) {
+                                slectQuests = {
+                                  [selectKeyQuest]: {
+                                    type: keyType,
+                                    current: 0,
+                                    ...source
+                                  },
+                                  ...slectQuests
+                                };
+                              }
+            }
                 //test Walk Quest
                 date = new Date()
+                keyDate = moment(date).format("DMMMYY").toString()
+                console.log(keyDate)
               slectQuests = {
-                walk:{type:"walk",start:date.toISOString(),last:new Date(date.setHours(24,0,0,0)).toISOString()},
+                [keyDate]:{type:"walk",start:date.toISOString(),last:new Date(date.setHours(24,0,0,0)).toISOString()},
                 ...slectQuests,
               }
               updateUserQuest(slectQuests, user.uid)
@@ -155,3 +157,35 @@ export const compareScore = (data, stepCount) => {
       return fetchData(result);
 }
 
+ export const finishQuestWalk = (uid,key,modalData,stepCount)=>{
+    return async(dispatch)=>{
+      const quest = Object.values(modalData);
+      fetchSystem("walkScore").then(allScore => {
+        const filterScore = Object.entries(allScore).filter((systemScore) => {
+          return stepCount >= systemScore[0]
+        })
+      let star = 0;
+      let walkStacks=[]
+      filterScore.map((obj)=>star+=obj[1].star);
+      filterScore.map((obj) =>walkStacks.push(obj[0]));
+     
+    let data = {...quest[0],stepCount,star:star}
+      moveToDone(uid,key,data);
+     const result = updateWalkStacks(uid, walkStacks).then(updatedStacks=>{
+        dispatch({
+          type: MODAL_OPEN,
+          payload: { walkStacks:updatedStacks,
+            ...modalData,
+          }
+        })
+      })
+      })
+    }
+}
+export const clearFinishQuestWalk=(uid)=>{
+  return async (dispatch)=>{
+    clearOver(uid).then(() => dispatch({
+      type: MODAL_CLOSE
+    }))
+  }
+} 

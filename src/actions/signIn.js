@@ -87,6 +87,7 @@ try{
                         quest: questListdone,
                         star:result.star,
                         achieve:result.achieve,
+                        walkStacks:result.walkStacks,
                         pushToken:token
                     }
                 })}

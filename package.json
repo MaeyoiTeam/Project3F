@@ -45,6 +45,6 @@
     "redux-devtools-extension": "^2.13.5",
     "redux-thunk": "^2.3.0",
     "request": "^2.88.0",
-    "sentry-expo": "~1.9.0"
+    "sentry-expo": "^1.10.0"
   }
 }

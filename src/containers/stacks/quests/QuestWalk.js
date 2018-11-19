@@ -71,8 +71,8 @@ class QuestWalk extends Component {
                 time: new Date(),
             });
         });
-/*          console.log("Start: "+startTime);
-         console.log("current: "+currentTime); */
+/*           console.log("Start: "+startTime);
+         console.log("current: "+currentTime);  */
          Pedometer.getStepCountAsync(startTime, currentTime).then(
              result => {
                 // console.log(result.steps);
@@ -100,7 +100,6 @@ class QuestWalk extends Component {
     render(){
         const {fetchReducer,authReducer} = this.props;
         const {name,type,detail,current,target,key,point,star,level,isComplete,prevLevel,targetSteps}=this.state;
-     //   console.log(targetSteps)
         if (isComplete){   //Quest Complete
                     return(<View>
                     <Text>Current {type} star :{prevLevel.star}/{prevLevel.target}->{star}/{target}</Text>
@@ -119,7 +118,7 @@ class QuestWalk extends Component {
                     <Text>Name: {name} Type: {type}</Text>
                 <Text>Detail: {detail} </Text>
                 <Text>Exp: {current}/{target}</Text>
-                    <Text>Steps : {this.state.stepCount==0 ? "Loading":this.state.stepCount}</Text>
+                    <Text>Steps : {this.state.stepCount}</Text>
                 {   
                     targetSteps.map((obj,i) =><View key={i}>
                         <Text>You got more: {obj[0]}</Text>

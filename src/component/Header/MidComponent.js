@@ -5,6 +5,7 @@ import {Avatar,Badge} from 'react-native-elements';
 import {fetchUser} from '../../actions/signIn';
 import LeftComponent from './LeftComponent';
 import {getQuestList} from '../../actions/quest';
+import {navigate} from '../../actions'
 import  ModalScreen  from '../Modal/ModalScreen';
 
 class MidComponent extends Component {
@@ -18,6 +19,13 @@ class MidComponent extends Component {
 
     componentWillMount(){
         this.props.getQuestList(this.props.authReducer.data.uid, "over")
+    }
+
+    componentDidUpdate(){
+        if (this.props.modal.showModal){
+            console.log("Work")
+            this.props.navigate("ModalScreen");
+        }
     }
 
     easter9=()=>{
@@ -36,7 +44,6 @@ class MidComponent extends Component {
         return(
                 <View style={styles.container}>
                 <Text>ACHIEVE</Text>
-                <ModalScreen/>
                  {/*  <Badge onPress={() => {this.easter9()}} value="ACHIEVE" /> */}
                 </View>
         );
@@ -50,13 +57,14 @@ const styles = StyleSheet.create({
 
 
 const mapStateToProps = (state) => ({
+    modal:state.modalReducer,
     fetchReducer: state.fetchReducer,
     authReducer: state.authReducer,
     nav:state.nav
 });
 //Used to add dispatch (action) into props
 const mapDispatchToProps={
-  fetchUser, getQuestList
+  fetchUser, getQuestList,navigate
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MidComponent)

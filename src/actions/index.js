@@ -86,8 +86,12 @@ export const fetchHistoryList = (fn) => {
 
 export const fetchModal = (fn) => {
     return (dispatch) => {
-        fn.then(result => {
-                dispatch({type:MODAL_OPEN,payload:result})
+        fn.then(result =>{
+                if(result!=null){
+                    dispatch({type:MODAL_OPEN,payload:result})
+                }else{
+                    dispatch({type:MODAL_CLOSE})
+                }
             }).catch(error => {
                 dispatch({type:MODAL_CLOSE})
                 console.log(error)

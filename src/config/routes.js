@@ -145,7 +145,8 @@ QuestRest: {
 },
 },{
   mode:"modal",
-  headerLayoutPreset:"center"
+  headerLayoutPreset:"center",
+
 });
 
 const Navigator = createSwitchNavigator({
@@ -161,12 +162,16 @@ const Navigator = createSwitchNavigator({
     screen: Stack,
     navigationOptions: {}
   },
-  MyModal: {
+  ModalScreen: {
       screen: ModalScreen,
     },
 }, {
   mode: 'modal',
   headerMode: 'none',
+  cardStyle:{
+    backgroundColor:"transparent",
+    opacity:0.50
+  }
 });
 
 export default Navigator;
