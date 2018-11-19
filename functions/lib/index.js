@@ -30,7 +30,7 @@ exports.resetMidnight = functions.https.onRequest((req, res) => __awaiter(this, 
             return false;
         });
     });
-    res.send("Remove Undone in userkey: " + usersKey);
+    res.send("Remove Undone in userkey2: " + usersKey);
 }));
 exports.addTest = functions.https.onRequest((req, res) => __awaiter(this, void 0, void 0, function* () {
     const allUserRef = yield admin.database().ref('/users');
