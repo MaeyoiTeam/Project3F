@@ -44,7 +44,7 @@ class Profile extends Component{
                     flexDirection: 'row'
                     }}>
                 <Image
-                 source={require('../../image/star.jpg')}
+                 source={require('../../image/star.png')}
                  fadeDuration={0}
                  style={{width: 25, height: 25,left:90}}
                 />    
