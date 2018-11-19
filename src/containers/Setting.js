@@ -1,8 +1,10 @@
-import { View,Text,StyleSheet,Image,Platform,TextInput,TouchableOpacity,ActivityIndicator,Dimensions,Modal } from 'react-native';
+import { View,Text,StyleSheet,Image,Platform,TextInput,TouchableOpacity,ActivityIndicator,Dimensions,Modal} from 'react-native';
 import React,{Component} from 'react';
 import {Button,CheckBox} from 'react-native-elements'
 import { connect } from 'react-redux';
 import {signOut} from '../actions/signIn';
+import { BlurView } from 'expo';
+
 class Setting extends Component {
     static navigationOptions = () => ({
  
@@ -33,9 +35,12 @@ class Setting extends Component {
             <View style={styles.pa4}></View>
                 <View style={styles.container1}>
                             <Modal visible={this.state.showMe}
-                            onRequestClose={()=>console.warn("this is cloase request")}>
+                            onRequestClose={()=>console.warn("this is cloase request")}
+                            animationType='fade' transparent  >
+                             <BlurView tint="dark" intensity={50} style={StyleSheet.absoluteFill}></BlurView>
+                            <View style={styles.modalView1}></View>
                             <View style={styles.modalView}>
-                            
+                            <Text > </Text>
                             <Text >Project Manager</Text>
                             <Text >Nutza007</Text>
                             <Text ></Text>
@@ -51,7 +56,7 @@ class Setting extends Component {
                             <TouchableOpacity onPress={()=>{this.setState({
                                 showMe:false
                             })}}>
-                                <Text style={styles.closeText}>Go to Setting</Text>
+                                <Text style={styles.closeText}>Close</Text>
                             </TouchableOpacity>
                             </View>
                             </Modal>
@@ -91,11 +96,16 @@ const styles = StyleSheet.create({
     pa3: {backgroundColor: 'white', flex: 0.2,
     },
     pa4: {backgroundColor: 'white', flex: 0.05,
-    }, 
-    modalView:{backgroundColor:'#aaa',
-            //height:150,
+    },
+    modalView1:{
+        flex:0.4
+         }, 
+    modalView:{backgroundColor:'#fff',
+            height:290,
+            width: 320,
             justifyContent:'center',
-            alignItems:'center'
+            alignItems:'center',
+            alignSelf: 'center'
         },
     closeText:{backgroundColor:'#333',
             color:'#bbb',
