@@ -2,9 +2,10 @@ import {FETCHING_DATA,FETCHING_DATA_FAILURE,FETCHING_DATA_SUCCESS,
     FETCH_USER, 
     RANK_DATA, RANK_DATA_SUCCESS, RANK_DATA_FAILURE,
     QUEST_DATA, QUEST_DATA_SUCCESS, QUEST_DATA_FAILURE,
-    HISTORY_DATA, HISTORY_DATA_FAILURE, HISTORY_DATA_SUCCESS
+    HISTORY_DATA, HISTORY_DATA_FAILURE, HISTORY_DATA_SUCCESS,
+    MODAL_CLOSE,MODAL_OPEN
 } from '../constants';
-import {rankingUser,updateScore} from './api';
+import loadUserData,{rankingUser,updateScore}  from './api';
 import { NavigationActions } from 'react-navigation'
 export const SetStageToSuccess =(data)=>({
     type:FETCHING_DATA_SUCCESS,
@@ -34,6 +35,17 @@ export const navigate = (nav)=>{
         dispatch(NavigationActions.navigate({routeName:nav}));
     }
 } 
+
+//############################################### Ranking ###############################################
+export const fetchProfile = (uid) => {
+    console.log(uid)
+    const result = loadUserData(uid).then((obj) => {
+        return {
+            ...obj
+        }
+    });
+    return fetchData(result);
+}
 
 export const fetchRanking  = () => {
     return (dispatch) => {
@@ -71,3 +83,18 @@ export const fetchHistoryList = (fn) => {
     }
 }
 
+
+export const fetchModal = (fn) => {
+    return (dispatch) => {
+        fn.then(result =>{
+                if(result!=null){
+                    dispatch({type:MODAL_OPEN,payload:result})
+                }else{
+                    dispatch({type:MODAL_CLOSE})
+                }
+            }).catch(error => {
+                dispatch({type:MODAL_CLOSE})
+                console.log(error)
+            })
+    }
+}

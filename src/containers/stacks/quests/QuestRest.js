@@ -2,9 +2,9 @@ import { View,Text,StyleSheet } from 'react-native';
 import React,{Component} from 'react';
 import { connect } from 'react-redux';
 import {Button} from 'react-native-elements'
-import {updateQuest,fetchQuest,updateQuestDone,getQuestList} from '../../actions/quest'
+import {updateQuest,fetchQuest,updateQuestDone,getQuestList} from '../../../actions/quest'
 import TimerCountdown from 'react-native-timer-countdown';
-import Accel from '../../component/Accel';
+import Accel from '../../../component/Accel';
 class QuestRest extends Component {
   static navigationOptions = ({
       navigation
