@@ -52,7 +52,7 @@ class Home extends Component {
                                 <Button title={"Play "+info[1].name}
                                 buttonStyle={{
                                     backgroundColor: "rgba(10, 10,100, 1)",
-                                    height:80,
+                                    height:50,
                                     borderColor: "transparent",
                                     borderWidth: 0,
                                     borderRadius:360,
