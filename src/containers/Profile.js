@@ -2,12 +2,16 @@ import { View,Text,StyleSheet,Image } from 'react-native';
 import React,{Component} from 'react';
 import { connect } from "react-redux";
 import { Button, Avatar } from 'react-native-elements';
+import {updateMidAuth} from '../actions/signIn'
 import ProgressBarAnimated from 'react-native-progress-bar-animated';
 
 
 class Profile extends Component{
 
-    
+    componentDidMount(){
+        this.props.updateMidAuth(this.props.authReducer.data.uid);
+    }
+
          componentDidUpdate(prevProps, prevState, snapshot) {
              if (prevProps.authReducer.data != this.props.authReducer.data) {
                  this.setState({
@@ -133,7 +137,7 @@ const mapStateToProps = (state) => ({
 });
 //Used to add dispatch (action) into props
 const mapDispatchToProps = {
-    
+    updateMidAuth
 };
 const styles = StyleSheet.create({  
     container: {

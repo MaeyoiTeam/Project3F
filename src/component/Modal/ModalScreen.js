@@ -74,7 +74,7 @@ export class ModalScreen extends Component {
         <Button
           onPress={() => this.props.clearFinishQuestWalk(authReducer.data.uid).then(()=>this.props.navigate("Stack"))
           }
-          title="Dismiss"
+          title="Go to Home"
         />
         {
           Object.entries(authReducer.data.walkStacks).map((obj,i)=>
