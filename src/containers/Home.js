@@ -99,19 +99,6 @@ class Home extends Component {
                             }}  
                         />
                     </View>
-                    <View style={styles.ku4}>
-                        <Button title="Go Pedo" 
-                            onPress={()=>this.props.navigation.navigate('Pedo')}
-                            buttonStyle={{
-                                backgroundColor: "rgba(00, 99,216, 1)",
-                                width: 150,
-                                height: 40,
-                                borderColor: "transparent",
-                                borderWidth: 0,
-                                borderRadius: 360  
-                            }}
-                        />
-                    </View>
             </View>
         );
             }

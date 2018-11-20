@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text ,Modal,Button} from 'react-native'
+import { View, Text ,Modal,Button,Image} from 'react-native'
 import { connect } from 'react-redux'
 import {navigate} from '../../actions'
 import {finishQuestWalk,clearFinishQuestWalk} from '../../actions/quest'
@@ -14,17 +14,14 @@ export class ModalScreen extends Component {
     };
   }
     componentWillMount(){
-        
            this._subscribe();
     }
     componentDidUpdate(prevProps, prevState){
       if (prevState.stepCount!=this.state.stepCount) {
         const key = Object.keys(this.props.modalReducer.data)
-        this.props.finishQuestWalk(this.props.authReducer.data.uid,key[0],this.props.modalReducer.data,this.state.stepCount)
+        this.props.finishQuestWalk(this.props.authReducer.data,key[0],this.props.modalReducer.data,this.state.stepCount)
       }
     }
-    
-
         _subscribe = () => {
           if (this.props.modalReducer.showModal) {
         const data = Object.values(this.props.modalReducer.data);
@@ -66,13 +63,23 @@ export class ModalScreen extends Component {
             Alert.alert('Modal has been closed.');
           }}>
        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-       
+        {
+         modalReducer.data.achievement!=null &&
+         Object.values(modalReducer.data.achievement).map((obj,i) => <View key={i}>
+                            <Text>Name: {obj.name}</Text>
+                            <Text>Detail: {obj.detail}</Text>
+                            <Text>Time: {obj.time}</Text>
+                            <Text>star: {obj.star}</Text>
+                            <Text> </Text>
+                        </View>
+                        )
+       } 
        <Text>Date: {key[0]}</Text>
        <Text>Start at: {data[0].start}</Text>
        <Text>finish at: {data[0].last}</Text>
        <Text>Steps: {this.state.stepCount}</Text>
         <Button
-          onPress={() => this.props.clearFinishQuestWalk(authReducer.data.uid).then(()=>this.props.navigate("Stack"))
+          onPress={() => this.props.clearFinishQuestWalk(authReducer.data).then(()=>this.props.navigate("Stack"))
           }
           title="Go to Home"
         />

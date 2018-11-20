@@ -52,7 +52,6 @@ class QuestWalk extends Component {
                 })
                 if (this.props.fetchReducer.data.isComplete) {
                     this.props.getQuestList(this.props.authReducer.data.uid, "undone");
-                    this.props.updateQuestDone(this.props.authReducer.data, this.state.key, this.state.type);
                 }
             }
         }
