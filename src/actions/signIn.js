@@ -88,7 +88,7 @@ try{
                         star:result.star,
                         achieve:result.achieve,
                         walkStacks:result.walkStacks,
-                        pushToken:token,
+                        pushToken:result.pushToken,
                         isShowNotification:result.isShowNotification,
                     }
                 })}
