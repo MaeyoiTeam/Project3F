@@ -4,6 +4,7 @@ import {Button,Avatar} from 'react-native-elements';
 import { connect } from 'react-redux';
 import {fetchData,fetchRanking} from '../actions'
 import {Font} from 'expo'
+import Loading from '../component/Loading'
 
 class Ranking extends Component{
     constructor(props){
@@ -28,22 +29,19 @@ class Ranking extends Component{
             fontWeight: 'bold',
             textAlign: 'center',
           }};
-          
-        const current={};
-        props=this.props;
-        if(this.props.authReducer.isAuth &&this.state.fontLoaded){
+          this.current=0
+        const {authReducer,rankReducer}=this.props;
+        if (rankReducer.isFetching){
+            return(<Loading/>)
+        }
+        else if(this.props.authReducer.isAuth &&this.state.fontLoaded){
         return(<View style={styles.container}>
-            
-
                 <View>
                 <Text style = {styles.title}>Ranking</Text>
-                
-                
-                
                      {
-                        props.rankReducer.data.map((item, i) => {
-                             if(item.uid==props.authReducer.data.uid){
-                                this.current={data:item,index:i}
+                        rankReducer.data.map((item, i) => {
+                             if(item.uid==authReducer.data.uid){
+                                this.current=i
                              }
                             return  <TouchableHighlight onPress={()=>this.props.navigation.navigate('OtherProfile',{
                                 data:item
@@ -56,16 +54,16 @@ class Ranking extends Component{
                             <Text style={{left:50}}>   Star:  {item.star}</Text>
                                </View>
                             </TouchableHighlight>
-        })
+                        })
                      }
                 <View style={styles.container}>
                 
                 <Text style={{fontSize:25,fontWeight: 'bold',fontFamily: "Segoe-Script",padding:5}}>Your Rank!</Text>
                 </View>   
                      {
-                         this.current!=null &&<View>
-                          <Text>Rank: {this.current.index+1} : {this.current.data.name}</Text>
-                        <Text>     Star:  {this.current.data.star}</Text>
+                         authReducer.isAuth && < View >
+                          <Text>Rank: {this.current} : {authReducer.data.name}</Text>
+                        <Text>     Star:  {authReducer.data.star}</Text>
                          </View>
                       }
             </View>
@@ -75,7 +73,6 @@ class Ranking extends Component{
         return(<View><Text>Rank: Please Login</Text></View>);
     }
     }
-   
 }
 const styles = StyleSheet.create({  
     container: {

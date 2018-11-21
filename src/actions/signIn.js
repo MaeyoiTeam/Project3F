@@ -134,6 +134,7 @@ export const updateMidAuth = (uid) => async dispatch => {
                         walkStacks: result.walkStacks,
                         pushToken: result.pushToken,
                         isShowNotification: result.isShowNotification,
+                        walkStacks:{999:0}
                     }
                 })
             })
