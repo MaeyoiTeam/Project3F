@@ -31,6 +31,7 @@ class Accel extends Component{
             let { x, y, z } = this.state.accelerometerData; 
             if(x>=0.5||y>=0.5||x<=-0.5||y<=-0.5){
                 this.props.isAlert(true)
+                console.log("Work")
                 this.setState({
                     isAlert:true,
                     accelerometerData
