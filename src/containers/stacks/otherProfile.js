@@ -83,6 +83,7 @@ class OtherProfile extends Component {
                         left:15
                       }}  
                 />
+                
                 </View> 
         </View>);
     }
