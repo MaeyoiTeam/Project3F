@@ -13,7 +13,6 @@ class OtherProfile extends Component{
             ...this.props.navigation.state.params.data,
         }
     }
-
     render(){
         const {authReducer,fetchReducer} = this.props;
         const {name,photoURL,star,levelQ} =this.state;
