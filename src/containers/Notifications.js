@@ -44,8 +44,10 @@ class Notifications extends Component {
                       <Text>{moment(obj.date).format('LTS')}</Text>
                       <Text>{obj.name}</Text>
                       <Text>Current Star: {obj.currentStar} (+{obj.newStar})</Text>
+                      
                     </View>)
                   }
+                  <Button title="push" onPress={()=>this.props.updateNotification(this.props.authReducer.data.uid,{test:"test"},this.props.notification.data)}/>
             </View>
               );
         }

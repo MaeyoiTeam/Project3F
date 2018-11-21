@@ -2,7 +2,7 @@ import loadUserData,{updateDataUserNotification} from './api'
 import {NOTIFICATION_DATA_FAILURE,NOTIFICATION_DATA_SUCCESS,NOTIFICATION_DATA} from '../constants'
 
 export const updateNotification = (uid,newLog,notiLogs)=>{
-    return async (dispath) => {
+    return (dispath) => {
         notiLogs.push(newLog);
         let sortnotiLogs = notiLogs.sort((a, b) => {
           const x = new Date(a.date)
@@ -31,7 +31,7 @@ export const updateNotification = (uid,newLog,notiLogs)=>{
 }
 
 export const getNotifications = (uid) => {
-    return async (dispath) => {
+    return (dispath) => {
         dispath({type:NOTIFICATION_DATA});
         loadUserData(uid,'notificationLog').then(result => { 
             return dispath({
