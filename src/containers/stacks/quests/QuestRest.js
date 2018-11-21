@@ -45,7 +45,7 @@ class QuestRest extends Component {
                  this.props.getQuestList(this.props.authReducer.data.uid, "undone");
                  this.props.updateQuestDone(this.props.authReducer.data,this.state.key,this.state.type);
                   this.props.updateNotification(this.props.authReducer.data.uid,{
-                     name: "Rest Quest Success",newStar:prevProps.fetchReducer.data.star, currentStar: this.props.fetchReducer.data.star, date: new Date()
+                     name: "Rest Quest Success",newStar:prevProps.fetchReducer.data.star, currentStar: this.props.fetchReducer.data.star, date: new Date().toISOString()
                  },this.props.notification.data)
              }
         }

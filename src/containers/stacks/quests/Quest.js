@@ -39,9 +39,9 @@ class Quest extends Component {
              if (this.props.fetchReducer.data.isComplete) {
                  this.props.getQuestList(this.props.authReducer.data.uid, "undone");
                  this.props.updateQuestDone(this.props.authReducer.data,this.state.key,this.state.type);
-                 this.props.updateNotification(this.props.authReducer.data.uid,{
-                     name: "Food Quest Success",newStar:prevProps.fetchReducer.data.star, currentStar: this.props.fetchReducer.data.star, date: new Date()
-                 },this.props.notification.data)
+                  this.props.updateNotification(this.props.authReducer.data.uid,{
+                     name: "Food Quest Success",newStar:prevProps.fetchReducer.data.star, currentStar: this.props.fetchReducer.data.star, date: new Date().toISOString()
+                 },this.props.notification.data) 
              }
         }
     } 

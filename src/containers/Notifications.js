@@ -47,7 +47,8 @@ class Notifications extends Component {
                       
                     </View>)
                   }
-                  <Button title="push" onPress={()=>this.props.updateNotification(this.props.authReducer.data.uid,{test:"test"},this.props.notification.data)}/>
+                  <Button title="push" onPress={()=>this.props.updateNotification(this.props.authReducer.data.uid,{test:"test",date:new Date().toISOString()
+                },this.props.notification.data)}/>
             </View>
               );
         }

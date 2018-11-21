@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import {Button} from 'react-native-elements'
 import { Pedometer } from "expo";
 import {updateQuest,fetchQuest,updateQuestDone,getQuestList,compareScore} from '../../../actions/quest';
+import ListCom from '../../../component/ListCom'
 import * as Expo from "expo";
 class QuestWalk extends Component {
   static navigationOptions = ({
@@ -34,27 +35,30 @@ class QuestWalk extends Component {
             targetSteps: []
         }
     }
+
+     componentWillReceiveProps(nextProps){
+        if(this.props.fetchReducer.data!=nextProps.fetchReducer.data){
+            this.setState({
+                ...this.props.fetchReducer.data,
+            })
+        }
+    } 
      componentDidUpdate(prevProps, prevState, snapshot){
          if(prevState.stepCount!=this.state.stepCount){
              console.log("Update StepCount")
              //TODO แสดงป๊อปอัพว่า ปลดคล๊อกอันใหม่
-             this.update(this.state.stepCount)
+             this.update(this.state.stepCount).then(()=>{
+/*                 if (this.props.fetchReducer.data.targetSteps!=null&&prevProps.fetchReducer.data.targetSteps!=null) {
+                    if (prevProps.fetchReducer.data.targetSteps.length != this.props.fetchReducer.data.targetSteps.length){ */
+                        console.log("Update targetSteps")
+                        this.setState({
+                            ...this.props.fetchReducer.data,
+                        })
+/*                     }
+                } */
+             })
          }
-
-        if (this.props.fetchReducer.data.targetSteps!=null&&prevProps.fetchReducer.data.targetSteps!=null) {
-         console.log(prevProps.fetchReducer.data.targetSteps.length + " / " + this.props.fetchReducer.data.targetSteps.length)
-            if (prevProps.fetchReducer.data.targetSteps.length != this.props.fetchReducer.data.targetSteps.length) {
-                console.log("Update targetSteps")
-                this.setState({
-                    ...this.props.fetchReducer.data,
-                    prevLevel: { ...prevProps.authReducer.data.levelQ[this.state.type]
-                    }
-                })
-                if (this.props.fetchReducer.data.isComplete) {
-                    this.props.getQuestList(this.props.authReducer.data.uid, "undone");
-                }
-            }
-        }
+        
     } 
     componentDidMount() {
           this.timerID = setInterval(() => this._subscribe(), 1000);
@@ -92,8 +96,8 @@ class QuestWalk extends Component {
          );
      };
 
-    update = (steps) => {
-             this.props.compareScore(this.props.fetchReducer.data,steps);
+    update =async (steps) => {
+             await this.props.compareScore(this.props.fetchReducer.data,steps);
     }
      _unsubscribe = () => {
          this._subscription && this._subscription.remove();
@@ -122,13 +126,9 @@ class QuestWalk extends Component {
                 <Text>Detail: {detail} </Text>
                 <Text>Exp: {current}/{target}</Text>
                     <Text>Steps : {this.state.stepCount}</Text>
-                {   this.props.fetchReducer.data.targetSteps!=null &&
-                    this.props.fetchReducer.data.targetSteps.map((obj,i) =><View key={i}>
-                        <Text>You got more: {obj[0]}</Text>
-                        <Text>Name: {obj[1].name}</Text>
-                        <Text>Star: {obj[1].star}</Text>
-                    </View>)
-                }
+                   {/*  {   this.props.fetchReducer.data.targetSteps!=null &&
+                        <ListCom targetSteps={this.state.targetSteps}/>
+                    } */}
             </View>
             );
         }

@@ -68,26 +68,22 @@ export const updateQuestDone = (user, key, type) => {
     ...user.quest
   }
   //TODO update Achievement
-  updateAchieve(user.uid, quest, user.achieve).then((newAchieve) => {
-    var achievement = user.achieve;
-    if (achievement != null) {
-      achievement = { ...newAchieve,
-        ...achievement
-      }
-    } else {
-      achievement = { ...newAchieve
-      };
-    }
-    return (dispatch) => {
-      dispatch({
-        type: FETCH_USER_SUCCESS,
-        payload: { ...user,
-          quest: quest,
-          achieve: achievement
-        }
-      });
-    }
-  })
+  const newAchieve = updateAchieve(user.uid,quest,user.achieve);
+  var achievement = user.achieve;
+   if (achievement!=null) {
+      achievement={...newAchieve,...achievement}
+   } else {
+     achievement = {...newAchieve};
+   }
+     return (dispatch)=>{
+         dispatch({
+           type:FETCH_USER_SUCCESS,
+           payload:{ ...user,
+             quest:quest,
+             achieve:achievement
+           }
+         });
+     }
 }
 
 // Update Quest while During Quest

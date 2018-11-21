@@ -117,7 +117,6 @@ export const updateAchieve = (uid, quest, achieve) => {
                                 const result = [];
                             } else {
                                 const result = have.filter((obj) => {
-                                    console.log(obj)
                                     return Object.values(require).includes(String(obj));
                                 }).sort().join()
                             }
@@ -125,7 +124,6 @@ export const updateAchieve = (uid, quest, achieve) => {
                         } else if (typeof condition[key] == 'object') { //กรณีจำนวนwalk stacks 
                             const haveWalkStacks = quest; //อันนี้คือwalkStacks
                             const result = Object.entries(haveWalkStacks).filter((obj) => {
-                                console.log(obj[1] + " >= " + require[obj[0]])
                                 return obj[1] >= require[obj[0]]
                             })
                             return result.length == Object.keys(require).length;
@@ -268,6 +266,7 @@ export const updateDataUser = (uid, user) => {
                         target: 10
                     }
                     personalRef.update({
+                        walkStacks:{999:0},
                         ...user,
                         isShowNotification: true,
                         star: 0,
@@ -337,6 +336,6 @@ export const updateDataUserNotification = (uid, NotiLogs) => {
     return new Promise((resolve, reject) => {
         const personalRef = userRef.child(uid);
         const result = personalRef.child('notificationLog').update(NotiLogs)
-        return resolve(result);
+        return resolve("Sucess");
     })
 }

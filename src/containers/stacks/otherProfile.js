@@ -40,32 +40,18 @@ class OtherProfile extends Component {
             levelQ
         } = this.state;
         console.log(this.state)
-        return ( < View style = {
-                styles.container
-            } >
-            <
-            Avatar xlarge rounded source = {
-                {
-                    uri: photoURL
-                }
-            }
-            onPress = {
-                () => console.log("Works!")
-            }
-            /> <
-            Text style = {
-                {
+        return ( <View style = { styles.containe} >
+            <Avatar xlarge rounded source = { {uri: photoURL }}
+            onPress = { () => console.log("Works!")}
+            />
+             <Text style = {{
                     paddingTop: 20,
                     fontSize: 15,
                     textAlign: 'center'
                 }
-            } > {
-                name
-            } < /Text> <
-            Text > Star: {
-                star
-            } < /Text> <
-            Text style = {
+            } > { name} </Text> 
+            <Text> Star: { star } </Text> 
+            <Text style = {
                 {
                     textAlign: 'center',
                     paddingTop: 10,
@@ -74,15 +60,12 @@ class OtherProfile extends Component {
                 }
             } > X Star: {
                 star
-            } < /Text> <
-            View style = {
-                {
+            } </Text> <View style = { {
                     padding: 5,
                     flexDirection: 'row'
                 }
             } >
-            <
-            Image source = {
+            <Image source = {
                 require('../../../image/steps.png')
             }
             fadeDuration = {
@@ -95,16 +78,14 @@ class OtherProfile extends Component {
                     right: 10
                 }
             }
-            /> <
-            ProgressBarAnimated width = {
+            /> <ProgressBarAnimated width = {
                 200
             }
             backgroundColor = "#6CC644"
             value = {
                 (levelQ.walk.star * 100) / levelQ.walk.target
             }
-            /> <
-            Text style = {
+            /> <Text style = {
                 {
                     left: 10
                 }
@@ -112,19 +93,14 @@ class OtherProfile extends Component {
                 levelQ.walk.star
             }
             /{levelQ.walk.target}</Text >
-            <
-            /View> <
-            Text > Level: {
-                levelQ.walk.level
-            } < /Text> <
-            View style = {
+            </View> <Text > Level: { levelQ.walk.level} </Text> 
+            <View style = {
                 {
                     padding: 5,
                     flexDirection: 'row'
                 }
-            } >
-            <
-            Image source = {
+            }>
+            <Image source = {
                 require('../../../image/food2.png')
             }
             fadeDuration = {
@@ -137,16 +113,14 @@ class OtherProfile extends Component {
                     right: 10
                 }
             }
-            /> <
-            ProgressBarAnimated width = {
+            /> <ProgressBarAnimated width = {
                 200
             }
             backgroundColor = "#6CC644"
             value = {
                 (levelQ.food.star * 100) / levelQ.food.target
             }
-            /> <
-            Text style = {
+            /> <Text style = {
                 {
                     left: 10
                 }
@@ -154,19 +128,15 @@ class OtherProfile extends Component {
                 levelQ.food.star
             }
             /{levelQ.food.target}</Text >
-            <
-            /View> <
-            Text > Level: {
+            </View> <Text > Level: {
                 levelQ.food.level
-            } < /Text> <
-            View style = {
+            } </Text> <View style = {
                 {
                     padding: 5,
                     flexDirection: 'row'
                 }
             } >
-            <
-            Image source = {
+            <Image source = {
                 require('../../../image/yoga.png')
             }
             fadeDuration = {
@@ -196,25 +166,19 @@ class OtherProfile extends Component {
                 levelQ.rest.star
             }
             /{levelQ.rest.target}</Text >
-            <
-            /View> <
-            Text > Level: {
+            </View> <Text > Level: {
                 levelQ.rest.level
-            } < /Text> <
-            View style = {
+            } </Text> < View style = {
                 {
                     paddingTop: 10
                 }
             } >
-            <
-            /View> <
-            View style = {
+            </View> <View style = {
                 {
                     paddingTop: 10
                 }
             } >
-            <
-            Button title = "Achievement Earned"
+            <Button title = "Achievement Earned"
             disabled onPress = {
                 () => this.props.navigation.navigate("History")
             }
@@ -230,9 +194,8 @@ class OtherProfile extends Component {
             }
             />
 
-            <
-            /View>  <
-            /View>);
+            </View> 
+             </View>);
         }
     }
 

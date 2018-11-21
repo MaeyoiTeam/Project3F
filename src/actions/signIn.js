@@ -63,7 +63,7 @@ try{
         firebase.auth().onAuthStateChanged(user => {
         if (user) {
 //TODO add UserAchievement
-            const token = updateToken(user.uid);
+            const token =  updateToken(user.uid);
             updateDataUser(user.uid, user.providerData[0]).then((result)=>{
                 let questListdone = {};
                 if(result.quest!=null){
@@ -88,7 +88,7 @@ try{
                         star:result.star,
                         achieve:result.achieve,
                         walkStacks:result.walkStacks,
-                        pushToken:result.pushToken,
+                        pushToken:token,
                         isShowNotification:result.isShowNotification,
                     }
                 })}
@@ -134,7 +134,7 @@ export const updateMidAuth = (uid) => async dispatch => {
                         walkStacks: result.walkStacks,
                         pushToken: result.pushToken,
                         isShowNotification: result.isShowNotification,
-                        walkStacks:{999:0}
+                        walkStacks:result.walkStacks
                     }
                 })
             })

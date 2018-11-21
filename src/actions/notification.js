@@ -2,11 +2,11 @@ import loadUserData,{updateDataUserNotification} from './api'
 import {NOTIFICATION_DATA_FAILURE,NOTIFICATION_DATA_SUCCESS,NOTIFICATION_DATA} from '../constants'
 
 export const updateNotification = (uid,newLog,notiLogs)=>{
-    return async (dispatch) => {
+    return  (dispatch) => {
         
         if(Array.isArray(notiLogs)){
             notiLogs.push(newLog);
-            let sortnotiLogs = notiLogs.sort((a, b) => {
+            var sortnotiLogs = notiLogs.sort((a, b) => {
                 const x = new Date(a.date)
                 const y  =  new Date(b.date)
                 if(x>y){
@@ -19,19 +19,19 @@ export const updateNotification = (uid,newLog,notiLogs)=>{
                 }
               });
         }else{
-            let sortnotiLogs=[newLog];
+            var sortnotiLogs=[newLog];
         }
         if (sortnotiLogs.length > 10) {
             sortnotiLogs.shift()
         }
-        dispath({type:NOTIFICATION_DATA});
-        updateDataUserNotification(uid, sortnotiLogs).then(() => dispatch({
+        dispatch({type:NOTIFICATION_DATA});
+         updateDataUserNotification(uid, sortnotiLogs).then(() => dispatch({
             type:NOTIFICATION_DATA_SUCCESS,
             payload: sortnotiLogs
         }))
         .catch(e=>dispatch({
             type: NOTIFICATION_DATA_FAILURE
-        }))
+        })) 
     }
 }
 
