@@ -1,4 +1,4 @@
-import { View,Text,StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, FlatList } from 'react-native';
 import React,{Component} from 'react';
 import { connect } from 'react-redux';
 import {Button} from 'react-native-elements'
@@ -32,37 +32,26 @@ class QuestWalk extends Component {
             isComplete:false,
             prevLevel:{},
             stepCount: 0,
-            targetSteps: []
+            targetSteps: [],
+            count:0
         }
     }
 
-     componentWillReceiveProps(nextProps){
-        if(this.props.fetchReducer.data!=nextProps.fetchReducer.data){
-            this.setState({
-                ...this.props.fetchReducer.data,
-            })
-        }
-    } 
-     componentDidUpdate(prevProps, prevState, snapshot){
-         if(prevState.stepCount!=this.state.stepCount){
-             console.log("Update StepCount")
-             //TODO แสดงป๊อปอัพว่า ปลดคล๊อกอันใหม่
-             this.update(this.state.stepCount).then(()=>{
-/*                 if (this.props.fetchReducer.data.targetSteps!=null&&prevProps.fetchReducer.data.targetSteps!=null) {
-                    if (prevProps.fetchReducer.data.targetSteps.length != this.props.fetchReducer.data.targetSteps.length){ */
-                        console.log("Update targetSteps")
-                        this.setState({
-                            ...this.props.fetchReducer.data,
-                        })
-/*                     }
-                } */
-             })
-         }
-        
-    } 
     componentDidMount() {
-          this.timerID = setInterval(() => this._subscribe(), 1000);
-      }
+        this.timerID = setInterval(() => this._subscribe(), 1000);
+    }
+
+    shouldComponentUpdate = (nextProps, nextState) => {
+      return this.props.fetchReducer.data.targetSteps!=nextProps.fetchReducer.data.targetSteps||this.state.stepCount!=nextState.stepCount;
+    }
+    
+    componentWillUpdate = (nextProps, nextState) => {
+        if (nextState.stepCount != this.state.stepCount) {
+          console.log("Update StepCount");
+          //TODO แสดงป๊อปอัพว่า ปลดคล๊อกอันใหม่
+          this.update(this.state.stepCount);
+        }
+    }
 
 
       componentWillUnmount() {
@@ -73,10 +62,8 @@ class QuestWalk extends Component {
      _subscribe = () => {
          let startTime = new Date(this.props.fetchReducer.data.start.replace('Z', ''));
          let currentTime  = new Date();
-        this._subscription = Pedometer.watchStepCount(result => {
-                this.setState({
-                time: new Date(),
-            });
+        this._subscription = Pedometer.watchStepCount((result)=>{
+            this.setState({count:result})
         });
 /*           console.log("Start: "+startTime);
          console.log("current: "+currentTime);  */
@@ -126,9 +113,10 @@ class QuestWalk extends Component {
                 <Text>Detail: {detail} </Text>
                 <Text>Exp: {current}/{target}</Text>
                     <Text>Steps : {this.state.stepCount}</Text>
-                   {/*  {   this.props.fetchReducer.data.targetSteps!=null &&
-                        <ListCom targetSteps={this.state.targetSteps}/>
-                    } */}
+                     {   fetchReducer.data.targetSteps!=null &&
+                        <FlatList data={fetchReducer.data.targetSteps} 
+                        renderItem={({item})=><Text>{item[0]}</Text>}/>
+                    } 
             </View>
             );
         }
