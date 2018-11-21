@@ -6,6 +6,7 @@ import { SocialIcon } from 'react-native-elements'
 import { connect } from 'react-redux';
 import ProgressBarAnimated from 'react-native-progress-bar-animated';
 import {getNotifications,updateNotification} from '../actions/notification'
+import Loading from '../component/Loading';
 const moment = require('moment');
 class Notifications extends Component {
     state = {
@@ -24,9 +25,6 @@ class Notifications extends Component {
  
   });
 
-  componentWillMount(){
-    this.props.getNotifications(this.props.authReducer.data.uid);
-  }
   componentDidMount(){
     this.props.getNotifications(this.props.authReducer.data.uid);
   }
@@ -34,24 +32,23 @@ class Notifications extends Component {
 
 
     render(){
-        const barWidth = Dimensions.get('screen').width - 30;
-        const progressCustomStyles = {
-          backgroundColor: 'red', 
-          borderRadius: 0,
-          borderColor: 'orange',
-        };
-        console.log(this.props.notification.isfetch)
-        return(
+      const {notification} =this.props;
+        if (notification.isFetching) {
+          return(<Loading/>);
+        }else{
+          return(
             <View style={styles.container}>
-          { this.props.notification.isfetch&&
-            this.props.notification.data.sort((a,b)=>-1).map((obj,i)=><View  key={i}>
-              <Text>{moment(obj.date).format('LTS')}</Text>
-              <Text>{obj.name}</Text>
-              <Text>Current Star: {obj.currentStar} (+{obj.newStar})</Text>
-            </View>)
-          }
-      </View>
-    );
+                  {
+                    this.props.notification.haveNotification &&
+                    this.props.notification.data.sort((a,b)=>-1).map((obj,i)=><View  key={i}>
+                      <Text>{moment(obj.date).format('LTS')}</Text>
+                      <Text>{obj.name}</Text>
+                      <Text>Current Star: {obj.currentStar} (+{obj.newStar})</Text>
+                    </View>)
+                  }
+            </View>
+              );
+        }
   }
 }
 

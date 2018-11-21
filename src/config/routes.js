@@ -10,7 +10,7 @@ import Profile from '../containers/Profile';
 import Home from '../containers/Home';
 import Setting from '../containers/Setting';
 import SignIn from '../containers/stacks/SignIn';
-import Loading from '../containers/stacks/Loading';
+import FirstPage from '../containers/stacks/FirstPage';
 import Quest from '../containers/stacks/quests/Quest';
 import QuestWalk from '../containers/stacks/quests/QuestWalk';
 import QuestRest from '../containers/stacks/quests/QuestRest';
@@ -150,8 +150,8 @@ QuestRest: {
 });
 
 const Navigator = createSwitchNavigator({
-  Loading: {
-    screen: Loading,
+  FirstPage: {
+    screen: FirstPage,
     navigationOptions: {}
   },
   SignIn: {

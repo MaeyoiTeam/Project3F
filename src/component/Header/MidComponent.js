@@ -3,10 +3,8 @@ import { StyleSheet,View,Text,Alert} from 'react-native';
 import { connect } from 'react-redux';
 import {Avatar,Badge} from 'react-native-elements';
 import {fetchUser} from '../../actions/signIn';
-import LeftComponent from './LeftComponent';
 import {getQuestList} from '../../actions/quest';
 import {navigate} from '../../actions'
-import  ModalScreen  from '../Modal/ModalScreen';
 
 class MidComponent extends Component {
     constructor(props){

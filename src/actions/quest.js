@@ -69,24 +69,24 @@ export const updateQuestDone = (user, key, type) => {
   }
   //TODO update Achievement
   updateAchieve(user.uid, quest, user.achieve).then((newAchieve) => {
-      var achievement = user.achieve;
-      if (achievement != null) {
-        achievement = { ...newAchieve,
-          ...achievement
+    var achievement = user.achieve;
+    if (achievement != null) {
+      achievement = { ...newAchieve,
+        ...achievement
+      }
+    } else {
+      achievement = { ...newAchieve
+      };
+    }
+    return (dispatch) => {
+      dispatch({
+        type: FETCH_USER_SUCCESS,
+        payload: { ...user,
+          quest: quest,
+          achieve: achievement
         }
-      } else {
-        achievement = { ...newAchieve
-        };
-      }
-      return (dispatch) => {
-        dispatch({
-          type: FETCH_USER_SUCCESS,
-          payload: { ...user,
-            quest: quest,
-            achieve: achievement
-          }
-        });
-      }
+      });
+    }
   })
 }
 
@@ -206,16 +206,16 @@ export const finishQuestWalk = (user, key, modalData, stepCount) => {
       }
       moveToDone(user.uid, key, data);
       const result = updateWalkStacks(user.uid, walkStacks).then(updatedStacks => {
-           updateAchieve(user.uid, updatedStacks, user.achieve).then((newAchieve) => {
-              dispatch({
-                type: MODAL_OPEN,
-                payload: {
-                   achievement: newAchieve,
-                  walkStacks: updatedStacks,
-                  ...modalData,
-                }
-              })
-          }).catch((e)=>console.log(e)) 
+        updateAchieve(user.uid, updatedStacks, user.achieve).then((newAchieve) => {
+          dispatch({
+            type: MODAL_OPEN,
+            payload: {
+              achievement: newAchieve,
+              walkStacks: updatedStacks,
+              ...modalData,
+            }
+          })
+        }).catch((e) => console.log(e))
       })
     })
   }

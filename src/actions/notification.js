@@ -1,5 +1,5 @@
 import loadUserData,{updateDataUserNotification} from './api'
-import {NOTIFICATION_DATA_FAILURE,NOTIFICATION_DATA_SUCCESS} from '../constants'
+import {NOTIFICATION_DATA_FAILURE,NOTIFICATION_DATA_SUCCESS,NOTIFICATION_DATA} from '../constants'
 
 export const updateNotification = (uid,newLog,notiLogs)=>{
     return async (dispath) => {
@@ -19,6 +19,7 @@ export const updateNotification = (uid,newLog,notiLogs)=>{
         if (sortnotiLogs.length > 10) {
             sortnotiLogs.shift()
         }
+        dispath({type:NOTIFICATION_DATA});
         updateDataUserNotification(uid, sortnotiLogs).then(() => dispatch({
             type:NOTIFICATION_DATA_SUCCESS,
             payload: sortnotiLogs
@@ -31,6 +32,7 @@ export const updateNotification = (uid,newLog,notiLogs)=>{
 
 export const getNotifications = (uid) => {
     return async (dispath) => {
+        dispath({type:NOTIFICATION_DATA});
         loadUserData(uid,'notificationLog').then(result => { 
             return dispath({
                 type: NOTIFICATION_DATA_SUCCESS,
