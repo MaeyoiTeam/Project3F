@@ -5,6 +5,7 @@ import {navigate} from '../../actions'
 import {finishQuestWalk,clearFinishQuestWalk} from '../../actions/quest'
 import { Pedometer } from "expo";
 import * as Expo from "expo";
+import { updateNotification} from '../../actions/notification'
 export class ModalScreen extends Component {
   constructor(props) {
     super(props)
@@ -20,6 +21,9 @@ export class ModalScreen extends Component {
       if (prevState.stepCount!=this.state.stepCount) {
         const key = Object.keys(this.props.modalReducer.data)
         this.props.finishQuestWalk(this.props.authReducer.data,key[0],this.props.modalReducer.data,this.state.stepCount)
+        this.props.updateNotification(this.props.authReducer.data.uid, {
+          name:"steps: "+this.state.stepCount+" Walk Quest Success wal", date: new Date().toISOString()
+        }, this.props.notification.data) 
       }
     }
         _subscribe = () => {
@@ -108,11 +112,12 @@ export class ModalScreen extends Component {
 const mapStateToProps = (state) => ({
   authReducer: state.authReducer,
   modalReducer: state.modalReducer,
-  questReducer: state.questReducer
+  questReducer: state.questReducer,
+  notification: state.notification
 })
 
 const mapDispatchToProps = {
- navigate,finishQuestWalk,clearFinishQuestWalk
+ navigate,finishQuestWalk,clearFinishQuestWalk,updateNotification
 }
 Expo.registerRootComponent(ModalScreen);
 export default connect(mapStateToProps, mapDispatchToProps)(ModalScreen)
