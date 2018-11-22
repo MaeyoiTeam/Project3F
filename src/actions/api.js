@@ -227,9 +227,9 @@ export const clearOver = (uid) => {
 //############################################### Ranking ###############################################
 
 //fetch Ranking
-export const rankingUser = () => {
+export const rankingUser = (uid) => {
     return new Promise((resolve, reject) => {
-        userRef.orderByChild("star").once('value', snapshot => {
+        userRef.orderByChild("star").limitToLast(10).once('value', snapshot => {
             let data = [];
             snapshot.forEach((item) => {
                 data.push({
@@ -242,7 +242,7 @@ export const rankingUser = () => {
             return resolve(data.sort((a, b) => {
                 return b.star - a.star;
             }));
-        });
+        }).catch((e)=>reject(e))
     });
 }
 

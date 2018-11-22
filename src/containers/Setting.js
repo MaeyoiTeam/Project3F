@@ -18,10 +18,8 @@ class Setting extends Component {
 
 
      logOut(){
-         return new Promise(async (resolve, reject) => {
-             this.props.signOut()
-            return resolve("SignIn")
-         })
+             this.props.signOut();
+             this.props.navigation.navigate(path)
      }
     toggleNotification(){
          this.props.updateIsShowNotification(this.props.authReducer.data, !this.props.authReducer.data.isShowNotification)
@@ -74,9 +72,7 @@ class Setting extends Component {
             <View style={styles.pa1}></View>
             <View style={styles.pa2}>
                 <Button title="Logout Account"
-                    onPress={async ()=>{let path = await this.logOut();
-                    this.props.navigation.navigate(path);
-                    }}
+                    onPress={this.logOut}
                     buttonStyle={{
                         backgroundColor: "rgba(00, 99,216, 1)",width: 150,height: 40,borderColor: "transparent",borderWidth: 0,marginLeft:54
                     }}/>

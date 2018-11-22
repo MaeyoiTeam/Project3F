@@ -14,7 +14,6 @@ import FirstPage from '../containers/stacks/FirstPage';
 import Quest from '../containers/stacks/quests/Quest';
 import QuestWalk from '../containers/stacks/quests/QuestWalk';
 import QuestRest from '../containers/stacks/quests/QuestRest';
-import Pedo from '../containers/stacks/Pedo';
 import HistoryQuestList from '../containers/stacks/HistoryQuestList';
 import Achievement from '../containers/stacks/Achievement';
 import OtherProfile from '../containers/stacks/OtherProfile'
@@ -118,10 +117,6 @@ const Stack = createStackNavigator(
         headerTitle: "Achievement",
         headerStyle: {}
       }
-    },
-    Pedo: {
-      screen: Pedo,
-      navigationOptions: {}
     },
     Quest: {
       screen: Quest,

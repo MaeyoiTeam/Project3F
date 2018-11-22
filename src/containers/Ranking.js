@@ -13,7 +13,7 @@ class Ranking extends Component{
         this.goToOtherProfile = this.goToOtherProfile.bind(this);
     }
      componentDidMount(){
-        this.props.fetchRanking()
+        this.props.fetchRanking(this.props.authReducer.data.uid)
         Font.loadAsync({
             'Segoe-Script' : require('../../assets/fonts/segoesc.ttf')
         }).then(()=>{

@@ -86,7 +86,6 @@ try{
                         levelQ:result.levelQ,
                         quest: questListdone,
                         star:result.star,
-                        achieve:result.achieve,
                         walkStacks:result.walkStacks,
                         pushToken:token,
                         isShowNotification:result.isShowNotification,

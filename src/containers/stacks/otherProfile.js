@@ -8,12 +8,23 @@ class OtherProfile extends Component {
     
     constructor(props) {
         super(props);
+        this.goToHistoryQuest = this.goToHistoryQuest.bind(this);
+        this.goToAchievement = this.goToAchievement.bind(this);
     }
+
+    goToHistoryQuest() {
+        this.props.navigation.navigate("History", { uid: this.props.fetchReducer.data.uid })
+    }
+
+    goToAchievement() {
+        this.props.navigation.navigate("Achievement", { uid: this.props.fetchReducer.data.uid })
+    }
+
 
     render(){
         const {fetchReducer} = this.props;
          const {displayName,photoURL,star,levelQ} =fetchReducer.data
-        console.log(fetchReducer.data.levelQ);
+
         return(<View style={styles.container}>
                   <Avatar xlarge rounded source={{ uri: photoURL }} onPress={() => console.log("Works!")} />
             <Text style={{ paddingTop: 20, fontSize: 15, textAlign: 'center' }}>{displayName}</Text>
@@ -71,7 +82,18 @@ class OtherProfile extends Component {
                     </View>
                     <View style={{ paddingTop: 10 }}>
                         <Button title="Achievement Earned"
-                            onPress={() => this.props.navigation.navigate("History",{uid:fetchReducer.data.uid})}
+                            onPress={this.goToAchievement}
+                            buttonStyle={{
+                                backgroundColor: "rgba(00, 99,216, 1)",
+                                width: 200,
+                                height: 40,
+                                borderColor: "transparent",
+                                borderWidth: 0,
+                                left: 15
+                            }}
+                        />
+                        <Button title="History Quest"
+                            onPress={this.goToHistoryQuest}
                             buttonStyle={{
                                 backgroundColor: "rgba(00, 99,216, 1)",
                                 width: 200,

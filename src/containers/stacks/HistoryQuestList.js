@@ -11,7 +11,7 @@ class HistoryQuestList extends Component {
     }
 
 
-    componentDidMount(){
+    componentWillMount(){
         this.props.getQuestList(this.props.navigation.state.params.uid,"done")
     }
 
