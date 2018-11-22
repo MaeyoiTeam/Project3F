@@ -69,20 +69,27 @@ class QuestRest extends Component {
         const {name,type,detail,current,target,key,point,star,level,isComplete,prevLevel}=this.state;
 
         if (isComplete){   //Quest Complete
-                    return(<View>
+                    return(<View style = {{paddingTop:180}}>
                     <Text>Current {type} star :{prevLevel.star}/{prevLevel.target}->{star}/{target}</Text>
                     <Text>level: {prevLevel.level}/{level}</Text>
                     <Text>Quest is Complete</Text>
-                      <Button title="Go Home" 
+                      <Button title="Go Home"
+                       buttonStyle={{
+                        backgroundColor: "rgba(10, 10,100, 1)",
+                        height:80,
+                        borderColor: "transparent",
+                        borderWidth: 0,
+                        borderRadius:360,
+                        }} 
                     onPress={()=>this.props.navigation.navigate('Home')}/>  
                     </View>);
         }
         else{    //Quest Continue
             return(
-            <View>
+            <View style = {{paddingTop:180}}>
                 <View>
-                    <Text style = {{textAlign: 'center',fontSize:15}}>{name} Type: {type}</Text>
-                <Text style = {{textAlign: 'center',fontSize:15}}>Detail: {detail} </Text>
+                    <Text style = {{textAlign: 'center',fontSize:20}}>{name} Type: {type}</Text>
+                <Text style = {{textAlign: 'center',fontSize:20}}>Detail: {detail} </Text>
                 {   this.state.isPressed &&<View>
                 <TimerCountdown
                     initialSecondsRemaining={1000*(target-current)}

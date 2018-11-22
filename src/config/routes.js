@@ -31,7 +31,7 @@ const BottomTabs = createMaterialBottomTabNavigator(
       screen: Profile,
       navigationOptions: {
         tabBarLabel: 'Profile',
-        tabBarColor: '#1E90FF',
+        tabBarColor: '#336600',
         tabBarIcon: ({ tintColor, focused }) => (
           <Icon size={30} name={ Platform.OS === 'ios' ? (focused ? 'ios-contact' : 'ios-contact-outline') : 'md-contact' } style={{ color: tintColor }} />
         )
@@ -41,7 +41,7 @@ const BottomTabs = createMaterialBottomTabNavigator(
       screen: Ranking,
       navigationOptions: {
         tabBarLabel: 'Ranking',
-        tabBarColor: '#1E90FF',
+        tabBarColor: '#CC0099',
         tabBarIcon: ({ tintColor, focused }) => (
           <Icon size={30} name={ Platform.OS === 'ios' ? (focused ? 'ios-settings' : 'ios-settings-outline') : 'md-trending-up' } style={{ color: tintColor }} />
         )
@@ -51,7 +51,7 @@ const BottomTabs = createMaterialBottomTabNavigator(
       screen: Home,
       navigationOptions: {
         tabBarLabel: 'Home',
-        tabBarColor: '#1E90FF',
+        tabBarColor: '#3399FF',
         tabBarIcon: ({ tintColor, focused }) => (
           <Icon size={30} name={ Platform.OS === 'ios' ? (focused ? 'ios-home' : 'ios-home-outline') : 'md-home' } style={{ color: tintColor }} />
         )
@@ -61,7 +61,7 @@ const BottomTabs = createMaterialBottomTabNavigator(
       screen: Notifications,
       navigationOptions: {
         tabBarLabel: 'Notifications',
-        tabBarColor: '#1E90FF',
+        tabBarColor: '#CC6600',
         tabBarIcon: ({ tintColor, focused }) => (
           <Icon size={30} name={ Platform.OS === 'ios' ? (focused ? 'ios-settings' : 'ios-settings-outline') : 'md-notifications-outline' } style={{ color: tintColor }} />
         )
@@ -71,7 +71,7 @@ const BottomTabs = createMaterialBottomTabNavigator(
       screen: Setting,
       navigationOptions: {
         tabBarLabel: 'Settings',
-        tabBarColor: '#1E90FF',
+        tabBarColor: '#4c4c4c',
         tabBarIcon: ({ tintColor, focused }) => (
           <Icon size={30} name={ Platform.OS === 'ios' ? (focused ? 'ios-settings' : 'ios-settings-outline') : 'md-settings' } style={{ color: tintColor }} />
         )
@@ -88,20 +88,18 @@ const BottomTabs = createMaterialBottomTabNavigator(
 );
 
 
-const Stack = createStackNavigator(
-  {
-    Home: {
-      screen: BottomTabs,
-      navigationOptions: {
-        /* header:null */
 
-        headerLeft: <LeftComponent />,
-        headerTitle: <MidComponent />,
-        headerRight: <RightComponent />,
-        headerStyle: {
-          height: 40
-        }
-      }
+const Stack = createStackNavigator({
+Home:{    screen:BottomTabs,
+          navigationOptions:{ /* header:null */
+            
+             headerLeft:(<LeftComponent/>),
+            headerTitle:(<MidComponent/>),
+            headerRight:(<RightComponent/>), 
+            headerStyle: {
+              height:45
+            } 
+          }
     },
     OtherProfile: {
       screen: OtherProfile,

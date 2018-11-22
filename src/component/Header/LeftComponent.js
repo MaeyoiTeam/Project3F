@@ -10,7 +10,7 @@ render(){
     return(
         <View>
             <Image
-                 source={require('../../../image/RedStar.png')}
+                 source={require('../../../../Project3F/image/YellowStar.png')}
                  fadeDuration={0}
                  style={{width: 25, height: 25,marginLeft:20}}
                  

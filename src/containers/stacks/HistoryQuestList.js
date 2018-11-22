@@ -1,16 +1,16 @@
-import { View,Text,StyleSheet } from 'react-native';
+import { View,Text,StyleSheet,Image,FlatList,AppRegistry,ScrollView} from 'react-native';
 import React,{Component} from 'react';
 import { connect } from 'react-redux';
 import {getQuestList,fetchQuest} from '../../actions/quest'
 import { clearMiddleHistory} from '../../actions/'
-import {Button} from 'react-native-elements';
+import {Button,List,ListItem} from 'react-native-elements';
 class HistoryQuestList extends Component {
     constructor(props){
         super(props);
         this.state={
         };
     }
-
+ 
 
     componentWillMount(){
         this.props.getQuestList(this.props.navigation.state.params.uid,"done")
@@ -22,19 +22,31 @@ class HistoryQuestList extends Component {
     render(){
         const {historyReducer,authReducer,fetchReducer} = this.props;
                         return(
-            <View>
-            {historyReducer.haveHISTORY &&         
+                <View style={styles.container}>
+                {  historyReducer.haveHISTORY &&
                 historyReducer.data.map((type, index) => {
                     const arr = type[1]
-                return  <View key={index}><Text>{type[0]}</Text>
-                    {Object.values(arr).map((info, i) =>{
+                return  <ScrollView><View key={index}><Text style={{fontFamily:'asd',fontSize:27}}>{type[0]}</Text>
+                 <View style={styles.pa3}></View>
+                {
+                    console.log(arr)
+                }
+                    {
+                        
+                        Object.values(arr).map((info, i) =>{
+                        console.log(info)
                         return <View key={i}>
-                                <Text>Quest name: {info.name}</Text>
-                                <Text>Quest type: {info.type}</Text>
-                            </View> 
+                        <View style={styles.pa1}>
+                            
+                                <Text style={{fontFamily:'asd'}}>Quest name: {info.name}</Text>
+                                <Text style={{fontFamily:'asd'}}>Quest type: {info.type}</Text>
+                                <View key={i} style = {styles.separator}></View>
+                            
+                            </View>
+                        </View> 
                         })
                     }
-                </View>       
+                </View></ScrollView>       
                 })  
             }  
             </View>
@@ -52,5 +64,23 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
     getQuestList, fetchQuest, clearMiddleHistory
 };
+const styles = StyleSheet.create({  
+    container: {
+    flex: 1,
+    backgroundColor: 'white', alignItems: 'center',
+  },
+    pa1:{
+    flex: 0.18,
+    },
+    pa3:{
+        flex: 0.1,
+        },
+    separator: {
+        marginVertical: 10,
+        borderWidth: 1,
+        width:400,
+        borderColor: '#000',
 
+      },
+});
 export default connect(mapStateToProps, mapDispatchToProps)(HistoryQuestList)

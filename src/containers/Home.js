@@ -1,8 +1,9 @@
-import { View,Text,StyleSheet } from 'react-native';
+import { View,Text,StyleSheet,Image, } from 'react-native';
 import React,{Component} from 'react';
 import {Button} from 'react-native-elements'
 import { connect } from 'react-redux';
 import { randomQuest,getQuestList,fetchQuest } from '../actions/quest'
+import {RNSlidingButton, SlideDirection} from 'rn-sliding-button';
 class Home extends Component {
     constructor(props){
         super(props);
@@ -13,6 +14,10 @@ class Home extends Component {
         this.randomQ = this.randomQ.bind(this);
         this.goToQuest = this.goToQuest.bind(this);
     }
+    a
+    onSlideRight = () => {
+        //perform Action on slide success.
+    };
 
     componentWillMount() {
         this.props.getQuestList(this.props.authReducer.data.uid, "undone")
@@ -63,8 +68,8 @@ class Home extends Component {
                                 <Text style = {{textAlign:'center',fontSize:15,paddingBottom:10}}>type: {info[1].type}</Text>
                                 <Button title={"Play "+info[1].name}
                                 buttonStyle={{
-                                    backgroundColor: "rgba(10, 10,100, 1)",
-                                    height:80,
+                                    backgroundColor: "#3399FF",
+                                    height:50,
                                     borderColor: "transparent",
                                     borderWidth: 0,
                                     borderRadius:360,
@@ -81,18 +86,46 @@ class Home extends Component {
                 return(
             <View style={styles.container}>
                     <View style={styles.ku1}></View>
+                <View style={styles.kuko}>
+                <Image 
+                 source={require('../../image/steps.png')}
+                 fadeDuration={0}
+                 style={{width: 100, height: 100,right:10}}
+                />
+                <Image
+                 source={require('../../image/food2.png')}
+                 fadeDuration={0}
+                 style={{width: 100, height: 100}}
+                 />
+                <Image
+                 source={require('../../image/yoga.png')}
+                 fadeDuration={0}
+                 style={{width: 100, height: 100,left:10}}
+                />
+                </View>
+                    <View style={styles.kuka}></View>
+                    <View style={styles.kuku}>
+                        <Text style = {{textAlign:'center',fontSize:13.5,color:'#7a7a7a'}}>You can lies to others, but you can not lie to yourself.</Text>
+                        <Text style = {{textAlign:'center',fontSize:13.5,color:'#7a7a7a'}}>- Just be honest. -</Text>
+                                            
+                    </View>
                     <View style={styles.ku2}>
-                        <Button title="Let's Achieve!" 
-                            onPress={this.randomQ}
-                            buttonStyle={{
-                                backgroundColor: "rgba(00, 99,216, 1)",
-                                width: 150,
-                                height: 40,
-                                borderColor: "transparent",
-                                borderWidth: 0,
-                                borderRadius: 360  
-                            }}  
-                        />
+                        <RNSlidingButton
+                            style={{
+                            width: 260,
+                            backgroundColor: '#fcfcf7',
+                             }}
+                            height={35}
+                            onSlidingSuccess={async ()=>{let path = await this.randomQ();
+                                this.props.navigation.navigate(path);}}
+                                slideDirection={SlideDirection.RIGHT}>
+                            <View>
+                                <Text numberOfLines={1} style={styles.titleText}>
+                                    SLIDE RIGHT TO GET QUESTS >
+                                </Text>
+                            </View>
+                        </RNSlidingButton>
+ 
                     </View>
             </View>
         );
@@ -112,27 +145,45 @@ const mapStateToProps = (state) => ({
 const styles = StyleSheet.create({  
     container: {
     flex: 1,
-    backgroundColor: 'white',  
+    backgroundColor: '#fcfcf7',  
     alignItems: 'center'
   },
     
     ku1: {
-      backgroundColor: 'white', 
-      flex: 0.2,
+       
+      flex: 0.1,
     },
     ku2: {
-      backgroundColor: 'white', 
+      
       flex: 0.2,
     },
     ku3: {
-      backgroundColor: 'white', 
+      
       flex: 0.2,
+    },
+    kuku: {
+        
+        flex: 0.65,
+    },
+    kuka: {
+        
+        flex: 0.1,
+    },
+    kuko:  {
+        
+        flexDirection: 'row'
     },
     separator: {
         marginVertical: 10,
         borderWidth: 0.5,
         borderColor: '#DCDCDC',
       },
+    titleText: {
+        fontSize: 18,
+        fontWeight: 'normal',
+        textAlign: 'center',
+        color: '#000000'
+    }
 });
 //Used to add dispatch (action) into props
 const mapDispatchToProps = {

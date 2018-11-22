@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { Button, Avatar } from 'react-native-elements';
 import {updateMidAuth} from '../actions/signIn'
 import ProgressBarAnimated from 'react-native-progress-bar-animated';
+import { Font } from 'expo';
 
 
 class Profile extends Component{
@@ -33,6 +34,11 @@ class Profile extends Component{
             this.props.navigation.navigate("Achievement", { uid: this.props.authReducer.data.uid })
         }
 
+         
+         
+
+         
+
     render(){
         const styles = StyleSheet.create({
             container: {
@@ -40,20 +46,25 @@ class Profile extends Component{
             },
             title: {
               fontSize: 30,
-              fontWeight: 'bold',
               textAlign: 'center',
-              fontFamily: 'asd'
+              fontFamily:'asd'
             },
-           
+            ki:{
+                paddingTop:20,
+                fontSize:15,
+                textAlign:'center',
+                fontFamily:'asd'
+            },
+         
           });
         const {authReducer} = this.props
         const {food,walk,rest}= authReducer.data.levelQ;
         
         return <View style={styles.container}>
-            <Text style = {{fontFamily:'asd',fontSize:30,fontWeight:'bold'}}>Your Profile</Text>
+            <Text style = {{fontFamily:'asd',paddingTop:20,paddingBottom:10,fontSize:25}}>Your Profile</Text>
             {authReducer.isAuth && <View>
-                <Avatar containerStyle = {{left:90}} large rounded source={{ uri: authReducer.data.photoURL }} />
-                <Text style={{paddingTop:20,fontSize:15,textAlign:'center'}}>{authReducer.data.displayName}</Text>
+                <Avatar containerStyle = {{left:90}} large rounded source={{ uri: authReducer.data.photoURL }} onPress={() => console.log("Works!")} />
+                <Text style={styles.ki}>{authReducer.data.displayName}</Text>
                 <Text>{authReducer.data.Email}</Text>
                 
 {/* //TODO แสดง เลเวล ค่าประสบการณ์ Objectที่เก็บข้อมูล = authReducer.data.levelQ */}
@@ -65,7 +76,7 @@ class Profile extends Component{
                  fadeDuration={0}
                  style={{width: 25, height: 25,left:90}}
                 />    
-                <Text style={{textAlign:'center',paddingTop:10,paddingBottom:30,left:100}}> X Star : {authReducer.data.star  }</Text>
+                <Text style={{textAlign:'center',paddingTop:10,paddingBottom:20,left:100}}> X  {authReducer.data.star  }</Text>
                 </View>
                 <View style = {{
                     padding:5, 
@@ -81,7 +92,7 @@ class Profile extends Component{
                 value = {(authReducer.data.levelQ.walk.star*100)/authReducer.data.levelQ.walk.target}/>
                 <Text style = {{left:10}}>{walk.star}/{walk.target}</Text> 
                 </View>
-                <Text>Level:{walk.level}</Text>
+                <Text style = {{fontFamily:'asd'}}>Level:{walk.level}</Text>
                 <View style = {{
                     padding:5, 
                     flexDirection: 'row'
@@ -96,7 +107,7 @@ class Profile extends Component{
                 value = {(authReducer.data.levelQ.food.star*100)/authReducer.data.levelQ.food.target}/>
                 <Text style = {{left:10}}>{food.star}/{food.target}</Text>         
                 </View>
-                <Text>Level:{food.level}</Text>
+                <Text style = {{fontFamily:'asd'}}>Level:{food.level}</Text>
                 <View style = {{
                     padding:5, 
                     flexDirection: 'row'
@@ -111,31 +122,19 @@ class Profile extends Component{
                 value = {(authReducer.data.levelQ.rest.star*100)/authReducer.data.levelQ.rest.target}/>
                 <Text style = {{left:10}}>{rest.star}/{rest.target}</Text>   
                 </View>
-                <Text>Level:{rest.level}</Text>
-                <View style = {{paddingTop:10}}>
-                <Button title="Share Now!" 
-                    buttonStyle={{
-                        backgroundColor: "rgba(10, 10,100, 1)",
-                        width: 120,
-                        height: 30,
-                        borderColor: "transparent",
-                        borderWidth: 0,
-                        borderRadius:360,
-                        left:55
-                      }}  
-                />
-                </View>
-                <View style = {{paddingTop:10}}>
+                <Text style = {{fontFamily:'asd'}}>Level:{rest.level}</Text>
+                <View style = {{paddingTop:20}}>
                 <Button title="Achievement Earned" 
                     onPress={this.goToAchievement}
                     buttonStyle={{
-                        backgroundColor: "rgba(00, 99,216, 1)",
+                        backgroundColor: "#004200",
                         width: 200,
                         height: 40,
                         borderColor: "transparent",
                         borderWidth: 0,
                         left:15
-                      }}  
+                      }}
+                      style = {{fontFamily:'asd'}}  
                 />
                     <Button title="History Quest"
                         onPress={this.goToHistoryQuest}
