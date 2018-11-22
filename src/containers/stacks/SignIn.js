@@ -104,7 +104,7 @@ const Styles = StyleSheet.create({
         flex: 0.2,
       },
     ki1: {
-        flex: 0.1,   
+        flex: 0.13,   
       },
     ki4:{
         
