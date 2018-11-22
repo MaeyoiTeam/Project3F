@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {ScrollView, View,Text,StyleSheet,TouchableHighlight } from 'react-native';
+import {ScrollView, View,Text,StyleSheet,TouchableHighlight,} from 'react-native';
 import {Button,Avatar} from 'react-native-elements';
 import { connect } from 'react-redux';
 import {fetchData,fetchRanking} from '../actions'
@@ -32,11 +32,13 @@ class Ranking extends Component{
         const current={};
         props=this.props;
         if(this.props.authReducer.isAuth &&this.state.fontLoaded){
-        return(<View style={styles.container}>
+        return(
+            <ScrollView>
+                <View style={styles.container}>
             
 
                 <View>
-                <Text style = {styles.title}>Ranking</Text>
+                <Text style = {{fontFamily:'asd',paddingTop:20,paddingBottom:10,fontSize:25,fontWeight:'bold',textAlign:'center'}}>Ranking</Text>
                 
                 
                 
@@ -60,16 +62,17 @@ class Ranking extends Component{
                      }
                 <View style={styles.container}>
                 
-                <Text style={{fontSize:25,fontWeight: 'bold',fontFamily: "Segoe-Script",padding:5}}>Your Rank!</Text>
+                <Text style={{fontSize:25,fontWeight: 'bold',fontFamily: "Segoe-Script",padding:5,}}>Your Rank!</Text>
                 </View>   
                      {
                          this.current!=null &&<View>
-                          <Text>Rank: {this.current.index+1} : {this.current.data.name}</Text>
-                        <Text>     Star:  {this.current.data.star}</Text>
+                          <Text style = {{left:45}}>Rank: {this.current.index+1} : {this.current.data.name}</Text>
+                        <Text style={{left:45,paddingTop:10}}>     Star:  {this.current.data.star}</Text>
                          </View>
                       }
             </View>
             </View>
+            </ScrollView>
         );
     }else{
         return(<View><Text>Rank: Please Login</Text></View>);
@@ -94,8 +97,8 @@ const styles = StyleSheet.create({
     },
     ku3: {
         flex: 0.4,
-    }
-  });
+    },
+});
 // Used to add reducer's states into the props
 const mapStateToProps = (state) => ({
     fetchReducer: state.fetchReducer,

@@ -1,8 +1,8 @@
-import { View,Text,StyleSheet,Image} from 'react-native';
+import { View,Text,StyleSheet,Image,FlatList,AppRegistry} from 'react-native';
 import React,{Component} from 'react';
 import { connect } from 'react-redux';
 import {getQuestList,fetchQuest} from '../../actions/quest'
-import {Button} from 'react-native-elements';
+import {Button,List,ListItem} from 'react-native-elements';
 class HistoryQuestList extends Component {
     constructor(props){
         super(props);
@@ -10,7 +10,7 @@ class HistoryQuestList extends Component {
             
         };
     }
-
+ 
 
     componentDidMount(){
           this.props.getQuestList(this.props.authReducer.data.uid,"done")
@@ -23,12 +23,20 @@ class HistoryQuestList extends Component {
                 historyReducer.data.map((type, index) => {
                     const arr = type[1]
                 return  <View key={index}><Text>{type[0]}</Text>
-                    {Object.values(arr).map((info, i) =>{
+                {
+                    console.log(arr)
+                }
+                    {
+                        
+                        Object.values(arr).map((info, i) =>{
+                        console.log(info)
                         return <View key={i}>
                         <View style={styles.pa1}>
+                            
                                 <Text>Quest name: {info.name}</Text>
                                 <Text>Quest type: {info.type}</Text>
                                 <View key={i} style = {styles.separator}></View>
+                            
                             </View>
                         </View> 
                         })

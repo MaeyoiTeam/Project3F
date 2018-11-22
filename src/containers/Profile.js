@@ -33,7 +33,7 @@ class Profile extends Component{
         const {food,walk,rest}= authReducer.data.levelQ;
         
         return <View style={styles.container}>
-            <Text style = {{fontFamily:'asd',fontSize:30,fontWeight:'bold'}}>Your Profile</Text>
+            <Text style = {{fontFamily:'asd',paddingTop:20,paddingBottom:10,fontSize:25,fontWeight:'bold'}}>Your Profile</Text>
             {authReducer.isAuth && <View>
                 <Avatar containerStyle = {{left:90}} large rounded source={{ uri: authReducer.data.photoURL }} onPress={() => console.log("Works!")} />
                 <Text style={{paddingTop:20,fontSize:15,textAlign:'center'}}>{authReducer.data.displayName}</Text>
@@ -95,24 +95,11 @@ class Profile extends Component{
                 <Text style = {{left:10}}>{rest.star}/{rest.target}</Text>   
                 </View>
                 <Text>Level:{rest.level}</Text>
-                <View style = {{paddingTop:10}}>
-                <Button title="Share Now!" 
-                    buttonStyle={{
-                        backgroundColor: "rgba(10, 10,100, 1)",
-                        width: 120,
-                        height: 30,
-                        borderColor: "transparent",
-                        borderWidth: 0,
-                        borderRadius:360,
-                        left:55
-                      }}  
-                />
-                </View>
-                <View style = {{paddingTop:10}}>
+                <View style = {{paddingTop:20}}>
                 <Button title="Achievement Earned" 
                     onPress={()=>this.props.navigation.navigate("History")}
                     buttonStyle={{
-                        backgroundColor: "rgba(00, 99,216, 1)",
+                        backgroundColor: "#004200",
                         width: 200,
                         height: 40,
                         borderColor: "transparent",

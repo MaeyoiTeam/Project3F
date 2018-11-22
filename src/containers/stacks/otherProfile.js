@@ -18,6 +18,7 @@ class OtherProfile extends Component{
         const {name,photoURL,star,levelQ} =this.state;
         console.log(this.state)
         return(<View style={styles.container}>
+                <Text style={{textAlign:'center',paddingTop:10,paddingBottom:30,left:100}}></Text>
                  <Avatar xlarge rounded source={{ uri: photoURL }} onPress={() => console.log("Works!")} />
                 <Text style={{paddingTop:20,fontSize:15,textAlign:'center'}}>{name}</Text>
                 <Text>Star:{star}</Text>
@@ -70,18 +71,7 @@ class OtherProfile extends Component{
                 <View style = {{paddingTop:10}}>
                 </View>
                 <View style = {{paddingTop:10}}>
-                <Button title="Achievement Earned" 
-                    disabled
-                    onPress={()=>this.props.navigation.navigate("History")}
-                    buttonStyle={{
-                        backgroundColor: "rgba(00, 99,216, 1)",
-                        width: 200,
-                        height: 40,
-                        borderColor: "transparent",
-                        borderWidth: 0,
-                        left:15
-                      }}  
-                />
+                
                 </View> 
         </View>);
     }

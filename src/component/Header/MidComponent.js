@@ -43,7 +43,7 @@ class MidComponent extends Component {
 
         return(
                 <View style={styles.container}>
-                <Text>ACHIEVE</Text>
+                <Text>ACHIEVE4YOURSELF</Text>
                  {/*  <Badge onPress={() => {this.easter9()}} value="ACHIEVE" /> */}
                 </View>
         );

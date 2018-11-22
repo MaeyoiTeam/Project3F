@@ -52,7 +52,7 @@ class Home extends Component {
                                 <Text style = {{textAlign:'center',fontSize:15,paddingBottom:10}}>type: {info[1].type}</Text>
                                 <Button title={"Play "+info[1].name}
                                 buttonStyle={{
-                                    backgroundColor: "rgba(10, 10,100, 1)",
+                                    backgroundColor: "#3399FF",
                                     height:50,
                                     borderColor: "transparent",
                                     borderWidth: 0,
