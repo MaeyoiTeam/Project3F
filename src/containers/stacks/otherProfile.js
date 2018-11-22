@@ -27,11 +27,8 @@ class OtherProfile extends Component{
                     padding:5, 
                     flexDirection: 'row'
                     }}>
-                <Image
-                 source={require('../../../image/steps.png')}
-                 fadeDuration={0}
-                 style={{width: 25, height: 25,right:10}}
-                />
+
+                             
                 <ProgressBarAnimated width = {200}
                 backgroundColor = "#6CC644"
                 value = {(levelQ.walk.star*100)/levelQ.walk.target}/>
@@ -57,11 +54,23 @@ class OtherProfile extends Component{
                     padding:5, 
                     flexDirection: 'row'
                     }}>
+                
+                 <Image
+                 source={require('../../../image/steps.png')}
+                 fadeDuration={0}
+                 style={{width: 25, height: 25,}}
+                />
+                <Image
+                 source={require('../../../image/food2.png')}
+                 fadeDuration={0}
+                 style={{width: 25, height: 25,}}
+                 />
                 <Image
                  source={require('../../../image/yoga.png')}
                  fadeDuration={0}
-                 style={{width: 25, height: 25,right:10}}
-                 />
+                 style={{width: 25, height: 25,}}
+                />
+                
                 <ProgressBarAnimated width = {200}
                 backgroundColor = "#6CC644"
                 value = {(levelQ.rest.star*100)/levelQ.rest.target}/>
