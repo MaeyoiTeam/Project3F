@@ -3,6 +3,7 @@ import React,{Component} from 'react';
 import { connect } from 'react-redux';
 import {Button} from 'react-native-elements'
 import {updateQuest,fetchQuest,updateQuestDone,getQuestList} from '../../../actions/quest'
+import {updateNotification} from '../../../actions/notification'
 import TimerCountdown from 'react-native-timer-countdown';
 import Accel from '../../../component/Accel';
 class QuestRest extends Component {
@@ -43,13 +44,16 @@ class QuestRest extends Component {
              if (this.props.fetchReducer.data.isComplete) {
                  this.props.getQuestList(this.props.authReducer.data.uid, "undone");
                  this.props.updateQuestDone(this.props.authReducer.data,this.state.key,this.state.type);
+                  this.props.updateNotification(this.props.authReducer.data.uid,{
+                     name: "Rest Quest Success",newStar:prevProps.fetchReducer.data.star, currentStar: this.props.fetchReducer.data.star, date: new Date().toISOString()
+                 },this.props.notification.data)
              }
         }
     }
 
 
     update=(time)=>{
-        console.log(time)
+      //  console.log(time)
     }
 
     updateDone = (user, key, point) => {
@@ -137,12 +141,13 @@ class QuestRest extends Component {
 
 // Used to add reducer's states into the props
 const mapStateToProps = (state) => ({
+    notification:state.notification,
     fetchReducer: state.fetchReducer,
     authReducer: state.authReducer
 });
 //Used to add dispatch (action) into props
 const mapDispatchToProps = {
-    updateQuest, fetchQuest, updateQuestDone, getQuestList
+    updateQuest, fetchQuest, updateQuestDone, getQuestList, updateNotification
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(QuestRest)

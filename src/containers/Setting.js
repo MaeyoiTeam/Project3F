@@ -2,7 +2,7 @@ import { View,Text,StyleSheet,Image,Platform,TextInput,TouchableOpacity,Activity
 import React,{Component} from 'react';
 import {Button,CheckBox,ButtonGroup} from 'react-native-elements'
 import { connect } from 'react-redux';
-import {signOut} from '../actions/signIn';
+import {signOut,updateIsShowNotification} from '../actions/signIn';
 import { BlurView } from 'expo';
 
 class Setting extends Component {
@@ -12,27 +12,30 @@ class Setting extends Component {
     constructor(props){
         super(props);
         this.state={
-            isC:true,
-            showMe:false
+            showMe: false
         }
+        this.logOut = this.logOut.bind(this);
+        this.toggleNotification = this.toggleNotification.bind(this);
     }
 
 
-     logOut = () => {
-         return new Promise(async (resolve, reject) => {
-             this.props.signOut()
-            return resolve("SignIn")
-         })
+     logOut(){
+             this.props.signOut();
+         this.props.navigation.navigate('SignIn')
+     }
+    toggleNotification(){
+         this.props.updateIsShowNotification(this.props.authReducer.data, !this.props.authReducer.data.isShowNotification)
      }
 
     render(){
+        const {authReducer } = this.props;
         return(     
         <View style={styles.container}>
         
             <View style={styles.pa3}></View>
             <View style={styles.pa6}>
             
-            <CheckBox title='On/Off Notification' iconRight checked={this.state.isC} style={{fontFamily:'asd'}} />
+            <CheckBox title='On/Off Notification' iconRight checked={authReducer.data.isShowNotification} onPress = {this.toggleNotification} style={{fontFamily:'asd'}} />
             </View>
             <View style={styles.pa4}></View>
                 <View style={styles.container1}>
@@ -73,9 +76,7 @@ class Setting extends Component {
             <View style={styles.pa1}></View>
             <View style={styles.pa2}>
                 <Button title="Logout Account"
-                    onPress={async ()=>{let path = await this.logOut();
-                    this.props.navigation.navigate(path);
-                    }}
+                    onPress={this.logOut}
                     buttonStyle={{
                         backgroundColor: "#4c4c4c",width: 150,height: 40,borderColor: "transparent",borderWidth: 0,marginLeft:54
                     }}/>
@@ -137,7 +138,7 @@ const mapStateToProps = (state) => ({
 });
 //Used to add dispatch (action) into props
 const mapDispatchToProps = {
-    signOut,
+    signOut, updateIsShowNotification
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Setting)

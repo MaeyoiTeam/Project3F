@@ -6,9 +6,6 @@ import {authChanged} from '../../actions/signIn';
 import {Header} from 'react-native-elements';
 import {navigate} from '../../actions';
 class LeftComponent extends Component{
-         componentWillMount() {
-            this.props.authChanged()
-         }
 render(){
     return(
         <View>

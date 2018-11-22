@@ -2,35 +2,34 @@ import { View,Text,StyleSheet,Image,FlatList,AppRegistry,ScrollView} from 'react
 import React,{Component} from 'react';
 import { connect } from 'react-redux';
 import {getQuestList,fetchQuest} from '../../actions/quest'
+import { clearMiddleHistory} from '../../actions/'
 import {Button,List,ListItem} from 'react-native-elements';
 class HistoryQuestList extends Component {
     constructor(props){
         super(props);
         this.state={
-            
         };
     }
  
 
-    componentDidMount(){
-          this.props.getQuestList(this.props.authReducer.data.uid,"done")
+    componentWillMount(){
+        this.props.getQuestList(this.props.navigation.state.params.uid,"done")
     }
 
+    componentWillUnmount(){
+        this.props.clearMiddleHistory();
+    }
     render(){
         const {historyReducer,authReducer,fetchReducer} = this.props;
                         return(
-                        <View style={styles.container}>{          
+                <View style={styles.container}>
+                {  historyReducer.haveHISTORY &&
                 historyReducer.data.map((type, index) => {
                     const arr = type[1]
-                return  <ScrollView><View key={index}><Text style={{fontFamily:'asd',fontSize:27}}>{type[0]}</Text>
+                return  <ScrollView key={index}><Text style={{fontFamily:'asd',fontSize:27}}>{type[0]}</Text>
                  <View style={styles.pa3}></View>
-                {
-                    console.log(arr)
-                }
                     {
-                        
                         Object.values(arr).map((info, i) =>{
-                        console.log(info)
                         return <View key={i}>
                         <View style={styles.pa1}>
                             
@@ -42,7 +41,7 @@ class HistoryQuestList extends Component {
                         </View> 
                         })
                     }
-                </View></ScrollView>       
+                </ScrollView>       
                 })  
             }  
             </View>
@@ -58,7 +57,7 @@ const mapStateToProps = (state) => ({
 });
 //Used to add dispatch (action) into props
 const mapDispatchToProps = {
-    getQuestList, fetchQuest
+    getQuestList, fetchQuest, clearMiddleHistory
 };
 const styles = StyleSheet.create({  
     container: {

@@ -2,13 +2,21 @@ import { View,Text,StyleSheet,Image } from 'react-native';
 import React,{Component} from 'react';
 import { connect } from "react-redux";
 import { Button, Avatar } from 'react-native-elements';
+import {updateMidAuth} from '../actions/signIn'
 import ProgressBarAnimated from 'react-native-progress-bar-animated';
 import { Font } from 'expo';
 
 
 class Profile extends Component{
+    constructor(props){
+        super(props);
+        this.goToHistoryQuest = this.goToHistoryQuest.bind(this);
+        this.goToAchievement = this.goToAchievement.bind(this);
+    }
+    componentDidMount(){
+        this.props.updateMidAuth(this.props.authReducer.data.uid);
+    }
 
-    
          componentDidUpdate(prevProps, prevState, snapshot) {
              if (prevProps.authReducer.data != this.props.authReducer.data) {
                  this.setState({
@@ -16,6 +24,15 @@ class Profile extends Component{
                  })
              }
          }
+//TODO ทำให้เมื่อเวลอัพ starเพิ่ม อัพเดทอัตโนมัติ
+
+        goToHistoryQuest(){
+            this.props.navigation.navigate("History",{uid:this.props.authReducer.data.uid})
+         }
+         
+        goToAchievement() {
+            this.props.navigation.navigate("Achievement", { uid: this.props.authReducer.data.uid })
+        }
 
          
          
@@ -108,7 +125,7 @@ class Profile extends Component{
                 <Text style = {{fontFamily:'asd'}}>Level:{rest.level}</Text>
                 <View style = {{paddingTop:20}}>
                 <Button title="Achievement Earned" 
-                    onPress={()=>this.props.navigation.navigate("History")}
+                    onPress={this.goToAchievement}
                     buttonStyle={{
                         backgroundColor: "#004200",
                         width: 200,
@@ -119,6 +136,17 @@ class Profile extends Component{
                       }}
                       style = {{fontFamily:'asd'}}  
                 />
+                    <Button title="History Quest"
+                        onPress={this.goToHistoryQuest}
+                        buttonStyle={{
+                            backgroundColor: "rgba(00, 99,216, 1)",
+                            width: 200,
+                            height: 40,
+                            borderColor: "transparent",
+                            borderWidth: 0,
+                            left: 15
+                        }}
+                    />
                 </View>
               </View>}
           </View>;
@@ -132,7 +160,7 @@ const mapStateToProps = (state) => ({
 });
 //Used to add dispatch (action) into props
 const mapDispatchToProps = {
-    
+    updateMidAuth
 };
 const styles = StyleSheet.create({  
     container: {

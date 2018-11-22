@@ -1,9 +1,10 @@
-import { View,Text,StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, FlatList } from 'react-native';
 import React,{Component} from 'react';
 import { connect } from 'react-redux';
 import {Button} from 'react-native-elements'
 import { Pedometer } from "expo";
 import {updateQuest,fetchQuest,updateQuestDone,getQuestList,compareScore} from '../../../actions/quest';
+import ListCom from '../../../component/ListCom'
 import * as Expo from "expo";
 class QuestWalk extends Component {
   static navigationOptions = ({
@@ -31,35 +32,26 @@ class QuestWalk extends Component {
             isComplete:false,
             prevLevel:{},
             stepCount: 0,
-            targetSteps: []
+            targetSteps: [],
+            count:0
         }
     }
-     componentDidUpdate(prevProps, prevState, snapshot){
-         if(prevState.stepCount!=this.state.stepCount){
-             console.log("Update StepCount")
-             //TODO แสดงป๊อปอัพว่า ปลดคล๊อกอันใหม่
-             this.update(this.state.stepCount)
-         }
 
-        if (this.props.fetchReducer.data.targetSteps!=null&&prevProps.fetchReducer.data.targetSteps!=null) {
-         console.log(prevProps.fetchReducer.data.targetSteps.length + " / " + this.props.fetchReducer.data.targetSteps.length)
-            if (prevProps.fetchReducer.data.targetSteps.length != this.props.fetchReducer.data.targetSteps.length) {
-                console.log("Update targetSteps")
-                this.setState({
-                    ...this.props.fetchReducer.data,
-                    prevLevel: { ...prevProps.authReducer.data.levelQ[this.state.type]
-                    }
-                })
-                if (this.props.fetchReducer.data.isComplete) {
-                    this.props.getQuestList(this.props.authReducer.data.uid, "undone");
-                    this.props.updateQuestDone(this.props.authReducer.data, this.state.key, this.state.type);
-                }
-            }
-        }
-    } 
     componentDidMount() {
-          this.timerID = setInterval(() => this._subscribe(), 1000);
-      }
+        this.timerID = setInterval(() => this._subscribe(), 1000);
+    }
+
+    shouldComponentUpdate = (nextProps, nextState) => {
+      return this.props.fetchReducer.data.targetSteps!=nextProps.fetchReducer.data.targetSteps||this.state.stepCount!=nextState.stepCount;
+    }
+    
+    componentWillUpdate = (nextProps, nextState) => {
+        if (nextState.stepCount != this.state.stepCount) {
+          console.log("Update StepCount");
+          //TODO แสดงป๊อปอัพว่า ปลดคล๊อกอันใหม่
+          this.update(this.state.stepCount);
+        }
+    }
 
 
       componentWillUnmount() {
@@ -70,10 +62,8 @@ class QuestWalk extends Component {
      _subscribe = () => {
          let startTime = new Date(this.props.fetchReducer.data.start.replace('Z', ''));
          let currentTime  = new Date();
-        this._subscription = Pedometer.watchStepCount(result => {
-                this.setState({
-                time: new Date(),
-            });
+        this._subscription = Pedometer.watchStepCount((result)=>{
+            this.setState({count:result})
         });
 /*           console.log("Start: "+startTime);
          console.log("current: "+currentTime);  */
@@ -93,8 +83,8 @@ class QuestWalk extends Component {
          );
      };
 
-    update = (steps) => {
-             this.props.compareScore(this.props.fetchReducer.data,steps);
+    update =async (steps) => {
+             await this.props.compareScore(this.props.fetchReducer.data,steps);
     }
      _unsubscribe = () => {
          this._subscription && this._subscription.remove();
@@ -123,13 +113,10 @@ class QuestWalk extends Component {
                 <Text>Detail: {detail} </Text>
                 <Text>Exp: {current}/{target}</Text>
                     <Text>Steps : {this.state.stepCount}</Text>
-                {   this.props.fetchReducer.data.targetSteps!=null &&
-                    this.props.fetchReducer.data.targetSteps.map((obj,i) =><View key={i}>
-                        <Text>You got more: {obj[0]}</Text>
-                        <Text>Name: {obj[1].name}</Text>
-                        <Text>Star: {obj[1].star}</Text>
-                    </View>)
-                }
+                     {   fetchReducer.data.targetSteps!=null &&
+                        <FlatList data={fetchReducer.data.targetSteps} 
+                        renderItem={({item})=><Text>{item[0]}</Text>}/>
+                    } 
             </View>
             );
         }

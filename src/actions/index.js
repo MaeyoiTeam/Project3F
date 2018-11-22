@@ -36,29 +36,6 @@ export const navigate = (nav)=>{
     }
 } 
 
-//############################################### Ranking ###############################################
-export const fetchProfile = (uid) => {
-    console.log(uid)
-    const result = loadUserData(uid).then((obj) => {
-        return {
-            ...obj
-        }
-    });
-    return fetchData(result);
-}
-
-export const fetchRanking  = () => {
-    return (dispatch) => {
-        dispatch({ type:RANK_DATA });
-        rankingUser()
-            .then(result => {
-                dispatch({type:RANK_DATA_SUCCESS,payload:result})
-            }).catch(error => {
-                dispatch({type:RANK_DATA_FAILURE})
-                console.log(error)
-            })
-    }
-}
 
 export const fetchQuestList = (fn) => {
     return (dispatch) => {
@@ -96,5 +73,52 @@ export const fetchModal = (fn) => {
                 dispatch({type:MODAL_CLOSE})
                 console.log(error)
             })
+    }
+}
+
+//############################################### Ranking ###############################################
+export const fetchProfile = (uid) => {
+    const result = loadUserData(uid).then((obj) => {
+        return {
+            uid: uid,
+            displayName: obj.displayName,
+            photoURL: obj.photoURL + "?width=256",
+            email: obj.email,
+            levelQ: obj.levelQ,
+            star: obj.star,
+            achieve: obj.achieve,
+            walkStacks: obj.walkStacks,
+        }
+    });
+    return fetchData(result);
+}
+
+
+export const fetchRanking = () => {
+    return (dispatch) => {
+        dispatch({ type: RANK_DATA });
+        rankingUser()
+            .then(result => {
+                dispatch({ type: RANK_DATA_SUCCESS, payload: result })
+            }).catch(error => {
+                dispatch({ type: RANK_DATA_FAILURE })
+                console.log(error)
+            })
+    }
+}
+//############################################### Achievement ###############################################
+
+export const fetchAchievement = (uid) => {
+    const result = loadUserData(uid,"achieve").then(obj => {
+        return {
+            ...obj
+        }
+    });
+    return fetchHistoryList(result);
+}
+
+export const clearMiddleHistory=()=>{
+    return dispatch=>{
+        dispatch({ type: HISTORY_DATA });
     }
 }

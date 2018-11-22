@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import {signOut,signInWithFacebook,signInWithGoogle,authChanged} from '../../actions/signIn';
 import {Button,Avatar,colors} from 'react-native-elements';
 import { SocialIcon } from 'react-native-elements'
-import Loading from '../../containers/stacks/Loading'
+import FirstPage from '../../containers/stacks/FirstPage'
 class SingIn extends Component{
   static navigationOptions = ({
       navigation
@@ -28,12 +28,12 @@ class SingIn extends Component{
   
      render() {
       props=this.props;
-      if(props.authReducer.isAuth){         //Should be Loading
+      if(props.authReducer.isAuth){         //Should be FirstPage
           return (
          
           
         <View>
-                  <Loading/>
+                  <FirstPage/>
       </View>
     );
       }
