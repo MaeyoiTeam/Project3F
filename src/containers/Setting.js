@@ -32,7 +32,7 @@ class Setting extends Component {
             <View style={styles.pa3}></View>
             <View style={styles.pa6}>
             
-            <CheckBox title='On/Off Notification' iconRight checked={this.state.isC} />
+            <CheckBox title='On/Off Notification' iconRight checked={this.state.isC} style={{fontFamily:'asd'}} />
             </View>
             <View style={styles.pa4}></View>
                 <View style={styles.container1}>
@@ -43,18 +43,18 @@ class Setting extends Component {
                             <View style={styles.modalView1}></View>
                             <View style={styles.modalView}>
                             <Text > </Text>
-                            <Text >Project Manager</Text>
-                            <Text >Nutza007</Text>
+                            <Text style={{fontFamily:'asd'}} >Project Manager</Text>
+                            <Text style={{fontFamily:'asd'}}>Nutza007</Text>
+                            <Text style={{fontFamily:'asd'}}></Text>
                             <Text ></Text>
+                            <Text style={{fontFamily:'asd'}}>UX/UI Designer</Text>
+                            <Text style={{fontFamily:'asd'}}>Nine9Belive</Text>
+                            <Text style={{fontFamily:'asd'}}>Bally</Text>
+                            <Text style={{fontFamily:'asd'}}>Wanchoice</Text>
                             <Text ></Text>
-                            <Text >UX/UI Designer</Text>
-                            <Text >Nine9Belive</Text>
-                            <Text >Bally</Text>
-                            <Text >Wanchoice</Text>
-                            <Text ></Text>
-                            <Text >Deverloper</Text>
-                            <Text >InwMax</Text>
-                            <Text >Mojo Jojo</Text>
+                            <Text style={{fontFamily:'asd'}}>Deverloper</Text>
+                            <Text style={{fontFamily:'asd'}}>InwMax</Text>
+                            <Text style={{fontFamily:'asd'}}>Mojo Jojo</Text>
                             <TouchableOpacity onPress={()=>{this.setState({
                                 showMe:false
                             })}}>
@@ -117,6 +117,7 @@ const styles = StyleSheet.create({
             color:'#bbb',
             padding:5,
             margin:20,
+            fontFamily:'asd'
         }, 
     openText:{backgroundColor:'#FBFBFB',
             color:'black',
@@ -125,7 +126,7 @@ const styles = StyleSheet.create({
             margin:10,
             borderWidth: 1,
             borderColor: '#eaeaea', 
-                  
+            fontFamily:'asd'          
     },
 });
 

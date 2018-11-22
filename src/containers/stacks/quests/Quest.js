@@ -100,15 +100,14 @@ class Quest extends Component {
                             <View style={styles.modalView1}></View>
                             <View style={styles.modalView}>
                  <Text>กดเพื่อรับดวงดาวกันเลยยยยยย</Text>
-                 <View style={styles.ku1}></View>
+                 <View style={styles.modalView}></View>
                   <Button buttonStyle={{
                                     backgroundColor: "rgba(10, 10,100, 1)",
                                     height:30,
                                     borderColor: "transparent",
                                     borderWidth: 0,
                                     borderRadius:360,
-                                    }} title={"Up "+point+" point"} onPress={()=>this.update(authReducer.data,key,point)}/>
-                                    <View style={styles.ku1}></View> 
+                                    }} title={"Up "+point+" point"} onPress={()=>this.update(authReducer.data,key,point)}/> 
                  <TouchableOpacity onPress={()=>{this.setState({
                                 showMe:false
                             })}}>
@@ -151,9 +150,6 @@ openText:{backgroundColor:'#bbb',
    padding:5,
    margin:20,
    borderWidth: 1,          
-},
-ku1:{backgroundColor:'#bbb',
-   flex:0.2        
 },
 });
 // Used to add reducer's states into the props

@@ -58,6 +58,7 @@ class Home extends Component {
                                     borderWidth: 0,
                                     borderRadius:360,
                                     }}
+                                
                                 onPress = {
                                         () => {
                                             this.props.fetchQuest(authReducer.data.uid,info[0],"undone");
@@ -73,6 +74,7 @@ class Home extends Component {
                                             }
                                             this.props.navigation.navigate(path);
                                         }
+                                        
                                 }
                                 />
                             </View>
