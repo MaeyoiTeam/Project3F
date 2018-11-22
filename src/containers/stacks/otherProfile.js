@@ -88,7 +88,31 @@ class OtherProfile extends Component {
                             <Text style = {{left:10}}>{levelQ.rest.star}/{levelQ.rest.target}</Text>   
                             </View>
                             <Text>Level:{levelQ.rest.level}</Text>
-                            </View>}
+                    <Button title="Achievement Earned"
+                        onPress={this.goToAchievement}
+                        buttonStyle={{
+                            backgroundColor: "#004200",
+                            width: 200,
+                            height: 40,
+                            borderColor: "transparent",
+                            borderWidth: 0,
+                            left: 15
+                        }}
+                        style={{ fontFamily: 'asd' }}
+                    />
+                    <Button title="History Quest"
+                        onPress={this.goToHistoryQuest}
+                        buttonStyle={{
+                            backgroundColor: "rgba(00, 99,216, 1)",
+                            width: 200,
+                            height: 40,
+                            borderColor: "transparent",
+                            borderWidth: 0,
+                            left: 15
+                        }}
+                    />
+                            </View>
+                            }
                 <View style = {{paddingTop:10}}></View>
                 <View style = {{paddingTop:10}}></View>
         </View>);

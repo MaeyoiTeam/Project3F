@@ -26,15 +26,10 @@ class HistoryQuestList extends Component {
                 {  historyReducer.haveHISTORY &&
                 historyReducer.data.map((type, index) => {
                     const arr = type[1]
-                return  <ScrollView><View key={index}><Text style={{fontFamily:'asd',fontSize:27}}>{type[0]}</Text>
+                return  <ScrollView key={index}><Text style={{fontFamily:'asd',fontSize:27}}>{type[0]}</Text>
                  <View style={styles.pa3}></View>
-                {
-                    console.log(arr)
-                }
                     {
-                        
                         Object.values(arr).map((info, i) =>{
-                        console.log(info)
                         return <View key={i}>
                         <View style={styles.pa1}>
                             
@@ -46,7 +41,7 @@ class HistoryQuestList extends Component {
                         </View> 
                         })
                     }
-                </View></ScrollView>       
+                </ScrollView>       
                 })  
             }  
             </View>
