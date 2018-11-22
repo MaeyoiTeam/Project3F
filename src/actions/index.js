@@ -116,3 +116,9 @@ export const fetchAchievement = (uid) => {
     });
     return fetchHistoryList(result);
 }
+
+export const clearMiddleHistory=()=>{
+    return dispatch=>{
+        dispatch({ type: HISTORY_DATA });
+    }
+}

@@ -3,7 +3,7 @@ import React,{Component} from 'react';
 import { connect } from "react-redux";
 import { Button, Avatar } from 'react-native-elements';
 import firebase from '../../config/firebase';
-import {fetchAchievement} from '../../actions/'
+import { fetchAchievement, clearMiddleHistory} from '../../actions/'
 class Achievement extends Component {
   constructor(props) {
     super(props);
@@ -32,6 +32,9 @@ class Achievement extends Component {
         achieve: this.props.historyReducer.data
       });
     }
+  }
+  componentWillUnmount() {
+    this.props.clearMiddleHistory();
   }
 
   getUrlImage(achievelist) {
@@ -102,7 +105,7 @@ const mapStateToProps = state => ({
 });
 //Used to add dispatch (action) into props
 const mapDispatchToProps = {
-  fetchAchievement
+  fetchAchievement, clearMiddleHistory
 };
 const styles = StyleSheet.create({  
     container: {

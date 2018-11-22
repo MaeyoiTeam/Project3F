@@ -2,6 +2,7 @@ import { View,Text,StyleSheet } from 'react-native';
 import React,{Component} from 'react';
 import { connect } from 'react-redux';
 import {getQuestList,fetchQuest} from '../../actions/quest'
+import { clearMiddleHistory} from '../../actions/'
 import {Button} from 'react-native-elements';
 class HistoryQuestList extends Component {
     constructor(props){
@@ -15,6 +16,9 @@ class HistoryQuestList extends Component {
         this.props.getQuestList(this.props.navigation.state.params.uid,"done")
     }
 
+    componentWillUnmount(){
+        this.props.clearMiddleHistory();
+    }
     render(){
         const {historyReducer,authReducer,fetchReducer} = this.props;
                         return(
@@ -46,7 +50,7 @@ const mapStateToProps = (state) => ({
 });
 //Used to add dispatch (action) into props
 const mapDispatchToProps = {
-    getQuestList, fetchQuest
+    getQuestList, fetchQuest, clearMiddleHistory
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(HistoryQuestList)
