@@ -67,35 +67,34 @@ class Achievement extends Component {
   render() {
     const { historyReducer } = this.props;
     // console.log(this.state.achieve);
-    return (
-      <View style={styles.container}>
+    return <View style={styles.container}>
         <Text>Your Achievement</Text>
-        {this.state.achieve != null &&
-          Object.values(this.state.achieve).map((obj, i) => {
-            return (
-              <View key={i}>
-                <Text>Name: {obj.name}</Text>
-                <Text>Detail: {obj.detail}</Text>
-                <Text>Time: {obj.time}</Text>
-                <Text>star: {obj.star}</Text>
-                {this.state.showImg ? (
-                  <Image
-                    style={{ width: 50, height: 50 }}
-                    source={{ uri: obj.path }}
-                  />
-                ) : (
-                  <Image
-                    style={{ width: 50, height: 50 }}
-                    source={require("../../../image/icon.png")}
-                  />
-                ) //Temp Imag
-                }
-                <Text> </Text>
-              </View>
-            );
-          })}
-      </View>
-    );
+        {historyReducer.haveHISTORY && Object.values(this.state.achieve).map(
+            (obj, i) => {
+              return (
+                <View key={i}>
+                  <Text>Name: {obj.name}</Text>
+                  <Text>Detail: {obj.detail}</Text>
+                  <Text>Time: {obj.time}</Text>
+                  <Text>star: {obj.star}</Text>
+                  {this.state.showImg ? (
+                    <Image
+                      style={{ width: 50, height: 50 }}
+                      source={{ uri: obj.path }}
+                    />
+                  ) : (
+                    <Image
+                      style={{ width: 50, height: 50 }}
+                      source={require("../../../image/icon.png")}
+                    />
+                  ) //Temp Imag
+                  }
+                  <Text> </Text>
+                </View>
+              );
+            }
+          )}
+      </View>;
   }
 }
 

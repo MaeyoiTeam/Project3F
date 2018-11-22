@@ -23,7 +23,7 @@ class HistoryQuestList extends Component {
         const {historyReducer,authReducer,fetchReducer} = this.props;
                         return(
             <View>
-             {          
+            {historyReducer.haveHISTORY &&         
                 historyReducer.data.map((type, index) => {
                     const arr = type[1]
                 return  <View key={index}><Text>{type[0]}</Text>
