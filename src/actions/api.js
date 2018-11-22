@@ -97,80 +97,84 @@ export const moveToDone = (uid, key, quest) => { //quest คือข้อม�
     });
 }
 // UpdateAchieve & check Achieve 
-export const updateAchieve = (uid, quest, achieve) => {
+export const updateAchieve = (uid, quest) => {
     return new Promise((resolve,reject)=>{
         try{
             const personalRef = userRef.child(uid)
             var listResult = {};
-            systemRef.once('value', snap => {
-                const achE = Object.entries(snap.val().achieve)
-                const result = achE.filter((ach) => {
-                    const condition = ach[1].condition;
-                    const keyCon = Object.keys(condition);
-                    const filterCon = keyCon.filter((key) => {
-                        const require = condition[key];
-                        if (Array.isArray(condition[key])) { // เจาะจงเควส
-                            //TODO เจาะจง
+            personalRef.child('achieve').once('value',(ownAchieveSnap)=>{
+                systemRef.once("value", snap => {
+                    const achE = Object.entries(snap.val().achieve);
+                    const result = achE.filter(ach => {
+                        const condition = ach[1].condition;
+                        const keyCon = Object.keys(condition);
+                        const filterCon = keyCon.filter(key => {
+                            const require = condition[key];
+                            if (Array.isArray(condition[key])) {
+                                // เจาะจงเควส
+                                //TODO เจาะจง
 
-                            const have = quest[key]; // นี่คือเควส
-                            if (have == null) {
-                                const result = [];
+                                const have = quest[key]; // นี่คือเควส
+                                if (have == null) {
+                                    const result = [];
+                                } else {
+                                    const result = have
+                                        .filter(obj => {
+                                            return Object.values(require).includes(String(obj));
+                                        })
+                                        .sort()
+                                        .join();
+                                }
+                                return result == require.sort().join();
+                            } else if (typeof condition[key] == "object") {
+                                //กรณีจำนวนwalk stacks
+                                const haveWalkStacks = quest; //อันนี้คือwalkStacks
+                                const result = Object.entries(haveWalkStacks).filter(
+                                    obj => {
+                                        return obj[1] >= require[obj[0]];
+                                    }
+                                );
+                                return result.length == Object.keys(require).length;
                             } else {
-                                const result = have.filter((obj) => {
-                                    return Object.values(require).includes(String(obj));
-                                }).sort().join()
+                                // จำนวนเควส type มากกว่าหรือเท่ากับ condition
+                                if (quest[key] != null) {
+                                    return quest[key].length >= condition[key];
+                                } else {
+                                    return false;
+                                }
                             }
-                            return result == require.sort().join();
-                        } else if (typeof condition[key] == 'object') { //กรณีจำนวนwalk stacks 
-                            const haveWalkStacks = quest; //อันนี้คือwalkStacks
-                            const result = Object.entries(haveWalkStacks).filter((obj) => {
-                                return obj[1] >= require[obj[0]]
-                            })
-                            return result.length == Object.keys(require).length;
+                        });
+                        if (filterCon
+                            .sort()
+                            .join() == keyCon.sort().join()) {
+                            return true;
                         } else {
-                            // จำนวนเควส type มากกว่าหรือเท่ากับ condition
-                            if (quest[key] != null) {
-                                return quest[key].length >= condition[key];
-                            } else {
-                                return false
-                            }
+                            return false;
                         }
-                    })
-                    if (filterCon.sort().join() == keyCon.sort().join()) {
-                        return true;
-                    } else {
-                        return false;
-                    }
-                })
-
-                const filterResult = result.filter((obj) => {
-                    if (achieve != null) {
-                        if (Object.keys(achieve).length != 0) {
-                            return !Object.keys(achieve).includes(obj[0])
-                        }
-                    }
-                    return true
-                });
-                //Update in DataUser
-                var sumStar = 0;
-                if (filterResult != []) {
-                    filterResult.map((obj) => {
-                        sumStar += Number(obj[1].star);
-                        listResult = {
-                            [obj[0]]: {
-                                ...obj[1],
-                                time: new Date().toISOString(),
-                            },
-                            ...listResult
-                        };
                     });
-                    personalRef.child('achieve').update(listResult);
-                }
-                personalRef.child('star').transaction((star) => {
 
-                    return (Number(star) || 0) + Number(sumStar)
-                })
-            });
+                    const filterResult = result.filter(obj => {
+                        if (ownAchieveSnap.val() != null) {
+                            if (Object.keys(ownAchieveSnap.val()).length != 0) {
+                                return !Object.keys(ownAchieveSnap.val()).includes(obj[0]);
+                          }
+                        }
+                        return true;
+                    });
+                    //Update in DataUser
+                    var sumStar = 0;
+                    if (filterResult != []) {
+                        filterResult.map(obj => {
+                            sumStar += Number(obj[1].star);
+                            listResult = { [obj[0]]: { ...obj[1], time: new Date().toISOString() }, ...listResult };
+                        });
+                        personalRef.child("achieve").update(listResult);
+                    }
+                    personalRef.child("star").transaction(star => {
+                        return (Number(star) || 0) + Number(sumStar);
+                    });
+                });
+            })
             return resolve(listResult)
         }catch(e){
             return reject(e)
@@ -185,6 +189,7 @@ const updateLevel = (data, star) => {
     var level = data.level;
     const lvlup = Math.floor(currentStar / data.target);
     var target = data.target;
+    console.log(currentStar +" / "+ data.target);
     if (currentStar >= data.target) {
         systemRef.once('value', snap => {
             currentStar = currentStar - data.target;

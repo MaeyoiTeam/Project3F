@@ -68,7 +68,7 @@ export const updateQuestDone = (user, key, type) => {
     ...user.quest
   }
   //TODO update Achievement
-  const newAchieve = updateAchieve(user.uid,quest,user.achieve);
+  const newAchieve = updateAchieve(user.uid,quest);
   var achievement = user.achieve;
    if (achievement!=null) {
       achievement={...newAchieve,...achievement}
@@ -202,7 +202,7 @@ export const finishQuestWalk = (user, key, modalData, stepCount) => {
       }
       moveToDone(user.uid, key, data);
       const result = updateWalkStacks(user.uid, walkStacks).then(updatedStacks => {
-        updateAchieve(user.uid, updatedStacks, user.achieve).then((newAchieve) => {
+        updateAchieve(user.uid, updatedStacks).then((newAchieve) => {
           dispatch({
             type: MODAL_OPEN,
             payload: {
