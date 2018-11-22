@@ -22,11 +22,14 @@ export default class App extends React.Component {
     constructor() {
       super();
     }
-  componentDidMount() {
-    Font.loadAsync({
-      'asd': require('./assets/fonts/seguiemj.ttf'),
-    });
-  }
+   
+    async componentDidMount() {
+      await Font.loadAsync({
+        'asd': require('./assets/fonts/CSPraJad.otf'),
+      });
+  
+      this.setState({ fontLoaded: true });
+    }
 
   render() {
     return (
