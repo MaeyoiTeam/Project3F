@@ -21,7 +21,7 @@ class Setting extends Component {
 
      logOut(){
              this.props.signOut();
-             this.props.navigation.navigate(path)
+         this.props.navigation.navigate('SignIn')
      }
     toggleNotification(){
          this.props.updateIsShowNotification(this.props.authReducer.data, !this.props.authReducer.data.isShowNotification)
