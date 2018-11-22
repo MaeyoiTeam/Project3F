@@ -10,6 +10,8 @@ class Home extends Component {
             questlist:{},
             haveQuest:false
         }
+        this.randomQ = this.randomQ.bind(this);
+        this.goToQuest = this.goToQuest.bind(this);
     }
 
     componentWillMount() {
@@ -25,19 +27,28 @@ class Home extends Component {
          }
     }
 
-     randomQ=()=>{
-       return new Promise(async (resolve, reject) => {
+    randomQ(){
            this.props.randomQuest(this.props.authReducer.data).then(()=>{
                if (this.props.authReducer.isAuth) {
                 this.props.getQuestList(this.props.authReducer.data.uid, "undone")
-                   return resolve("QuestList")
-               } else {
-                   return reject("SignIn")
-               }
+               } 
            })
-            
-       })
     } 
+
+    goToQuest(info){
+        this.props.fetchQuest(this.props.authReducer.data.uid, info[0], "undone");
+        let path = 'Home';
+        switch (info[1].type) {
+            case "food": path = 'Quest';
+                break;
+            case "walk": path = 'QuestWalk';
+                break;
+            case "rest": path = "QuestRest";
+                break;
+            default: path = "Home";
+        }
+        this.props.navigation.navigate(path);
+    }
 
     render(){
         const {authReducer,questReducer} = this.props;
@@ -58,26 +69,11 @@ class Home extends Component {
                                     borderWidth: 0,
                                     borderRadius:360,
                                     }}
-                                onPress = {
-                                        () => {
-                                            this.props.fetchQuest(authReducer.data.uid,info[0],"undone");
-                                            let path='Home';
-                                            switch(info[1].type){
-                                                case "food": path='Quest'; 
-                                                                break;
-                                                case "walk": path='QuestWalk';
-                                                                break;
-                                                case "rest": path="QuestRest";
-                                                                break;
-                                                default: path="Home";
-                                            }
-                                            this.props.navigation.navigate(path);
-                                        }
-                                }
+                                    onPress={() => this.goToQuest(info)}
                                 />
                             </View>
                         )
-            }          
+                }          
                     </View>
                 );
             }
@@ -87,8 +83,7 @@ class Home extends Component {
                     <View style={styles.ku1}></View>
                     <View style={styles.ku2}>
                         <Button title="Let's Achieve!" 
-                            onPress={async ()=>{let path = await this.randomQ();
-                            this.props.navigation.navigate(path);}}
+                            onPress={this.randomQ}
                             buttonStyle={{
                                 backgroundColor: "rgba(00, 99,216, 1)",
                                 width: 150,

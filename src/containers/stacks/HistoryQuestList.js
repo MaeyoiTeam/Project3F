@@ -7,13 +7,12 @@ class HistoryQuestList extends Component {
     constructor(props){
         super(props);
         this.state={
-            
         };
     }
 
 
     componentDidMount(){
-          this.props.getQuestList(this.props.authReducer.data.uid,"done")
+        this.props.getQuestList(this.props.navigation.state.params.uid,"done")
     }
 
     render(){

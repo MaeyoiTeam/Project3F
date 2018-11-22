@@ -12,14 +12,19 @@ class Setting extends Component {
         this.state={
             showMe: false
         }
+        this.logOut = this.logOut.bind(this);
+        this.toggleNotification = this.toggleNotification.bind(this);
     }
 
 
-     logOut = () => {
+     logOut(){
          return new Promise(async (resolve, reject) => {
              this.props.signOut()
             return resolve("SignIn")
          })
+     }
+    toggleNotification(){
+         this.props.updateIsShowNotification(this.props.authReducer.data, !this.props.authReducer.data.isShowNotification)
      }
 
     render(){
@@ -32,9 +37,7 @@ class Setting extends Component {
             checked = {
                authReducer.data.isShowNotification
             }
-            iconRight onPress = {
-                () => this.props.updateIsShowNotification(authReducer.data,!authReducer.data.isShowNotification)
-            }
+            iconRight onPress = {this.toggleNotification}
             />
   
             <View style={styles.pa4}></View>

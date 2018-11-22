@@ -7,7 +7,11 @@ import ProgressBarAnimated from 'react-native-progress-bar-animated';
 
 
 class Profile extends Component{
-
+    constructor(props){
+        super(props);
+        this.goToHistoryQuest = this.goToHistoryQuest.bind(this);
+        this.goToAchievement = this.goToAchievement.bind(this);
+    }
     componentDidMount(){
         this.props.updateMidAuth(this.props.authReducer.data.uid);
     }
@@ -20,6 +24,15 @@ class Profile extends Component{
              }
          }
 //TODO ทำให้เมื่อเวลอัพ starเพิ่ม อัพเดทอัตโนมัติ
+
+        goToHistoryQuest(){
+            this.props.navigation.navigate("History",{uid:this.props.authReducer.data.uid})
+         }
+         
+        goToAchievement() {
+            this.props.navigation.navigate("Achievement", { uid: this.props.authReducer.data.uid })
+        }
+
     render(){
         const styles = StyleSheet.create({
             container: {
@@ -39,7 +52,7 @@ class Profile extends Component{
         return <View style={styles.container}>
             <Text style = {{fontFamily:'asd',fontSize:30,fontWeight:'bold'}}>Your Profile</Text>
             {authReducer.isAuth && <View>
-                <Avatar containerStyle = {{left:90}} large rounded source={{ uri: authReducer.data.photoURL }} onPress={() => console.log("Works!")} />
+                <Avatar containerStyle = {{left:90}} large rounded source={{ uri: authReducer.data.photoURL }} />
                 <Text style={{paddingTop:20,fontSize:15,textAlign:'center'}}>{authReducer.data.displayName}</Text>
                 <Text>{authReducer.data.Email}</Text>
                 
@@ -114,7 +127,7 @@ class Profile extends Component{
                 </View>
                 <View style = {{paddingTop:10}}>
                 <Button title="Achievement Earned" 
-                    onPress={()=>this.props.navigation.navigate("History")}
+                    onPress={this.goToAchievement}
                     buttonStyle={{
                         backgroundColor: "rgba(00, 99,216, 1)",
                         width: 200,
@@ -124,6 +137,17 @@ class Profile extends Component{
                         left:15
                       }}  
                 />
+                    <Button title="History Quest"
+                        onPress={this.goToHistoryQuest}
+                        buttonStyle={{
+                            backgroundColor: "rgba(00, 99,216, 1)",
+                            width: 200,
+                            height: 40,
+                            borderColor: "transparent",
+                            borderWidth: 0,
+                            left: 15
+                        }}
+                    />
                 </View>
               </View>}
           </View>;

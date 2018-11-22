@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {ScrollView, View,Text,StyleSheet,TouchableHighlight } from 'react-native';
 import {Button,Avatar} from 'react-native-elements';
 import { connect } from 'react-redux';
-import {fetchData,fetchRanking} from '../actions'
+import {fetchRanking,fetchProfile} from '../actions'
 import {Font} from 'expo'
 import Loading from '../component/Loading'
 
@@ -10,6 +10,7 @@ class Ranking extends Component{
     constructor(props){
         super(props)
         this.state={fontLoaded:false}
+        this.goToOtherProfile = this.goToOtherProfile.bind(this);
     }
      componentDidMount(){
         this.props.fetchRanking()
@@ -19,6 +20,11 @@ class Ranking extends Component{
             this.setState({fontLoaded:true});
         })
     }
+    goToOtherProfile(uid){
+        this.props.fetchProfile(uid)
+        this.props.navigation.navigate("OtherProfile");
+    }
+
 
     render(){
         const styles = {container: {
@@ -43,9 +49,7 @@ class Ranking extends Component{
                              if(item.uid==authReducer.data.uid){
                                 this.current=i
                              }
-                            return  <TouchableHighlight onPress={()=>this.props.navigation.navigate('OtherProfile',{
-                                data:item
-                            })} key={i}>
+                            return  <TouchableHighlight onPress={()=>this.goToOtherProfile(item.uid)} key={i}>
                                <View>
                                     <View style = {{padding:3,flexDirection: 'row'}}>
                                 <Avatar rounded small source = {{uri: item.photoURL}} />
@@ -101,7 +105,7 @@ const mapStateToProps = (state) => ({
 });
 //Used to add dispatch (action) into props
 const mapDispatchToProps = {
-    fetchData, fetchRanking
+    fetchRanking, fetchProfile
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Ranking)

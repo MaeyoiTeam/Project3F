@@ -38,14 +38,21 @@ export const navigate = (nav)=>{
 
 //############################################### Ranking ###############################################
 export const fetchProfile = (uid) => {
-    console.log(uid)
     const result = loadUserData(uid).then((obj) => {
         return {
-            ...obj
+            uid: uid,
+            displayName: obj.displayName,
+            photoURL: obj.photoURL + "?width=256",
+            email: obj.email,
+            levelQ: obj.levelQ,
+            star: obj.star,
+            achieve: obj.achieve,
+            walkStacks: obj.walkStacks,
         }
     });
     return fetchData(result);
 }
+
 
 export const fetchRanking  = () => {
     return (dispatch) => {

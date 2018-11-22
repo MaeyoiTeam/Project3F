@@ -237,8 +237,6 @@ export const rankingUser = () => {
                     star: item.val().star,
                     uid: item.key,
                     photoURL: item.val().photoURL + "?width=256",
-                    achieve: item.val().achieve,
-                    levelQ: item.val().levelQ
                 });
             });
             return resolve(data.sort((a, b) => {
@@ -296,7 +294,6 @@ export const updateToken = async (uid) => {
     }
     // Get the token that uniquely identifies this device
     let token = await Notifications.getExpoPushTokenAsync();
-    userID = firebase.auth().currentUser.uid;
     userRef.child(uid).update({
         pushToken: token
     });
@@ -324,8 +321,7 @@ export default (uid, path = '') => {
             if (snapshot.exists()) {
                 return resolve(snapshot.val());
             }
-        });
-        return reject("Fail");
+        }).catch((e) => reject(e))
     });
 }
 
