@@ -13,6 +13,7 @@ class Home extends Component {
         }
         this.randomQ = this.randomQ.bind(this);
         this.goToQuest = this.goToQuest.bind(this);
+        this.chooseColor=this.chooseColor.bind(this);
     }
     a
     onSlideRight = () => {
@@ -55,6 +56,14 @@ class Home extends Component {
         this.props.navigation.navigate(path);
     }
 
+    chooseColor(type){
+        switch (type) {
+            case 'walk':    return '#330066'
+            case 'food':    return '#FF6347'
+            case 'rest':    return '#32CD32'
+        }
+    }
+
     render(){
         const {authReducer,questReducer} = this.props;
         const {haveQuest,questlist} = this.state
@@ -75,7 +84,7 @@ class Home extends Component {
                                 
                                 buttonStyle={{
                                     
-                                    backgroundColor: "#3399FF",
+                                    backgroundColor: this.chooseColor(info[1].type),
                                     height:50,
                                     borderColor: "transparent",
                                     borderWidth: 0,
@@ -140,16 +149,19 @@ class Home extends Component {
                     <View style={styles.ku2}>
                         <RNSlidingButton
                             style={{
-                            width: 260,
-                            backgroundColor: '#fcfcf7',
+                            width: 325,
+                            backgroundColor: 'transparent',
+                            borderRadius: 360,
+                            borderColor: '#7a7a7a',
+                            borderWidth: 1
                              }}
-                            height={35}
+                            height={45}
                             onSlidingSuccess={async ()=>{let path = await this.randomQ();
                                 this.props.navigation.navigate(path);}}
                                 slideDirection={SlideDirection.RIGHT}>
                             <View>
                                 <Text numberOfLines={1} style={styles.titleText}>
-                                    SLIDE RIGHT TO GET QUESTS >
+                                    SLIDE RIGHT TO GET QUESTS  >>
                                 </Text>
                             </View>
                         </RNSlidingButton>
@@ -191,7 +203,7 @@ const styles = StyleSheet.create({
     },
     kuku: {
         
-        flex: 0.65,
+        flex: 0.5,
     },
     kuka: {
         
@@ -202,6 +214,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row'
     },
     separator: {
+        paddingBottom: 10,
         marginVertical: 10,
         borderWidth: 0.5,
         borderColor: '#DCDCDC',
@@ -210,7 +223,7 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontWeight: 'normal',
         textAlign: 'center',
-        color: '#000000'
+        color: '#7a7a7a'
     }
 });
 //Used to add dispatch (action) into props

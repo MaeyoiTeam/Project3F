@@ -12,9 +12,7 @@ class QuestRest extends Component {
   }) => {
       return {
           title: navigation.getParam('otherParam', "Rest"),
-          headerTitleStyle: {
-            fontFamily: 'asd',
-          }
+          titleStyle: {fontFamily:'asd'}
           
       };
   };
