@@ -11,9 +11,15 @@ class QuestRest extends Component {
       navigation
   }) => {
       return {
-          title: navigation.getParam('otherParam', "Quest Rest"),
+          title: navigation.getParam('otherParam', "Rest"),
+          headerTitleStyle: {
+            fontFamily: 'asd',
+          }
+          
       };
   };
+
+  
     constructor(props){
         super(props);
 
@@ -98,10 +104,11 @@ class QuestRest extends Component {
                 
                     <Text style = {{textAlign: 'center',fontSize:30,fontFamily:'asd'}}>{name}</Text>
                 <View style = {styles.kp2}></View>
-                <Text style = {{textAlign: 'center',fontSize:22,fontFamily:'asd'}}>Detail: {detail} </Text>
+                <Text style = {{textAlign: 'center',fontSize:20,fontFamily:'asd'}}>Detail: {detail} </Text>
+                <View style = {styles.kp6}></View>
                 {   this.state.isPressed &&<View>
-                <View style = {styles.kp5}></View>
                 <TimerCountdown
+                    
                     initialSecondsRemaining={1000*(target-current)}
                      onTick={secondsRemaining => this.update(secondsRemaining)} 
                     onTimeElapsed={() => this.updateDone(authReducer.data,key,target)}
@@ -112,11 +119,10 @@ class QuestRest extends Component {
                 </View>
                 }
                  <Text> </Text>
-                 <Text> </Text>
-                 <Text> </Text>
+                                  
                 {
                     this.state.isPressed ? <Button
-                    title= "Reset Button"
+                    title= "Try again"
                     buttonStyle={{
                         backgroundColor: "rgba(10, 10,100, 1)",
                         height:40,
@@ -130,7 +136,7 @@ class QuestRest extends Component {
                     textStyle={{fontFamily:'asd'}}
                     /> :                    
                     <Button
-                    title="Start Button"
+                    title="Start"
                     buttonStyle={{
                         backgroundColor: "rgba(10, 10,100, 1)",
                         height:40,
@@ -158,23 +164,26 @@ class QuestRest extends Component {
 styles = StyleSheet.create({
     A1:{
         alignItems:'center',
-        flex: 0.3
+        flex: 0.4
     },
     contra:{
         flex:1,
         alignItems: 'center'
     },
     kp2:{
-        flex:0
+        flex:0.1
     },
     kp3:{
-        flex:0.2,
+        flex:0.05,
     },
     kp4:{
         flex:0.1,
     },
     kp5:{
-        flex:0.2,
+        flex:0.05,
+    },
+    kp6:{
+        flex:0.15,
     },
 });
 

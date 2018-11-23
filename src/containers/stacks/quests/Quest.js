@@ -97,7 +97,7 @@ class Quest extends Component {
                 
             <View style={styles.modalView1}></View>
                     <Text style = {{textAlign: 'center',fontSize:30,fontFamily:'asd'}}>{name} </Text>
-                <Text style = {{textAlign: 'center',fontSize:22,fontFamily:'asd'}}>Detail: {detail} </Text>
+                <Text style = {{textAlign: 'center',fontSize:20,fontFamily:'asd'}}>Detail: {detail} </Text>
              
                 <View style={styles.kl1}></View>
                 <Text style = {{textAlign: 'center',fontSize:15,fontFamily:'asd'}}>Finished: {current}/{target}</Text>

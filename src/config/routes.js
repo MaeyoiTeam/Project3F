@@ -107,28 +107,50 @@ Home:{    screen:BottomTabs,
     },
     History: {
       screen: HistoryQuestList,
-      navigationOptions: {}
-    },
+      navigationOptions: {
+        headerStyle: {
+          height:45,
+      }
+    }
+   },
     Achievement: {
       screen: Achievement,
       navigationOptions: {
-        headerTitle: "Achievement",
-        headerStyle: {}
+        headerStyle: {
+          height:45,
+      },
+  
       }
     },
     Quest: {
       screen: Quest,
-      navigationOptions: {}
+      navigationOptions: {
+        headerStyle: {
+          height:45,
+      },
+      
+      }
     },
     QuestWalk: {
       screen: QuestWalk,
-      navigationOptions: {}
+      navigationOptions: {
+        headerStyle: {
+          height:45,
+      },
+      
+      }
     },
     QuestRest: {
       screen: QuestRest,
-      navigationOptions: {}
+      navigationOptions: {
+        headerStyle: {
+          height:45,
+          },
+          
+      },
     }
   },
+  
   {
     mode: "modal",
     headerLayoutPreset: "center"
