@@ -52,7 +52,7 @@ class Accel extends Component{
     render(){
         let { x, y, z } = this.state.accelerometerData; 
         return( <View>
-            {this.state.isAlert && <Text style = {{textAlign:'center'}}>ตาวิเศษรู้นะ วางโทรศัพท์ซะ</Text>}
+            {this.state.isAlert && <Text style = {{textAlign:'center',fontFamily:'asd'}}>ตาวิเศษรู้นะ วางโทรศัพท์ซะ</Text>}
         </View> );
     }
 }

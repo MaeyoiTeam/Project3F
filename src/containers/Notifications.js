@@ -35,17 +35,17 @@ class Notifications extends Component {
           return (
             <View style={styles.container}>
               {
-                this.props.notification.haveNotification &&
-                this.props.notification.data.sort((a, b) => -1).map((obj, i) => <View key={i}>
-                  <Text>{moment(obj.date).fromNow()}</Text>
-                  <Text>{obj.title}</Text>
-                  <Text>{obj.name}</Text>
-                  <Text>Current Star: {obj.currentStar} (+{obj.newStar})</Text>
-
-                </View>)
+                              this.props.notification.haveNotification &&
+                this.props.notification.data.sort((a, b) => -1).map((obj, i) => <View key={i} style = {styles.separator}>
+                  <Text style = {{fontFamily:'asd', fontSize:12, color:'#000000', paddingLeft:10}}>{obj.title}</Text>
+                  <Text style = {{fontFamily:'asd', fontSize:18, color:'#000000', paddingLeft:10}}>{obj.body}</Text>
+                  <Text style = {{fontFamily:'asd', fontSize:12, color:'#565656' ,textAlign:'right', paddingRight:10}}>{moment(obj.date).fromNow()}</Text>
+                  
+                </View>
+               )
               }
-
             </View>
+            
           );
       } else{
           return (<Loading />);
@@ -56,17 +56,21 @@ class Notifications extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFF',
-    marginTop: 50,
-    padding: 15,
+    backgroundColor: '#fcfcf7',
+    marginTop: 5,
+    marginBottom: 5,
+    padding: 5,
   },
   buttonContainer: {
     marginTop: 15,
   },
   separator: {
-    marginVertical: 30,
+    backgroundColor:'#ede6da',
+    paddingBottom: 5,
+    paddingTop: 10,
     borderWidth: 0.5,
-    borderColor: '#DCDCDC',
+    borderColor: '#ede6da',
+    marginTop: 5
   },
   label: {
     color: '#999',
