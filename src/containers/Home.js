@@ -92,7 +92,7 @@ class Home extends Component {
 
                                     }}
 
-                                textStyle={{fontFamily:'asd',fontSize:16}}
+                                textStyle={{fontFamily:'asd',fontSize:16,color:'#ffffff'}}
                                 onPress = {
                                         () => {
                                             this.props.fetchQuest(authReducer.data.uid,info[0],"undone");

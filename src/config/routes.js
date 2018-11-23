@@ -51,7 +51,7 @@ const BottomTabs = createMaterialBottomTabNavigator(
       screen: Home,
       navigationOptions: {
         tabBarLabel: 'Home',
-        tabBarColor: '#3399FF',
+        tabBarColor: '#3366FF',
         tabBarIcon: ({ tintColor, focused }) => (
           <Icon size={30} name={ Platform.OS === 'ios' ? (focused ? 'ios-home' : 'ios-home-outline') : 'md-home' } style={{ color: tintColor }} />
         )
@@ -103,7 +103,11 @@ Home:{    screen:BottomTabs,
     },
     OtherProfile: {
       screen: OtherProfile,
-      navigationOptions: {}
+      navigationOptions: {
+        headerStyle: {
+          height:45,
+      }
+      }
     },
     History: {
       screen: HistoryQuestList,

@@ -11,7 +11,7 @@ class QuestWalk extends Component {
       navigation
   }) => {
       return {
-          title: navigation.getParam('otherParam', "Quest Walk"),
+          title: navigation.getParam('otherParam', "Walk"),
       };
   };
     constructor(props){
