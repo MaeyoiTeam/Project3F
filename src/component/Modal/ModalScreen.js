@@ -1,18 +1,21 @@
 import React, { Component } from 'react'
-import { View, Text ,Modal,Button,Image} from 'react-native'
+import { View, Text ,Modal,Button,Image,ScrollView,StyleSheet,FlatList} from 'react-native'
 import { connect } from 'react-redux'
 import {navigate} from '../../actions'
 import {finishQuestWalk,clearFinishQuestWalk} from '../../actions/quest'
 import { Pedometer } from "expo";
 import * as Expo from "expo";
 import { updateNotification} from '../../actions/notification'
+import PureChart from 'react-native-pure-chart';
+
 export class ModalScreen extends Component {
   constructor(props) {
     super(props)
   
     this.state = {
-       stepCount:0
+       stepCount:0,
     };
+  
   }
     componentWillMount(){
            this._subscribe();
@@ -48,7 +51,7 @@ export class ModalScreen extends Component {
            },
            error => {
              this.setState({
-               stepCount: "Could not get stepCount: " + error
+               stepCount: 0
              });
            }
          );
@@ -65,7 +68,14 @@ export class ModalScreen extends Component {
     this._unsubscribe();
   }
 
+
+
+ 
+
   render(){
+  const labels = ["999","2018","4000","6500","9999"];
+
+    let sampleData = [50000, 10000, 5000, 3000, 0, 15000, 48652]
     if(this.props.modalReducer.showModal){
     const {modalReducer,authReducer} = this.props
     const key = Object.keys(modalReducer.data)
@@ -73,11 +83,14 @@ export class ModalScreen extends Component {
     console.log(modalReducer.data.achievement)
    // console.log(modalReducer.data)
     return (
+      
      <Modal visible={this.props.modalReducer.showModal}
       onRequestClose={() => {
             Alert.alert('Modal has been closed.');
           }}>
+          <ScrollView>
        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+       <PureChart data={sampleData} type='line' />
         {
          modalReducer.data.achievement!=null &&
          Object.values(modalReducer.data.achievement).map((obj,i) => <View key={i}>
@@ -105,7 +118,7 @@ export class ModalScreen extends Component {
           }
           title="Go to Home"
         />
-        {
+         {/*
           Object.entries(authReducer.data.walkStacks).map((obj,i)=>
             <Text key={i}>{obj[0]} : {obj[1]}</Text>
           )
@@ -114,18 +127,21 @@ export class ModalScreen extends Component {
           Object.entries(modalReducer.data.walkStacks).map((obj, i) =>
             <Text key={i}>{obj[0]} : {obj[1]}</Text>
           )
-        }
-        
-      </View>
+          
+        */ } 
+        </View>
+      </ScrollView>
      </Modal>
     )
+    
     }
     else{
       return <View></View>
     }
   }
+}
 
-  }
+
 
 const mapStateToProps = (state) => ({
   authReducer: state.authReducer,
