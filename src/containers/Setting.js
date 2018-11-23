@@ -80,8 +80,11 @@ class Setting extends Component {
                     buttonStyle={{
                         backgroundColor: "#4c4c4c",width: 150,height: 40,borderColor: "transparent",borderWidth: 0,marginLeft:54
                     }}/>
-                <Image source={require('../../image/Logout.png')} fadeDuration={0} style={{width: 50, height: 50}}
-                      /></View> 
+                    <TouchableOpacity  onPress={this.logOut}>
+                <Image source={require('../../image/Logout.png')} fadeDuration={0} style={{width: 50, height: 50} }  
+                      />
+                      </TouchableOpacity>
+                      </View> 
             </View>
             </View>
         );
