@@ -47,9 +47,11 @@ class QuestRest extends Component {
                 }
             })
              if (this.props.fetchReducer.data.isComplete) {
-                 const message = {
-                     name: "Rest Quest Success", newStar: prevProps.fetchReducer.data.star, currentStar: this.props.fetchReducer.data.star, date: new Date().toISOString()
-                 };
+                const message = {
+                    title: "Rest Quest Completed!",
+                    body:"Quest: "+prevProps.fetchReducer.data.name+" (+ "+prevProps.fetchReducer.data.star+" stars).",
+                    date: new Date().toISOString()
+                 }
                  this.props.getQuestList(this.props.authReducer.data.uid, "undone");
                  this.props.updateQuestDone(this.props.authReducer.data,this.state.key,this.state.type);
                   this.props.updateNotification(this.props.authReducer.data.uid,message)
@@ -72,8 +74,8 @@ class QuestRest extends Component {
 
     sendSuccessQuestNotification = (message) => {
         Notifications.presentLocalNotificationAsync({
-            title: message.name,
-            body: "Star: " + message.currentStar + " ( +" + message.newStar + ").",
+            title:  message.title,
+            body:   message.body,
             ios: {
                 sound: true
             },

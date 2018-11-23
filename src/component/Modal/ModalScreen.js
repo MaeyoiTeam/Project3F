@@ -18,14 +18,34 @@ export class ModalScreen extends Component {
            this._subscribe();
     }
     componentDidUpdate(prevProps, prevState){
+      const message = {
+        title: "Walk Quest Completed!",
+        body:"Steps: "+this.state.stepCount+" (+ "+this.fetchReducer.data.star+" stars).",
+        date: new Date().toISOString()
+     }
       if (prevState.stepCount!=this.state.stepCount) {
         const key = Object.keys(this.props.modalReducer.data)
         this.props.finishQuestWalk(this.props.authReducer.data,key[0],this.props.modalReducer.data,this.state.stepCount)
-        this.props.updateNotification(this.props.authReducer.data.uid, {
-          name:"steps: "+this.state.stepCount+" Walk Quest Success walk", date: new Date().toISOString()
-        }) 
+        this.props.updateNotification(this.props.authReducer.data.uid, message);
+        this.sendSuccessQuestNotification(message);
       }
     }
+
+    sendSuccessQuestNotification=(message)=>{
+      Notifications.presentLocalNotificationAsync({
+          title:  message.title,
+          body:   message.body,
+          ios:{
+              sound:true
+          },
+          android: {
+              icon: 'https://firebasestorage.googleapis.com/v0/b/project3f-4a950.appspot.com/o/achieve%2Ficon.png?alt=media&token=e95c5c83-7b5c-4db3-96f7-258b06b925a1',
+              channelId: "achieve",
+              color: '#FF0000',
+          }
+      });
+  }
+
         _subscribe = () => {
           if (this.props.modalReducer.showModal) {
         const data = Object.values(this.props.modalReducer.data);
@@ -70,8 +90,7 @@ export class ModalScreen extends Component {
     const {modalReducer,authReducer} = this.props
     const key = Object.keys(modalReducer.data)
       const data = modalReducer.data[key[2]];
-    console.log(modalReducer.data.achievement)
-   // console.log(modalReducer.data)
+    console.log(modalReducer.data.walkHistory)
     return (
      <Modal visible={this.props.modalReducer.showModal}
       onRequestClose={() => {
