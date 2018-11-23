@@ -28,65 +28,97 @@ class OtherProfile extends Component {
         return(<View style={styles.container}>
                 <Text style={{textAlign:'center',paddingTop:10,paddingBottom:30,left:100,fontFamily:'asd'}}></Text>
                  <Avatar xlarge rounded source={{ uri: photoURL }} onPress={() => console.log("Works!")} />
-                <Text style={{paddingTop:20,fontSize:15,textAlign:'center',fontFamily:'asd'}}>{name}</Text>
-                <Text>Star:{star}</Text>
-                 <Text style={{textAlign:'center',paddingTop:10,paddingBottom:30,left:100,fontFamily:'asd'}}> X Star : {star}</Text>
-                <View style = {{
-                    padding:5, 
+                <Text style={{paddingTop:20,fontSize:15,textAlign:'center',fontFamily:'asd'}}>{displayName}</Text>
+                <View style = {{                  
                     flexDirection: 'row'
                     }}>
-
                 <Image
+                 source={require('../../../image/star.png')}
+                 fadeDuration={0}
+                 style={{width: 25, height: 25}}
+                />    
+                <Text style = {{paddingBottom:10,fontFamily:'asd'}}> x {star}</Text>
+                </View>
+               
+                            {
+                                fetchReducer.data.levelQ!=null &&
+                            <View>
+                                        <View style={{
+                                            padding: 5,
+                                            flexDirection: 'row'
+                                        }}>
+                                     <Image
                  source={require('../../../image/steps.png')}
                  fadeDuration={0}
                  style={{width: 25, height: 25,right:10}}
-                />             
-                <ProgressBarAnimated width = {200}
-                backgroundColor = "#6CC644"
-                value = {(levelQ.walk.star*100)/levelQ.walk.target}/>
-                <Text style={{left:10,fontFamily:'asd'}}>{levelQ.walk.star}/{levelQ.walk.target}</Text> 
-                </View>
-                
-                
-                <Text style={{fontFamily:'asd'}}>Level:{levelQ.walk.level}</Text>
-                <View style = {{
-                    padding:5, 
-                    flexDirection: 'row'
-                    }}>
-                <Image
-                 source={require('../../../image/food2.png')}
-                 fadeDuration={0}
-                 style={{width: 25, height: 25,right:10}}
                  />
-                <ProgressBarAnimated width = {200}
-                backgroundColor = "#6CC644"
-                value = {(levelQ.food.star*100)/levelQ.food.target}/>
-                <Text style = {{left:10,fontFamily:'asd'}}>{levelQ.food.star}/{levelQ.food.target}</Text>         
-                </View>
-                <Text style={{fontFamily:'asd'}}>Level:{levelQ.food.level}</Text>
-                <View style = {{
-                    padding:5, 
-                    flexDirection: 'row'
-                    }}>
-                
-                
-                <Image
-                 source={require('../../../image/yoga.png')}
-                 fadeDuration={0}
-                 style={{width: 25, height: 25,right:10}}
-                />
-                
-                <ProgressBarAnimated width = {200}
-                backgroundColor = "#6CC644"
-                value = {(levelQ.rest.star*100)/levelQ.rest.target}/>
-                <Text style = {{left:10}}>{levelQ.rest.star}/{levelQ.rest.target}</Text>   
-                </View>
-                <Text style={{fontFamily:'asd'}}>Level:{levelQ.rest.level}</Text>
-                <View style = {{paddingTop:10}}>
-                </View>
-                <View style = {{paddingTop:10}}>
-                
-                </View> 
+                                                
+                                    <ProgressBarAnimated width = {200}
+                                    backgroundColor = "#6CC644"
+                                    value = {(levelQ.walk.star*100)/levelQ.walk.target}/>
+                                    <Text style = {{left:10}}>{levelQ.walk.star}/{levelQ.walk.target}</Text> 
+                                    </View>
+                            <Text style = {{fontFamily:'asd'}}>Level:{levelQ.walk.level}</Text>
+                            <View style = {{
+                                padding:5, 
+                                flexDirection: 'row'
+                                }}>
+                                    <Image
+                                        source={require('../../../image/food2.png')}
+                                        fadeDuration={0}
+                                        style={{ width: 25, height: 25, right: 10 }}
+                                    />
+                                    <ProgressBarAnimated width={200}
+                                        backgroundColor="#6CC644"
+                                        value={(levelQ.food.star * 100) / levelQ.food.target} />
+                                    <Text style={{ left: 10 }}>{levelQ.food.star}/{levelQ.food.target}</Text>
+                                </View>
+                                <Text style = {{fontFamily:'asd'}}>Level:{levelQ.food.level}</Text>
+                                <View style={{
+                                    padding: 5,
+                                    flexDirection: 'row'
+                                }}>
+                            
+                            <Image
+                            source={require('../../../image/yoga.png')}
+                            fadeDuration={0}
+                            style={{width: 25, height: 25,right:10}}
+                            />
+                            
+                            <ProgressBarAnimated width = {200}
+                            backgroundColor = "#6CC644"
+                            value = {(levelQ.rest.star*100)/levelQ.rest.target}/>
+                            <Text style = {{left:10}}>{levelQ.rest.star}/{levelQ.rest.target}</Text>   
+                            </View>
+                            <Text style = {{paddingBottom:20,fontFamily:'asd'}}>Level:{levelQ.rest.level}</Text>
+                    <Button title="Achievement Earned"
+                        onPress={this.goToAchievement}
+                        buttonStyle={{
+                            backgroundColor: "#004200",
+                            width: 200,
+                            height: 40,
+                            borderColor: "transparent",
+                            borderWidth: 0,
+                            left: 15
+                        }}
+                        textStyle = {{fontFamily:'asd'}} 
+                    />
+                    <Button title="History Quest"
+                        onPress={this.goToHistoryQuest}
+                        buttonStyle={{
+                            backgroundColor: "rgba(00, 99,216, 1)",
+                            width: 200,
+                            height: 40,
+                            borderColor: "transparent",
+                            borderWidth: 0,
+                            left: 15
+                        }}
+                        textStyle = {{fontFamily:'asd'}} 
+                    />
+                            </View>
+                            }
+                <View style = {{paddingTop:10}}></View>
+                <View style = {{paddingTop:10}}></View>
         </View>);
     }
 }
@@ -103,7 +135,8 @@ const styles = StyleSheet.create({
     container: {
     flex: 1,
     backgroundColor: 'white',  
-    alignItems: 'center'
+    alignItems: 'center',
+    
   },
 });
 
