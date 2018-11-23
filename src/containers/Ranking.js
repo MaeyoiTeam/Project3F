@@ -43,7 +43,7 @@ class Ranking extends Component{
             }
         else if(this.props.authReducer.isAuth &&this.state.fontLoaded){
         return(
-            <ScrollView>
+            
                 <View style={styles.container}>
             
 
@@ -51,7 +51,7 @@ class Ranking extends Component{
                 <Text style = {{fontFamily:'asd',paddingTop:20,paddingBottom:10,fontSize:25,textAlign:'center'}}>Ranking</Text>
                 
                 
-                
+                <ScrollView>
                      {
                         rankReducer.data.map((item, i) => {
                              if(item.uid==authReducer.data.uid){
@@ -67,7 +67,7 @@ class Ranking extends Component{
                                </View>
                             </TouchableHighlight>
                         })
-                     }
+                     }</ScrollView>
                 <View style={styles.container}>
                 
                 <Text style={{fontSize:25,fontFamily:'asd',padding:5,}}>Your Rank!</Text>
@@ -80,7 +80,7 @@ class Ranking extends Component{
                       }
             </View>
             </View>
-            </ScrollView>
+            
         );
     }else{
         return(<View><Text style = {{fontFamily:'asd'}}>Rank: Please Login</Text></View>);

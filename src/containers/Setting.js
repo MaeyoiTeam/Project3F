@@ -35,7 +35,7 @@ class Setting extends Component {
             <View style={styles.pa3}></View>
             <View style={styles.pa6}>
             
-            <CheckBox title='On/Off Notification' iconRight checked={authReducer.data.isShowNotification} onPress = {this.toggleNotification} style={{fontFamily:'asd'}} />
+            <CheckBox title='On/Off Notification' iconRight checked={authReducer.data.isShowNotification} onPress = {this.toggleNotification}  />
             </View>
             <View style={styles.pa4}></View>
                 <View style={styles.container1}>

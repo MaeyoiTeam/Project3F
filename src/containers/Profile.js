@@ -40,28 +40,11 @@ class Profile extends Component{
          
 
     render(){
-        const styles = StyleSheet.create({
-            container: {
-              alignItems: 'center'
-            },
-            title: {
-              fontSize: 30,
-              textAlign: 'center',
-              fontFamily:'asd'
-            },
-            ki:{
-                paddingTop:20,
-                fontSize:15,
-                textAlign:'center',
-                fontFamily:'asd'
-            },
-         
-          });
         const {authReducer} = this.props
         const {food,walk,rest}= authReducer.data.levelQ;
         
         return <View style={styles.container}>
-            <Text style = {{fontFamily:'asd',paddingTop:20,paddingBottom:10,fontSize:25}}>Your Profile</Text>
+            <Text style = {styles.a1}>Your Profile</Text>
             {authReducer.isAuth && <View>
                 <Avatar containerStyle = {{left:90}} large rounded source={{ uri: authReducer.data.photoURL }} onPress={() => console.log("Works!")} />
                 <Text style={styles.ki}>{authReducer.data.displayName}</Text>
@@ -69,7 +52,8 @@ class Profile extends Component{
                 
 {/* //TODO แสดง เลเวล ค่าประสบการณ์ Objectที่เก็บข้อมูล = authReducer.data.levelQ */}
                 <View style = {{                  
-                    flexDirection: 'row'
+                    flexDirection: 'row',
+                    flex:0.4
                     }}>
                 <Image
                  source={require('../../image/star.png')}
@@ -78,9 +62,11 @@ class Profile extends Component{
                 />    
                 <Text style={{textAlign:'center',paddingTop:10,paddingBottom:20,left:100}}> X  {authReducer.data.star  }</Text>
                 </View>
+                <View style = {{flex:1}}>
                 <View style = {{
                     padding:5, 
-                    flexDirection: 'row'
+                    flexDirection: 'row',
+                    flex:0.33
                     }}>
                 <Image
                  source={require('../../image/steps.png')}
@@ -92,10 +78,11 @@ class Profile extends Component{
                 value = {(authReducer.data.levelQ.walk.star*100)/authReducer.data.levelQ.walk.target}/>
                 <Text style = {{left:10}}>{walk.star}/{walk.target}</Text> 
                 </View>
-                <Text style = {{fontFamily:'asd'}}>Level:{walk.level}</Text>
+                <Text style = {{fontFamily:'asd',textAlign:'center'}}>Level:{walk.level}</Text>
                 <View style = {{
                     padding:5, 
-                    flexDirection: 'row'
+                    flexDirection: 'row',
+                    flex:0.33
                     }}>
                 <Image
                  source={require('../../image/food2.png')}
@@ -107,10 +94,11 @@ class Profile extends Component{
                 value = {(authReducer.data.levelQ.food.star*100)/authReducer.data.levelQ.food.target}/>
                 <Text style = {{left:10}}>{food.star}/{food.target}</Text>         
                 </View>
-                <Text style = {{fontFamily:'asd'}}>Level:{food.level}</Text>
+                <Text style = {{fontFamily:'asd',textAlign:'center'}}>Level:{food.level}</Text>
                 <View style = {{
                     padding:5, 
-                    flexDirection: 'row'
+                    flexDirection: 'row',
+                    flex:0.33
                     }}>
                 <Image
                  source={require('../../image/yoga.png')}
@@ -122,8 +110,9 @@ class Profile extends Component{
                 value = {(authReducer.data.levelQ.rest.star*100)/authReducer.data.levelQ.rest.target}/>
                 <Text style = {{left:10}}>{rest.star}/{rest.target}</Text>   
                 </View>
-                <Text style = {{fontFamily:'asd'}}>Level:{rest.level}</Text>
-                <View style = {{paddingTop:20}}>
+                </View>
+                <Text style = {{fontFamily:'asd',textAlign:'center'}}>Level:{rest.level}</Text>
+                <View style = {{paddingTop:20,flex:0.0125}}>
                 <Button title="Achievement Earned" 
                     onPress={this.goToAchievement}
                     buttonStyle={{
@@ -149,6 +138,7 @@ class Profile extends Component{
                         textStyle = {{fontFamily:'asd'}} 
                     />
                 </View>
+                <View style = {{flex:1}}></View>
               </View>}
           </View>;
     }
@@ -163,12 +153,27 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
     updateMidAuth
 };
-const styles = StyleSheet.create({  
+const styles = StyleSheet.create({
     container: {
-    flex: 1,
-    backgroundColor: 'white',  
-    alignItems: 'center'
-  },
-});
+      alignItems: 'center',
+      flex:1
+    },
+    title: {
+      fontSize: 30,
+      textAlign: 'center',
+      fontFamily:'asd'
+    },
+    ki:{
+        paddingTop:20,
+        fontSize:15,
+        textAlign:'center',
+        fontFamily:'asd'
+    },
+    a1:{
+        fontFamily:'asd',
+        fontSize:25
+    }
+ 
+  });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile)
