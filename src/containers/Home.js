@@ -64,8 +64,8 @@ class Home extends Component {
                     <View>
                 {    haveQuest &&   questlist.map((info, i) =>
                             <View key={i} style = {styles.separator}>
-                                <Text style = {{textAlign:'center',fontSize:15,paddingTop:20}}>{info[1].name}</Text>
-                                <Text style = {{textAlign:'center',fontSize:15,paddingBottom:10}}>type: {info[1].type}</Text>
+                                <Text style = {{textAlign:'center',fontSize:15,paddingTop:20,fontFamily:'asd'}}>{info[1].name}</Text>
+                                <Text style = {{textAlign:'center',fontSize:15,paddingBottom:10,fontFamily:'asd'}}>type: {info[1].type}</Text>
                                 <Button title={"Play "+info[1].name}
                                 buttonStyle={{
                                     backgroundColor: "#3399FF",
@@ -74,7 +74,24 @@ class Home extends Component {
                                     borderWidth: 0,
                                     borderRadius:360,
                                     }}
-                                    onPress={() => this.goToQuest(info)}
+                                textStyle={{fontFamily:'asd'}}
+                                onPress = {
+                                        () => {
+                                            this.props.fetchQuest(authReducer.data.uid,info[0],"undone");
+                                            let path='Home';
+                                            switch(info[1].type){
+                                                case "food": path='Quest'; 
+                                                                break;
+                                                case "walk": path='QuestWalk';
+                                                                break;
+                                                case "rest": path="QuestRest";
+                                                                break;
+                                                default: path="Home";
+                                            }
+                                            this.props.navigation.navigate(path);
+                                        }
+                                        
+                                }
                                 />
                             </View>
                         )

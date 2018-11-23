@@ -26,7 +26,7 @@ class OtherProfile extends Component {
          const {displayName,photoURL,star,levelQ} =fetchReducer.data
 
         return(<View style={styles.container}>
-                <Text style={{textAlign:'center',paddingTop:10,paddingBottom:30,left:100}}></Text>
+                <Text style={{textAlign:'center',paddingTop:10,paddingBottom:30,left:100,fontFamily:'asd'}}></Text>
                  <Avatar xlarge rounded source={{ uri: photoURL }} onPress={() => console.log("Works!")} />
                 <Text style={{paddingTop:20,fontSize:15,textAlign:'center',fontFamily:'asd'}}>{displayName}</Text>
                 <View style = {{                  

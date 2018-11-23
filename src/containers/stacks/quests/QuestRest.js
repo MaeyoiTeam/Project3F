@@ -1,4 +1,4 @@
-import { View,Text,StyleSheet } from 'react-native';
+import { View,Text,StyleSheet,Image} from 'react-native';
 import React,{Component} from 'react';
 import { connect } from 'react-redux';
 import {Button} from 'react-native-elements'
@@ -85,28 +85,41 @@ class QuestRest extends Component {
                     </View>);
         }
         else{    //Quest Continue
-            return(
-            <View style = {{paddingTop:180}}>
-                <View>
-                    <Text style = {{textAlign: 'center',fontSize:20}}>{name} Type: {type}</Text>
-                <Text style = {{textAlign: 'center',fontSize:20}}>Detail: {detail} </Text>
+            return(<View style={styles.contra}>
+            <View style = {styles.A1}></View>
+            <Image
+                source={require('../../../../image/yoga.png')}
+                fadeDuration={0}
+                style={{width: 180, height: 180}}
+                />
+            
+            <View style = {styles.kp3}></View>
+                <View style = {styles.kp1}>
+                
+                    <Text style = {{textAlign: 'center',fontSize:30,fontFamily:'asd'}}>{name}</Text>
+                <View style = {styles.kp2}></View>
+                <Text style = {{textAlign: 'center',fontSize:22,fontFamily:'asd'}}>Detail: {detail} </Text>
                 {   this.state.isPressed &&<View>
+                <View style = {styles.kp5}></View>
                 <TimerCountdown
                     initialSecondsRemaining={1000*(target-current)}
                      onTick={secondsRemaining => this.update(secondsRemaining)} 
                     onTimeElapsed={() => this.updateDone(authReducer.data,key,target)}
                     allowFontScaling={true}
-                    style={{ fontSize: 50,textAlign:'center' }}
+                    style={{ fontSize: 30,textAlign:'center' ,fontFamily:'asd'}}
                 />
                 <Accel isAlert={this.toggleAlert}/>
                 </View>
                 }
+                 <Text> </Text>
+                 <Text> </Text>
+                 <Text> </Text>
                 {
                     this.state.isPressed ? <Button
                     title= "Reset Button"
                     buttonStyle={{
                         backgroundColor: "rgba(10, 10,100, 1)",
-                        height:80,
+                        height:40,
                         borderColor: "transparent",
                         borderWidth: 0,
                         borderRadius:360,
@@ -114,16 +127,19 @@ class QuestRest extends Component {
                     onPress={() => {
                         this.setState({ isPressed: false });
                     }}
+                    textStyle={{fontFamily:'asd'}}
                     /> :                    
                     <Button
                     title="Start Button"
                     buttonStyle={{
                         backgroundColor: "rgba(10, 10,100, 1)",
-                        height:80,
+                        height:40,
                         borderColor: "transparent",
                         borderWidth: 0,
                         borderRadius:360,
+                        marginTop:20
                         }}
+                        textStyle={{fontFamily:'asd'}}
                     onPress={() => {
                         this.setState({ isPressed: true });
                     }}
@@ -138,6 +154,29 @@ class QuestRest extends Component {
         }
     }
 }
+
+styles = StyleSheet.create({
+    A1:{
+        alignItems:'center',
+        flex: 0.3
+    },
+    contra:{
+        flex:1,
+        alignItems: 'center'
+    },
+    kp2:{
+        flex:0
+    },
+    kp3:{
+        flex:0.2,
+    },
+    kp4:{
+        flex:0.1,
+    },
+    kp5:{
+        flex:0.2,
+    },
+});
 
 // Used to add reducer's states into the props
 const mapStateToProps = (state) => ({
