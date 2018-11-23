@@ -41,9 +41,7 @@ class MidComponent extends Component {
 
         return(
                 <View style={styles.container}>
-                <Text style = {{fontFamily:'asd',color:'#000066',fontSize:18}}>ACHIEVE</Text>
-                <Text style = {{fontFamily:'asd',color:'#FF3300',fontSize:18}}>4</Text>
-                <Text style = {{fontFamily:'asd',color:'#000066',fontSize:18}}>YOURSELF</Text> 
+                <Text>ACHIEVE4YOURSELF</Text>
                  {/*  <Badge onPress={() => {this.easter9()}} value="ACHIEVE" /> */}
                 </View>
         );
@@ -52,7 +50,6 @@ class MidComponent extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        flexDirection: 'row'
     }
 })
 

@@ -9,7 +9,13 @@ class LeftComponent extends Component{
 render(){
     return(
         <View>
-            
+            <Image
+                 source={require('../../../../Project3F/image/YellowStar.png')}
+                 fadeDuration={0}
+                 style={{width: 25, height: 25,marginLeft:20}}
+                 
+                 
+                 />
         </View>
 
         /*<View style={styles.container}>
