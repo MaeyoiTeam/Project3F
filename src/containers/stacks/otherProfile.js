@@ -30,7 +30,8 @@ class OtherProfile extends Component {
                  <Avatar xlarge rounded source={{ uri: photoURL }} onPress={() => console.log("Works!")} />
                 <Text style={{paddingTop:20,fontSize:15,textAlign:'center',fontFamily:'asd'}}>{displayName}</Text>
                 <View style = {{                  
-                    flexDirection: 'row'
+                    flexDirection: 'row',
+                    flex:0.4
                     }}>
                 <Image
                  source={require('../../../image/star.png')}
@@ -42,10 +43,12 @@ class OtherProfile extends Component {
                
                             {
                                 fetchReducer.data.levelQ!=null &&
+                                <View style = {{flex:1}}>
                             <View>
                                         <View style={{
                                             padding: 5,
-                                            flexDirection: 'row'
+                                            flexDirection: 'row',
+                                            flex:0.33
                                         }}>
                                      <Image
                  source={require('../../../image/steps.png')}
@@ -61,7 +64,8 @@ class OtherProfile extends Component {
                             <Text style = {{fontFamily:'asd'}}>Level:{levelQ.walk.level}</Text>
                             <View style = {{
                                 padding:5, 
-                                flexDirection: 'row'
+                                flexDirection: 'row',
+                                flex:0.33
                                 }}>
                                     <Image
                                         source={require('../../../image/food2.png')}
@@ -76,7 +80,8 @@ class OtherProfile extends Component {
                                 <Text style = {{fontFamily:'asd'}}>Level:{levelQ.food.level}</Text>
                                 <View style={{
                                     padding: 5,
-                                    flexDirection: 'row'
+                                    flexDirection: 'row',
+                                    flex:0.33
                                 }}>
                             
                             <Image
@@ -89,6 +94,7 @@ class OtherProfile extends Component {
                             backgroundColor = "#6CC644"
                             value = {(levelQ.rest.star*100)/levelQ.rest.target}/>
                             <Text style = {{left:10}}>{levelQ.rest.star}/{levelQ.rest.target}</Text>   
+                            </View>
                             </View>
                             <Text style = {{paddingBottom:20,fontFamily:'asd'}}>Level:{levelQ.rest.level}</Text>
                     <Button title="Achievement Earned"
@@ -117,8 +123,7 @@ class OtherProfile extends Component {
                     />
                             </View>
                             }
-                <View style = {{paddingTop:10}}></View>
-                <View style = {{paddingTop:10}}></View>
+                 <View style = {{flex:1}}></View>
         </View>);
     }
 }
