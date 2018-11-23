@@ -1,17 +1,17 @@
 import React,{Component} from 'react'
-import {Text,View,StyleSheet,AppRegistry,ProgressBarAndroid } from 'react-native'
+import {Text,View } from 'react-native'
 import { connect } from 'react-redux';
 import {authChanged} from '../../actions/signIn';
+import {getQuestList} from '../../actions/quest';
+import Loading from '../../component/Loading';
 
-import {Button,Avatar} from 'react-native-elements';
-
-class Loading extends Component{
+class FirstPage extends Component {
      componentWillMount() {
          this.props.authChanged();
-          
      }
      componentDidUpdate = (prevProps, prevState) => {
          if (this.props.authReducer.isAuth) {
+             this.props.getQuestList(this.props.authReducer.data.uid, "over")
              this.props.navigation.navigate('Stack')
          }
          else{
@@ -20,23 +20,11 @@ class Loading extends Component{
      };
     render(){
         return(
-            <View style={styles.container}>
-               <ProgressBarAndroid
-          styleAttr="Large"
-          indeterminate={true}
-        />
-            </View>
+            <Loading/>
         );
     }
 }
 
-const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      justifyContent: "space-evenly",
-      padding: 10
-    }
-  });
 // Used to add reducer's states into the props
 const mapStateToProps = (state) => ({
     modal:state.modalReducer,
@@ -45,7 +33,7 @@ const mapStateToProps = (state) => ({
 });
 //Used to add dispatch (action) into props
 const mapDispatchToProps = {
-    authChanged,
+    authChanged, getQuestList
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Loading)
+export default connect(mapStateToProps, mapDispatchToProps)(FirstPage)

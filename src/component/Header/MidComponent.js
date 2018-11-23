@@ -3,10 +3,8 @@ import { StyleSheet,View,Text,Alert} from 'react-native';
 import { connect } from 'react-redux';
 import {Avatar,Badge} from 'react-native-elements';
 import {fetchUser} from '../../actions/signIn';
-import LeftComponent from './LeftComponent';
 import {getQuestList} from '../../actions/quest';
 import {navigate} from '../../actions'
-import  ModalScreen  from '../Modal/ModalScreen';
 
 class MidComponent extends Component {
     constructor(props){
@@ -43,7 +41,9 @@ class MidComponent extends Component {
 
         return(
                 <View style={styles.container}>
-                <Text>ACHIEVE4YOURSELF</Text>
+                <Text style = {{fontFamily:'asd',color:'#000066',fontSize:18}}>ACHIEVE</Text>
+                <Text style = {{fontFamily:'asd',color:'#FF3300',fontSize:18}}>4</Text>
+                <Text style = {{fontFamily:'asd',color:'#000066',fontSize:18}}>YOURSELF</Text> 
                  {/*  <Badge onPress={() => {this.easter9()}} value="ACHIEVE" /> */}
                 </View>
         );
@@ -52,6 +52,7 @@ class MidComponent extends Component {
 
 const styles = StyleSheet.create({
     container: {
+        flexDirection: 'row'
     }
 })
 

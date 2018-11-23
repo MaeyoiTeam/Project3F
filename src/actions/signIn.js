@@ -1,6 +1,6 @@
 import {FETCH_USER_FAIL,FETCH_USER_SUCCESS,FETCH_USER} from '../constants';
 import firebase from '../config/firebase'
-import {updateDataUser,updateToken} from './api';
+import loadUserData,{updateDataUser,updateToken,onOffNotification} from './api';
 import { NavigationActions } from 'react-navigation'
 import { Button } from 'react-native-elements';
 import * as Expo from 'expo';
@@ -63,7 +63,7 @@ try{
         firebase.auth().onAuthStateChanged(user => {
         if (user) {
 //TODO add UserAchievement
-            const token = updateToken(user.uid);
+            const token =  updateToken(user.uid);
             updateDataUser(user.uid, user.providerData[0]).then((result)=>{
                 let questListdone = {};
                 if(result.quest!=null){
@@ -86,9 +86,9 @@ try{
                         levelQ:result.levelQ,
                         quest: questListdone,
                         star:result.star,
-                        achieve:result.achieve,
                         walkStacks:result.walkStacks,
-                        pushToken:token
+                        pushToken:token,
+                        isShowNotification:result.isShowNotification,
                     }
                 })}
                 );
@@ -104,3 +104,49 @@ catch (e) {
 }
 };
 
+export const updateMidAuth = (uid) => async dispatch => {
+    try {
+                loadUserData(uid).then(result => {
+                     let questListdone = {};
+                     if (result.quest != null) {
+                         if (result.quest.done != null) {
+                             const quest = result.quest.done;
+                             Object.keys(quest).map((key) => {
+                                 questListdone = {
+                                     [key]: Object.keys(quest[key]),
+                                     ...questListdone
+                                 }
+                             });
+                         }
+                     }
+                    dispatch({
+                    type: FETCH_USER_SUCCESS,
+                    payload: {
+                        uid: uid,
+                        displayName: result.displayName,
+                        photoURL: result.photoURL + "?width=256",
+                        email: result.email,
+                        levelQ: result.levelQ,
+                        quest: questListdone,
+                        star: result.star,
+                        achieve: result.achieve,
+                        walkStacks: result.walkStacks,
+                        pushToken: result.pushToken,
+                        isShowNotification: result.isShowNotification,
+                        walkStacks:result.walkStacks
+                    }
+                })
+            })
+        }catch (e) {
+        return {
+            error: true
+        };
+    }
+};
+
+
+export const updateIsShowNotification = (user,permission) =>async dispatch => {
+    onOffNotification(user,permission).then(result=>dispatch({type: FETCH_USER_SUCCESS,
+        payload:result
+    }))
+}

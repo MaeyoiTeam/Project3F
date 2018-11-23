@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import {  View, Text ,StyleSheet,ImageBackground } from 'react-native';
+import {  View, Text ,StyleSheet,ImageBackground,Image } from 'react-native';
 import { connect } from 'react-redux';
 import {signOut,signInWithFacebook,signInWithGoogle,authChanged} from '../../actions/signIn';
 import {Button,Avatar,colors} from 'react-native-elements';
 import { SocialIcon } from 'react-native-elements'
-import Loading from '../../containers/stacks/Loading'
+import FirstPage from '../../containers/stacks/FirstPage'
 class SingIn extends Component{
   static navigationOptions = ({
       navigation
@@ -28,12 +28,12 @@ class SingIn extends Component{
   
      render() {
       props=this.props;
-      if(props.authReducer.isAuth){         //Should be Loading
+      if(props.authReducer.isAuth){         //Should be FirstPage
           return (
          
           
         <View>
-                  <Loading/>
+                  <FirstPage/>
       </View>
     );
       }
@@ -45,26 +45,34 @@ class SingIn extends Component{
           <ImageBackground source={require('../../../image/k1.png')}style={Styles.container}>
         <View style={Styles.ki1}></View>
          <View style={Styles.ki2}>
-            <Text style = {{fontFamily:'asd',fontSize:30,fontWeight:'bold'}}>    ACHIVE</Text>
-        <Text style = {{fontFamily:'asd',fontSize:30,fontWeight:'bold'}}>4YOURSELF</Text> 
+         <Image 
+                 source={require('../../../image/logosignin.png')}
+                 fadeDuration={0}
+                 style={{width: 220, height: 220,alignItems:'center'}}
+                />
         </View>
+        <View style={Styles.ki5}></View>
         <View style={Styles.ki3}>
-        <Text style = {{fontFamily:'asd',fontSize:25,fontWeight:'bold'}}>Login via</Text>
+        <Text style = {{fontFamily:'asd',fontSize:15}}>Login via</Text>
         </View> 
+        
         <View style={Styles.ki4}>
-        <SocialIcon onPress={this.props.signInWithFacebook}
+        <SocialIcon
+        onPress={this.props.signInWithFacebook}
+        title='Sign In With Facebook'
+        button
         type='facebook'
-        style={{width: 100, height: 100, borderRadius: 100}}
-        iconSize={70}
-      />
+        style={{height:35,width:300}}
+        />
         </View>
         
-        <SocialIcon onPress={this.props.signInWithGoogle}
+        <SocialIcon
+        onPress={this.props.signInWithGoogle}
+        title='Sign In With Google'
+        button
         type='google-plus-official'
-        style={{width: 100, height: 100, borderRadius: 100, backgroundColor:'white'}}
-        iconSize={100}
-        iconColor='red'
-      />
+        style={{height:35,width:300}}
+        />
     
       
   </ImageBackground>
@@ -89,19 +97,24 @@ const Styles = StyleSheet.create({
         alignItems: 'center'
       },
     ki3: {
-        flex: 0.12,
+        flex: 0.05,
         
       },
     ki2: {
         flex: 0.2,
       },
     ki1: {
-        flex: 0.25,   
+        flex: 0.13,   
       },
     ki4:{
         
-        flex: 0.3,
-    }
+        flex: 0.10,
+    },
+    ki5:{
+
+        flex: 0.30,
+    },
+   
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SingIn)

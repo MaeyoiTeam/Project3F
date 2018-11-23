@@ -2,21 +2,29 @@ import { View,Text,StyleSheet,Image } from 'react-native';
 import React,{Component} from 'react';
 import { connect } from "react-redux";
 import { Button, Avatar } from 'react-native-elements';
-import {fetchProfile} from '../../actions';
 import ProgressBarAnimated from 'react-native-progress-bar-animated';
 
-class OtherProfile extends Component{
+class OtherProfile extends Component {
     
     constructor(props) {
         super(props);
-        this.state = {
-            ...this.props.navigation.state.params.data,
-        }
+        this.goToHistoryQuest = this.goToHistoryQuest.bind(this);
+        this.goToAchievement = this.goToAchievement.bind(this);
     }
+
+    goToHistoryQuest() {
+        this.props.navigation.navigate("History", { uid: this.props.fetchReducer.data.uid })
+    }
+
+    goToAchievement() {
+        this.props.navigation.navigate("Achievement", { uid: this.props.fetchReducer.data.uid })
+    }
+
+
     render(){
-        const {authReducer,fetchReducer} = this.props;
-        const {name,photoURL,star,levelQ} =this.state;
-        console.log(this.state)
+        const {fetchReducer} = this.props;
+         const {displayName,photoURL,star,levelQ} =fetchReducer.data
+
         return(<View style={styles.container}>
                 <Text style={{textAlign:'center',paddingTop:10,paddingBottom:30,left:100,fontFamily:'asd'}}></Text>
                  <Avatar xlarge rounded source={{ uri: photoURL }} onPress={() => console.log("Works!")} />
@@ -85,13 +93,11 @@ class OtherProfile extends Component{
 
 
 // Used to add reducer's states into the props
-const mapStateToProps = (state) => ({
-    fetchReducer: state.fetchReducer,
-    fetchReducer: state.authReducer
+const mapStateToProps = state => ({
+  fetchReducer: state.fetchReducer,
 });
 //Used to add dispatch (action) into props
 const mapDispatchToProps = {
-    fetchProfile
 };
 const styles = StyleSheet.create({  
     container: {

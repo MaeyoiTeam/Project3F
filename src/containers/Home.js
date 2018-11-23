@@ -11,6 +11,8 @@ class Home extends Component {
             questlist:{},
             haveQuest:false
         }
+        this.randomQ = this.randomQ.bind(this);
+        this.goToQuest = this.goToQuest.bind(this);
     }
     a
     onSlideRight = () => {
@@ -30,19 +32,28 @@ class Home extends Component {
          }
     }
 
-     randomQ=()=>{
-       return new Promise(async (resolve, reject) => {
+    randomQ(){
            this.props.randomQuest(this.props.authReducer.data).then(()=>{
                if (this.props.authReducer.isAuth) {
                 this.props.getQuestList(this.props.authReducer.data.uid, "undone")
-                   return resolve("QuestList")
-               } else {
-                   return reject("SignIn")
-               }
+               } 
            })
-            
-       })
     } 
+
+    goToQuest(info){
+        this.props.fetchQuest(this.props.authReducer.data.uid, info[0], "undone");
+        let path = 'Home';
+        switch (info[1].type) {
+            case "food": path = 'Quest';
+                break;
+            case "walk": path = 'QuestWalk';
+                break;
+            case "rest": path = "QuestRest";
+                break;
+            default: path = "Home";
+        }
+        this.props.navigation.navigate(path);
+    }
 
     render(){
         const {authReducer,questReducer} = this.props;
@@ -84,7 +95,7 @@ class Home extends Component {
                                 />
                             </View>
                         )
-            }          
+                }          
                     </View>
                 );
             }

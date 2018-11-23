@@ -1,19 +1,28 @@
 import * as functions from "firebase-functions";
 import * as admin from 'firebase-admin';
-/* import Expo from "expo-server-sdk";
- */
+const fetch = require('node-fetch');
+//require("babel-polyfill");
 admin.initializeApp();
-/* // Create a new Expo SDK client
-let expo = new Expo(); */
+ // Create a new Expo SDK client
  
 //https://us-central1-project3f-4a950.cloudfunctions.net/resetMidnight
 exports.resetMidnight = functions.https.onRequest(async (req, res) => {
   const allUserRef = await admin.database().ref('/users');
+  let message = [];
   let usersKey = [];
   const test = await allUserRef.once("value", (usersSnap) => {
     usersSnap.forEach((user) => {
       let key = user.key;
       usersKey.push(key);
+      if (user.val().pushToken != null && user.val().isShowNotification){
+        message.push({
+          to: user.val().pushToken,
+          sound: "default",
+          title: "Daily Quest has been clear!!",
+          body: "Visit our app for next challage",
+          data: { status: "ok" }
+        });
+      }
       const personalQuestRef = allUserRef.child(key).child("/quest");
       if (user.child(key + "/quest/undone").exists) {
         personalQuestRef.child("undone").once("value", unSnap => {
@@ -35,5 +44,19 @@ exports.resetMidnight = functions.https.onRequest(async (req, res) => {
       return false;
     })
   })
-  res.send("Remove Undone in userkey: " + usersKey);
+  const response = await fetch("https://exp.host/--/api/v2/push/send", {
+    method: "POST",
+    headers: {
+      Accept: 'application/json',
+      'Accept-encoding': 'gzip, deflate',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(message)
+  });
+  res.send("Status: "+response+"Remove Undone in userkey: " + usersKey);
 });
+
+
+
+
+/*   notifications.push(); */

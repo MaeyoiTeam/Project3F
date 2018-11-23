@@ -6,19 +6,10 @@ import {authChanged} from '../../actions/signIn';
 import {Header} from 'react-native-elements';
 import {navigate} from '../../actions';
 class LeftComponent extends Component{
-         componentWillMount() {
-            this.props.authChanged()
-         }
 render(){
     return(
         <View>
-            <Image
-                 source={require('../../../../Project3F/image/YellowStar.png')}
-                 fadeDuration={0}
-                 style={{width: 25, height: 25,marginLeft:20}}
-                 
-                 
-                 />
+            
         </View>
 
         /*<View style={styles.container}>

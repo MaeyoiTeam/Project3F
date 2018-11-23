@@ -2,22 +2,29 @@ import React, { Component } from 'react';
 import {ScrollView, View,Text,StyleSheet,TouchableHighlight,} from 'react-native';
 import {Button,Avatar} from 'react-native-elements';
 import { connect } from 'react-redux';
-import {fetchData,fetchRanking} from '../actions'
+import {fetchRanking,fetchProfile} from '../actions'
 import {Font} from 'expo'
+import Loading from '../component/Loading'
 
 class Ranking extends Component{
     constructor(props){
         super(props)
         this.state={fontLoaded:false}
+        this.goToOtherProfile = this.goToOtherProfile.bind(this);
     }
      componentDidMount(){
-        this.props.fetchRanking()
+        this.props.fetchRanking(this.props.authReducer.data.uid)
         Font.loadAsync({
             'Segoe-Script' : require('../../assets/fonts/segoesc.ttf')
         }).then(()=>{
             this.setState({fontLoaded:true});
         })
     }
+    goToOtherProfile(uid){
+        this.props.fetchProfile(uid)
+        this.props.navigation.navigate("OtherProfile");
+    }
+
 
     render(){
         const styles = {container: {
@@ -29,9 +36,12 @@ class Ranking extends Component{
             textAlign: 'center',
           }};
           
-        const current={};
-        props=this.props;
-        if(this.props.authReducer.isAuth &&this.state.fontLoaded){
+        let current=0
+        const {authReducer,rankReducer}=this.props;
+        if (rankReducer.isFetching){
+            return (<Loading />)
+            }
+        else if(this.props.authReducer.isAuth &&this.state.fontLoaded){
         return(
             <ScrollView>
                 <View style={styles.container}>
@@ -43,13 +53,11 @@ class Ranking extends Component{
                 
                 
                      {
-                        props.rankReducer.data.map((item, i) => {
-                             if(item.uid==props.authReducer.data.uid){
-                                this.current={data:item,index:i}
+                        rankReducer.data.map((item, i) => {
+                             if(item.uid==authReducer.data.uid){
+                                this.current=i
                              }
-                            return  <TouchableHighlight onPress={()=>this.props.navigation.navigate('OtherProfile',{
-                                data:item
-                            })} key={i}>
+                            return  <TouchableHighlight onPress={()=>this.goToOtherProfile(item.uid)} key={i}>
                                <View>
                                     <View style = {{padding:3,flexDirection: 'row'}}>
                                 <Avatar rounded small source = {{uri: item.photoURL}} />
@@ -58,16 +66,16 @@ class Ranking extends Component{
                             <Text style={{left:50,fontFamily:'asd'}}>   Star:  {item.star}</Text>
                                </View>
                             </TouchableHighlight>
-        })
+                        })
                      }
                 <View style={styles.container}>
                 
                 <Text style={{fontSize:25,fontFamily:'asd',padding:5,}}>Your Rank!</Text>
                 </View>   
                      {
-                         this.current!=null &&<View>
-                          <Text style = {{left:45,fontFamily:'asd'}}>Rank: {this.current.index+1} : {this.current.data.name}</Text>
-                        <Text style={{left:45,paddingTop:10,fontFamily:'asd'}}>     Star:  {this.current.data.star}</Text>
+                         authReducer.isAuth &&<View>
+                                    <Text style={{ left: 45, fontFamily: 'asd' }}>Rank: {this.current.index + 1} : {authReducer.data.name}</Text>
+                                    <Text style={{ left: 45, paddingTop: 10, fontFamily: 'asd' }}>     Star:  {authReducer.data.star}</Text>
                          </View>
                       }
             </View>
@@ -78,7 +86,6 @@ class Ranking extends Component{
         return(<View><Text style = {{fontFamily:'asd'}}>Rank: Please Login</Text></View>);
     }
     }
-   
 }
 const styles = StyleSheet.create({  
     container: {
@@ -107,7 +114,7 @@ const mapStateToProps = (state) => ({
 });
 //Used to add dispatch (action) into props
 const mapDispatchToProps = {
-    fetchData, fetchRanking
+    fetchRanking, fetchProfile
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Ranking)

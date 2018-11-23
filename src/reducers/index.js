@@ -6,6 +6,7 @@ import questReducer from './questReducer';
 import historyReducer from './historyReducer';
 import modalReducer from './modalReducer';
 import nav from './nav';
+import notification from './notification';
 //can add more method-------------here
 export default combineReducers({
     questReducer,   // ส่วนรวบรวม เควสลิสที่ยังกำลังทำอยู่
@@ -15,4 +16,5 @@ export default combineReducers({
     historyReducer, // ส่วนรวบรวม ข้อมูลเควสลิสที่ทำสำเร็จแล้ว //?น่าจะลดทอนได้
     nav,            //ส่วนรวบรวมของNavigator
     modalReducer,   //ส่วนแสดง Modal (สามารถแสดงได้ทุกหน้า)
+    notification,   //ส่วนรวบรวม Notification
 })

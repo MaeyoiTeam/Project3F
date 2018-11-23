@@ -10,11 +10,10 @@ import Profile from '../containers/Profile';
 import Home from '../containers/Home';
 import Setting from '../containers/Setting';
 import SignIn from '../containers/stacks/SignIn';
-import Loading from '../containers/stacks/Loading';
+import FirstPage from '../containers/stacks/FirstPage';
 import Quest from '../containers/stacks/quests/Quest';
 import QuestWalk from '../containers/stacks/quests/QuestWalk';
 import QuestRest from '../containers/stacks/quests/QuestRest';
-import Pedo from '../containers/stacks/Pedo';
 import HistoryQuestList from '../containers/stacks/HistoryQuestList';
 import Achievement from '../containers/stacks/Achievement';
 import OtherProfile from '../containers/stacks/OtherProfile'
@@ -88,23 +87,6 @@ const BottomTabs = createMaterialBottomTabNavigator(
   }
 );
 
-const History = createMaterialTopTabNavigator({
-Achievement: {
-  screen: Achievement,
-  navigationOptions: {
-    headerTitle: "Achievement",
-    headerStyle: {}
-  }
-},
-HistoryQuestList: {
-  screen: HistoryQuestList,
-  navigationOptions: {
-    headerTitle: "HistoryQuestList",
-    headerStyle: {}
-  }
-},
-})
-
 
 
 const Stack = createStackNavigator({
@@ -119,39 +101,43 @@ Home:{    screen:BottomTabs,
             } 
           }
     },
-  OtherProfile: {
-    screen: OtherProfile,
-    navigationOptions: {}
+    OtherProfile: {
+      screen: OtherProfile,
+      navigationOptions: {}
+    },
+    History: {
+      screen: HistoryQuestList,
+      navigationOptions: {}
+    },
+    Achievement: {
+      screen: Achievement,
+      navigationOptions: {
+        headerTitle: "Achievement",
+        headerStyle: {}
+      }
+    },
+    Quest: {
+      screen: Quest,
+      navigationOptions: {}
+    },
+    QuestWalk: {
+      screen: QuestWalk,
+      navigationOptions: {}
+    },
+    QuestRest: {
+      screen: QuestRest,
+      navigationOptions: {}
+    }
   },
- History: {
-   screen: History,
-   navigationOptions: {}
- },
- Pedo: {
-  screen: Pedo,
-  navigationOptions: {}
-}, 
-Quest: {
-  screen: Quest,
-  navigationOptions: {}
-},
-QuestWalk: {
-  screen: QuestWalk,
-  navigationOptions: {}
-},
-QuestRest: {
-  screen: QuestRest,
-  navigationOptions: {}
-},
-},{
-  mode:"modal",
-  headerLayoutPreset:"center",
-
-});
+  {
+    mode: "modal",
+    headerLayoutPreset: "center"
+  }
+);
 
 const Navigator = createSwitchNavigator({
-  Loading: {
-    screen: Loading,
+  FirstPage: {
+    screen: FirstPage,
     navigationOptions: {}
   },
   SignIn: {
