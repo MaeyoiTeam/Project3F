@@ -82,7 +82,7 @@ class OtherProfile extends Component {
                             <Image
                             source={require('../../../image/yoga.png')}
                             fadeDuration={0}
-                            style={{width: 25, height: 25,}}
+                            style={{width: 25, height: 25,right:10}}
                             />
                             
                             <ProgressBarAnimated width = {200}
