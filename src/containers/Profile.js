@@ -134,7 +134,7 @@ class Profile extends Component{
                         borderWidth: 0,
                         left:15
                       }}
-                      style = {{fontFamily:'asd'}}  
+                      textStyle = {{fontFamily:'asd'}}  
                 />
                     <Button title="History Quest"
                         onPress={this.goToHistoryQuest}
@@ -146,6 +146,7 @@ class Profile extends Component{
                             borderWidth: 0,
                             left: 15
                         }}
+                        textStyle = {{fontFamily:'asd'}} 
                     />
                 </View>
               </View>}
