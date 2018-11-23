@@ -16,7 +16,7 @@ import QuestWalk from '../containers/stacks/quests/QuestWalk';
 import QuestRest from '../containers/stacks/quests/QuestRest';
 import HistoryQuestList from '../containers/stacks/HistoryQuestList';
 import Achievement from '../containers/stacks/Achievement';
-import OtherProfile from '../containers/stacks/OtherProfile'
+import OtherProfile from '../containers/stacks/otherProfile'
 //Component
 import LeftComponent from '../component/Header/LeftComponent';
 import MidComponent from '../component/Header/MidComponent';

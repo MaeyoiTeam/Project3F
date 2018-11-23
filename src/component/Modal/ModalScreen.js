@@ -22,8 +22,8 @@ export class ModalScreen extends Component {
         const key = Object.keys(this.props.modalReducer.data)
         this.props.finishQuestWalk(this.props.authReducer.data,key[0],this.props.modalReducer.data,this.state.stepCount)
         this.props.updateNotification(this.props.authReducer.data.uid, {
-          name:"steps: "+this.state.stepCount+" Walk Quest Success wal", date: new Date().toISOString()
-        }, this.props.notification.data) 
+          name:"steps: "+this.state.stepCount+" Walk Quest Success walk", date: new Date().toISOString()
+        }) 
       }
     }
         _subscribe = () => {
@@ -55,12 +55,23 @@ export class ModalScreen extends Component {
        }
     };  
 
+  _unsubscribe = () => {
+    this._subscription && this._subscription.remove();
+    this._subscription = null;
+  };
+
+  componentWillUnmount() {
+    clearInterval(this.timerID)
+    this._unsubscribe();
+  }
+
   render(){
     if(this.props.modalReducer.showModal){
     const {modalReducer,authReducer} = this.props
     const key = Object.keys(modalReducer.data)
-    const data = Object.values(modalReducer.data);
-    console.log(modalReducer.data)
+      const data = modalReducer.data[key[2]];
+    console.log(modalReducer.data.achievement)
+   // console.log(modalReducer.data)
     return (
      <Modal visible={this.props.modalReducer.showModal}
       onRequestClose={() => {
@@ -78,9 +89,16 @@ export class ModalScreen extends Component {
                         </View>
                         )
        } 
-       <Text>Date: {key[0]}</Text>
-       <Text>Start at: {data[0].start}</Text>
-       <Text>finish at: {data[0].last}</Text>
+       <Text>Date: {key[2]}</Text>
+          { data!=null &&
+             <View>
+              <Text>Start at: {data.start}</Text>
+              <Text>finish at: {data.last}</Text> 
+             </View> 
+          }
+          {
+            
+          }
        <Text>Steps: {this.state.stepCount}</Text>
         <Button
           onPress={() => this.props.clearFinishQuestWalk(authReducer.data).then(()=>this.props.navigate("Stack"))
@@ -113,7 +131,6 @@ const mapStateToProps = (state) => ({
   authReducer: state.authReducer,
   modalReducer: state.modalReducer,
   questReducer: state.questReducer,
-  notification: state.notification
 })
 
 const mapDispatchToProps = {

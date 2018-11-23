@@ -6,6 +6,7 @@ import {updateQuest,fetchQuest,updateQuestDone,getQuestList} from '../../../acti
 import {updateNotification} from '../../../actions/notification'
 import TimerCountdown from 'react-native-timer-countdown';
 import Accel from '../../../component/Accel';
+import { Notifications} from 'expo'
 class QuestRest extends Component {
   static navigationOptions = ({
       navigation
@@ -46,11 +47,13 @@ class QuestRest extends Component {
                 }
             })
              if (this.props.fetchReducer.data.isComplete) {
+                 const message = {
+                     name: "Rest Quest Success", newStar: prevProps.fetchReducer.data.star, currentStar: this.props.fetchReducer.data.star, date: new Date().toISOString()
+                 };
                  this.props.getQuestList(this.props.authReducer.data.uid, "undone");
                  this.props.updateQuestDone(this.props.authReducer.data,this.state.key,this.state.type);
-                  this.props.updateNotification(this.props.authReducer.data.uid,{
-                     name: "Rest Quest Success",newStar:prevProps.fetchReducer.data.star, currentStar: this.props.fetchReducer.data.star, date: new Date().toISOString()
-                 },this.props.notification.data)
+                  this.props.updateNotification(this.props.authReducer.data.uid,message)
+                 this.sendSuccessQuestNotification(message)
              }
         }
     }
@@ -65,6 +68,21 @@ class QuestRest extends Component {
     }
     toggleAlert=(toggle)=>{
          this.setState({isAlert: toggle});
+    }
+
+    sendSuccessQuestNotification = (message) => {
+        Notifications.presentLocalNotificationAsync({
+            title: message.name,
+            body: "Star: " + message.currentStar + " ( +" + message.newStar + ").",
+            ios: {
+                sound: true
+            },
+            android: {
+                icon:'https://firebasestorage.googleapis.com/v0/b/project3f-4a950.appspot.com/o/achieve%2Ficon.png?alt=media&token=e95c5c83-7b5c-4db3-96f7-258b06b925a1',
+                channelId: "achieve",
+                color: '#ADFFFF',
+            }
+        });
     }
 
 
@@ -187,7 +205,6 @@ styles = StyleSheet.create({
 
 // Used to add reducer's states into the props
 const mapStateToProps = (state) => ({
-    notification:state.notification,
     fetchReducer: state.fetchReducer,
     authReducer: state.authReducer
 });
