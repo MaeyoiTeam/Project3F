@@ -8,13 +8,7 @@ class RightComponent extends Component{
 render(){
     return(
         <View>
-            <Image
-                 source={require('../../../image/icon.png')}
-                 fadeDuration={0}
-                 style={{width: 25, height: 25,marginRight:20}}
-                 
-                 
-                 />
+            
         </View>
         /*<View style={styles.container}>
         {   this.props.authReducer.isAuth && <View>
