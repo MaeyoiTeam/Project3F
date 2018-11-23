@@ -39,7 +39,7 @@ export const navigate = (nav)=>{
 
 export const fetchQuestList = (fn) => {
     return (dispatch) => {
-        dispatch({ type:QUEST_DATA });
+        dispatch({ type:QUEST_DATA }); 
         fn.then(result => {
                 dispatch({type:QUEST_DATA_SUCCESS,payload:result})
             }).catch(error => {

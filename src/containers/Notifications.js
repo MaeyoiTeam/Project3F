@@ -25,7 +25,7 @@ class Notifications extends Component {
  
   });
 
-  componentDidMount(){
+  componentWillMount(){
     this.props.getNotifications(this.props.authReducer.data.uid);
   }
   
@@ -33,22 +33,25 @@ class Notifications extends Component {
 
     render(){
       const {notification} =this.props;
-        if (notification.isFetching) {
-          return(<Loading/>);
-        }else{
-          return(
+      if (notification.haveNotification&&!notification.isFetching) {
+          return (
             <View style={styles.container}>
-                  {
-                    this.props.notification.haveNotification &&
-                    this.props.notification.data.sort((a,b)=>-1).map((obj,i)=><View  key={i}>
-                      <Text>{moment(obj.date).format('LTS')}</Text>
-                      <Text>{obj.name}</Text>
-                      <Text>Current Star: {obj.currentStar} (+{obj.newStar})</Text>
-                      
-                    </View>)
-                  }
+              {
+                this.props.notification.haveNotification &&
+                this.props.notification.data.sort((a, b) => -1).map((obj, i) => <View key={i}>
+                  <Text>{moment(obj.date).format('LTS')}</Text>
+                  <Text>{obj.name}</Text>
+                  <Text>Current Star: {obj.currentStar} (+{obj.newStar})</Text>
+
+                </View>)
+              }
             </View>
-              );
+          );
+      } else if (!notification.haveNotification && notification.isFetching) {
+        return(<Text>You don't have any massage</Text>)
+      }   
+        else{
+          return (<Loading />);
         }
   }
 }

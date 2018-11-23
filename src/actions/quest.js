@@ -209,6 +209,7 @@ export const finishQuestWalk = (user, key, modalData, stepCount) => {
               achievement: newAchieve,
               walkStacks: updatedStacks,
               ...modalData,
+              plusStar:star
             }
           })
         }).catch((e) => console.log(e))

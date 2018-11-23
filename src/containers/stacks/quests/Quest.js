@@ -1,10 +1,11 @@
-import { View,Text,StyleSheet,Alert ,Modal,TouchableOpacity} from 'react-native';
+import { View, Text, StyleSheet, Alert, Modal, TouchableOpacity, Platform} from 'react-native';
 import React,{Component} from 'react';
 import { connect } from 'react-redux';
 import {Button} from 'react-native-elements'
 import {updateQuest,fetchQuest,updateQuestDone,getQuestList} from '../../../actions/quest'
 import {updateNotification} from '../../../actions/notification'
-import { BlurView } from 'expo';
+import { BlurView, Notifications} from 'expo';
+
 class Quest extends Component {
   static navigationOptions = ({
       navigation
@@ -15,7 +16,7 @@ class Quest extends Component {
   };
     constructor(props){
         super(props);
-
+        this.update = this.update.bind(this);
         this.state={
             key:"none",
             name: "none",
@@ -31,6 +32,18 @@ class Quest extends Component {
             showMe:false
         }
     }
+
+    componentDidMount(){
+        if (Platform.OS === 'android') {
+            Notifications.createChannelAndroidAsync("achieve", {
+                name: "Achieve",
+                sound: true,
+                priority: 'max',
+                vibrate: [0, 250, 250, 250],
+            });
+        }
+    }
+
      componentDidUpdate(prevProps, prevState, snapshot){
         if(prevProps.fetchReducer.data!=this.props.fetchReducer.data){
             this.setState({
@@ -39,17 +52,35 @@ class Quest extends Component {
                 }
             })
              if (this.props.fetchReducer.data.isComplete) {
+                 const message = {
+                     name: "Food Quest Success", newStar: prevProps.fetchReducer.data.star, currentStar: this.props.fetchReducer.data.star, date: new Date().toISOString()
+                 }
                  this.props.getQuestList(this.props.authReducer.data.uid, "undone");
                  this.props.updateQuestDone(this.props.authReducer.data,this.state.key,this.state.type);
-                    this.props.updateNotification(this.props.authReducer.data.uid,{
-                     name: "Food Quest Success",newStar:prevProps.fetchReducer.data.star, currentStar: this.props.fetchReducer.data.star, date: new Date().toISOString()
-                 },this.props.notification.data) 
+                 this.props.updateNotification(this.props.authReducer.data.uid, message)
+                 this.sendSuccessQuestNotification(message); 
              }
         }
     } 
 
-    update=(user,key,point)=>{
-        this.props.updateQuest(user, key, this.state.current+point);
+    sendSuccessQuestNotification=(message)=>{
+        Notifications.presentLocalNotificationAsync({
+            title: message.name,
+            body: "Star: " + message.currentStar + " ( +" + message.newStar+").",
+            ios:{
+                sound:true
+            },
+            android: {
+                icon: 'https://firebasestorage.googleapis.com/v0/b/project3f-4a950.appspot.com/o/achieve%2Ficon.png?alt=media&token=e95c5c83-7b5c-4db3-96f7-258b06b925a1',
+                channelId: "achieve",
+                color: '#FF0000',
+            }
+        });
+    }
+    
+    update(){
+        let sumPoint = this.state.current+this.state.point;
+        this.props.updateQuest(this.props.authReducer.data, this.state.key, sumPoint);
     }
     
     decisionQuest=()=>{
@@ -111,7 +142,7 @@ class Quest extends Component {
                                     borderColor: "transparent",
                                     borderWidth: 0,
                                     borderRadius:360,
-                                    }} title={"Up "+point+" point"} onPress={()=>this.update(authReducer.data,key,point)}/> 
+                                    }} title={"Up "+point+" point"} onPress={this.update}/> 
                  <TouchableOpacity onPress={()=>{this.setState({
                                 showMe:false
                             })}}>
@@ -158,7 +189,6 @@ openText:{backgroundColor:'#bbb',
 });
 // Used to add reducer's states into the props
 const mapStateToProps = (state) => ({
-    notification: state.notification,
     fetchReducer: state.fetchReducer,
     authReducer: state.authReducer
 });
