@@ -29,6 +29,7 @@
       "config":{
         "googleSignIn":{
           "apiKey":"AIzaSyDsTlwU2F5GoxCGJqmN_MIo54z8ddINS3U",
+          "certificateHash":"656A673994EB929E3E9341A231EB02FDE1F55309"
         }
       }
     }

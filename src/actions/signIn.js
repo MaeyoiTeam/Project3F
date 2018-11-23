@@ -38,7 +38,7 @@ export const signInWithGoogle = ()  => {
     try {
         return async (dispatch) => {
             const result = await Expo.Google.logInAsync({
-                androidClientId: '895255967672-7h7v7t5r97c3cpj8rijahirbcqjjcifv.apps.googleusercontent.com',
+                androidClientId: '895255967672-matn7emvcouhnh3371blsaa7r5q266bn.apps.googleusercontent.com',
                 iosClientId: '895255967672-bg7pp8ojou3cfrsjqcssm0s6km3nvevq.apps.googleusercontent.com',
                 scopes: ['profile', 'email'],
             })
