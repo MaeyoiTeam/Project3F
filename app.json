@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "project3f",
+    "name": "Achieve",
     "description": "This project is really great.",
     "slug": "project3f",
     "privacy": "public",
@@ -21,11 +21,16 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "bundleIdentifier":"com.project3f"
     },
     "android": {
       "googleServicesFile": "./src/config/google-services.json",
-      "package":"meayoi.Team"
+      "package":"com.project3f",
+      "config":{
+        "googleSignIn":{
+          "apiKey":"AIzaSyDsTlwU2F5GoxCGJqmN_MIo54z8ddINS3U",
+        }
+      }
     }
   }
 }

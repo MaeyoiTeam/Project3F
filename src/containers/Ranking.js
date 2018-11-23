@@ -108,7 +108,6 @@ const styles = StyleSheet.create({
 });
 // Used to add reducer's states into the props
 const mapStateToProps = (state) => ({
-    fetchReducer: state.fetchReducer,
     authReducer: state.authReducer,
     rankReducer: state.rankReducer
 });

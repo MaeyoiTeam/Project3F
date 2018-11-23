@@ -20,7 +20,7 @@ class HistoryQuestList extends Component {
         this.props.clearMiddleHistory();
     }
     render(){
-        const {historyReducer,authReducer,fetchReducer} = this.props;
+        const {historyReducer} = this.props;
                         return(
                 <View style={styles.container}>
                 {  historyReducer.haveHISTORY &&
@@ -51,9 +51,7 @@ class HistoryQuestList extends Component {
 
 // Used to add reducer's states into the props
 const mapStateToProps = (state) => ({
-    fetchReducer: state.fetchReducer,
     historyReducer: state.historyReducer,
-    authReducer: state.authReducer
 });
 //Used to add dispatch (action) into props
 const mapDispatchToProps = {

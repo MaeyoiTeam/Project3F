@@ -155,7 +155,6 @@ class Profile extends Component{
 
 // Used to add reducer's states into the props
 const mapStateToProps = (state) => ({
-    fetchReducer: state.fetchReducer,
     authReducer: state.authReducer
 });
 //Used to add dispatch (action) into props

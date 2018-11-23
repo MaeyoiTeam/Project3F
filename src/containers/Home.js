@@ -15,15 +15,12 @@ class Home extends Component {
         this.randomQ = this.randomQ.bind(this);
         this.goToQuest = this.goToQuest.bind(this);
     }
-    a
-    onSlideRight = () => {
-        //perform Action on slide success.
-    };
 
     componentWillMount() {
         this.props.getQuestList(this.props.authReducer.data.uid, "undone")
        
     }
+    
     componentDidUpdate(prevProps, prevState, snapshot) {
          if (prevProps.questReducer.data != this.props.questReducer.data) {
              this.setState({
@@ -141,12 +138,7 @@ class Home extends Component {
         }
     }
 }
-// Used to add reducer's states into the props
-const mapStateToProps = (state) => ({
-    fetchReducer: state.fetchReducer,
-    authReducer: state.authReducer,
-    questReducer:state.questReducer
-})
+
 const styles = StyleSheet.create({  
     container: {
     flex: 1,
@@ -190,6 +182,13 @@ const styles = StyleSheet.create({
         color: '#000000'
     }
 });
+
+// Used to add reducer's states into the props
+const mapStateToProps = (state) => ({
+    authReducer: state.authReducer,
+    questReducer: state.questReducer
+})
+
 //Used to add dispatch (action) into props
 const mapDispatchToProps = {
      getQuestList, randomQuest, fetchQuest

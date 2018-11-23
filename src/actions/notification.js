@@ -5,9 +5,11 @@ import { Platform} from 'react-native'
 export const updateNotification = (uid,newLog)=>{
     return  (dispatch) => {
         loadUserData(uid,'notificationLog').then(notiLogs=>{
+            console.log("loadUserData")
+            var sortnotiLogs=[];
             if (Array.isArray(notiLogs)) {
                 notiLogs.push(newLog);
-                var sortnotiLogs = notiLogs.sort((a, b) => {
+               sortnotiLogs = notiLogs.sort((a, b) => {
                     const x = new Date(a.date)
                     const y = new Date(b.date)
                     if (x > y) {
@@ -20,7 +22,7 @@ export const updateNotification = (uid,newLog)=>{
                     }
                 });
             } else {
-                var sortnotiLogs = [newLog];
+                sortnotiLogs.push(newLog);
             }
             if (sortnotiLogs.length > 10) {
                 sortnotiLogs.shift()
@@ -30,10 +32,8 @@ export const updateNotification = (uid,newLog)=>{
                 type: NOTIFICATION_DATA_SUCCESS,
                 payload: sortnotiLogs
             }))
-                .catch(e => dispatch({
-                    type: NOTIFICATION_DATA_FAILURE
-                }))
         })
+        
     }
 }
 
