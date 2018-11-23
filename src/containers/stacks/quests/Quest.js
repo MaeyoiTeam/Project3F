@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Alert, Modal, TouchableOpacity, Platform} from 'react-native';
+import { View, Text, StyleSheet, Alert, Modal, TouchableOpacity, Platform,Image} from 'react-native';
 import React,{Component} from 'react';
 import { connect } from 'react-redux';
 import {Button} from 'react-native-elements'
@@ -100,7 +100,7 @@ class Quest extends Component {
 
     render(){
         const {name,type,detail,current,target,key,point,star,level,isComplete,prevLevel}=this.state;
-
+        const {authReducer} =this.props;
         if (isComplete){this.decisionQuest()                                            //Quest Complete
                     return(<View style = {{paddingTop:180,alignItems:'center'}}>
                     <Text style={{color:'white'}}>Current {type} star :{prevLevel.star}/{prevLevel.target}->{star}/{target}</Text>
