@@ -75,6 +75,7 @@ class Home extends Component {
                                     borderRadius:360,
                                     }}
                                     onPress={() => this.goToQuest(info)}
+                                    textStyle={{fontFamily:'asd',fontSize:16,color:'#ffffff'}}
                                 />
                             </View>
                         )
@@ -112,8 +113,11 @@ class Home extends Component {
                     <View style={styles.ku2}>
                         <RNSlidingButton
                             style={{
-                            width: 260,
-                            backgroundColor: '#fcfcf7',
+                            width: 325,
+                            backgroundColor: 'transparent',
+                            borderWidth: 1,
+                            borderColor: '#7a7a7a',
+                            borderRadius: 360
                              }}
                             height={35}
                             onSlidingSuccess={async ()=>{let path = await this.randomQ();
@@ -121,7 +125,7 @@ class Home extends Component {
                                 slideDirection={SlideDirection.RIGHT}>
                             <View>
                                 <Text numberOfLines={1} style={styles.titleText}>
-                                    SLIDE RIGHT TO GET QUESTS >
+                                    SLIDE RIGHT TO GET QUESTS >>
                                 </Text>
                             </View>
                         </RNSlidingButton>
@@ -163,7 +167,7 @@ const styles = StyleSheet.create({
     },
     kuku: {
         
-        flex: 0.65,
+        flex: 0.55,
     },
     kuka: {
         

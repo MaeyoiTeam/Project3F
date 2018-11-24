@@ -5,6 +5,14 @@ import { Button, Avatar } from 'react-native-elements';
 import ProgressBarAnimated from 'react-native-progress-bar-animated';
 
 class OtherProfile extends Component {
+
+    static navigationOptions = ({
+        navigation
+    }) => {
+        return {
+            title: navigation.getParam('otherParam', "Profile"),
+        };
+    };
     
     constructor(props) {
         super(props);
@@ -26,11 +34,21 @@ class OtherProfile extends Component {
          const {displayName,photoURL,star,levelQ} =fetchReducer.data
 
         return(<View style={styles.container}>
-                <Text style={{textAlign:'center',paddingTop:10,paddingBottom:30,left:100}}></Text>
-                 <Avatar xlarge rounded source={{ uri: photoURL }} onPress={() => console.log("Works!")} />
-                <Text style={{paddingTop:20,fontSize:15,textAlign:'center'}}>{displayName}</Text>
-                <Text>Star:{star}</Text>
-               <Text style={{textAlign:'center',paddingTop:10,paddingBottom:30,left:100}}> X Star : {star}</Text>
+                <Text style={{textAlign:'center',paddingTop:10,paddingBottom:20,left:100,fontFamily:'asd'}}></Text>
+                 <Avatar large rounded source={{ uri: photoURL }} onPress={() => console.log("Works!")} />
+                <Text style={{paddingTop:20,fontSize:15,textAlign:'center',fontFamily:'asd'}}>{displayName}</Text>
+                <View style = {{                  
+                    flexDirection: 'row',
+                    flex:0.4
+                    }}>
+                <Image
+                 source={require('../../../image/star.png')}
+                 fadeDuration={0}
+                 style={{width: 25, height: 25}}
+                />    
+                <Text style = {{paddingBottom:10,fontFamily:'asd'}}> x {star}</Text>
+                </View>
+               
                             {
                                 fetchReducer.data.levelQ!=null &&
                             <View>
@@ -43,7 +61,7 @@ class OtherProfile extends Component {
                                     <ProgressBarAnimated width = {200}
                                     backgroundColor = "#6CC644"
                                     value = {(levelQ.walk.star*100)/levelQ.walk.target}/>
-                                    <Text style = {{left:10}}>{levelQ.walk.star}/{levelQ.walk.target}</Text> 
+                                    <Text style = {{left:10, fontFamily:'asd'}}>{levelQ.walk.star}/{levelQ.walk.target}</Text> 
                                     </View>
                             <Text>Level:{levelQ.walk.level}</Text>
                             <View style = {{
@@ -58,7 +76,7 @@ class OtherProfile extends Component {
                                     <ProgressBarAnimated width={200}
                                         backgroundColor="#6CC644"
                                         value={(levelQ.food.star * 100) / levelQ.food.target} />
-                                    <Text style={{ left: 10 }}>{levelQ.food.star}/{levelQ.food.target}</Text>
+                                    <Text style={{ left: 10, fontFamily:'asd'}}>{levelQ.food.star}/{levelQ.food.target}</Text>
                                 </View>
                                 <Text>Level:{levelQ.food.level}</Text>
                                 <View style={{
@@ -85,13 +103,13 @@ class OtherProfile extends Component {
                             <ProgressBarAnimated width = {200}
                             backgroundColor = "#6CC644"
                             value = {(levelQ.rest.star*100)/levelQ.rest.target}/>
-                            <Text style = {{left:10}}>{levelQ.rest.star}/{levelQ.rest.target}</Text>   
+                            <Text style = {{left:10, fontFamily:'asd'}}>{levelQ.rest.star}/{levelQ.rest.target}</Text>   
                             </View>
                             <Text>Level:{levelQ.rest.level}</Text>
                     <Button title="Achievement Earned"
                         onPress={this.goToAchievement}
                         buttonStyle={{
-                            backgroundColor: "#004200",
+                            backgroundColor: "#336600",
                             width: 200,
                             height: 40,
                             borderColor: "transparent",
@@ -103,7 +121,7 @@ class OtherProfile extends Component {
                     <Button title="History Quest"
                         onPress={this.goToHistoryQuest}
                         buttonStyle={{
-                            backgroundColor: "rgba(00, 99,216, 1)",
+                            backgroundColor: "#4a9301",
                             width: 200,
                             height: 40,
                             borderColor: "transparent",

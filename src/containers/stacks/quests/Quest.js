@@ -10,7 +10,7 @@ class Quest extends Component {
       navigation
   }) => {
       return {
-          title: navigation.getParam('otherParam', "Quest"),
+          title: navigation.getParam('otherParam', "Food"),
       };
   };
     constructor(props){
@@ -41,9 +41,9 @@ class Quest extends Component {
              if (this.props.fetchReducer.data.isComplete) {
                  this.props.getQuestList(this.props.authReducer.data.uid, "undone");
                  this.props.updateQuestDone(this.props.authReducer.data,this.state.key,this.state.type);
-                    this.props.updateNotification(this.props.authReducer.data.uid,{
-                     name: "Food Quest Success",newStar:prevProps.fetchReducer.data.star, currentStar: this.props.fetchReducer.data.star, date: new Date().toISOString()
-                 },this.props.notification.data) 
+                 this.props.updateNotification(this.props.authReducer.data.uid, message)
+                 this.sendSuccessQuestNotification(message);
+                 this.decisionQuest();
              }
         }
     } 
@@ -54,12 +54,11 @@ class Quest extends Component {
     
     decisionQuest=()=>{
         Alert.alert(
-            'Alert Title',
-            'My Alert Msg',
-            [
-              {text: 'Ask me later', onPress: () => console.log('Ask me later pressed')},
-              {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
-              {text: 'OK', onPress: () => console.log('OK Pressed')},
+            'Food Quest Completed',
+            'Start: '+this.state.star+' / '+this.state.target+'Level: '+
+            this.state.prevLevel.level+' => '+this.state.level,
+            [ 
+              {text: 'OK',  onPress:()=>this.props.navigation.navigate('Home')}  ,
             ],
             { cancelable: false }
           )
@@ -71,12 +70,14 @@ class Quest extends Component {
     render(){
         const {fetchReducer,authReducer} = this.props;
         const {name,type,detail,current,target,key,point,star,level,isComplete,prevLevel}=this.state;
-
-        if (isComplete){   //Quest Complete
-                    return(<View style = {{paddingTop:180}}>
-                    <Text>Current {type} star :{prevLevel.star}/{prevLevel.target}->{star}/{target}</Text>
-                    <Text>level: {prevLevel.level}/{level}</Text>
-                    <Text>Quest is Complete</Text>
+        const {authReducer} =this.props;
+        if (isComplete){ 
+            this.decisionQuest();                                           //Quest Complete
+                     return(
+                    <View style = {{paddingTop:180,alignItems:'center'}}>
+                    <Text style={{color:'white'}}>Current {type} star :{prevLevel.star}/{prevLevel.target}->{star}/{target}</Text>
+                    <Text style={{color:'white'}}>level: {prevLevel.level}/{level}</Text>
+                    <Text style={{color:'white'}}>Quest is Complete</Text>
                       <Button title="Go Home"
                       buttonStyle={{
                         backgroundColor: "rgba(10, 10,100, 1)",
@@ -86,7 +87,7 @@ class Quest extends Component {
                         borderRadius:360,
                         }}
                     onPress={()=>this.props.navigation.navigate('Home')}/>  
-                    </View>);
+                    </View>); 
         }
         else{    //Quest Continue
             return(    

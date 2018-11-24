@@ -4,6 +4,7 @@ import {Button,CheckBox,ButtonGroup} from 'react-native-elements'
 import { connect } from 'react-redux';
 import {signOut,updateIsShowNotification} from '../actions/signIn';
 import { BlurView } from 'expo';
+import AboutUs from '../component/AboutUs';
 
 class Setting extends Component {
     static navigationOptions = () => ({
@@ -27,6 +28,17 @@ class Setting extends Component {
          this.props.updateIsShowNotification(this.props.authReducer.data, !this.props.authReducer.data.isShowNotification)
      }
 
+     openAboutUs=()=>{
+        this.setState({
+            showMe:true
+        })
+     }
+     closeAboutUs=()=>{
+        this.setState({
+            showMe:false
+        })
+     }
+
     render(){
         const {authReducer } = this.props;
         return(     
@@ -39,36 +51,9 @@ class Setting extends Component {
             </View>
             <View style={styles.pa4}></View>
                 <View style={styles.container1}>
-                            <Modal visible={this.state.showMe}
-                            onRequestClose={()=>console.warn("this is cloase request")}
-                            animationType='fade' transparent  >
-                             <BlurView tint="dark" intensity={50} style={StyleSheet.absoluteFill}></BlurView>
-                            <View style={styles.modalView1}></View>
-                            <View style={styles.modalView}>
-                            <Text > </Text>
-                            <Text style={{fontFamily:'asd'}} >Project Manager</Text>
-                            <Text style={{fontFamily:'asd'}}>Nutza007</Text>
-                            <Text style={{fontFamily:'asd'}}></Text>
-                            <Text ></Text>
-                            <Text style={{fontFamily:'asd'}}>UX/UI Designer</Text>
-                            <Text style={{fontFamily:'asd'}}>Nine9Belive</Text>
-                            <Text style={{fontFamily:'asd'}}>Bally</Text>
-                            <Text style={{fontFamily:'asd'}}>Wanchoice</Text>
-                            <Text ></Text>
-                            <Text style={{fontFamily:'asd'}}>Deverloper</Text>
-                            <Text style={{fontFamily:'asd'}}>InwMax</Text>
-                            <Text style={{fontFamily:'asd'}}>Mojo Jojo</Text>
-                            <TouchableOpacity onPress={()=>{this.setState({
-                                showMe:false
-                            })}}>
-                                <Text style={styles.closeText}>Close</Text>
-                            </TouchableOpacity>
-                            </View>
-                            </Modal>
+                            <AboutUs showMe={this.state.showMe} closeAboutUs={this.closeAboutUs}/>
 
-                            <TouchableOpacity onPress={()=>{this.setState({
-                                showMe:true
-                            })}}>
+                            <TouchableOpacity onPress={this.openAboutUs}>
              <Text style={styles.openText}>About US</Text>
         </TouchableOpacity>
         </View>
