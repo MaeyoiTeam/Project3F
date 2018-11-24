@@ -125,7 +125,6 @@ class Profile extends Component{
                 value = {(authReducer.data.levelQ.rest.star*100)/authReducer.data.levelQ.rest.target}/>
                 <Text style = {{left:10}}>{rest.star}/{rest.target}</Text>   
                 </View>
-                </View>
                 <Text style = {{fontFamily:'asd',textAlign:'center'}}>Level:{rest.level}</Text>
                 <View style = {{paddingTop:20,flex:0.0125}}>
                 <Button title="Achievement Earned" 

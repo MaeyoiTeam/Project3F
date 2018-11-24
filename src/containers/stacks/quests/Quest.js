@@ -68,7 +68,6 @@ class Quest extends Component {
 
 
     render(){
-        const {fetchReducer,authReducer} = this.props;
         const {name,type,detail,current,target,key,point,star,level,isComplete,prevLevel}=this.state;
         const {authReducer} =this.props;
         if (isComplete){ 

@@ -119,30 +119,8 @@ class Home extends Component {
                                     borderWidth: 0,
                                     borderRadius:360,
                                     }}
-<<<<<<< HEAD
                                     onPress={() => this.goToQuest(info)}
                                     textStyle={{fontFamily:'asd',fontSize:16,color:'#ffffff'}}
-=======
-
-                                textStyle={{fontFamily:'asd',fontSize:16}}
-                                onPress = {
-                                        () => {
-                                            this.props.fetchQuest(authReducer.data.uid,info[0],"undone");
-                                            let path='Home';
-                                            switch(info[1].type){
-                                                case "food": path='Quest'; 
-                                                                break;
-                                                case "walk": path='QuestWalk';
-                                                                break;
-                                                case "rest": path="QuestRest";
-                                                                break;
-                                                default: path="Home";
-                                            }
-                                            this.props.navigation.navigate(path);
-                                        }
-                                        
-                                }
->>>>>>> parent of 7842c0b... Merge branch 'UI/UX' of https://github.com/MaeyoiTeam/Project3F into UI/UX
                                 />
                             </View>
                         )

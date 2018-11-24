@@ -51,9 +51,7 @@ class Notifications extends Component {
 
             </View>
           );
-      } else{
-          return (<Loading />);
-        }
+      }
   }
 }
 

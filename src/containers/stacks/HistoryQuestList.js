@@ -26,11 +26,7 @@ class HistoryQuestList extends Component {
                 {  historyReducer.haveHISTORY &&
                 historyReducer.data.map((type, index) => {
                     const arr = type[1]
-<<<<<<< HEAD
                 return  <ScrollView key={index}><Text style={{fontFamily:'asd',fontSize:25, paddingLeft:10}}>{type[0]}</Text>
-=======
-                return  <View key={index}><Text style={{fontFamily:'asd',fontSize:27}}>{type[0]}</Text>
->>>>>>> parent of 7842c0b... Merge branch 'UI/UX' of https://github.com/MaeyoiTeam/Project3F into UI/UX
                  <View style={styles.pa3}></View>
                     {
                         Object.values(arr).map((info, i) =>{
