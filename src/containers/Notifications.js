@@ -1,9 +1,12 @@
-import { View, Text, StyleSheet, Button} from 'react-native';
+import { View,Text,StyleSheet,ImageBackground,TouchableOpacity,Dimensions,Button,Alert } from 'react-native';
 import React,{Component} from 'react';
+import { Ionicons } from '@expo/vector-icons';
+import { Image } from 'react-native';
+import { SocialIcon } from 'react-native-elements'
 import { connect } from 'react-redux';
+import ProgressBarAnimated from 'react-native-progress-bar-animated';
 import {getNotifications,updateNotification} from '../actions/notification'
 import Loading from '../component/Loading';
-
 const moment = require('moment');
 class Notifications extends Component {
     state = {
@@ -22,7 +25,7 @@ class Notifications extends Component {
  
   });
 
-  componentWillMount(){
+  componentDidMount(){
     this.props.getNotifications(this.props.authReducer.data.uid);
   }
   
@@ -30,25 +33,22 @@ class Notifications extends Component {
 
     render(){
       const {notification} =this.props;
-      console.log(this.props.uid)
-      if (notification.haveNotification&&!notification.isFetching) {
-          return (
+        if (notification.isFetching) {
+          return(<Loading/>);
+        }else{
+          return(
             <View style={styles.container}>
-              {
-                this.props.notification.haveNotification &&
-                this.props.notification.data.sort((a, b) => -1).map((obj, i) => <View key={i}>
-                  <Text>{moment(obj.date).fromNow()}</Text>
-                  <Text>{obj.title}</Text>
-                  <Text>{obj.name}</Text>
-                  <Text>Current Star: {obj.currentStar} (+{obj.newStar})</Text>
-
-                </View>)
-              }
-
+                  {
+                    this.props.notification.haveNotification &&
+                    this.props.notification.data.sort((a,b)=>-1).map((obj,i)=><View  key={i}>
+                      <Text>{moment(obj.date).format('LTS')}</Text>
+                      <Text>{obj.name}</Text>
+                      <Text>Current Star: {obj.currentStar} (+{obj.newStar})</Text>
+                      
+                    </View>)
+                  }
             </View>
-          );
-      } else{
-          return (<Loading />);
+              );
         }
   }
 }
@@ -80,7 +80,6 @@ const mapStateToProps = (state) => ({
   notification: state.notification,
   authReducer: state.authReducer
 });
-
 //Used to add dispatch (action) into props
 const mapDispatchToProps = {
   getNotifications, updateNotification

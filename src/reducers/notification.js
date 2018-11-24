@@ -9,7 +9,7 @@ const initialState = {
 export default (state = initialState, action) => {
     switch (action.type) {
         case NOTIFICATION_DATA:
-            return { ...state, haveNotification: false, isFetching:true };
+            return { ...state, haveNotification: true, isFetching:true};
         case NOTIFICATION_DATA_SUCCESS:
             return { ...state, haveNotification: true, isFetching:false,data: action.payload};
         case NOTIFICATION_DATA_FAILURE:

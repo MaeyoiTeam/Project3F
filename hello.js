@@ -3,13 +3,12 @@
 
  let message=[];
        message.push({
-           to: "ExponentPushToken[eWVyK6PAswTC8MV1gk4WOR]",
+           to: "ExponentPushToken[BYh79LF4M-w7UrLLi31BRO]",
            sound: "default",
-           title: "หี",
+           title: "Daily Quest has been clear!!",
            body: "Visit our app for next challage",
            data: {
-               status: "ok",
-               priority:"high"
+               status: "ok"
            }
        });
 fetch("https://exp.host/--/api/v2/push/send", {

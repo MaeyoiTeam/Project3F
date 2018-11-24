@@ -1,4 +1,4 @@
-import { View,Text,StyleSheet,Image} from 'react-native';
+import { View,Text,StyleSheet } from 'react-native';
 import React,{Component} from 'react';
 import { connect } from 'react-redux';
 import {Button} from 'react-native-elements'
@@ -6,19 +6,14 @@ import {updateQuest,fetchQuest,updateQuestDone,getQuestList} from '../../../acti
 import {updateNotification} from '../../../actions/notification'
 import TimerCountdown from 'react-native-timer-countdown';
 import Accel from '../../../component/Accel';
-import { Notifications} from 'expo'
 class QuestRest extends Component {
   static navigationOptions = ({
       navigation
   }) => {
       return {
-          title: navigation.getParam('otherParam', "Rest"),
-          titleStyle: {fontFamily:'asd'}
-          
+          title: navigation.getParam('otherParam', "Quest Rest"),
       };
   };
-
-  
     constructor(props){
         super(props);
 
@@ -47,15 +42,11 @@ class QuestRest extends Component {
                 }
             })
              if (this.props.fetchReducer.data.isComplete) {
-                const message = {
-                    title: "Rest Quest Completed!",
-                    body:"Quest: "+prevProps.fetchReducer.data.name+" (+ "+prevProps.fetchReducer.data.star+" stars).",
-                    date: new Date().toISOString()
-                 }
                  this.props.getQuestList(this.props.authReducer.data.uid, "undone");
                  this.props.updateQuestDone(this.props.authReducer.data,this.state.key,this.state.type);
-                  this.props.updateNotification(this.props.authReducer.data.uid,message)
-                 this.sendSuccessQuestNotification(message)
+                  this.props.updateNotification(this.props.authReducer.data.uid,{
+                     name: "Rest Quest Success",newStar:prevProps.fetchReducer.data.star, currentStar: this.props.fetchReducer.data.star, date: new Date().toISOString()
+                 },this.props.notification.data)
              }
         }
     }
@@ -70,21 +61,6 @@ class QuestRest extends Component {
     }
     toggleAlert=(toggle)=>{
          this.setState({isAlert: toggle});
-    }
-
-    sendSuccessQuestNotification = (message) => {
-        Notifications.presentLocalNotificationAsync({
-            title:  message.title,
-            body:   message.body,
-            ios: {
-                sound: true
-            },
-            android: {
-                icon:'https://firebasestorage.googleapis.com/v0/b/project3f-4a950.appspot.com/o/achieve%2Ficon.png?alt=media&token=e95c5c83-7b5c-4db3-96f7-258b06b925a1',
-                channelId: "achieve",
-                color: '#ADFFFF',
-            }
-        });
     }
 
 
@@ -109,41 +85,28 @@ class QuestRest extends Component {
                     </View>);
         }
         else{    //Quest Continue
-            return(<View style={styles.contra}>
-            <View style = {styles.A1}></View>
-            <Image
-                source={require('../../../../image/yoga.png')}
-                fadeDuration={0}
-                style={{width: 180, height: 180}}
-                />
-            
-            <View style = {styles.kp3}></View>
-                <View style = {styles.kp1}>
-                
-                    <Text style = {{textAlign: 'center',fontSize:30,fontFamily:'asd'}}>{name}</Text>
-                <View style = {styles.kp2}></View>
-                <Text style = {{textAlign: 'center',fontSize:20,fontFamily:'asd'}}>Detail: {detail} </Text>
-                <View style = {styles.kp6}></View>
+            return(
+            <View style = {{paddingTop:180}}>
+                <View>
+                    <Text style = {{textAlign: 'center',fontSize:20}}>{name} Type: {type}</Text>
+                <Text style = {{textAlign: 'center',fontSize:20}}>Detail: {detail} </Text>
                 {   this.state.isPressed &&<View>
                 <TimerCountdown
-                    
                     initialSecondsRemaining={1000*(target-current)}
                      onTick={secondsRemaining => this.update(secondsRemaining)} 
                     onTimeElapsed={() => this.updateDone(authReducer.data,key,target)}
                     allowFontScaling={true}
-                    style={{ fontSize: 30,textAlign:'center' ,fontFamily:'asd'}}
+                    style={{ fontSize: 50,textAlign:'center' }}
                 />
                 <Accel isAlert={this.toggleAlert}/>
                 </View>
                 }
-                 <Text> </Text>
-                                  
                 {
                     this.state.isPressed ? <Button
-                    title= "Try again"
+                    title= "Reset Button"
                     buttonStyle={{
                         backgroundColor: "rgba(10, 10,100, 1)",
-                        height:40,
+                        height:80,
                         borderColor: "transparent",
                         borderWidth: 0,
                         borderRadius:360,
@@ -151,19 +114,16 @@ class QuestRest extends Component {
                     onPress={() => {
                         this.setState({ isPressed: false });
                     }}
-                    textStyle={{fontFamily:'asd'}}
                     /> :                    
                     <Button
-                    title="Start"
+                    title="Start Button"
                     buttonStyle={{
                         backgroundColor: "rgba(10, 10,100, 1)",
-                        height:40,
+                        height:80,
                         borderColor: "transparent",
                         borderWidth: 0,
                         borderRadius:360,
-                        marginTop:20
                         }}
-                        textStyle={{fontFamily:'asd'}}
                     onPress={() => {
                         this.setState({ isPressed: true });
                     }}
@@ -179,34 +139,9 @@ class QuestRest extends Component {
     }
 }
 
-styles = StyleSheet.create({
-    A1:{
-        alignItems:'center',
-        flex: 0.4
-    },
-    contra:{
-        flex:1,
-        alignItems: 'center'
-    },
-    kp2:{
-        flex:0.1
-    },
-    kp3:{
-        flex:0.05,
-    },
-    kp4:{
-        flex:0.1,
-    },
-    kp5:{
-        flex:0.05,
-    },
-    kp6:{
-        flex:0.15,
-    },
-});
-
 // Used to add reducer's states into the props
 const mapStateToProps = (state) => ({
+    notification:state.notification,
     fetchReducer: state.fetchReducer,
     authReducer: state.authReducer
 });
