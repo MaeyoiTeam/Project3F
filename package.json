@@ -49,7 +49,6 @@
     "redux-devtools-extension": "^2.13.5",
     "redux-thunk": "^2.3.0",
     "request": "^2.88.0",
-    "reselect": "^4.0.0",
     "rn-sliding-button": "^1.1.5",
     "sentry-expo": "^1.10.0"
   }

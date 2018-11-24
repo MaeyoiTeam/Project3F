@@ -47,7 +47,7 @@ class Setting extends Component {
             <View style={styles.pa3}></View>
             <View style={styles.pa6}>
             
-            <CheckBox title='On/Off Notification' iconRight checked={authReducer.data.isShowNotification} onPress = {this.toggleNotification}  />
+            <CheckBox title='On/Off Notification' iconRight checked={authReducer.data.isShowNotification} onPress = {this.toggleNotification} style={{fontFamily:'asd'}} />
             </View>
             <View style={styles.pa4}></View>
                 <View style={styles.container1}>
@@ -65,11 +65,8 @@ class Setting extends Component {
                     buttonStyle={{
                         backgroundColor: "#4c4c4c",width: 150,height: 40,borderColor: "transparent",borderWidth: 0,marginLeft:54
                     }}/>
-                    <TouchableOpacity  onPress={this.logOut}>
-                <Image source={require('../../image/Logout.png')} fadeDuration={0} style={{width: 50, height: 50} }  
-                      />
-                      </TouchableOpacity>
-                      </View> 
+                <Image source={require('../../image/Logout.png')} fadeDuration={0} style={{width: 50, height: 50}}
+                      /></View> 
             </View>
             </View>
         );
@@ -121,6 +118,7 @@ const styles = StyleSheet.create({
 
 // Used to add reducer's states into the props
 const mapStateToProps = (state) => ({
+    fetchReducer: state.fetchReducer,
     authReducer: state.authReducer
 });
 //Used to add dispatch (action) into props

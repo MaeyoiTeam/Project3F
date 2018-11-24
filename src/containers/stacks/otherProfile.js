@@ -5,14 +5,6 @@ import { Button, Avatar } from 'react-native-elements';
 import ProgressBarAnimated from 'react-native-progress-bar-animated';
 
 class OtherProfile extends Component {
-
-    static navigationOptions = ({
-        navigation
-    }) => {
-        return {
-            title: navigation.getParam('otherParam', "Profile"),
-        };
-    };
     
     constructor(props) {
         super(props);
@@ -34,8 +26,8 @@ class OtherProfile extends Component {
          const {displayName,photoURL,star,levelQ} =fetchReducer.data
 
         return(<View style={styles.container}>
-                <Text style={{textAlign:'center',paddingTop:10,paddingBottom:20,left:100,fontFamily:'asd'}}></Text>
-                 <Avatar large rounded source={{ uri: photoURL }} onPress={() => console.log("Works!")} />
+                <Text style={{textAlign:'center',paddingTop:10,paddingBottom:30,left:100,fontFamily:'asd'}}></Text>
+                 <Avatar xlarge rounded source={{ uri: photoURL }} onPress={() => console.log("Works!")} />
                 <Text style={{paddingTop:20,fontSize:15,textAlign:'center',fontFamily:'asd'}}>{displayName}</Text>
                 <View style = {{                  
                     flexDirection: 'row',
@@ -51,29 +43,22 @@ class OtherProfile extends Component {
                
                             {
                                 fetchReducer.data.levelQ!=null &&
-                                <View style = {{flex:1}}>
                             <View>
                                         <View style={{
                                             padding: 5,
-                                            flexDirection: 'row',
-                                            flex:0.33
+                                            flexDirection: 'row'
                                         }}>
-                                     <Image
-                 source={require('../../../image/steps.png')}
-                 fadeDuration={0}
-                 style={{width: 25, height: 25,right:10}}
-                 />
+
                                                 
                                     <ProgressBarAnimated width = {200}
                                     backgroundColor = "#6CC644"
                                     value = {(levelQ.walk.star*100)/levelQ.walk.target}/>
-                                    <Text style = {{left:10, fontFamily:'asd'}}>{levelQ.walk.star}/{levelQ.walk.target}</Text> 
+                                    <Text style = {{left:10}}>{levelQ.walk.star}/{levelQ.walk.target}</Text> 
                                     </View>
-                            <Text style = {{fontFamily:'asd'}}>Level:{levelQ.walk.level}</Text>
+                            <Text>Level:{levelQ.walk.level}</Text>
                             <View style = {{
                                 padding:5, 
-                                flexDirection: 'row',
-                                flex:0.33
+                                flexDirection: 'row'
                                 }}>
                                     <Image
                                         source={require('../../../image/food2.png')}
@@ -83,28 +68,36 @@ class OtherProfile extends Component {
                                     <ProgressBarAnimated width={200}
                                         backgroundColor="#6CC644"
                                         value={(levelQ.food.star * 100) / levelQ.food.target} />
-                                    <Text style={{ left: 10, fontFamily:'asd'}}>{levelQ.food.star}/{levelQ.food.target}</Text>
+                                    <Text style={{ left: 10 }}>{levelQ.food.star}/{levelQ.food.target}</Text>
                                 </View>
-                                <Text style = {{fontFamily:'asd'}}>Level:{levelQ.food.level}</Text>
+                                <Text>Level:{levelQ.food.level}</Text>
                                 <View style={{
                                     padding: 5,
-                                    flexDirection: 'row',
-                                    flex:0.33
+                                    flexDirection: 'row'
                                 }}>
                             
                             <Image
+                            source={require('../../../image/steps.png')}
+                            fadeDuration={0}
+                            style={{width: 25, height: 25,}}
+                            />
+                            <Image
+                            source={require('../../../image/food2.png')}
+                            fadeDuration={0}
+                            style={{width: 25, height: 25,}}
+                            />
+                            <Image
                             source={require('../../../image/yoga.png')}
                             fadeDuration={0}
-                            style={{width: 25, height: 25,right:10}}
+                            style={{width: 25, height: 25,}}
                             />
                             
                             <ProgressBarAnimated width = {200}
                             backgroundColor = "#6CC644"
                             value = {(levelQ.rest.star*100)/levelQ.rest.target}/>
-                            <Text style = {{left:10, fontFamily:'asd'}}>{levelQ.rest.star}/{levelQ.rest.target}</Text>   
+                            <Text style = {{left:10}}>{levelQ.rest.star}/{levelQ.rest.target}</Text>   
                             </View>
-                            </View>
-                            <Text style = {{paddingBottom:20,fontFamily:'asd'}}>Level:{levelQ.rest.level}</Text>
+                            <Text>Level:{levelQ.rest.level}</Text>
                     <Button title="Achievement Earned"
                         onPress={this.goToAchievement}
                         buttonStyle={{
@@ -131,7 +124,8 @@ class OtherProfile extends Component {
                     />
                             </View>
                             }
-                 <View style = {{flex:1}}></View>
+                <View style = {{paddingTop:10}}></View>
+                <View style = {{paddingTop:10}}></View>
         </View>);
     }
 }
@@ -148,8 +142,7 @@ const styles = StyleSheet.create({
     container: {
     flex: 1,
     backgroundColor: 'white',  
-    alignItems: 'center',
-    
+    alignItems: 'center'
   },
 });
 

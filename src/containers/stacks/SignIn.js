@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {  View, Text ,StyleSheet,ImageBackground,Image } from 'react-native';
+import {  View, Text ,StyleSheet,ImageBackground } from 'react-native';
 import { connect } from 'react-redux';
 import {signOut,signInWithFacebook,signInWithGoogle,authChanged} from '../../actions/signIn';
 import {Button,Avatar,colors} from 'react-native-elements';
@@ -45,34 +45,26 @@ class SingIn extends Component{
           <ImageBackground source={require('../../../image/k1.png')}style={Styles.container}>
         <View style={Styles.ki1}></View>
          <View style={Styles.ki2}>
-         <Image 
-                 source={require('../../../image/logosignin.png')}
-                 fadeDuration={0}
-                 style={{width: 220, height: 220,alignItems:'center'}}
-                />
+            <Text style = {{fontFamily:'asd',fontSize:30,fontWeight:'bold'}}>    ACHIVE</Text>
+        <Text style = {{fontFamily:'asd',fontSize:30,fontWeight:'bold'}}>4YOURSELF</Text> 
         </View>
-        <View style={Styles.ki5}></View>
         <View style={Styles.ki3}>
-        <Text style = {{fontFamily:'asd',fontSize:15}}>Login via</Text>
+        <Text style = {{fontFamily:'asd',fontSize:25,fontWeight:'bold'}}>Login via</Text>
         </View> 
-        
         <View style={Styles.ki4}>
-        <SocialIcon
-        onPress={this.props.signInWithFacebook}
-        title='Sign In With Facebook'
-        button
+        <SocialIcon onPress={this.props.signInWithFacebook}
         type='facebook'
-        style={{height:35,width:300}}
-        />
+        style={{width: 100, height: 100, borderRadius: 100}}
+        iconSize={70}
+      />
         </View>
         
-        <SocialIcon
-        onPress={this.props.signInWithGoogle}
-        title='Sign In With Google'
-        button
+        <SocialIcon onPress={this.props.signInWithGoogle}
         type='google-plus-official'
-        style={{height:35,width:300}}
-        />
+        style={{width: 100, height: 100, borderRadius: 100, backgroundColor:'white'}}
+        iconSize={100}
+        iconColor='red'
+      />
     
       
   </ImageBackground>
@@ -84,6 +76,7 @@ class SingIn extends Component{
 }
 // Used to add reducer's states into the props
 const mapStateToProps = (state) => ({
+    fetchReducer:state.fetchReducer,
     authReducer: state.authReducer
 });
 //Used to add dispatch (action) into props
@@ -96,24 +89,19 @@ const Styles = StyleSheet.create({
         alignItems: 'center'
       },
     ki3: {
-        flex: 0.05,
+        flex: 0.12,
         
       },
     ki2: {
         flex: 0.2,
       },
     ki1: {
-        flex: 0.13,   
+        flex: 0.25,   
       },
     ki4:{
         
-        flex: 0.10,
-    },
-    ki5:{
-
-        flex: 0.30,
-    },
-   
+        flex: 0.3,
+    }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SingIn)

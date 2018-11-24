@@ -50,8 +50,8 @@ class QuestWalk extends Component {
       return this.props.fetchReducer.data.targetSteps!=nextProps.fetchReducer.data.targetSteps||this.state.stepCount!=nextState.stepCount||this.state.showMe!=nextState.showMe;
     }  
     
-    componentDidUpdate = (prevProps, prevState) => {
-        if (prevState.stepCount != this.state.stepCount) {
+    componentWillUpdate = (nextProps, nextState) => {
+        if (nextState.stepCount != this.state.stepCount) {
           console.log("Update StepCount");
           //TODO แสดงป๊อปอัพว่า ปลดคล๊อกอันใหม่
           this.update(this.state.stepCount);
@@ -107,7 +107,7 @@ class QuestWalk extends Component {
      };
 
     render(){
-        const {fetchReducer} = this.props;
+        const {fetchReducer,authReducer} = this.props;
         const {name,type,detail,current,target,key,point,star,level,isComplete,prevLevel,targetSteps}=this.state;
         if (isComplete){   //Quest Complete
                     return(<View>
@@ -201,6 +201,7 @@ const styles = StyleSheet.create({
 // Used to add reducer's states into the props
 const mapStateToProps = (state) => ({
     fetchReducer: state.fetchReducer,
+    authReducer: state.authReducer
 });
 //Used to add dispatch (action) into props
 const mapDispatchToProps = {
