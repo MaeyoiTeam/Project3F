@@ -203,13 +203,15 @@ export const finishQuestWalk = (user, key, modalData, stepCount) => {
       moveToDone(user.uid, key, data);
       const result = updateWalkStacks(user.uid, walkStacks).then(updatedStacks => {
         updateAchieve(user.uid, updatedStacks).then((newAchieve) => {
+          const walkHistory = loadUserData(user.uid,'quest/done/walk');
           dispatch({
             type: MODAL_OPEN,
             payload: {
+              walkHistory:walkHistory,
               achievement: newAchieve,
               walkStacks: updatedStacks,
               ...modalData,
-              plusStar:star
+              star:star
             }
           })
         }).catch((e) => console.log(e))

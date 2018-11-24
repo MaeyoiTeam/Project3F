@@ -68,28 +68,30 @@ class Achievement extends Component {
     const { historyReducer } = this.props;
     // console.log(this.state.achieve);
     return <View style={styles.container}>
-        <Text>Your Achievement</Text>
+        
         {historyReducer.haveHISTORY && Object.values(this.state.achieve).map(
             (obj, i) => {
               return (
                 <View key={i}>
-                  <Text>Name: {obj.name}</Text>
-                  <Text>Detail: {obj.detail}</Text>
-                  <Text>Time: {obj.time}</Text>
-                  <Text>star: {obj.star}</Text>
+                  <View style = {{alignItems:'center', paddingTop: 10, paddingBottom: 10}}>
                   {this.state.showImg ? (
                     <Image
-                      style={{ width: 50, height: 50 }}
+                      style={{ width: 50, height: 50, alignItems:'center' }}
                       source={{ uri: obj.path }}
                     />
                   ) : (
                     <Image
-                      style={{ width: 50, height: 50 }}
+                      style={{ width: 50, height: 50, alignItems:'center' }}
                       source={require("../../../image/icon.png")}
                     />
                   ) //Temp Imag
                   }
-                  <Text> </Text>
+                  </View>
+                  <Text style = {{fontFamily: 'asd', paddingLeft: 10, textAlign: 'center'}}>Name : {obj.name}</Text>
+                  <Text style = {{fontFamily: 'asd', paddingLeft: 10, textAlign: 'center'}}>Detail : {obj.detail}</Text>
+                  <Text style = {{fontFamily: 'asd', paddingLeft: 10, textAlign: 'center'}}>Time : {obj.time}</Text>
+                  <Text style = {{fontFamily: 'asd', paddingLeft: 10, textAlign: 'center'}}>star : {obj.star}</Text>
+                  <View key={i} style = {styles.separator}></View>
                 </View>
               );
             }
@@ -109,8 +111,16 @@ const mapDispatchToProps = {
 const styles = StyleSheet.create({  
     container: {
     flex: 1,
-    backgroundColor: 'white',  
-    alignItems: 'center'
+    backgroundColor: 'white', 
+     
+    
+  },
+  separator: {
+    marginVertical: 10,
+    borderWidth: 1,
+    width:400,
+    borderColor: '#DCDCDC',
+
   },
 });
 

@@ -47,9 +47,11 @@ class QuestRest extends Component {
                 }
             })
              if (this.props.fetchReducer.data.isComplete) {
-                 const message = {
-                     name: "Rest Quest Success", newStar: prevProps.fetchReducer.data.star, currentStar: this.props.fetchReducer.data.star, date: new Date().toISOString()
-                 };
+                const message = {
+                    title: "Rest Quest Completed!",
+                    body:"Quest: "+prevProps.fetchReducer.data.name+" (+ "+prevProps.fetchReducer.data.star+" stars).",
+                    date: new Date().toISOString()
+                 }
                  this.props.getQuestList(this.props.authReducer.data.uid, "undone");
                  this.props.updateQuestDone(this.props.authReducer.data,this.state.key,this.state.type);
                   this.props.updateNotification(this.props.authReducer.data.uid,message)
@@ -72,8 +74,8 @@ class QuestRest extends Component {
 
     sendSuccessQuestNotification = (message) => {
         Notifications.presentLocalNotificationAsync({
-            title: message.name,
-            body: "Star: " + message.currentStar + " ( +" + message.newStar + ").",
+            title:  message.title,
+            body:   message.body,
             ios: {
                 sound: true
             },
@@ -97,7 +99,7 @@ class QuestRest extends Component {
                     <Text>Quest is Complete</Text>
                       <Button title="Go Home"
                        buttonStyle={{
-                        backgroundColor: "rgba(10, 10,100, 1)",
+                        backgroundColor: "#32CD32",
                         height:80,
                         borderColor: "transparent",
                         borderWidth: 0,
@@ -140,7 +142,7 @@ class QuestRest extends Component {
                     this.state.isPressed ? <Button
                     title= "Try again"
                     buttonStyle={{
-                        backgroundColor: "rgba(10, 10,100, 1)",
+                        backgroundColor: "#32CD32",
                         height:40,
                         borderColor: "transparent",
                         borderWidth: 0,
@@ -154,7 +156,7 @@ class QuestRest extends Component {
                     <Button
                     title="Start"
                     buttonStyle={{
-                        backgroundColor: "rgba(10, 10,100, 1)",
+                        backgroundColor: "#32CD32",
                         height:40,
                         borderColor: "transparent",
                         borderWidth: 0,

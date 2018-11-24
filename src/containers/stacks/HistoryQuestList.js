@@ -41,8 +41,8 @@ class HistoryQuestList extends Component {
                         return <View key={i}>
                         <View style={styles.pa1}>
                             
-                                <Text style={{fontFamily:'asd', paddingLeft:10}}>Quest name: {info.name}</Text>
-                                <Text style={{fontFamily:'asd', paddingLeft:10}}>Quest type: {info.type}</Text>
+                                <Text style={{fontFamily:'asd', paddingLeft:10}}>Quest name : {info.name}</Text>
+                                <Text style={{fontFamily:'asd', paddingLeft:10}}>Quest type : {info.type}</Text>
                                 <View key={i} style = {styles.separator}></View>
                             
                             </View>
