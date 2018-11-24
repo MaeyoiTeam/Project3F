@@ -5,6 +5,7 @@ import { Button, Avatar } from 'react-native-elements';
 import {updateMidAuth} from '../actions/signIn'
 import ProgressBarAnimated from 'react-native-progress-bar-animated';
 import { Font } from 'expo';
+import { Colors } from 'react-native-paper';
 
 
 class Profile extends Component{
@@ -117,27 +118,28 @@ class Profile extends Component{
                 <Button title="Achievement Earned" 
                     onPress={this.goToAchievement}
                     buttonStyle={{
-                        backgroundColor: "#336600",
+                        backgroundColor: "#DCDCDC",
                         width: 200,
                         height: 40,
                         borderColor: "transparent",
                         borderWidth: 0,
                         left:15
+                        
                       }}
-                      textStyle = {{fontFamily:'asd'}}  
+                      textStyle = {{fontFamily:'asd', color: '#000000'}}  
                 />
                  
                     <Button title="Completed Quest"
                         onPress={this.goToHistoryQuest}
                         buttonStyle={{
-                            backgroundColor: "#4a9301",
+                            backgroundColor: "#8e8e8e",
                             width: 200,
                             height: 40,
                             borderColor: "transparent",
                             borderWidth: 0,
                             left: 15
                         }}
-                        textStyle = {{fontFamily:'asd'}} 
+                        textStyle = {{fontFamily:'asd', color: '#ffffff'}} 
                     />
                 </View>
                 <View style = {{flex:1}}></View>

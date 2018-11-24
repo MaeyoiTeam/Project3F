@@ -97,7 +97,7 @@ class QuestRest extends Component {
                     <Text>Quest is Complete</Text>
                       <Button title="Go Home"
                        buttonStyle={{
-                        backgroundColor: "rgba(10, 10,100, 1)",
+                        backgroundColor: "#32CD32",
                         height:80,
                         borderColor: "transparent",
                         borderWidth: 0,
@@ -140,7 +140,7 @@ class QuestRest extends Component {
                     this.state.isPressed ? <Button
                     title= "Try again"
                     buttonStyle={{
-                        backgroundColor: "rgba(10, 10,100, 1)",
+                        backgroundColor: "#32CD32",
                         height:40,
                         borderColor: "transparent",
                         borderWidth: 0,
@@ -154,7 +154,7 @@ class QuestRest extends Component {
                     <Button
                     title="Start"
                     buttonStyle={{
-                        backgroundColor: "rgba(10, 10,100, 1)",
+                        backgroundColor: "#32CD32",
                         height:40,
                         borderColor: "transparent",
                         borderWidth: 0,

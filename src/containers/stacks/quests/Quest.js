@@ -139,7 +139,7 @@ class Quest extends Component {
                             <View style={styles.modalView}></View>
                 
                   <Button buttonStyle={{
-                                    backgroundColor: "rgba(10, 10,100, 1)",
+                                    backgroundColor: "#FF6347",
                                     height:40,width:300,
                                     borderColor: "transparent",
                                     borderWidth: 0,
