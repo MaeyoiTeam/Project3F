@@ -17,6 +17,7 @@ export default class Tails extends Component {
          <BlurView tint="dark" intensity={50} style={StyleSheet.absoluteFill}></BlurView>
         <View style={styles.modalView1}></View>
         <View style={styles.modalView}>
+        
         <Text ></Text>
         <Text style={{fontFamily:'asd', fontSize: 18}}>How to Get Stars</Text>
         <View style = {styles.separator}></View>

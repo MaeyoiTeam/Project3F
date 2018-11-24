@@ -17,18 +17,15 @@ export default class AboutUs extends Component {
         <View style={styles.modalView1}></View>
         <View style={styles.modalView}>
         <Text > </Text>
-        <Text style={{fontFamily:'asd'}} >Project Manager</Text>
-        <Text style={{fontFamily:'asd'}}>Nutza007</Text>
-        <Text style={{fontFamily:'asd'}}></Text>
+        <Text style={{fontFamily:'asd',fontSize:20}} >Frontend Team</Text>
+        <Text style={{fontFamily:'asd'}}>Kanutsanun Nithipanich 59010164</Text>
+        <Text style={{fontFamily:'asd'}}>Naphat Pechsrijun 59010386</Text>
+        <Text style={{fontFamily:'asd'}}>Nithi Semamuang 59010736</Text>
+        <Text style={{fontFamily:'asd'}}>Papon Prommool 59010792</Text>
         <Text ></Text>
-        <Text style={{fontFamily:'asd'}}>UX/UI Designer</Text>
-        <Text style={{fontFamily:'asd'}}>Nine9Belive</Text>
-        <Text style={{fontFamily:'asd'}}>Bally</Text>
-        <Text style={{fontFamily:'asd'}}>Wanchoice</Text>
-        <Text ></Text>
-        <Text style={{fontFamily:'asd'}}>Deverloper</Text>
-        <Text style={{fontFamily:'asd'}}>InwMax</Text>
-        <Text style={{fontFamily:'asd'}}>Mojo Jojo</Text>
+        <Text style={{fontFamily:'asd',fontSize:20}}>Backend Team</Text>
+        <Text style={{fontFamily:'asd'}}>Jakkapat Boonroj 59010187</Text>
+        <Text style={{fontFamily:'asd'}}>Nontakon Charoencheewakul 59010679</Text>
         <TouchableOpacity onPress={this.closeModal}>
             <Text style={styles.closeText}>Close</Text>
         </TouchableOpacity>
@@ -59,8 +56,8 @@ const styles = StyleSheet.create({
         flex:0.4
          }, 
     modalView:{backgroundColor:'#fff',
-            height:290,
-            width: 320,
+            height:400,
+            width: 350,
             justifyContent:'center',
             alignItems:'center',
             alignSelf: 'center'
