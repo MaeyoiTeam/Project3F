@@ -23,7 +23,7 @@ export class ModalScreen extends Component {
     componentDidUpdate(prevProps, prevState){
       const message = {
         title: "Walk Quest Completed!",
-        body:"Steps: "+this.state.stepCount+" (+ "+this.fetchReducer.data.star+" stars).",
+        body:"Steps: "+this.state.stepCount+" (+  stars).",  //"+this.fetchReducer.data.star+"
         date: new Date().toISOString()
      }
       if (prevState.stepCount!=this.state.stepCount) {

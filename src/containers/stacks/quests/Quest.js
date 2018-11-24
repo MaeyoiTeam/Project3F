@@ -5,6 +5,7 @@ import {Button} from 'react-native-elements'
 import {updateQuest,fetchQuest,updateQuestDone,getQuestList} from '../../../actions/quest'
 import {updateNotification} from '../../../actions/notification'
 import { BlurView, Notifications} from 'expo';
+import { AnimatedCircularProgress } from 'react-native-circular-progress';
 
 class Quest extends Component {
   static navigationOptions = ({
@@ -61,7 +62,6 @@ class Quest extends Component {
                  this.props.updateQuestDone(this.props.authReducer.data,this.state.key,this.state.type);
                  this.props.updateNotification(this.props.authReducer.data.uid, message)
                  this.sendSuccessQuestNotification(message);
-                 this.decisionQuest();
              }
         }
     } 
@@ -104,22 +104,48 @@ class Quest extends Component {
     render(){
         const {name,type,detail,current,target,key,point,star,level,isComplete,prevLevel}=this.state;
         const {authReducer} =this.props;
-        if (isComplete){ 
-            this.decisionQuest();                                           //Quest Complete
-                     return(
-                    <View style = {{paddingTop:180,alignItems:'center'}}>
-                    <Text style={{color:'white'}}>Current {type} star :{prevLevel.star}/{prevLevel.target}->{star}/{target}</Text>
-                    <Text style={{color:'white'}}>level: {prevLevel.level}/{level}</Text>
-                    <Text style={{color:'white'}}>Quest is Complete</Text>
-                      <Button title="Go Home"
-                      buttonStyle={{
-                        backgroundColor: "white",
-                        height:20,
-                        borderColor: "transparent",
-                        borderWidth: 0,
-                        borderRadius:360,
-                        }}
-                    onPress={()=>this.props.navigation.navigate('Home')}/>  
+        if (isComplete){                                            //Quest Complete
+                     return(<View style = {styles.contra}>
+                     <View style={styles.kl1}></View>
+                     <Text style={{color:'black',fontFamily:'asd',fontSize:25}}>Quest is Complete</Text>
+                     <View style={styles.kl3}></View>
+                     <AnimatedCircularProgress
+                        size={210}
+                        width={90}
+                        fill={star/target *100 }
+                        tintColor="#330066"
+                        onAnimationComplete={() => console.log('onAnimationComplete')}
+                        /* backgroundColor="#330066" */ >{
+                          (fill) => (
+                        
+                            <Text style={{
+                            fontFamily:'asd',
+                            fontSize:40,
+                            color:'#330066',
+                            textAlign:'center', 
+                            backgroundColor:'#FFE4B5',
+                            borderRadius:360,
+                            width:180,
+                            height:180,
+                            textAlignVertical:'center'}}>
+                            Level : {level}
+                            </Text>
+                            
+                          )
+                        }
+                        </AnimatedCircularProgress>
+                        <View style={styles.kl1}></View>
+                    <Text style={{color:'black',fontFamily:'asd',fontSize:25}}>EXP : {star}/{target}</Text>
+                    {/* <Text style={{color:'white'}}>level: {prevLevel.level}/{level}</Text> */}
+                    <View style={styles.kl1}></View>
+                      <Button buttonStyle={{
+                            backgroundColor: "#FF6347",
+                            height:40,width:300,
+                            borderColor: "transparent",
+                            borderWidth: 0,
+                            borderRadius:360,
+                            }} title={"Go Home"}  onPress={()=>this.props.navigation.navigate('Home')}/> 
+                   
                     </View>); 
         }
         else{    //Quest Continue
@@ -136,8 +162,7 @@ class Quest extends Component {
              
                 <View style={styles.kl1}></View>
                 <Text style = {{textAlign: 'center',fontSize:15,fontFamily:'asd'}}>Finished: {current}/{target}</Text>
-                
-                            
+                  
                             <View style={styles.modalView}></View>
                 
                   <Button buttonStyle={{
@@ -170,7 +195,10 @@ kl1:{
 },
 kl2:{
     flex:0.2
-}
+},
+kl3:{
+   flex:0.15
+},
 });
 // Used to add reducer's states into the props
 const mapStateToProps = (state) => ({

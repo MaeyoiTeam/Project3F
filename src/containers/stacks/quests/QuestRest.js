@@ -1,4 +1,4 @@
-import { View,Text,StyleSheet,Image} from 'react-native';
+import {View, Text, StyleSheet, Alert, Modal, TouchableOpacity, Platform,Image} from 'react-native';
 import React,{Component} from 'react';
 import { connect } from 'react-redux';
 import {Button} from 'react-native-elements'
@@ -7,6 +7,7 @@ import {updateNotification} from '../../../actions/notification'
 import TimerCountdown from 'react-native-timer-countdown';
 import Accel from '../../../component/Accel';
 import { Notifications} from 'expo'
+import { AnimatedCircularProgress } from 'react-native-circular-progress';
 class QuestRest extends Component {
   static navigationOptions = ({
       navigation
@@ -93,20 +94,49 @@ class QuestRest extends Component {
         const {name,type,detail,current,target,key,point,star,level,isComplete,prevLevel}=this.state;
 
         if (isComplete){   //Quest Complete
-                    return(<View style = {{paddingTop:180}}>
-                    <Text>Current {type} star :{prevLevel.star}/{prevLevel.target}->{star}/{target}</Text>
-                    <Text>level: {prevLevel.level}/{level}</Text>
-                    <Text>Quest is Complete</Text>
-                      <Button title="Go Home"
-                       buttonStyle={{
-                        backgroundColor: "#32CD32",
-                        height:80,
-                        borderColor: "transparent",
-                        borderWidth: 0,
-                        borderRadius:360,
-                        }} 
-                    onPress={()=>this.props.navigation.navigate('Home')}/>  
-                    </View>);
+                    return(
+                    <View style = {styles.contra}>
+                     <View style={styles.kl1}></View>
+                     <Text style={{color:'black',fontFamily:'asd',fontSize:25}}>Quest is Complete</Text>
+                     <View style={styles.kl3}></View>
+                     <AnimatedCircularProgress
+                        size={210}
+                        width={90}
+                        fill={star/target *100 }
+                        tintColor="#330066"
+                        onAnimationComplete={() => console.log('onAnimationComplete')}
+                        /* backgroundColor="#330066" */ >{
+                          (fill) => (
+                        
+                            <Text style={{
+                            fontFamily:'asd',
+                            fontSize:40,
+                            color:'#330066',
+                            textAlign:'center', 
+                            backgroundColor:'#FFE4B5',
+                            borderRadius:360,
+                            width:180,
+                            height:180,
+                            textAlignVertical:'center'}}>
+                            Level : {level}
+                            </Text>
+                            
+                          )
+                        }
+                        </AnimatedCircularProgress>
+                        <View style={styles.kl1}></View>
+                    <Text style={{color:'black',fontFamily:'asd',fontSize:25}}>EXP : {star}/{target}</Text>
+                    {/* <Text style={{color:'white'}}>level: {prevLevel.level}/{level}</Text> */}
+                    <View style={styles.kl1}></View>
+                      <Button buttonStyle={{
+                            backgroundColor: "#32CD32",
+                            height:40,width:300,
+                            borderColor: "transparent",
+                            borderWidth: 0,
+                            borderRadius:360,
+                            }} title={"Go Home"}  onPress={()=>this.props.navigation.navigate('Home')}/> 
+                   
+                    </View>); 
         }
         else{    //Quest Continue
             return(<View style={styles.contra}>
@@ -203,6 +233,16 @@ styles = StyleSheet.create({
     kp6:{
         flex:0.15,
     },
+    contra:{
+        flex:1,
+        alignItems: 'center'
+    },
+    kl1:{
+        flex:0.2,
+    },
+    kl3:{
+        flex:0.15
+     },
 });
 
 // Used to add reducer's states into the props
