@@ -61,6 +61,23 @@ class QuestRest extends Component {
     }
 
 
+    showNewAchievement=(data)=>{
+        const achieves = Object.values(data);
+            const message={
+                title:'New Achievement',
+                body:'You receive: '+achieves.length+ ' achievement',
+            }
+        this.sendSuccessQuestNotification(message);
+        Alert.alert(
+            message.title,
+            message.body,
+            [ 
+              {text: 'OK'}  ,
+            ],
+            { cancelable: true }
+          )
+    } 
+
     update=(time)=>{
       //  console.log(time)
     }
@@ -73,6 +90,9 @@ class QuestRest extends Component {
     }
 
     sendSuccessQuestNotification = (message) => {
+        if(message.icon==null){
+            message.icon='https://firebasestorage.googleapis.com/v0/b/project3f-4a950.appspot.com/o/achieve%2Ficon.png?alt=media&token=e95c5c83-7b5c-4db3-96f7-258b06b925a1';
+        }
         Notifications.presentLocalNotificationAsync({
             title:  message.title,
             body:   message.body,
@@ -80,7 +100,7 @@ class QuestRest extends Component {
                 sound: true
             },
             android: {
-                icon:'https://firebasestorage.googleapis.com/v0/b/project3f-4a950.appspot.com/o/achieve%2Ficon.png?alt=media&token=e95c5c83-7b5c-4db3-96f7-258b06b925a1',
+                icon:   message.icon,
                 channelId: "achieve",
                 color: '#ADFFFF',
             }
@@ -91,7 +111,9 @@ class QuestRest extends Component {
     render(){
         const {fetchReducer,authReducer} = this.props;
         const {name,type,detail,current,target,key,point,star,level,isComplete,prevLevel}=this.state;
-
+        if(this.props.achievement.haveHISTORY){
+            this.showNewAchievement(this.props.achievement.data)
+        }
         if (isComplete){   //Quest Complete
                     return(<View style = {{paddingTop:180}}>
                     <Text>Current {type} star :{prevLevel.star}/{prevLevel.target}->{star}/{target}</Text>
@@ -136,8 +158,7 @@ class QuestRest extends Component {
                 <Accel isAlert={this.toggleAlert}/>
                 </View>
                 }
-                 <Text> </Text>
-                                  
+                 <Text> </Text>                 
                 {
                     this.state.isPressed ? <Button
                     title= "Try again"
@@ -169,10 +190,7 @@ class QuestRest extends Component {
                     }}
                     />
                 }
-
-                    
                 </View>
-                
             </View>
             );
         }
@@ -207,6 +225,7 @@ styles = StyleSheet.create({
 
 // Used to add reducer's states into the props
 const mapStateToProps = (state) => ({
+    achievement: state.historyReducer,
     fetchReducer: state.fetchReducer,
     authReducer: state.authReducer
 });

@@ -14,9 +14,8 @@ import loadUserData, {
   clearOver
 } from './api';
 import {
-  FETCH_USER_FAIL,
-  FETCH_USER_SUCCESS,
-  FETCH_USER,
+  HISTORY_DATA_SUCCESS,
+  HISTORY_DATA_FAILURE,
   MODAL_OPEN,
   MODAL_CLOSE
 } from '../constants';
@@ -56,34 +55,35 @@ export const getQuestList = (uid, type) => {
 
 //Update Middleware
 export const updateQuestDone = (user, key, type) => {
-  var quest = user.quest;
-  var quest = quest[type];
-  if (Array.isArray(quest)) {
-    quest.push(key);
-  } else {
-    quest = [key];
-  }
-  quest = {
-    [type]: quest,
-    ...user.quest
-  }
-  //TODO update Achievement
-  const newAchieve = updateAchieve(user.uid,quest);
-  var achievement = user.achieve;
-   if (achievement!=null) {
-      achievement={...newAchieve,...achievement}
-   } else {
-     achievement = {...newAchieve};
-   }
-     return (dispatch)=>{
-         dispatch({
-           type:FETCH_USER_SUCCESS,
-           payload:{ ...user,
-             quest:quest,
-             achieve:achievement
-           }
-         });
-     }
+      return (dispatch)=>{
+        var quest = user.quest;
+        var quest = quest[type];
+        if (Array.isArray(quest)) {
+          quest.push(key);
+        } else {
+          quest = [key];
+        }
+        quest = {
+          [type]: quest,
+          ...user.quest
+        }
+        // update Achievement
+        updateAchieve(user.uid,quest).then((newAchieve)=>{
+          if (Object.values(newAchieve).length>=1) {
+            dispatch({
+              type:HISTORY_DATA_SUCCESS,
+              payload:{...newAchieve}
+            }); 
+          }
+          else{
+            dispatch({
+              type:HISTORY_DATA_FAILURE,
+            }); 
+          }
+         
+        })
+          
+     } 
 }
 
 // Update Quest while During Quest
@@ -203,17 +203,32 @@ export const finishQuestWalk = (user, key, modalData, stepCount) => {
       moveToDone(user.uid, key, data);
       const result = updateWalkStacks(user.uid, walkStacks).then(updatedStacks => {
         updateAchieve(user.uid, updatedStacks).then((newAchieve) => {
-          const walkHistory = loadUserData(user.uid,'quest/done/walk');
-          dispatch({
+        loadUserData(user.uid,'quest/done/walk').then(walkHistory=>{
+          let walksCount =[]
+          var date = new Date();
+          for(let i=0;i<7;i++){
+            date.setDate(date.getDate()-1);
+            const keyDate = moment(date).format("DMMMYY").toString()
+            let stepCount=0;
+            const walkDate = walkHistory[keyDate];
+            if(walkDate!=null){
+              stepCount=walkDate.stepCount
+            }
+            walksCount.push({date:keyDate,stpeCount:stepCount})
+          }
+          return dispatch({
             type: MODAL_OPEN,
             payload: {
-              walkHistory:walkHistory,
+              walkHistory:walksCount,
               achievement: newAchieve,
               walkStacks: updatedStacks,
-              ...modalData,
-              star:star
+              start:quest[0].start,
+              star:star,
+              last:quest[0].last,
+              
             }
           })
+        })
         }).catch((e) => console.log(e))
       })
     })

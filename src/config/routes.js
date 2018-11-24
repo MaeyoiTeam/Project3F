@@ -24,7 +24,6 @@ import RightComponent from '../component/Header/RightComponent';
 import  ModalScreen  from '../component/Modal/ModalScreen';
 
 
-
 const BottomTabs = createMaterialBottomTabNavigator(
   {
     Profile: {

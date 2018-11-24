@@ -5,7 +5,7 @@ import {Button} from 'react-native-elements'
 import {updateQuest,fetchQuest,updateQuestDone,getQuestList} from '../../../actions/quest'
 import {updateNotification} from '../../../actions/notification'
 import { BlurView, Notifications} from 'expo';
-
+import firebase from '../../../config/firebase'
 class Quest extends Component {
   static navigationOptions = ({
       navigation
@@ -44,6 +44,7 @@ class Quest extends Component {
         }
     }
 
+    
      componentDidUpdate(prevProps, prevState, snapshot){
         if(prevProps.fetchReducer.data!=this.props.fetchReducer.data){
             this.setState({
@@ -51,22 +52,25 @@ class Quest extends Component {
                 prevLevel: { ...prevProps.authReducer.data.levelQ[this.state.type]
                 }
             })
-             if (this.props.fetchReducer.data.isComplete) {
+              if (this.props.fetchReducer.data.isComplete) {
                  const message = {
                     title: "Food Quest Completed!",
                     body:"Quest: "+prevProps.fetchReducer.data.name+" (+ "+prevProps.fetchReducer.data.star+" stars).",
                     date: new Date().toISOString()
+                    
                  }
                  this.props.getQuestList(this.props.authReducer.data.uid, "undone");
                  this.props.updateQuestDone(this.props.authReducer.data,this.state.key,this.state.type);
                  this.props.updateNotification(this.props.authReducer.data.uid, message)
                  this.sendSuccessQuestNotification(message);
-                 this.decisionQuest();
-             }
+             } 
         }
     } 
 
     sendSuccessQuestNotification=(message)=>{
+        if(message.icon==null){
+            message.icon='https://firebasestorage.googleapis.com/v0/b/project3f-4a950.appspot.com/o/achieve%2Ficon.png?alt=media&token=e95c5c83-7b5c-4db3-96f7-258b06b925a1';
+        }
         Notifications.presentLocalNotificationAsync({
             title:  message.title,
             body:   message.body,
@@ -74,7 +78,7 @@ class Quest extends Component {
                 sound:true
             },
             android: {
-                icon: 'https://firebasestorage.googleapis.com/v0/b/project3f-4a950.appspot.com/o/achieve%2Ficon.png?alt=media&token=e95c5c83-7b5c-4db3-96f7-258b06b925a1',
+                icon: message.icon,
                 channelId: "achieve",
                 color: '#FF0000',
             }
@@ -86,17 +90,22 @@ class Quest extends Component {
         this.props.updateQuest(this.props.authReducer.data, this.state.key, sumPoint);
     }
     
-    decisionQuest=()=>{
+     showNewAchievement=(data)=>{
+        const achieves = Object.values(data);
+            const message={
+                title:'New Achievement',
+                body:'You receive: '+achieves.length+ ' achievement',
+            }
+        this.sendSuccessQuestNotification(message);
         Alert.alert(
-            'Food Quest Completed',
-            'Start: '+this.state.star+' / '+this.state.target+'Level: '+
-            this.state.prevLevel.level+' => '+this.state.level,
+            message.title,
+            message.body,
             [ 
-              {text: 'OK',  onPress:()=>this.props.navigation.navigate('Home')}  ,
+              {text: 'OK'}  ,
             ],
-            { cancelable: false }
+            { cancelable: true }
           )
-    }
+    } 
 
 
 
@@ -104,8 +113,10 @@ class Quest extends Component {
     render(){
         const {name,type,detail,current,target,key,point,star,level,isComplete,prevLevel}=this.state;
         const {authReducer} =this.props;
-        if (isComplete){ 
-            this.decisionQuest();                                           //Quest Complete
+         if(this.props.achievement.haveHISTORY){
+            this.showNewAchievement(this.props.achievement.data)
+        } 
+        if (isComplete){                            //Quest Complete
                      return(
                     <View style = {{paddingTop:180,alignItems:'center'}}>
                     <Text style={{color:'white'}}>Current {type} star :{prevLevel.star}/{prevLevel.target}->{star}/{target}</Text>
@@ -174,6 +185,7 @@ kl2:{
 });
 // Used to add reducer's states into the props
 const mapStateToProps = (state) => ({
+    achievement: state.historyReducer,
     fetchReducer: state.fetchReducer,
     authReducer: state.authReducer
 });

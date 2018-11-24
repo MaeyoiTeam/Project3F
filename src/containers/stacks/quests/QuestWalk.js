@@ -1,14 +1,13 @@
 import { View, Text, StyleSheet, FlatList,Image,TouchableOpacity,ActivityIndicator,Dimensions,Modal } from 'react-native';
 import React,{Component} from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {Button,Badge} from 'react-native-elements'
 import { Pedometer } from "expo";
 import {updateQuest,fetchQuest,updateQuestDone,getQuestList,compareScore} from '../../../actions/quest';
-import ListCom from '../../../component/ListCom'
 import * as Expo from "expo";
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 import Tails from '../../../component/Tails';
-
 class QuestWalk extends Component {
   static navigationOptions = ({
       navigation
@@ -46,6 +45,10 @@ class QuestWalk extends Component {
         this.timerID = setInterval(() => this._subscribe(), 1000);
     }
 
+    componentWillReceiveProps = (nextProps) => {
+      this.setState({targetSteps:nextProps.fetchReducer.data.targetSteps})
+    }
+    
       shouldComponentUpdate = (nextProps, nextState) => {
       return this.props.fetchReducer.data.targetSteps!=nextProps.fetchReducer.data.targetSteps||this.state.stepCount!=nextState.stepCount||this.state.showMe!=nextState.showMe;
     }  
@@ -104,63 +107,69 @@ class QuestWalk extends Component {
      _unsubscribe = () => {
          this._subscription && this._subscription.remove();
          this._subscription = null;
-     };
+    };
+
+    chooseColor=()=>{
+        if(Array.isArray(this.props.fetchReducer.data.targetSteps)){
+            const target = this.props.fetchReducer.data.targetSteps[this.props.fetchReducer.data.targetSteps.length-1];
+            console.log(target[1].color)
+            return target[1].color;
+        }
+        return "#FF3333";
+    }
+
+    chooseTarget=()=>{
+        let target =0
+            if(Array.isArray(this.props.fetchReducer.data.targetSteps)){
+                switch (this.props.fetchReducer.data.targetSteps.length) {
+                    case 0: target=200;     break;
+                    case 1: target=400;     break;
+                    case 2: target=999;     break;
+                    case 3: target=2018;    break;
+                    default:  target=200;   break;
+                }
+            }
+            else{
+                target=200;
+            }
+            let result = this.state.stepCount/target*100;
+        return result
+    }
 
     render(){
         const {fetchReducer} = this.props;
-        const {name,type,detail,current,target,key,point,star,level,isComplete,prevLevel,targetSteps}=this.state;
-        if (isComplete){   //Quest Complete
-                    return(<View>
-                    <Text>Current {type} star :{prevLevel.star}/{prevLevel.target}->{star}/{target}</Text>
-                    <Text>level: {prevLevel.level}/{level}</Text>
-                    <Text>Quest is Complete</Text>
-                      <Button title="Go Home" 
-                    onPress={()=>this.props.navigation.navigate('Home')}/>  
-                    </View>
-                    );
-        }
+        const {type,target,star,level,isComplete,prevLevel}=this.state;
+            return (<View style={styles.container}>
+<View style={styles.title}></View>
 
-        else{    //Quest Continue
-            return(<View style={styles.container}>
-            <View style={styles.title}></View>
-                
-                <AnimatedCircularProgress
-  size={210}
-  width={90}
-  fill={/* this.state.stepCount */ 80 }
-  tintColor="#ff3333"
-  onAnimationComplete={() => console.log('onAnimationComplete')}
+<AnimatedCircularProgress size={210} width={90} fill={this.chooseTarget()} tintColor={this.chooseColor()} onAnimationComplete={() => console.log('onAnimationComplete')}
   /* backgroundColor="#330066" */ >{
-    (fill) => (
-     /*  <Text >
-        {this.state.stepCount}
-      </Text> */
-      <Image
-                 source={require('../../../../image/steps.png')}
-                 style={{width: 180, height: 180}}
-                />
-    )
-  }
-  </AnimatedCircularProgress>
-  <View style={styles.ki}></View>
-  
-                    <Badge containerStyle={{ backgroundColor: '#330066',width:300}} textStyle={{fontFamily:'asd',fontSize:25}} value={"Steps : "+this.state.stepCount}/>
-                     {   /* fetchReducer.data.targetSteps!=null &&
-                        <FlatList data={fetchReducer.data.targetSteps} 
-                        renderItem={({item})=><Text>{item[0]}</Text>}/> */
-                    }   
+                        (fill) => (
+                            /*  <Text >
+                               {this.state.stepCount}
+                             </Text> */
+                            <Image source={require('../../../../image/steps.png')} style={{ width: 180, height: 180 }}
+                            />
+                        )
+                    }
+                </AnimatedCircularProgress>
+<View style={styles.ki}></View>
+
+<Badge containerStyle={{ backgroundColor: '#330066', width: 300 }} textStyle={{ fontFamily: 'asd', fontSize: 25 }} value={"Steps : " + this.state.stepCount} />
+                {    /* fetchReducer.data.targetSteps!=null &&
+                        <FlatList data={fetchReducer.data.targetSteps} renderItem={({item})=><Text>{item[0]}</Text>}/>  */
+                }
                 <View style={styles.ki1}></View>
-                    <Text style={{fontFamily:'asd',fontSize:20}}>Star : 11 </Text> 
-            
-            <View style={styles.container1}>
-                            <Tails showMe={this.state.showMe} closeAboutUs={this.closeAboutUs}/>
-                            <View style={styles.ki9}></View>
-                            <Badge onPress={this.openAboutUs} containerStyle={{ backgroundColor: '#330066',width:150}} textStyle={{fontFamily:'asd',fontSize:20}} value={'Detail'} />
-                           
-             
-                            </View>  
-            </View>);
-        }
+<Text style={{ fontFamily: 'asd', fontSize: 20 }}>Star : 11 </Text>
+
+<View style={styles.container1}>
+<Tails showMe={this.state.showMe} closeAboutUs={this.closeAboutUs} />
+<View style={styles.ki9}></View>
+<Badge onPress={this.openAboutUs} containerStyle={{ backgroundColor: '#330066', width: 150 }} textStyle={{ fontFamily: 'asd', fontSize: 20 }} value={'Detail'} />
+
+
+</View>
+</View>);
     }
 }
 const styles = StyleSheet.create({
