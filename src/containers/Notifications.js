@@ -1,12 +1,9 @@
-import { View,Text,StyleSheet,ImageBackground,TouchableOpacity,Dimensions,Button,Alert } from 'react-native';
+import { View, Text, StyleSheet, Button} from 'react-native';
 import React,{Component} from 'react';
-import { Ionicons } from '@expo/vector-icons';
-import { Image } from 'react-native';
-import { SocialIcon } from 'react-native-elements'
 import { connect } from 'react-redux';
-import ProgressBarAnimated from 'react-native-progress-bar-animated';
 import {getNotifications,updateNotification} from '../actions/notification'
 import Loading from '../component/Loading';
+
 const moment = require('moment');
 class Notifications extends Component {
     state = {
@@ -25,7 +22,7 @@ class Notifications extends Component {
  
   });
 
-  componentDidMount(){
+  componentWillMount(){
     this.props.getNotifications(this.props.authReducer.data.uid);
   }
   
@@ -33,10 +30,9 @@ class Notifications extends Component {
 
     render(){
       const {notification} =this.props;
-        if (notification.isFetching) {
-          return(<Loading/>);
-        }else{
-          return(
+      console.log(this.props.uid)
+      if (notification.haveNotification&&!notification.isFetching) {
+          return (
             <View style={styles.container}>
               {
                               this.props.notification.haveNotification &&
@@ -48,19 +44,22 @@ class Notifications extends Component {
                 </View>
                )
               }
-
             </View>
+            
           );
-      }
+      } else{
+          return (<Loading />);
+        }
   }
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFF',
-    marginTop: 50,
-    padding: 15,
+    backgroundColor: '#fcfcf7',
+    marginTop: 5,
+    marginBottom: 5,
+    padding: 5,
   },
   buttonContainer: {
     marginTop: 15,
@@ -85,6 +84,7 @@ const mapStateToProps = (state) => ({
   notification: state.notification,
   authReducer: state.authReducer
 });
+
 //Used to add dispatch (action) into props
 const mapDispatchToProps = {
   getNotifications, updateNotification

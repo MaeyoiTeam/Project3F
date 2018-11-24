@@ -189,8 +189,8 @@ const updateLevel = (data, star) => {
     var level = data.level;
     const lvlup = Math.floor(currentStar / data.target);
     var target = data.target;
-    console.log(currentStar +" / "+ data.target);
-    if (currentStar >= data.target) {
+    console.log(lvlup);
+    if (lvlup>=1) {
         systemRef.once('value', snap => {
             currentStar = currentStar - data.target;
             level = level + lvlup
@@ -247,7 +247,7 @@ export const rankingUser = (uid) => {
             return resolve(data.sort((a, b) => {
                 return b.star - a.star;
             }));
-        }).catch((e)=>reject(e))
+        })
     });
 }
 
@@ -273,6 +273,12 @@ export const updateDataUser = (uid, user) => {
                         ...user,
                         isShowNotification: true,
                         star: 0,
+                        notificationLog:{
+                            0:{
+                                title:"Welcome to Achieve App",
+                                date:new Date().toISOString(),
+                            }
+                        },
                         levelQ: {
                             food: initializeLevel,
                             rest: initializeLevel,

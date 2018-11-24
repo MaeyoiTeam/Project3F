@@ -43,15 +43,15 @@ class Ranking extends Component{
             }
         else if(this.props.authReducer.isAuth &&this.state.fontLoaded){
         return(
-            <ScrollView>
+            
                 <View style={styles.container}>
             
 
                 <View>
-                <Text style = {{fontFamily:'asd',paddingTop:20,paddingBottom:10,fontSize:25,textAlign:'center'}}>Ranking</Text>
+                <Text style = {{fontFamily:'asd',paddingTop:15,paddingBottom:10,fontSize:25,textAlign:'center'}}>Ranking</Text>
                 
                 
-                
+                <ScrollView>
                      {
                         rankReducer.data.map((item, i) => {
                              if(item.uid==authReducer.data.uid){
@@ -59,28 +59,28 @@ class Ranking extends Component{
                              }
                             return  <TouchableHighlight onPress={()=>this.goToOtherProfile(item.uid)} key={i}>
                                <View>
-                                    <View style = {{padding:3,flexDirection: 'row'}}>
+                                    <View style = {{padding:4,flexDirection: 'row'}}>
                                 <Avatar rounded small source = {{uri: item.photoURL}} />
                                 <Text style = {{left:10,fontFamily:'asd'}} >Rank: {i+1} : {item.name}</Text>
                             </View>
-                            <Text style={{left:50,fontFamily:'asd'}}>   Star:  {item.star}</Text>
+                            <Text style={{left:50,fontFamily:'asd'}}>   Stars :  {item.star}</Text>
                                </View>
                             </TouchableHighlight>
                         })
-                     }
+                     }</ScrollView>
                 <View style={styles.container}>
                 
-                <Text style={{fontSize:25,fontFamily:'asd',padding:5,}}>Your Rank!</Text>
+                <Text style={{fontSize:20,fontFamily:'asd',paddingTop:5}}>Your Rank!</Text>
                 </View>   
                      {
                          authReducer.isAuth &&<View>
                                     <Text style={{ left: 45, fontFamily: 'asd' }}>Rank: {this.current.index + 1} : {authReducer.data.name}</Text>
-                                    <Text style={{ left: 45, paddingTop: 10, fontFamily: 'asd' }}>     Star:  {authReducer.data.star}</Text>
+                                    <Text style={{ left: 45, paddingTop: 10, fontFamily: 'asd',paddingBottom:10 }}>     Stars :  {authReducer.data.star}</Text>
                          </View>
                       }
             </View>
             </View>
-            </ScrollView>
+            
         );
     }else{
         return(<View><Text style = {{fontFamily:'asd'}}>Rank: Please Login</Text></View>);
@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',  
     alignItems: 'center',
     paddingTop: 10,
-    paddingBottom: 5,
+    paddingBottom: 10,
   },
     ku1: {
         flex: 0.02,
@@ -108,7 +108,6 @@ const styles = StyleSheet.create({
 });
 // Used to add reducer's states into the props
 const mapStateToProps = (state) => ({
-    fetchReducer: state.fetchReducer,
     authReducer: state.authReducer,
     rankReducer: state.rankReducer
 });
