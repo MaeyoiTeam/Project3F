@@ -69,21 +69,23 @@ class Quest extends Component {
     } 
 
     sendSuccessQuestNotification=(message)=>{
-        if(message.icon==null){
-            message.icon='https://firebasestorage.googleapis.com/v0/b/project3f-4a950.appspot.com/o/achieve%2Ficon.png?alt=media&token=e95c5c83-7b5c-4db3-96f7-258b06b925a1';
-        }
-        Notifications.presentLocalNotificationAsync({
-            title:  message.title,
-            body:   message.body,
-            ios:{
-                sound:true
-            },
-            android: {
-                icon: message.icon,
-                channelId: "achieve",
-                color: '#FF0000',
+        if(this.props.authReducer.data.isShowNotification){
+            if(message.icon==null){
+                message.icon='https://firebasestorage.googleapis.com/v0/b/project3f-4a950.appspot.com/o/achieve%2Ficon.png?alt=media&token=e95c5c83-7b5c-4db3-96f7-258b06b925a1';
             }
-        });
+            Notifications.presentLocalNotificationAsync({
+                title:  message.title,
+                body:   message.body,
+                ios:{
+                    sound:true
+                },
+                android: {
+                    icon: message.icon,
+                    channelId: "achieve",
+                    color: '#FF0000',
+                }
+            });
+        }
     }
     
     update(){

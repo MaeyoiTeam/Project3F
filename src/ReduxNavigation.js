@@ -13,6 +13,7 @@ import {
 } from 'react-navigation-redux-helpers';
 import { connect } from 'react-redux';
 import {NavigationActions,addNavigationHelpers} from 'react-navigation'
+import {Notifications} from 'expo';
 // Note: createReactNavigationReduxMiddleware must be run before reduxifyNavigator
 const middleware = createReactNavigationReduxMiddleware(
     "root",
@@ -24,6 +25,9 @@ const ReduxAppNavigator = reduxifyNavigator(Navigator, "root");
 class ReduxNavigation extends PureComponent {
     componentDidMount(){
         BackHandler.addEventListener("hardwareBackPress",this.onBackPress);
+        if(this.props.authReducer.data.isShowNotification){
+            Notifications.addListener().remove();
+        }        
     }
     componentWillMount() {
         BackHandler.addEventListener("hardwareBackPress", this.onBackPress);
@@ -42,6 +46,7 @@ class ReduxNavigation extends PureComponent {
     }
 }
 const mapStateToProps = (state) => ({
+    authReducer: state.authReducer,
     state: state.nav,
 });
 export default connect(mapStateToProps)(ReduxNavigation)
