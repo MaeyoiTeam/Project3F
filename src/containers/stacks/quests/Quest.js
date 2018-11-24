@@ -11,7 +11,7 @@ class Quest extends Component {
       navigation
   }) => {
       return {
-          title: navigation.getParam('otherParam', "Quest"),
+          title: navigation.getParam('otherParam', "Food"),
       };
   };
     constructor(props){
@@ -60,7 +60,8 @@ class Quest extends Component {
                  this.props.getQuestList(this.props.authReducer.data.uid, "undone");
                  this.props.updateQuestDone(this.props.authReducer.data,this.state.key,this.state.type);
                  this.props.updateNotification(this.props.authReducer.data.uid, message)
-                 this.sendSuccessQuestNotification(message); 
+                 this.sendSuccessQuestNotification(message);
+                 this.decisionQuest();
              }
         }
     } 
@@ -87,10 +88,10 @@ class Quest extends Component {
     
     decisionQuest=()=>{
         Alert.alert(
-            'Completed',
-            'Congratulations',
-            [
-              
+            'Food Quest Completed',
+            'Start: '+this.state.star+' / '+this.state.target+'Level: '+
+            this.state.prevLevel.level+' => '+this.state.level,
+            [ 
               {text: 'OK',  onPress:()=>this.props.navigation.navigate('Home')}  ,
             ],
             { cancelable: false }
@@ -103,8 +104,10 @@ class Quest extends Component {
     render(){
         const {name,type,detail,current,target,key,point,star,level,isComplete,prevLevel}=this.state;
         const {authReducer} =this.props;
-        if (isComplete){this.decisionQuest()                                            //Quest Complete
-                    return(<View style = {{paddingTop:180,alignItems:'center'}}>
+        if (isComplete){ 
+            this.decisionQuest();                                           //Quest Complete
+                     return(
+                    <View style = {{paddingTop:180,alignItems:'center'}}>
                     <Text style={{color:'white'}}>Current {type} star :{prevLevel.star}/{prevLevel.target}->{star}/{target}</Text>
                     <Text style={{color:'white'}}>level: {prevLevel.level}/{level}</Text>
                     <Text style={{color:'white'}}>Quest is Complete</Text>
@@ -117,7 +120,7 @@ class Quest extends Component {
                         borderRadius:360,
                         }}
                     onPress={()=>this.props.navigation.navigate('Home')}/>  
-                    </View>);
+                    </View>); 
         }
         else{    //Quest Continue
             return(  <View style={styles.contra}>
