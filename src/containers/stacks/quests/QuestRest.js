@@ -8,6 +8,7 @@ import TimerCountdown from 'react-native-timer-countdown';
 import Accel from '../../../component/Accel';
 import { Notifications} from 'expo'
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
+import {clearFechReducer,clearMiddleHistory} from '../../../actions'
 class QuestRest extends Component {
   static navigationOptions = ({
       navigation
@@ -48,6 +49,7 @@ class QuestRest extends Component {
                 }
             })
              if (this.props.fetchReducer.data.isComplete) {
+                 console.log("quest Rest ")
                 const message = {
                     title: "Rest Quest Completed!",
                     body:"Quest: "+prevProps.fetchReducer.data.name+" (+ "+prevProps.fetchReducer.data.star+" stars).",
@@ -61,6 +63,10 @@ class QuestRest extends Component {
         }
     }
 
+    componentWillUnmount(){
+        this.props.clearFechReducer();
+        this.props.clearMiddleHistory();
+    }
 
     showNewAchievement=(data)=>{
         const achieves = Object.values(data);
@@ -271,7 +277,7 @@ const mapStateToProps = (state) => ({
 });
 //Used to add dispatch (action) into props
 const mapDispatchToProps = {
-    updateQuest, fetchQuest, updateQuestDone, getQuestList, updateNotification
+    updateQuest, fetchQuest, updateQuestDone, getQuestList, updateNotification,clearFechReducer,clearMiddleHistory
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(QuestRest)

@@ -69,7 +69,7 @@ class OtherProfile extends Component {
                                     value = {(levelQ.walk.star*100)/levelQ.walk.target}/>
                                     <Text style = {{left:10, fontFamily:'asd'}}>{levelQ.walk.star}/{levelQ.walk.target}</Text> 
                                     </View>
-                            <Text style = {{fontFamily:'asd'}}>Level:{levelQ.walk.level}</Text>
+                            <Text style = {{fontFamily:'asd',textAlign:'center'}}>Level:{levelQ.walk.level}</Text>
                             <View style = {{
                                 padding:5, 
                                 flexDirection: 'row',
@@ -85,7 +85,7 @@ class OtherProfile extends Component {
                                         value={(levelQ.food.star * 100) / levelQ.food.target} />
                                     <Text style={{ left: 10, fontFamily:'asd'}}>{levelQ.food.star}/{levelQ.food.target}</Text>
                                 </View>
-                                <Text style = {{fontFamily:'asd'}}>Level:{levelQ.food.level}</Text>
+                                <Text style = {{fontFamily:'asd',textAlign:'center'}}>Level:{levelQ.food.level}</Text>
                                 <View style={{
                                     padding: 5,
                                     flexDirection: 'row',
@@ -104,13 +104,13 @@ class OtherProfile extends Component {
                             <Text style = {{left:10, fontFamily:'asd'}}>{levelQ.rest.star}/{levelQ.rest.target}</Text>   
                             </View>
                             </View>
-                            <Text style = {{paddingBottom:20,fontFamily:'asd'}}>Level:{levelQ.rest.level}</Text>
+                            <Text style = {{paddingBottom:20,fontFamily:'asd',textAlign:'center'}}>Level:{levelQ.rest.level}</Text>
                     <Button title="Achievement Earned"
                         onPress={this.goToAchievement}
                         buttonStyle={{
                             backgroundColor: "#DCDCDC",
-                            width: 200,
-                            height: 40,
+                            width: 220,
+                            height: 50,
                             borderColor: "transparent",
                             borderWidth: 0,
                             left: 15
@@ -121,8 +121,8 @@ class OtherProfile extends Component {
                         onPress={this.goToHistoryQuest}
                         buttonStyle={{
                             backgroundColor: "#8e8e8e",
-                            width: 200,
-                            height: 40,
+                            width: 220,
+                            height: 50,
                             borderColor: "transparent",
                             borderWidth: 0,
                             left: 15

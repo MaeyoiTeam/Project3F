@@ -111,9 +111,11 @@ class QuestWalk extends Component {
 
     chooseColor=()=>{
         if(Array.isArray(this.props.fetchReducer.data.targetSteps)){
+            if(this.props.fetchReducer.data.targetSteps.length!=0){
             const target = this.props.fetchReducer.data.targetSteps[this.props.fetchReducer.data.targetSteps.length-1];
             console.log(target[1].color)
             return target[1].color;
+            }
         }
         return "#FF3333";
     }
@@ -134,6 +136,20 @@ class QuestWalk extends Component {
             }
             let result = this.state.stepCount/target*100;
         return result
+    }
+
+    sumStar=()=>{
+        if(Array.isArray(this.props.fetchReducer.data.targetSteps)){
+            if(this.props.fetchReducer.data.targetSteps.length!=0){
+                let star =0;
+                for(target of this.props.fetchReducer.data.targetSteps){
+                    console.log(target)
+                    star+=target[1].star
+                }
+                return star;
+            }
+        }
+        return 0;
     }
 
     render(){
@@ -163,7 +179,7 @@ class QuestWalk extends Component {
                         renderItem={({item})=><Text>{item[0]}</Text>}/> */
                     }   
                 <View style={styles.ki1}></View>
-                    <Text style={{fontFamily:'asd',fontSize:20}}>Star : 11 </Text> 
+                    <Text style={{fontFamily:'asd',fontSize:20}}>Star : {this.sumStar()} </Text> 
                     <View style = {styles.separator}></View>
             <View style={styles.container1}>
                             <Tails showMe={this.state.showMe} closeAboutUs={this.closeAboutUs}/>

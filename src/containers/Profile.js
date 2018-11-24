@@ -79,7 +79,7 @@ class Profile extends Component{
                 value = {(authReducer.data.levelQ.walk.star*100)/authReducer.data.levelQ.walk.target}/>
                 <Text style = {{fontFamily:'asd',left:10,fontSize:12}}>{walk.star}/{walk.target}</Text> 
                 </View>
-                <Text style = {{fontFamily:'asd',textAlign:'center'}}>Level:{walk.level}</Text>
+                <Text style = {{fontFamily:'asd',textAlign:'center',bottom:30}}>Level:{walk.level}</Text>
                 <View style = {{
                     padding:5, 
                     flexDirection: 'row',
@@ -111,7 +111,7 @@ class Profile extends Component{
                 value = {(authReducer.data.levelQ.rest.star*100)/authReducer.data.levelQ.rest.target}/>
                 <Text style = {{fontFamily:'asd',left:10,fontSize:12}}>{rest.star}/{rest.target}</Text>   
                 </View>
-                <Text style = {{fontFamily:'asd',textAlign:'center'}}>Level:{rest.level}</Text>
+                <Text style = {{fontFamily:'asd',textAlign:'center',bottom:30}}>Level:{rest.level}</Text>
                 </View>
                 
                 <View style = {{flex:0.005}}>
@@ -119,8 +119,8 @@ class Profile extends Component{
                     onPress={this.goToAchievement}
                     buttonStyle={{
                         backgroundColor: "#DCDCDC",
-                        width: 200,
-                        height: 40,
+                        width: 220,
+                        height: 50,
                         borderColor: "transparent",
                         borderWidth: 0,
                         left:15
@@ -133,8 +133,8 @@ class Profile extends Component{
                         onPress={this.goToHistoryQuest}
                         buttonStyle={{
                             backgroundColor: "#8e8e8e",
-                            width: 200,
-                            height: 40,
+                            width: 220,
+                            height: 50,
                             borderColor: "transparent",
                             borderWidth: 0,
                             left: 15
