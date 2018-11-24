@@ -130,7 +130,7 @@ class QuestWalk extends Component {
   fill={/* this.state.stepCount */ 80 }
   tintColor="#ff3333"
   onAnimationComplete={() => console.log('onAnimationComplete')}
-  backgroundColor="#3d5875" >{
+  /* backgroundColor="#330066" */ >{
     (fill) => (
      /*  <Text >
         {this.state.stepCount}
@@ -144,7 +144,7 @@ class QuestWalk extends Component {
   </AnimatedCircularProgress>
   <View style={styles.ki}></View>
   
-                    <Badge containerStyle={{ backgroundColor: 'lightblue',width:300}} textStyle={{fontFamily:'asd',fontSize:25}} value={"Steps : "+this.state.stepCount}/>
+                    <Badge containerStyle={{ backgroundColor: '#330066',width:300}} textStyle={{fontFamily:'asd',fontSize:25}} value={"Steps : "+this.state.stepCount}/>
                      {   /* fetchReducer.data.targetSteps!=null &&
                         <FlatList data={fetchReducer.data.targetSteps} 
                         renderItem={({item})=><Text>{item[0]}</Text>}/> */
@@ -155,7 +155,7 @@ class QuestWalk extends Component {
             <View style={styles.container1}>
                             <Tails showMe={this.state.showMe} closeAboutUs={this.closeAboutUs}/>
                             <View style={styles.ki9}></View>
-                            <Badge onPress={this.openAboutUs} containerStyle={{ backgroundColor: 'red',width:150}} textStyle={{fontFamily:'asd',fontSize:20}} value={'Detail'} />
+                            <Badge onPress={this.openAboutUs} containerStyle={{ backgroundColor: '#330066',width:150}} textStyle={{fontFamily:'asd',fontSize:20}} value={'Detail'} />
                            
              
                             </View>  

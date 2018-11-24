@@ -17,21 +17,22 @@ export default class Tails extends Component {
          <BlurView tint="dark" intensity={50} style={StyleSheet.absoluteFill}></BlurView>
         <View style={styles.modalView1}></View>
         <View style={styles.modalView}>
-        <Text > </Text>
-        <Text style={{fontFamily:'asd'}} >Project Manager</Text>
-        <Text style={{fontFamily:'asd'}}>Nutza007</Text>
+        <Text ></Text>
+        <Text style={{fontFamily:'asd'}}>How Get Star</Text>
+        <Text style={{fontFamily:'asd'}}>999 Step => 1 Star</Text>
+        <Text style={{fontFamily:'asd'}}>2018 Step => 1 Star</Text>
+        <Text style={{fontFamily:'asd'}}>4500 Step => 1 Star</Text>
+        <Text style={{fontFamily:'asd'}}>6500 Step => 1 Star</Text>
+        <Text style={{fontFamily:'asd'}}>9999 Step => 2 Star</Text>
+        <Text style={{fontFamily:'asd'}}>20000 Step => 2 Star</Text>
+        <Text style={{fontFamily:'asd'}}>40000 Step => 2 Star</Text>
+        <Text style={{fontFamily:'asd'}}>65000 Step => 2 Star</Text>
+        <Text style={{fontFamily:'asd'}}>100000 Step => 4 Star</Text>
         <Text style={{fontFamily:'asd'}}></Text>
-        <Text ></Text>
-        <Text style={{fontFamily:'asd'}}>UX/UI Designer</Text>
-        <Text style={{fontFamily:'asd'}}>Nine9Belive</Text>
-        <Text style={{fontFamily:'asd'}}>Bally</Text>
-        <Text style={{fontFamily:'asd'}}>Wanchoice</Text>
-        <Text ></Text>
-        <Text style={{fontFamily:'asd'}}>Deverloper</Text>
-        <Text style={{fontFamily:'asd'}}>InwMax</Text>
-        <Text style={{fontFamily:'asd'}}>Mojo Jojo</Text>
+        <Text style={{fontFamily:'asd'}}></Text>
+        <Text style={{fontFamily:'asd'}}></Text>
     
-        <Badge onPress={this.closeModal} containerStyle={{ backgroundColor: 'red',width:150}} textStyle={{fontFamily:'asd',fontSize:20}} value={'Close'} />
+        <Badge onPress={this.closeModal} containerStyle={{ backgroundColor: '#330066',width:150}} textStyle={{fontFamily:'asd',fontSize:20}} value={'Close'} />
         
         </View>
         </Modal>
