@@ -4,6 +4,7 @@ import {Button} from 'react-native-elements'
 import { connect } from 'react-redux';
 import { randomQuest,getQuestList,fetchQuest } from '../actions/quest'
 import {RNSlidingButton, SlideDirection} from 'rn-sliding-button';
+import Loading from '../component/Loading'
 class Home extends Component {
     constructor(props){
         super(props);
@@ -14,15 +15,12 @@ class Home extends Component {
         this.randomQ = this.randomQ.bind(this);
         this.goToQuest = this.goToQuest.bind(this);
     }
-    a
-    onSlideRight = () => {
-        //perform Action on slide success.
-    };
 
     componentWillMount() {
         this.props.getQuestList(this.props.authReducer.data.uid, "undone")
        
     }
+    
     componentDidUpdate(prevProps, prevState, snapshot) {
          if (prevProps.questReducer.data != this.props.questReducer.data) {
              this.setState({
@@ -59,7 +57,54 @@ class Home extends Component {
         const {authReducer,questReducer} = this.props;
         const {haveQuest,questlist} = this.state
         if(authReducer.isAuth){
-            if(questReducer.haveQuest){
+            if(!questReducer.haveQuest){               //หน้าแรกก่อนสุ่มเควส
+                return (
+                    <View style={styles.container}>
+                        <View style={styles.ku1}></View>
+                        <View style={styles.kuko}>
+                            <Image
+                                source={require('../../image/steps.png')}
+                                fadeDuration={0}
+                                style={{ width: 100, height: 100, right: 10 }}
+                            />
+                            <Image
+                                source={require('../../image/food2.png')}
+                                fadeDuration={0}
+                                style={{ width: 100, height: 100 }}
+                            />
+                            <Image
+                                source={require('../../image/yoga.png')}
+                                fadeDuration={0}
+                                style={{ width: 100, height: 100, left: 10 }}
+                            />
+                        </View>
+                        <View style={styles.kuka}></View>
+                        <View style={styles.kuku}>
+                            <Text style={{ textAlign: 'center', fontSize: 13.5, color: '#7a7a7a' }}>You can lies to others, but you can not lie to yourself.</Text>
+                            <Text style={{ textAlign: 'center', fontSize: 13.5, color: '#7a7a7a' }}>- Just be honest. -</Text>
+
+                        </View>
+                        <View style={styles.ku2}>
+                            <RNSlidingButton
+                                style={{
+                                    width: 260,
+                                    backgroundColor: '#fcfcf7',
+                                }}
+                                height={35}
+                                onSlidingSuccess={this.randomQ}
+                                slideDirection={SlideDirection.RIGHT}>
+                                <View>
+                                    <Text numberOfLines={1} style={styles.titleText}>
+                                        SLIDE RIGHT TO GET QUESTS >
+                                </Text>
+                                </View>
+                            </RNSlidingButton>
+
+                        </View>
+                    </View>
+                );
+            }
+            else if(questReducer.haveQuest){     //หลังสุ่มเควส
                 return(
                     <View>
                 {    haveQuest &&   questlist.map((info, i) =>
@@ -74,8 +119,30 @@ class Home extends Component {
                                     borderWidth: 0,
                                     borderRadius:360,
                                     }}
+<<<<<<< HEAD
                                     onPress={() => this.goToQuest(info)}
                                     textStyle={{fontFamily:'asd',fontSize:16,color:'#ffffff'}}
+=======
+
+                                textStyle={{fontFamily:'asd',fontSize:16}}
+                                onPress = {
+                                        () => {
+                                            this.props.fetchQuest(authReducer.data.uid,info[0],"undone");
+                                            let path='Home';
+                                            switch(info[1].type){
+                                                case "food": path='Quest'; 
+                                                                break;
+                                                case "walk": path='QuestWalk';
+                                                                break;
+                                                case "rest": path="QuestRest";
+                                                                break;
+                                                default: path="Home";
+                                            }
+                                            this.props.navigation.navigate(path);
+                                        }
+                                        
+                                }
+>>>>>>> parent of 7842c0b... Merge branch 'UI/UX' of https://github.com/MaeyoiTeam/Project3F into UI/UX
                                 />
                             </View>
                         )
@@ -115,9 +182,9 @@ class Home extends Component {
                             style={{
                             width: 325,
                             backgroundColor: 'transparent',
-                            borderWidth: 1,
+                            borderRadius: 360,
                             borderColor: '#7a7a7a',
-                            borderRadius: 360
+                            borderWidth: 1
                              }}
                             height={35}
                             onSlidingSuccess={async ()=>{let path = await this.randomQ();
@@ -125,7 +192,7 @@ class Home extends Component {
                                 slideDirection={SlideDirection.RIGHT}>
                             <View>
                                 <Text numberOfLines={1} style={styles.titleText}>
-                                    SLIDE RIGHT TO GET QUESTS >>
+                                    SLIDE RIGHT TO GET QUESTS  >>
                                 </Text>
                             </View>
                         </RNSlidingButton>
@@ -134,18 +201,14 @@ class Home extends Component {
             </View>
         );
             }
+            
         }
         else{
           return <Text>Signing...</Text>
         }
     }
 }
-// Used to add reducer's states into the props
-const mapStateToProps = (state) => ({
-    fetchReducer: state.fetchReducer,
-    authReducer: state.authReducer,
-    questReducer:state.questReducer
-})
+
 const styles = StyleSheet.create({  
     container: {
     flex: 1,
@@ -167,7 +230,7 @@ const styles = StyleSheet.create({
     },
     kuku: {
         
-        flex: 0.55,
+        flex: 0.5,
     },
     kuka: {
         
@@ -189,6 +252,13 @@ const styles = StyleSheet.create({
         color: '#000000'
     }
 });
+
+// Used to add reducer's states into the props
+const mapStateToProps = (state) => ({
+    authReducer: state.authReducer,
+    questReducer: state.questReducer
+})
+
 //Used to add dispatch (action) into props
 const mapDispatchToProps = {
      getQuestList, randomQuest, fetchQuest

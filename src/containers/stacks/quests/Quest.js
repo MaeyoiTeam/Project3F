@@ -10,7 +10,7 @@ class Quest extends Component {
       navigation
   }) => {
       return {
-          title: navigation.getParam('otherParam', "Food"),
+          title: navigation.getParam('otherParam', "Quest"),
       };
   };
     constructor(props){

@@ -76,12 +76,12 @@ class Profile extends Component{
                  fadeDuration={0}
                  style={{width: 25, height: 25,left:90}}
                 />    
-                <Text style={{textAlign:'center',paddingTop:5,left:100,fontFamily:'asd'}}>X  {authReducer.data.star  }</Text>
+                <Text style={{textAlign:'center',paddingTop:10,paddingBottom:20,left:100}}> X  {authReducer.data.star  }</Text>
                 </View>
                 <View style = {{
                     padding:5, 
                     flexDirection: 'row',
-                    flex:0.25
+                    flex:0.33
                     }}>
                 <Image
                  source={require('../../image/steps.png')}
@@ -91,13 +91,13 @@ class Profile extends Component{
                 <ProgressBarAnimated width = {200}
                 backgroundColor = "#6CC644"
                 value = {(authReducer.data.levelQ.walk.star*100)/authReducer.data.levelQ.walk.target}/>
-                <Text style = {{fontFamily:'asd',left:10,fontSize:12}}>{walk.star}/{walk.target}</Text> 
+                <Text style = {{left:10}}>{walk.star}/{walk.target}</Text> 
                 </View>
                 <Text style = {{fontFamily:'asd'}}>Level:{walk.level}</Text>
                 <View style = {{
                     padding:5, 
                     flexDirection: 'row',
-                    flex:0.25
+                    flex:0.33
                     }}>
                 <Image
                  source={require('../../image/food2.png')}
@@ -107,13 +107,13 @@ class Profile extends Component{
                 <ProgressBarAnimated width = {200}
                 backgroundColor = "#6CC644"
                 value = {(authReducer.data.levelQ.food.star*100)/authReducer.data.levelQ.food.target}/>
-                <Text style = {{fontFamily:'asd',left:10,fontSize:12}}>{food.star}/{food.target}</Text>         
+                <Text style = {{left:10}}>{food.star}/{food.target}</Text>         
                 </View>
                 <Text style = {{fontFamily:'asd'}}>Level:{food.level}</Text>
                 <View style = {{
                     padding:5, 
                     flexDirection: 'row',
-                    flex:0.25
+                    flex:0.33
                     }}>
                 <Image
                  source={require('../../image/yoga.png')}
@@ -123,16 +123,15 @@ class Profile extends Component{
                 <ProgressBarAnimated width = {200}
                 backgroundColor = "#6CC644"
                 value = {(authReducer.data.levelQ.rest.star*100)/authReducer.data.levelQ.rest.target}/>
-                <Text style = {{fontFamily:'asd',left:10,fontSize:12}}>{rest.star}/{rest.target}</Text>   
+                <Text style = {{left:10}}>{rest.star}/{rest.target}</Text>   
+                </View>
                 </View>
                 <Text style = {{fontFamily:'asd',textAlign:'center'}}>Level:{rest.level}</Text>
-                </View>
-                
-                <View style = {{flex:0.005}}>
+                <View style = {{paddingTop:20,flex:0.0125}}>
                 <Button title="Achievement Earned" 
                     onPress={this.goToAchievement}
                     buttonStyle={{
-                        backgroundColor: "#336600",
+                        backgroundColor: "#004200",
                         width: 200,
                         height: 40,
                         borderColor: "transparent",
@@ -141,11 +140,10 @@ class Profile extends Component{
                       }}
                       style = {{fontFamily:'asd'}}  
                 />
-                 
-                    <Button title="Completed Quest"
+                    <Button title="History Quest"
                         onPress={this.goToHistoryQuest}
                         buttonStyle={{
-                            backgroundColor: "#4a9301",
+                            backgroundColor: "rgba(00, 99,216, 1)",
                             width: 200,
                             height: 40,
                             borderColor: "transparent",
@@ -179,20 +177,14 @@ const styles = StyleSheet.create({
       fontFamily:'asd'
     },
     ki:{
-        paddingTop:10,
+        paddingTop:20,
         fontSize:15,
         textAlign:'center',
         fontFamily:'asd'
     },
     a1:{
         fontFamily:'asd',
-        fontSize:25,
-        paddingTop: 15
-    },
-    ko:{
-        
-        flex: 0.1
-
+        fontSize:25
     }
  
   });
