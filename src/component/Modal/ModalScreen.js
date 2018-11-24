@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { View, Text ,Modal,Button,Image,ScrollView,StyleSheet,FlatList} from 'react-native'
+import { View, Text ,Modal,Image,ScrollView,StyleSheet,FlatList} from 'react-native'
+import {Button} from 'react-native-elements'
 import { connect } from 'react-redux'
 import {navigate} from '../../actions'
 import {finishQuestWalk,clearFinishQuestWalk} from '../../actions/quest'
@@ -93,32 +94,40 @@ export class ModalScreen extends Component {
     const {modalReducer,authReducer} = this.props
     if(this.props.modalReducer.showModal){
     return (
-      
-     <Modal visible={this.props.modalReducer.showModal}
+    <Modal visible={this.props.modalReducer.showModal}
       onRequestClose={() => {
             Alert.alert('Modal has been closed.');
           }}>
-          <ScrollView>
-       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}> 
+     <View style={styles.container1}>
+     <View style={styles.container2}></View>
+     <Image
+                 source={require('../../../image/end.jpg')}
+                 fadeDuration={0}
+                 style={{width: 180, height: 180,alignItems:'center'}}
+                 />
+     <View style={styles.container4}></View>  
           { modalReducer.showModal &&
-             <View>
-              <Text>Start at: {modalReducer.data.start}</Text>
-              <Text>finish at: {modalReducer.data.last}</Text>
-              <Text>star: {modalReducer.data.star}</Text> 
+             <View style={{alignItems:'center'}}>
+              <Text style={{fontFamily:'asd',fontSize:25}}>Start at : {modalReducer.data.start}</Text>
+              <Text style={{fontFamily:'asd',fontSize:25}}>Finish at : {modalReducer.data.last}</Text>
+              <Text style={{fontFamily:'asd',fontSize:25}}>Star : {modalReducer.data.star}</Text> 
              </View> 
           }
-          {
-            
-          }
-       <Text>Steps: {this.state.stepCount}</Text>
-        <Button
-          onPress={() => this.props.clearFinishQuestWalk(authReducer.data).then(()=>this.props.navigate("Stack"))
-          }
-          title="Go to Home"
-        />
+       <Text style={{fontFamily:'asd',fontSize:25,textAlign:'center'}}>Steps : {this.state.stepCount}</Text>
+       <View style={styles.container2}></View>
+       <Text style={{fontFamily:'asd',fontSize:10}}>Detail : This page is a summary of walking results in a day</Text> 
+       <View style={styles.container3}></View>
+        <Button buttonStyle={{
+            backgroundColor: "lightblue",
+            height:40,width:250,
+            borderColor: "transparent",
+            borderRadius:360,    
+            }}
+          title="Go to Home"style={{fontFamily:'asd'}}
+          onPress={() => this.props.clearFinishQuestWalk(authReducer.data).then(()=>this.props.navigate("Stack"))}/>
         </View>
-      </ScrollView>
      </Modal>
+    
     )
     
     }
@@ -128,7 +137,22 @@ export class ModalScreen extends Component {
   }
 }
 
-
+const styles = StyleSheet.create({
+  
+  container1: {
+    flex:1,
+    alignItems:'center'
+  },
+  container2: {
+    flex:0.2
+  },
+  container3: {
+    flex:0.02
+  },
+  container4: {
+    flex:0.1
+  },
+});
 
 const mapStateToProps = (state) => ({
 /*   fetchReducer: state.fetchReducer, */

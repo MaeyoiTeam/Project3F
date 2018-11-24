@@ -192,20 +192,7 @@ class QuestRest extends Component {
                 }
                  <Text> </Text>                 
                 {
-                    this.state.isPressed ? <Button
-                    title= "Try again"
-                    buttonStyle={{
-                        backgroundColor: "#32CD32",
-                        height:40,
-                        borderColor: "transparent",
-                        borderWidth: 0,
-                        borderRadius:360,
-                        }}
-                    onPress={() => {
-                        this.setState({ isPressed: false });
-                    }}
-                    textStyle={{fontFamily:'asd'}}
-                    /> :                    
+                    !this.state.isPressed &&                    
                     <Button
                     title="Start"
                     buttonStyle={{
