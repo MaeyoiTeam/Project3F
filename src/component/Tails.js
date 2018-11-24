@@ -18,21 +18,22 @@ export default class Tails extends Component {
         <View style={styles.modalView1}></View>
         <View style={styles.modalView}>
         <Text ></Text>
-        <Text style={{fontFamily:'asd'}}>How Get Star</Text>
-        <Text style={{fontFamily:'asd'}}>999 Step => 1 Star</Text>
-        <Text style={{fontFamily:'asd'}}>2018 Step => 1 Star</Text>
-        <Text style={{fontFamily:'asd'}}>4500 Step => 1 Star</Text>
-        <Text style={{fontFamily:'asd'}}>6500 Step => 1 Star</Text>
-        <Text style={{fontFamily:'asd'}}>9999 Step => 2 Star</Text>
-        <Text style={{fontFamily:'asd'}}>20000 Step => 2 Star</Text>
-        <Text style={{fontFamily:'asd'}}>40000 Step => 2 Star</Text>
-        <Text style={{fontFamily:'asd'}}>65000 Step => 2 Star</Text>
-        <Text style={{fontFamily:'asd'}}>100000 Step => 4 Star</Text>
-        <Text style={{fontFamily:'asd'}}></Text>
-        <Text style={{fontFamily:'asd'}}></Text>
-        <Text style={{fontFamily:'asd'}}></Text>
+        <Text style={{fontFamily:'asd', fontSize: 18}}>How to Get Stars</Text>
+        <View style = {styles.separator}></View>
+        <Text style={{fontFamily:'asd', fontSize: 15}}>   999 Steps => 1 Star</Text>
+        <Text style={{fontFamily:'asd', fontSize: 15}}>  2018 Steps => 1 Star</Text>
+        <Text style={{fontFamily:'asd', fontSize: 15}}>  4500 Steps => 1 Star</Text>
+        <Text style={{fontFamily:'asd', fontSize: 15}}>  6500 Steps => 1 Star</Text>
+        <Text style={{fontFamily:'asd', fontSize: 15}}>  9999 Steps => 2 Stars</Text>
+        <Text style={{fontFamily:'asd', fontSize: 15}}> 20000 Steps => 2 Stars</Text>
+        <Text style={{fontFamily:'asd', fontSize: 15}}> 40000 Steps => 2 Stars</Text>
+        <Text style={{fontFamily:'asd', fontSize: 15}}> 65000 Steps => 2 Stars</Text>
+        <Text style={{fontFamily:'asd', fontSize: 15}}>100000 Steps => 4 Stars</Text>
+        <Text style={{fontFamily:'asd', fontSize: 15}}> </Text>
+        <Text style={{fontFamily:'asd', fontSize: 15}}> </Text>
+        <Text style={{fontFamily:'asd', fontSize: 15}}> </Text>
     
-        <Badge onPress={this.closeModal} containerStyle={{ backgroundColor: '#330066',width:150}} textStyle={{fontFamily:'asd',fontSize:20}} value={'Close'} />
+        <Badge onPress={this.closeModal} containerStyle={{ backgroundColor: '#330066',width:125}} textStyle={{fontFamily:'asd',fontSize:15}} value={'Close'} />
         
         </View>
         </Modal>
@@ -82,4 +83,10 @@ const styles = StyleSheet.create({
             borderColor: '#eaeaea', 
             fontFamily:'asd'          
     },
+    separator:{
+        marginVertical: 10,
+        borderWidth: 1,
+        width:200,
+        borderColor: '#DCDCDC',
+    }
 });

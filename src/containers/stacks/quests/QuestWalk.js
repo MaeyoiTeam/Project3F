@@ -144,18 +144,18 @@ class QuestWalk extends Component {
   </AnimatedCircularProgress>
   <View style={styles.ki}></View>
   
-                    <Badge containerStyle={{ backgroundColor: '#330066',width:300}} textStyle={{fontFamily:'asd',fontSize:25}} value={"Steps : "+this.state.stepCount}/>
+                    <Badge containerStyle={{ backgroundColor: 'transparent',width:300,}} textStyle={{fontFamily:'asd',fontSize:30, color: '#000000'}} value={"Steps : "+this.state.stepCount}/>
                      {   /* fetchReducer.data.targetSteps!=null &&
                         <FlatList data={fetchReducer.data.targetSteps} 
                         renderItem={({item})=><Text>{item[0]}</Text>}/> */
                     }   
                 <View style={styles.ki1}></View>
                     <Text style={{fontFamily:'asd',fontSize:20}}>Star : 11 </Text> 
-            
+                    <View style = {styles.separator}></View>
             <View style={styles.container1}>
                             <Tails showMe={this.state.showMe} closeAboutUs={this.closeAboutUs}/>
                             <View style={styles.ki9}></View>
-                            <Badge onPress={this.openAboutUs} containerStyle={{ backgroundColor: '#330066',width:150}} textStyle={{fontFamily:'asd',fontSize:20}} value={'Detail'} />
+                            <Badge onPress={this.openAboutUs} containerStyle={{ backgroundColor: '#330066',width:125}} textStyle={{fontFamily:'asd',fontSize:18, color: '#ffffff'}} value={'Detail'} />
                            
              
                             </View>  
@@ -194,7 +194,12 @@ const styles = StyleSheet.create({
                 margin:20,
                 fontFamily:'asd'
             }, 
-          
+        separator:{
+                marginVertical: 10,
+                borderWidth: 1,
+                width:150,
+                borderColor: '#BEBEBE',
+            } 
        
     });
  
