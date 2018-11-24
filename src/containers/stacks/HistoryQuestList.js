@@ -10,6 +10,7 @@ class HistoryQuestList extends Component {
     }) => {
         return {
             title: navigation.getParam('otherParam', "Completed Quest"),
+            
         };
     };
     constructor(props){

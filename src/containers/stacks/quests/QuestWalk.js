@@ -144,34 +144,37 @@ class QuestWalk extends Component {
 
 <AnimatedCircularProgress size={210} width={90} fill={this.chooseTarget()} tintColor={this.chooseColor()} onAnimationComplete={() => console.log('onAnimationComplete')}
   /* backgroundColor="#330066" */ >{
-                        (fill) => (
-                            /*  <Text >
-                               {this.state.stepCount}
-                             </Text> */
-                            <Image source={require('../../../../image/steps.png')} style={{ width: 180, height: 180 }}
-                            />
-                        )
-                    }
-                </AnimatedCircularProgress>
-<View style={styles.ki}></View>
-
-<Badge containerStyle={{ backgroundColor: '#330066', width: 300 }} textStyle={{ fontFamily: 'asd', fontSize: 25 }} value={"Steps : " + this.state.stepCount} />
-                {    /* fetchReducer.data.targetSteps!=null &&
-                        <FlatList data={fetchReducer.data.targetSteps} renderItem={({item})=><Text>{item[0]}</Text>}/>  */
-                }
+    (fill) => (
+     /*  <Text >
+        {this.state.stepCount}
+      </Text> */
+      <Image
+                 source={require('../../../../image/steps.png')}
+                 style={{width: 180, height: 180}}
+                />
+    )
+  }
+  </AnimatedCircularProgress>
+  <View style={styles.ki}></View>
+  
+                    <Badge containerStyle={{ backgroundColor: 'transparent',width:300,}} textStyle={{fontFamily:'asd',fontSize:30, color: '#000000'}} value={"Steps : "+this.state.stepCount}/>
+                     {   /* fetchReducer.data.targetSteps!=null &&
+                        <FlatList data={fetchReducer.data.targetSteps} 
+                        renderItem={({item})=><Text>{item[0]}</Text>}/> */
+                    }   
                 <View style={styles.ki1}></View>
-<Text style={{ fontFamily: 'asd', fontSize: 20 }}>Star : 11 </Text>
-
-<View style={styles.container1}>
-<Tails showMe={this.state.showMe} closeAboutUs={this.closeAboutUs} />
-<View style={styles.ki9}></View>
-<Badge onPress={this.openAboutUs} containerStyle={{ backgroundColor: '#330066', width: 150 }} textStyle={{ fontFamily: 'asd', fontSize: 20 }} value={'Detail'} />
-
-
-</View>
-</View>);
+                    <Text style={{fontFamily:'asd',fontSize:20}}>Star : 11 </Text> 
+                    <View style = {styles.separator}></View>
+            <View style={styles.container1}>
+                            <Tails showMe={this.state.showMe} closeAboutUs={this.closeAboutUs}/>
+                            <View style={styles.ki9}></View>
+                            <Badge onPress={this.openAboutUs} containerStyle={{ backgroundColor: '#330066',width:125}} textStyle={{fontFamily:'asd',fontSize:18, color: '#ffffff'}} value={'Detail'} />
+                           
+             
+                            </View>  
+            </View>);
+        }
     }
-}
 const styles = StyleSheet.create({
     container: {
       alignItems: 'center',
@@ -203,7 +206,12 @@ const styles = StyleSheet.create({
                 margin:20,
                 fontFamily:'asd'
             }, 
-          
+        separator:{
+                marginVertical: 10,
+                borderWidth: 1,
+                width:150,
+                borderColor: '#BEBEBE',
+            } 
        
     });
  

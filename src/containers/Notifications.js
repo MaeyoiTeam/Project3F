@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Button} from 'react-native';
+import { View, Text, StyleSheet, Button,ScrollView} from 'react-native';
 import React,{Component} from 'react';
 import { connect } from 'react-redux';
 import {getNotifications,updateNotification} from '../actions/notification'
@@ -32,7 +32,7 @@ class Notifications extends Component {
       const {notification} =this.props;
       console.log(this.props.uid)
       if (notification.haveNotification&&!notification.isFetching) {
-          return (
+          return (<ScrollView>
             <View style={styles.container}>
               {
                               this.props.notification.haveNotification &&
@@ -45,7 +45,7 @@ class Notifications extends Component {
                )
               }
             </View>
-            
+            </ScrollView>
           );
       } else{
           return (<Loading />);

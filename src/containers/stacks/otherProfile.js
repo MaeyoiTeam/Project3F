@@ -108,7 +108,7 @@ class OtherProfile extends Component {
                     <Button title="Achievement Earned"
                         onPress={this.goToAchievement}
                         buttonStyle={{
-                            backgroundColor: "#8e8e8e",
+                            backgroundColor: "#DCDCDC",
                             width: 200,
                             height: 40,
                             borderColor: "transparent",
@@ -117,10 +117,10 @@ class OtherProfile extends Component {
                         }}
                         textStyle = {{fontFamily:'asd', color: '#000000'}} 
                     />
-                    <Button title="History Quest"
+                    <Button title="Completed Quest"
                         onPress={this.goToHistoryQuest}
                         buttonStyle={{
-                            backgroundColor: "#8e8e8e1",
+                            backgroundColor: "#8e8e8e",
                             width: 200,
                             height: 40,
                             borderColor: "transparent",

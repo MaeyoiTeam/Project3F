@@ -1,4 +1,4 @@
-import { View,Text,StyleSheet,Image } from 'react-native';
+import { View,Text,StyleSheet,Image,ScrollView } from 'react-native';
 import React,{Component} from 'react';
 import { connect } from "react-redux";
 import { Button, Avatar } from 'react-native-elements';
@@ -67,7 +67,7 @@ class Achievement extends Component {
   render() {
     const { historyReducer } = this.props;
     // console.log(this.state.achieve);
-    return <View style={styles.container}>
+    return <ScrollView><View style={styles.container}>
         
         {historyReducer.haveHISTORY && Object.values(this.state.achieve).map(
             (obj, i) => {
@@ -96,7 +96,7 @@ class Achievement extends Component {
               );
             }
           )}
-      </View>;
+      </View></ScrollView>;
   }
 }
 
