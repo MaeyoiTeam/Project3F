@@ -39,7 +39,7 @@ class Notifications extends Component {
                 this.props.notification.data.sort((a, b) => -1).map((obj, i) => <View key={i} style = {styles.separator}>
                   <Text style = {{fontFamily:'asd', fontSize:12, color:'#000000', paddingLeft:10}}>{obj.title}</Text>
                   <Text style = {{fontFamily:'asd', fontSize:18, color:'#000000', paddingLeft:10}}>{obj.body}</Text>
-                  <Text style = {{fontFamily:'asd', fontSize:12, color:'#565656' ,textAlign:'right', paddingRight:10}}>{moment(obj.date).fromNow()}</Text>
+                  <Text style = {{fontFamily:'asd', fontSize:10, color:'#565656' ,textAlign:'right', paddingRight:10}}>{moment(obj.date).fromNow()}</Text>
                   
                 </View>
                )
@@ -65,11 +65,11 @@ const styles = StyleSheet.create({
     marginTop: 15,
   },
   separator: {
-    backgroundColor:'#ede6da',
+    backgroundColor:'#fff3e0',
     paddingBottom: 5,
     paddingTop: 10,
     borderWidth: 0.5,
-    borderColor: '#ede6da',
+    borderColor: '#fff3e0',
     marginTop: 5
   },
   label: {
