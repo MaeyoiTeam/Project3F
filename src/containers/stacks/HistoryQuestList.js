@@ -20,13 +20,14 @@ class HistoryQuestList extends Component {
         this.props.clearMiddleHistory();
     }
     render(){
-        const {historyReducer,authReducer,fetchReducer} = this.props;
+        const {historyReducer} = this.props;
                         return(
                 <View style={styles.container}>
+                <ScrollView>
                 {  historyReducer.haveHISTORY &&
                 historyReducer.data.map((type, index) => {
                     const arr = type[1]
-                return  <ScrollView key={index}><Text style={{fontFamily:'asd',fontSize:27}}>{type[0]}</Text>
+                return  <View key={index}><Text style={{fontFamily:'asd',fontSize:27}}>{type[0]}</Text>
                  <View style={styles.pa3}></View>
                     {
                         Object.values(arr).map((info, i) =>{
@@ -41,9 +42,9 @@ class HistoryQuestList extends Component {
                         </View> 
                         })
                     }
-                </ScrollView>       
+                </View>    
                 })  
-            }  
+            }</ScrollView>     
             </View>
         );
     }
@@ -51,9 +52,7 @@ class HistoryQuestList extends Component {
 
 // Used to add reducer's states into the props
 const mapStateToProps = (state) => ({
-    fetchReducer: state.fetchReducer,
     historyReducer: state.historyReducer,
-    authReducer: state.authReducer
 });
 //Used to add dispatch (action) into props
 const mapDispatchToProps = {

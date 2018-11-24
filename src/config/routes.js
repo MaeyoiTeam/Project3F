@@ -16,7 +16,7 @@ import QuestWalk from '../containers/stacks/quests/QuestWalk';
 import QuestRest from '../containers/stacks/quests/QuestRest';
 import HistoryQuestList from '../containers/stacks/HistoryQuestList';
 import Achievement from '../containers/stacks/Achievement';
-import OtherProfile from '../containers/stacks/OtherProfile'
+import OtherProfile from '../containers/stacks/otherProfile'
 //Component
 import LeftComponent from '../component/Header/LeftComponent';
 import MidComponent from '../component/Header/MidComponent';
@@ -107,28 +107,50 @@ Home:{    screen:BottomTabs,
     },
     History: {
       screen: HistoryQuestList,
-      navigationOptions: {}
-    },
+      navigationOptions: {
+        headerStyle: {
+          height:45,
+      }
+    }
+   },
     Achievement: {
       screen: Achievement,
       navigationOptions: {
-        headerTitle: "Achievement",
-        headerStyle: {}
+        headerStyle: {
+          height:45,
+      },
+  
       }
     },
     Quest: {
       screen: Quest,
-      navigationOptions: {}
+      navigationOptions: {
+        headerStyle: {
+          height:45,
+      },
+      
+      }
     },
     QuestWalk: {
       screen: QuestWalk,
-      navigationOptions: {}
+      navigationOptions: {
+        headerStyle: {
+          height:45,
+      },
+      
+      }
     },
     QuestRest: {
       screen: QuestRest,
-      navigationOptions: {}
+      navigationOptions: {
+        headerStyle: {
+          height:45,
+          },
+          
+      },
     }
   },
+  
   {
     mode: "modal",
     headerLayoutPreset: "center"
