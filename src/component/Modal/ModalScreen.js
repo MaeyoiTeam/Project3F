@@ -23,15 +23,19 @@ export class ModalScreen extends Component {
     }
 
     componentDidUpdate(prevProps, prevState){
-       const message = {
-        title: "Walk Quest Completed!",
-        body:"Steps: "+this.state.stepCount+" (+ "+this.props.modalReducer.data.star+" stars).",
-        date: new Date().toISOString()
-     } 
+     
       if (prevState.stepCount!=this.state.stepCount) {
         const key = Object.keys(this.props.modalReducer.data)
          this.props.finishQuestWalk(this.props.authReducer.data,key[0],this.props.modalReducer.data,this.state.stepCount) 
-        this.props.updateNotification(this.props.authReducer.data.uid, message);
+        
+      }
+      if(this.props.modalReducer.data.star!=undefined){
+        const message = {
+          title: "Walk Quest Completed!",
+          body:"Steps: "+this.state.stepCount+" (+ "+this.props.modalReducer.data.star+" stars).",
+          date: new Date().toISOString()
+       } 
+       this.props.updateNotification(this.props.authReducer.data.uid, message);
         this.sendSuccessQuestNotification(message);
       }
     }
