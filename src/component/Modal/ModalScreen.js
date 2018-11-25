@@ -142,7 +142,7 @@ export class ModalScreen extends Component {
             Detail : This page is a summary of walking results in a day
           </Text>
           <View style={styles.container3} />
-          <Button buttonStyle={{ backgroundColor: "lightblue", height: 40, width: 250, borderColor: "transparent", borderRadius: 360 }} title="Go to Home" style={{ fontFamily: "asd" }} onPress={() => () => this.props.navigate("Stack")} />
+          <Button buttonStyle={{ backgroundColor: "lightblue", height: 40, width: 250, borderColor: "transparent", borderRadius: 360 }} title="Go to Home" style={{ fontFamily: "asd" }} onPress={() => this.props.navigate("Stack")} />
         </View>
       </Modal>;
     
