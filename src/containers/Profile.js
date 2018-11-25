@@ -47,7 +47,7 @@ class Profile extends Component{
                 result.push(box);
             }
                 );
-                console.log(result)
+
             return [{ seriesName: "Your WalkStacks", data: result, color: "#297AB1" }];
         }
          

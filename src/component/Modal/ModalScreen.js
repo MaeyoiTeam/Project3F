@@ -22,12 +22,11 @@ export class ModalScreen extends Component {
     componentWillMount(){
            this._subscribe();
     }
-
     componentDidUpdate(prevProps, prevState){
      
       if (prevState.stepCount!=this.state.stepCount) {
         const key = Object.keys(this.props.modalReducer.data)
-         this.props.finishQuestWalk(this.props.authReducer.data,key[0],this.props.modalReducer.data,this.state.stepCount) 
+        this.finishQuest(this.props.authReducer.data, key[0], this.props.modalReducer.data, this.state.stepCount);
         
       }
       if(this.props.modalReducer.data.star!=undefined){
@@ -40,6 +39,12 @@ export class ModalScreen extends Component {
         this.sendSuccessQuestNotification(message);
       }
     }
+
+    finishQuest=async (auth,key,modal,step)=>{
+      await this.props.finishQuestWalk(auth, key, modal, step)
+    await this.props.clearFinishQuestWalk(auth);
+    }
+
 
     sendSuccessQuestNotification=(message)=>{
      if(this.props.authReducer.data.isShowNotification){
@@ -108,7 +113,6 @@ export class ModalScreen extends Component {
 
   render(){
     const {modalReducer,authReducer} = this.props
-    console.log(modalReducer.data.walkHistory)
     if(this.props.modalReducer.showModal){
     return <Modal visible={this.props.modalReducer.showModal} onRequestClose={() => {
           Alert.alert("Modal has been closed.");
@@ -138,9 +142,7 @@ export class ModalScreen extends Component {
             Detail : This page is a summary of walking results in a day
           </Text>
           <View style={styles.container3} />
-          <Button buttonStyle={{ backgroundColor: "lightblue", height: 40, width: 250, borderColor: "transparent", borderRadius: 360 }} title="Go to Home" style={{ fontFamily: "asd" }} onPress={() => this.props
-                .clearFinishQuestWalk(authReducer.data)
-                .then(() => this.props.navigate("Stack"))} />
+          <Button buttonStyle={{ backgroundColor: "lightblue", height: 40, width: 250, borderColor: "transparent", borderRadius: 360 }} title="Go to Home" style={{ fontFamily: "asd" }} onPress={() => () => this.props.navigate("Stack")} />
         </View>
       </Modal>;
     
