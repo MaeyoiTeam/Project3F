@@ -1,11 +1,9 @@
-import { View,Text,StyleSheet,Image } from 'react-native';
+import { View,Text,StyleSheet,Image,ScrollView } from 'react-native';
 import React,{Component} from 'react';
 import { connect } from "react-redux";
-import { Button, Avatar } from 'react-native-elements';
+import { Button, Avatar,List,ListItem } from 'react-native-elements';
 import {updateMidAuth} from '../actions/signIn'
 import ProgressBarAnimated from 'react-native-progress-bar-animated';
-import { Font } from 'expo';
-import { Colors } from 'react-native-paper';
 
 
 class Profile extends Component{
@@ -36,6 +34,7 @@ class Profile extends Component{
         }
 
          
+        
          
 
          
@@ -44,14 +43,12 @@ class Profile extends Component{
         const {authReducer} = this.props
         const {food,walk,rest}= authReducer.data.levelQ;
         
-        return <View style={styles.container}>
+        return (<ScrollView>
+                    <View style={styles.container}>
             <Text style = {styles.a1}>Your Profile</Text>
             {authReducer.isAuth && <View>
                 <Avatar containerStyle = {{left:90}} large rounded source={{ uri: authReducer.data.photoURL }} onPress={() => console.log("Works!")} />
                 <Text style={styles.ki}>{authReducer.data.displayName}</Text>
-                <Text>{authReducer.data.Email}</Text>
-                
-{/* //TODO แสดง เลเวล ค่าประสบการณ์ Objectที่เก็บข้อมูล = authReducer.data.levelQ */}
                 <View style = {{                  
                     flexDirection: 'row',
                     flex:0.4
@@ -64,6 +61,7 @@ class Profile extends Component{
                 <Text style={{textAlign:'center',paddingTop:5,left:100,fontFamily:'asd'}}>X  {authReducer.data.star  }</Text>
                 </View>
                 <View style = {{flex:1}}>
+                <Text style = {{fontFamily:'asd',textAlign:'center'}}>Level:{walk.level}</Text>
                 <View style = {{
                     padding:5, 
                     flexDirection: 'row',
@@ -79,7 +77,7 @@ class Profile extends Component{
                 value = {(authReducer.data.levelQ.walk.star*100)/authReducer.data.levelQ.walk.target}/>
                 <Text style = {{fontFamily:'asd',left:10,fontSize:12}}>{walk.star}/{walk.target}</Text> 
                 </View>
-                <Text style = {{fontFamily:'asd',textAlign:'center'}}>Level:{walk.level}</Text>
+                <Text style = {{fontFamily:'asd',textAlign:'center'}}>Level:{food.level}</Text>
                 <View style = {{
                     padding:5, 
                     flexDirection: 'row',
@@ -95,7 +93,7 @@ class Profile extends Component{
                 value = {(authReducer.data.levelQ.food.star*100)/authReducer.data.levelQ.food.target}/>
                 <Text style = {{fontFamily:'asd',left:10,fontSize:12}}>{food.star}/{food.target}</Text>         
                 </View>
-                <Text style = {{fontFamily:'asd',textAlign:'center'}}>Level:{food.level}</Text>
+                <Text style = {{fontFamily:'asd',textAlign:'center'}}>Level:{rest.level}</Text>
                 <View style = {{
                     padding:5, 
                     flexDirection: 'row',
@@ -111,20 +109,18 @@ class Profile extends Component{
                 value = {(authReducer.data.levelQ.rest.star*100)/authReducer.data.levelQ.rest.target}/>
                 <Text style = {{fontFamily:'asd',left:10,fontSize:12}}>{rest.star}/{rest.target}</Text>   
                 </View>
-                <Text style = {{fontFamily:'asd',textAlign:'center'}}>Level:{rest.level}</Text>
+               
                 </View>
                 
                 <View style = {{flex:0.005}}>
+               
                 <Button title="Achievement Earned" 
                     onPress={this.goToAchievement}
                     buttonStyle={{
                         backgroundColor: "#DCDCDC",
-                        width: 200,
-                        height: 40,
-                        borderColor: "transparent",
-                        borderWidth: 0,
-                        left:15
-                        
+                        width: 240,
+                        height: 50,
+                        borderColor: "transparent"                     
                       }}
                       textStyle = {{fontFamily:'asd', color: '#000000'}}  
                 />
@@ -133,18 +129,27 @@ class Profile extends Component{
                         onPress={this.goToHistoryQuest}
                         buttonStyle={{
                             backgroundColor: "#8e8e8e",
-                            width: 200,
-                            height: 40,
-                            borderColor: "transparent",
-                            borderWidth: 0,
-                            left: 15
+                            width: 240,
+                            height: 50,
+                            borderColor: "transparent"
                         }}
                         textStyle = {{fontFamily:'asd', color: '#ffffff'}} 
                     />
+                     <View>
+                            <List >
+                            {
+                                Object.entries(authReducer.data.walkStacks).map((obj,i)=>
+                                <ListItem title={obj[0]+' : '+obj[1]} hideChevron={true} key={i}/>
+                                )
+                            }
+                            </List>
+                            
+                   </View> 
                 </View>
-                <View style = {{flex:1}}></View>
+                <View style = {{paddingBottom:50}}></View>
               </View>}
-          </View>;
+          </View>
+          </ScrollView>);
     }
 }
 

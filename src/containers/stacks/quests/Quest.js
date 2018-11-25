@@ -6,7 +6,7 @@ import {updateQuest,fetchQuest,updateQuestDone,getQuestList} from '../../../acti
 import {updateNotification} from '../../../actions/notification'
 import { Notifications} from 'expo';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
-
+import {clearFechReducer,clearMiddleHistory} from '../../../actions/'
 class Quest extends Component {
   static navigationOptions = ({
       navigation
@@ -99,6 +99,11 @@ class Quest extends Component {
                 title:'New Achievement',
                 body:'You receive: '+achieves.length+ ' achievement',
             }
+            for(achieve of achieves){
+                this.props.updateNotification(this.props.authReducer.data.uid, {title:message.title,
+                body:'You receive : '+achieve.name+'    ( +'+achieve.star+' stars)'
+                })
+            }
         this.sendSuccessQuestNotification(message);
         Alert.alert(
             message.title,
@@ -110,6 +115,10 @@ class Quest extends Component {
           )
     } 
 
+    componentWillUnmount(){
+        this.props.clearFechReducer();
+        this.props.clearMiddleHistory();
+    }
 
 
 
@@ -223,7 +232,7 @@ const mapStateToProps = (state) => ({
 });
 //Used to add dispatch (action) into props
 const mapDispatchToProps = {
-    updateQuest, fetchQuest, updateQuestDone, getQuestList, updateNotification
+    updateQuest, fetchQuest, updateQuestDone, getQuestList, updateNotification,clearFechReducer,clearMiddleHistory
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Quest)

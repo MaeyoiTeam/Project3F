@@ -55,9 +55,9 @@ class Ranking extends Component{
                      {
                         rankReducer.data.map((item, i) => {
                              if(item.uid==authReducer.data.uid){
-                                this.current=i
+                                current=i
                              }
-                            return  <TouchableHighlight onPress={()=>this.goToOtherProfile(item.uid)} key={i}>
+                            return  <TouchableHighlight onPress={()=>this.goToOtherProfile(item.uid)} key={i} underlayColor='#c4c4c4'>
                                <View>
                                     <View style = {{padding:4,flexDirection: 'row'}}>
                                 <Avatar rounded small source = {{uri: item.photoURL}} />
@@ -73,8 +73,9 @@ class Ranking extends Component{
                 <Text style={{fontSize:20,fontFamily:'asd',paddingTop:5}}>Your Rank!</Text>
                 </View>   
                      {
-                         authReducer.isAuth &&<View>
-                                    <Text style={{ left: 45, fontFamily: 'asd' }}>Rank: {this.current.index + 1} : {authReducer.data.name}</Text>
+                         authReducer.isAuth && <View style = {{padding:4,flexDirection: 'row'}}>
+                                    <Avatar rounded small source = {{uri: authReducer.data.photoURL}} /> 
+                                    <Text style={{ left: 45, fontFamily: 'asd' }}>Rank: {current + 1} : {authReducer.data.name}</Text>
                                     <Text style={{ left: 45, paddingTop: 10, fontFamily: 'asd',paddingBottom:10 }}>     Stars :  {authReducer.data.star}</Text>
                          </View>
                       }

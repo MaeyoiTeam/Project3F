@@ -122,3 +122,9 @@ export const clearMiddleHistory=()=>{
         dispatch({ type: HISTORY_DATA });
     }
 }
+
+export const clearFechReducer=()=>{
+    return dispatch=>{
+        dispatch({ type: FETCHING_DATA });
+    }
+}

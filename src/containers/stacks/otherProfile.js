@@ -1,7 +1,7 @@
-import { View,Text,StyleSheet,Image } from 'react-native';
+import { View,Text,StyleSheet,Image,ScrollView } from 'react-native';
 import React,{Component} from 'react';
 import { connect } from "react-redux";
-import { Button, Avatar } from 'react-native-elements';
+import { Button, Avatar,List,ListItem } from 'react-native-elements';
 import ProgressBarAnimated from 'react-native-progress-bar-animated';
 
 class OtherProfile extends Component {
@@ -51,8 +51,9 @@ class OtherProfile extends Component {
                
                             {
                                 fetchReducer.data.levelQ!=null &&
-                                <View style = {{flex:1}}>
+                                <ScrollView style={{flex:2}}>
                             <View>
+                            <Text style = {{fontFamily:'asd',textAlign:'center'}}>Level:{levelQ.walk.level}</Text>
                                         <View style={{
                                             padding: 5,
                                             flexDirection: 'row',
@@ -69,7 +70,7 @@ class OtherProfile extends Component {
                                     value = {(levelQ.walk.star*100)/levelQ.walk.target}/>
                                     <Text style = {{left:10, fontFamily:'asd'}}>{levelQ.walk.star}/{levelQ.walk.target}</Text> 
                                     </View>
-                            <Text style = {{fontFamily:'asd'}}>Level:{levelQ.walk.level}</Text>
+                                    <Text style = {{fontFamily:'asd',textAlign:'center'}}>Level:{levelQ.food.level}</Text>
                             <View style = {{
                                 padding:5, 
                                 flexDirection: 'row',
@@ -85,7 +86,7 @@ class OtherProfile extends Component {
                                         value={(levelQ.food.star * 100) / levelQ.food.target} />
                                     <Text style={{ left: 10, fontFamily:'asd'}}>{levelQ.food.star}/{levelQ.food.target}</Text>
                                 </View>
-                                <Text style = {{fontFamily:'asd'}}>Level:{levelQ.food.level}</Text>
+                                <Text style = {{fontFamily:'asd',textAlign:'center'}}>Level:{levelQ.rest.level}</Text>
                                 <View style={{
                                     padding: 5,
                                     flexDirection: 'row',
@@ -104,16 +105,14 @@ class OtherProfile extends Component {
                             <Text style = {{left:10, fontFamily:'asd'}}>{levelQ.rest.star}/{levelQ.rest.target}</Text>   
                             </View>
                             </View>
-                            <Text style = {{paddingBottom:20,fontFamily:'asd'}}>Level:{levelQ.rest.level}</Text>
+                          
                     <Button title="Achievement Earned"
                         onPress={this.goToAchievement}
                         buttonStyle={{
                             backgroundColor: "#DCDCDC",
-                            width: 200,
-                            height: 40,
+                            width: 240,
+                            height: 50,
                             borderColor: "transparent",
-                            borderWidth: 0,
-                            left: 15
                         }}
                         textStyle = {{fontFamily:'asd', color: '#000000'}} 
                     />
@@ -121,18 +120,28 @@ class OtherProfile extends Component {
                         onPress={this.goToHistoryQuest}
                         buttonStyle={{
                             backgroundColor: "#8e8e8e",
-                            width: 200,
-                            height: 40,
+                            width: 240,
+                            height: 50,
                             borderColor: "transparent",
-                            borderWidth: 0,
-                            left: 15
                         }}
                         textStyle = {{fontFamily:'asd', color: '#ffffff'}} 
                     />
-                            </View>
+                                    <View>
+                                            <List >
+                                            {
+                                                Object.entries(fetchReducer.data.walkStacks).map((obj,i)=>
+                                                <ListItem title={obj[0]+' : '+obj[1]} hideChevron={true} key={i}/>
+                                                )
+                                            }
+                                            </List>
+                                            
+                                </View> 
+                            </ScrollView>
                             }
-                 <View style = {{flex:1}}></View>
-        </View>);
+                {/*    <View style = {{flex:1}}></View>   */}
+                  
+        </View>
+        );
     }
 }
 
@@ -146,6 +155,8 @@ const mapDispatchToProps = {
 };
 const styles = StyleSheet.create({  
     container: {
+    marginLeft:0,
+    marginRight:0,
     flex: 1,
     backgroundColor: 'white',  
     alignItems: 'center',
