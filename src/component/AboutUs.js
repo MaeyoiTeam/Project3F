@@ -22,11 +22,12 @@ export default class AboutUs extends Component {
         <Text style={{fontFamily:'asd'}}>Naphat Pechsrijun 59010386</Text>
         <Text style={{fontFamily:'asd'}}>Nithi Semamuang 59010736</Text>
         <Text style={{fontFamily:'asd'}}>Papon Prommool 59010792</Text>
-        <Text ></Text>
+        <Text > </Text>
         <Text style={{fontFamily:'asd',fontSize:20}}>Backend Team</Text>
         <Text style={{fontFamily:'asd'}}>Jakkapat Boonroj 59010187</Text>
         <Text style={{fontFamily:'asd'}}>Nontakon Charoencheewakul 59010679</Text>
         <TouchableOpacity onPress={this.closeModal}>
+            
             <Text style={styles.closeText}>Close</Text>
         </TouchableOpacity>
         </View>
@@ -66,7 +67,11 @@ const styles = StyleSheet.create({
             color:'#bbb',
             padding:5,
             margin:20,
-            fontFamily:'asd'
+            fontFamily:'asd',
+            width: 50,
+            alignItems: 'center',
+            
+
         }, 
     openText:{backgroundColor:'#FBFBFB',
             color:'black',
