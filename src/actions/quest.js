@@ -152,7 +152,6 @@ export const randomQuest = (user) => {
       //test Walk Quest
       date = new Date()
       keyDate = moment(date).format("DMMMYY").toString()
-      console.log(keyDate)
       slectQuests = {
         [keyDate]: {
           type: "walk",
@@ -214,7 +213,7 @@ export const finishQuestWalk = (user, key, modalData, stepCount) => {
             if(walkDate!=null){
               stepCount=walkDate.stepCount
             }
-            walksCount.push({date:keyDate,stpeCount:stepCount})
+            walksCount.push({y:keyDate,x:stepCount})
           }
           return dispatch({
             type: MODAL_OPEN,
@@ -234,6 +233,7 @@ export const finishQuestWalk = (user, key, modalData, stepCount) => {
     })
   }
 }
+
 export const clearFinishQuestWalk = (user) => {
   return async (dispatch) => {
     clearOver(user.uid).then(() => dispatch({

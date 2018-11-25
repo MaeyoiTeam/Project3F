@@ -6,7 +6,8 @@ import {navigate} from '../../actions'
 import {finishQuestWalk,clearFinishQuestWalk} from '../../actions/quest'
 import { Pedometer,Notifications } from "expo";
 import * as Expo from "expo";
-import { updateNotification} from '../../actions/notification'
+import {updateNotification} from '../../actions/notification'
+ const moment = require("moment"); 
 
 
 export class ModalScreen extends Component {
@@ -21,12 +22,11 @@ export class ModalScreen extends Component {
     componentWillMount(){
            this._subscribe();
     }
-
     componentDidUpdate(prevProps, prevState){
      
       if (prevState.stepCount!=this.state.stepCount) {
         const key = Object.keys(this.props.modalReducer.data)
-         this.props.finishQuestWalk(this.props.authReducer.data,key[0],this.props.modalReducer.data,this.state.stepCount) 
+        this.finishQuest(this.props.authReducer.data, key[0], this.props.modalReducer.data, this.state.stepCount);
         
       }
       if(this.props.modalReducer.data.star!=undefined){
@@ -40,19 +40,27 @@ export class ModalScreen extends Component {
       }
     }
 
+    finishQuest=async (auth,key,modal,step)=>{
+      await this.props.finishQuestWalk(auth, key, modal, step)
+    await this.props.clearFinishQuestWalk(auth);
+    }
+
+
     sendSuccessQuestNotification=(message)=>{
-      Notifications.presentLocalNotificationAsync({
-          title:  message.title,
-          body:   message.body,
-          ios:{
-              sound:true
-          },
-          android: {
-              icon: 'https://firebasestorage.googleapis.com/v0/b/project3f-4a950.appspot.com/o/achieve%2Ficon.png?alt=media&token=e95c5c83-7b5c-4db3-96f7-258b06b925a1',
-              channelId: "achieve",
-              color: '#FF0000',
-          }
-      });
+     if(this.props.authReducer.data.isShowNotification){
+       Notifications.presentLocalNotificationAsync({
+         title: message.title,
+         body: message.body,
+         ios: {
+           sound: true
+         },
+         android: {
+           icon: 'https://firebasestorage.googleapis.com/v0/b/project3f-4a950.appspot.com/o/achieve%2Ficon.png?alt=media&token=e95c5c83-7b5c-4db3-96f7-258b06b925a1',
+           channelId: "achieve",
+           color: '#FF0000',
+         }
+       });
+     }
   }
 
         _subscribe = () => {
@@ -65,11 +73,8 @@ export class ModalScreen extends Component {
              time: new Date(),
            });
          });
-          //        console.log("Start: "+startTime);
-          //       console.log("current: "+currentTime);  
          Pedometer.getStepCountAsync(startTime, currentTime).then(
            result => {
-             // console.log(result.steps);
              this.setState({
                stepCount: result.steps || 0
              });
@@ -93,46 +98,53 @@ export class ModalScreen extends Component {
     this._unsubscribe();
   }
 
+   changeTextDate=(date,type)=>{
+     if (date){
+       switch (type) {
+         case 'day': return moment(date).format('LL')
+         case 'time': return moment(date).format('LT')
+         default: return moment(date).format("LT");
+       }
+    }
+    return "wait"
+  }
+  
+
 
   render(){
     const {modalReducer,authReducer} = this.props
     if(this.props.modalReducer.showModal){
-    return (
-    <Modal visible={this.props.modalReducer.showModal}
-      onRequestClose={() => {
-            Alert.alert('Modal has been closed.');
-          }}>
-     <View style={styles.container1}>
-     <View style={styles.container2}></View>
-     <Image
-                 source={require('../../../image/end.jpg')}
-                 fadeDuration={0}
-                 style={{width: 180, height: 180,alignItems:'center'}}
-                 />
-     <View style={styles.container4}></View>  
-          { modalReducer.showModal &&
-             <View style={{alignItems:'center'}}>
-              <Text style={{fontFamily:'asd',fontSize:25}}>Start at : {modalReducer.data.start}</Text>
-              <Text style={{fontFamily:'asd',fontSize:25}}>Finish at : {modalReducer.data.last}</Text>
-              <Text style={{fontFamily:'asd',fontSize:25}}>Star : {modalReducer.data.star}</Text> 
-             </View> 
-          }
-       <Text style={{fontFamily:'asd',fontSize:25,textAlign:'center'}}>Steps : {this.state.stepCount}</Text>
-       <View style={styles.container2}></View>
-       <Text style={{fontFamily:'asd',fontSize:10}}>Detail : This page is a summary of walking results in a day</Text> 
-       <View style={styles.container3}></View>
-        <Button buttonStyle={{
-            backgroundColor: "lightblue",
-            height:40,width:250,
-            borderColor: "transparent",
-            borderRadius:360,    
-            }}
-          title="Go to Home"style={{fontFamily:'asd'}}
-          onPress={() => this.props.clearFinishQuestWalk(authReducer.data).then(()=>this.props.navigate("Stack"))}/>
+    return <Modal visible={this.props.modalReducer.showModal} onRequestClose={() => {
+          Alert.alert("Modal has been closed.");
+        }}>
+        <View style={styles.container1}>
+          <View style={styles.container2} />
+          <Image source={require("../../../image/end.jpg")} fadeDuration={0} style={{ width: 180, height: 180, alignItems: "center" }} />
+          <View style={styles.container4} />
+          {modalReducer.showModal && <View style={{ alignItems: "center" }}>
+              <Text style={{ fontFamily: "asd", fontSize: 25 }}>
+                Date : {this.changeTextDate(modalReducer.data.start,'day')}
+              </Text>
+              <Text style={{ fontFamily: "asd", fontSize: 20 }}>
+            Time :{this.changeTextDate(modalReducer.data.start, 'time')} to {this.changeTextDate(modalReducer.data.last,'time')}
+              </Text>
+              <Text style={{ fontFamily: "asd", fontSize: 25 }}>
+                Star : {modalReducer.data.star}
+              </Text>
+            </View>}
+          <Text
+            style={{ fontFamily: "asd", fontSize: 25, textAlign: "center" }}
+          >
+            Steps : {this.state.stepCount}
+          </Text>
+          <View style={styles.container2} />
+          <Text style={{ fontFamily: "asd", fontSize: 10 }}>
+            Detail : This page is a summary of walking results in a day
+          </Text>
+          <View style={styles.container3} />
+          <Button buttonStyle={{ backgroundColor: "lightblue", height: 40, width: 250, borderColor: "transparent", borderRadius: 360 }} title="Go to Home" style={{ fontFamily: "asd" }} onPress={() => () => this.props.navigate("Stack")} />
         </View>
-     </Modal>
-    
-    )
+      </Modal>;
     
     }
     else{

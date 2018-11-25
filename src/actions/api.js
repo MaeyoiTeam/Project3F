@@ -269,13 +269,23 @@ export const updateDataUser = (uid, user) => {
                         target: 10
                     }
                     personalRef.update({
-                        walkStacks:{999:0},
+                        walkStacks:{999:0,
+                        2018:0,
+                    4000:0,
+                6500:0,
+            9999:0,
+        20000:0,
+    40000:0,
+65000:0,
+100000:0
+},
                         ...user,
                         isShowNotification: true,
                         star: 0,
                         notificationLog:{
                             0:{
-                                title:"Welcome to Achieve App",
+                                title:"First time Login",
+                                body:"Welcome to Achieve App",
                                 date:new Date().toISOString(),
                             }
                         },
