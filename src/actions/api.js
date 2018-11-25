@@ -275,7 +275,8 @@ export const updateDataUser = (uid, user) => {
                         star: 0,
                         notificationLog:{
                             0:{
-                                title:"Welcome to Achieve App",
+                                title:"First time Login",
+                                body:"Welcome to Achieve App",
                                 date:new Date().toISOString(),
                             }
                         },

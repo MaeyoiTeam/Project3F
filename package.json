@@ -52,6 +52,7 @@
     "request": "^2.88.0",
     "reselect": "^4.0.0",
     "rn-sliding-button": "^1.1.5",
-    "sentry-expo": "^1.10.0"
+    "sentry-expo": "^1.10.0",
+    "victory-native": "^31.0.0"
   }
 }

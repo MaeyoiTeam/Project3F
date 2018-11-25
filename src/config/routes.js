@@ -119,6 +119,7 @@ Home:{    screen:BottomTabs,
     Achievement: {
       screen: Achievement,
       navigationOptions: {
+        title:"Achievement",
         headerStyle: {
           height:45,
       },
@@ -163,11 +164,14 @@ Home:{    screen:BottomTabs,
 const Navigator = createSwitchNavigator({
   FirstPage: {
     screen: FirstPage,
-    navigationOptions: {}
+    navigationOptions: {
+
+    }
   },
   SignIn: {
     screen: SignIn,
-    navigationOptions: {}
+    navigationOptions: {
+    }
   },
   Stack: {
     screen: Stack,
