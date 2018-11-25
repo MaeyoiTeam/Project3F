@@ -68,11 +68,8 @@ export class ModalScreen extends Component {
              time: new Date(),
            });
          });
-          //        console.log("Start: "+startTime);
-          //       console.log("current: "+currentTime);  
          Pedometer.getStepCountAsync(startTime, currentTime).then(
            result => {
-             // console.log(result.steps);
              this.setState({
                stepCount: result.steps || 0
              });
@@ -105,10 +102,13 @@ export class ModalScreen extends Component {
        }
     }
     return "wait"
-  } 
+  }
+  
+
 
   render(){
     const {modalReducer,authReducer} = this.props
+    console.log(modalReducer.data.walkHistory)
     if(this.props.modalReducer.showModal){
     return <Modal visible={this.props.modalReducer.showModal} onRequestClose={() => {
           Alert.alert("Modal has been closed.");

@@ -214,7 +214,7 @@ export const finishQuestWalk = (user, key, modalData, stepCount) => {
             if(walkDate!=null){
               stepCount=walkDate.stepCount
             }
-            walksCount.push({date:keyDate,stpeCount:stepCount})
+            walksCount.push({y:keyDate,x:stepCount})
           }
           return dispatch({
             type: MODAL_OPEN,
