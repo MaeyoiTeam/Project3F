@@ -90,8 +90,8 @@ export const updateQuestDone = (user, key, type) => {
 export const updateQuest = (user, key, point) => {
   const result = updateScore(user.uid, key, point).then((quest) => {
     if (quest.current >= quest.target) {
-      return moveToDone(user.uid, key, quest).then((obj) => {
-        return { ...obj,
+      return moveToDone(user.uid, key, quest).then((levelType) => {
+        return { ...levelType,
           isComplete: true
         }
       })

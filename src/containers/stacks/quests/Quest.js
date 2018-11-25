@@ -97,6 +97,11 @@ class Quest extends Component {
                 title:'New Achievement',
                 body:'You receive: '+achieves.length+ ' achievement',
             }
+            for(achieve of achieves){
+                this.props.updateNotification(this.props.authReducer.data.uid, {title:message.title,
+                body:'You receive : '+achieve.name+'    ( +'+achieve.star+' stars)'
+                })
+            }
         this.sendSuccessQuestNotification(message);
         Alert.alert(
             message.title,

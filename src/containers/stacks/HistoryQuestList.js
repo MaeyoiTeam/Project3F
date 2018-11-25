@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import {getQuestList,fetchQuest} from '../../actions/quest'
 import { clearMiddleHistory} from '../../actions/'
 import {Button,List,ListItem} from 'react-native-elements';
+const moment = require('moment');
 class HistoryQuestList extends Component {
     static navigationOptions = ({
         navigation
@@ -27,6 +28,8 @@ class HistoryQuestList extends Component {
     componentWillUnmount(){
         this.props.clearMiddleHistory();
     }
+
+
     render(){
         const {historyReducer} = this.props;
                         return(
@@ -39,15 +42,27 @@ class HistoryQuestList extends Component {
                  <View style={styles.pa3}></View>
                     {
                         Object.values(arr).map((info, i) =>{
-                        return <View key={i}>
-                        <View style={styles.pa1}>
-                            
-                                <Text style={{fontFamily:'asd', paddingLeft:10}}>Quest name : {info.name}</Text>
-                                <Text style={{fontFamily:'asd', paddingLeft:10}}>Quest type : {info.type}</Text>
-                                <View key={i} style = {styles.separator}></View>
-                            
-                            </View>
-                        </View> 
+                        if(info.type!='walk'){
+                            return (<View key={i}>
+                                <View style={styles.pa1}>
+                                    
+                                        <Text style={{fontFamily:'asd', paddingLeft:15}}>Quest name : {info.name}</Text>
+                                        <View style={{flexDirection:'row', flex:1}}>
+                                        <Text style={{fontFamily:'asd',flex:1}}>star : {info.star}</Text>
+                                        <Text style={{fontFamily:'asd',flex:2}}>Date : {moment(info.date).format('LLL')}  </Text>
+                                        </View>
+                                        <View key={i} style = {styles.separator}></View>
+                                    </View>
+                                </View>) 
+                        }else{
+                            return(<View key={i}>
+                                        <Text style={{fontFamily:'asd', paddingLeft:15}}>Steps : {info.stepCount}</Text>
+                                        <Text style={{fontFamily:'asd',flex:1}}>star : {info.star}</Text>
+                                        <Text style={{fontFamily:'asd',flex:2}}>Date : {moment(info.date).format('LLL')}  </Text>
+                                        <View key={i} style = {styles.separator}></View>
+                                    </View>
+                                )
+                        }
                         })
                     }
                 </View>    
