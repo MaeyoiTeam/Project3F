@@ -137,9 +137,9 @@ class Quest extends Component {
                         size={210}
                         width={90}
                         fill={star/target *100 }
-                        tintColor="#330066"
+                        tintColor="#FF6347"
                         onAnimationComplete={() => console.log('onAnimationComplete')}
-                        /* backgroundColor="#330066" */ >{
+                        backgroundColor="#000000">{
                           (fill) => (
                         
                             <Text style={{
@@ -147,7 +147,7 @@ class Quest extends Component {
                             fontSize:40,
                             color:'#330066',
                             textAlign:'center', 
-                            backgroundColor:'#FFE4B5',
+                            backgroundColor:'#DCDCDC',
                             borderRadius:360,
                             width:180,
                             height:180,
