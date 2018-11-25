@@ -124,10 +124,15 @@ class QuestWalk extends Component {
         let target =0
             if(Array.isArray(this.props.fetchReducer.data.targetSteps)){
                 switch (this.props.fetchReducer.data.targetSteps.length) {
-                    case 0: target=200;     break;
-                    case 1: target=400;     break;
-                    case 2: target=999;     break;
-                    case 3: target=2018;    break;
+                    case 0: target=999;     break;
+                    case 1: target=2018;     break;
+                    case 2: target=4000;     break;
+                    case 3: target=6500;    break;
+                    case 4: target = 9999; break;
+                    case 5: target = 20000; break;
+                    case 6: target = 40000; break;
+                    case 7: target = 65000; break;
+                    case 8: target = 100000; break;
                     default:  target=200;   break;
                 }
             }

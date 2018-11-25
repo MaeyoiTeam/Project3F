@@ -79,16 +79,8 @@ export const fetchModal = (fn) => {
 //############################################### Ranking ###############################################
 export const fetchProfile = (uid) => {
     const result = loadUserData(uid).then((obj) => {
-        return {
-            uid: uid,
-            displayName: obj.displayName,
-            photoURL: obj.photoURL + "?width=256",
-            email: obj.email,
-            levelQ: obj.levelQ,
-            star: obj.star,
-            achieve: obj.achieve,
-            walkStacks: obj.walkStacks,
-        }
+        return { uid: uid, displayName: obj.displayName, photoURL: obj.photoURL + "?width=256", levelQ: obj.levelQ, email: obj.email,
+          star: obj.star, achieve: obj.achieve, walkStacks: obj.walkStacks };
     });
     return fetchData(result);
 }
