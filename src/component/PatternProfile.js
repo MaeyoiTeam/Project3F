@@ -9,7 +9,7 @@ export class PatternProfile extends Component {
       const {food,walk,rest}= data.levelQ;
     return (
         <View style={styles.container}>
-            <Text style={styles.a1}>Your Profile</Text>
+            <Text style={styles.a1}>Profile</Text>
                 <Avatar large rounded source={{ uri: data.photoURL }} onPress={() => console.log("Works!")} />
                 <Text style={styles.ki}>
                     {data.displayName}
