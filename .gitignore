@@ -2,3 +2,10 @@ node_modules/**/*
 functions/node_modules/
 .expo/*
 npm-debug.*
+.idea/workspace.xml
+.idea/vcs.xml
+.idea/Project3F.iml
+.idea/modules.xml
+.idea/misc.xml
+.idea/inspectionProfiles/Project_Default.xml
+.idea/encodings.xml
