@@ -21,7 +21,6 @@ class MidComponent extends Component {
 
     componentDidUpdate(){
         if (this.props.modal.showModal){
-            console.log("Work")
             this.props.navigate("ModalScreen");
         }
     }

@@ -129,7 +129,7 @@ class QuestRest extends Component {
                         fill={star/target *100 }
                         tintColor="#32CD32"
                         onAnimationComplete={() => console.log('onAnimationComplete')}
-                        /* backgroundColor="#330066" */ >{
+                        backgroundColor="#330066" >{
                           (fill) => (
                         
                             <Text style={{

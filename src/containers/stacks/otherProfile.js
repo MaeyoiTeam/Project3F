@@ -50,7 +50,7 @@ class OtherProfile extends Component {
             otherResult.push(box);
         }
         );
-        return [{ seriesName: "Your WalkStacks", data: myResult, color: "#297AB1" }, { seriesName: "Your WalkStacks", data: otherResult, color: "#d82a00" }];
+        return [{ seriesName: "Your WalkStacks", data: myResult, color: "#297AB1" }, { seriesName: "WalkStacks", data: otherResult, color: "#d82a00" }];
     }
 
     render(){

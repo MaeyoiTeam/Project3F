@@ -48,9 +48,12 @@ class Setting extends Component {
             
             <View style={{flexDirection: 'row'}}>
             <Text style = {styles.notiText}>On/Off Notifications</Text>
-            
-            <CheckBox checked={authReducer.data.isShowNotification} onPress = {this.toggleNotification} checkedIcon = 'dot-circle-o' uncheckedIcon = 'circle-o' iconRight />
-                
+            <View style={{
+                        flex: 1,
+                        alignItems: 'flex-end',
+                    }}>
+            <CheckBox checked={authReducer.data.isShowNotification} onPress = {this.toggleNotification} checkedIcon = 'dot-circle-o' uncheckedIcon = 'circle-o' iconRight right/>
+            </View>
             </View>
            
             <View style={styles.pa4}></View>
@@ -127,8 +130,6 @@ const styles = StyleSheet.create({
         margin:10,
         fontFamily:'asd',
         fontSize: 20,
-        width: 300
-
     }
 });
 

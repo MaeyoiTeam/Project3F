@@ -75,7 +75,7 @@ class Ranking extends Component{
                      {
                          authReducer.isAuth && <View style = {{padding:4,flexDirection: 'row'}}>
                                     <Avatar rounded small source = {{uri: authReducer.data.photoURL}} /> 
-                                    <Text style={{ left: 45, fontFamily: 'asd' }}>Rank: {current + 1} : {authReducer.data.name}</Text>
+                                    <Text style={{ left: 45, fontFamily: 'asd' }}>Rank: {current>10?"Below 10":current+1} : {authReducer.data.name}</Text>
                                     <Text style={{ left: 45, paddingTop: 10, fontFamily: 'asd',paddingBottom:10 }}>     Stars :  {authReducer.data.star}</Text>
                          </View>
                       }
