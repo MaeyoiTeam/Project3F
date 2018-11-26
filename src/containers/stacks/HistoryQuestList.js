@@ -45,20 +45,21 @@ class HistoryQuestList extends Component {
                         if(info.type!='walk'){
                             return (<View key={i}>
                                 <View style={styles.pa1}>
-                                    
                                         <Text style={{fontFamily:'asd', paddingLeft:15}}>Quest name : {info.name}</Text>
                                         <View style={{flexDirection:'row', flex:1}}>
-                                        <Text style={{ fontFamily: 'asd', paddingLeft: 15,flex:0.8}}>star : {info.star}</Text>
+                                        <Text style={{ fontFamily: 'asd', paddingLeft: 15,flex:0.5}}>star : {info.star}</Text>
                                         <Text style={{fontFamily:'asd',flex:2}}>Date : {moment(info.date).format('LLL')}  </Text>
                                         </View>
                                         <View key={i} style = {styles.separator}></View>
                                     </View>
                                 </View>) 
                         }else{
-                            return(<View key={i}>
+                            return(<View key={i} style={styles.pa1}>
                                         <Text style={{fontFamily:'asd', paddingLeft:15}}>Steps : {info.stepCount}</Text>
-                                <Text style={{ fontFamily: 'asd', paddingLeft: 15,flex:0.5}}>star : {info.star}</Text>
-                                        <Text style={{fontFamily:'asd',flex:2}}>Date : {moment(info.date).format('LLL')}  </Text>
+                                        <View style={{flexDirection:'row', flex:1}}>
+                                            <Text style={{ fontFamily: 'asd', paddingLeft: 15,flex:0.5}}>star : {info.star}</Text>
+                                            <Text style={{fontFamily:'asd',flex:2}}>Date : {moment(info.date).format('LLL')}  </Text>
+                                        </View>
                                         <View key={i} style = {styles.separator}></View>
                                     </View>
                                 )

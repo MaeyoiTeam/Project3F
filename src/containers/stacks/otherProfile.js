@@ -46,7 +46,6 @@ class OtherProfile extends Component {
                 x: obj[0],
                 y: obj[1]
             }
-            console.log(obj)
             otherResult.push(box);
         }
         );

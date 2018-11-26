@@ -120,16 +120,12 @@ export const updateAchieve = (uid, quest) => {
                                 } else {
                                     result = have
                                         .filter(obj => {
-                                            console.log(obj)
-                                            console.log(Object.values(require).includes(obj));
                                             return Object.values(require).includes(String(obj));
                                         })
                                         .sort()
                                         .join();
                                         
                                 }
-                                console.log(result);
-                                        console.log(require.sort().join())
                                 return result == require.sort().join();
                             } else if (typeof condition[key] == "object") {
                                 //กรณีจำนวนwalk stacks

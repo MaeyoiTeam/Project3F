@@ -30,7 +30,6 @@ class Notifications extends Component {
 
     render(){
       const {notification} =this.props;
-      console.log(this.props.uid)
       if (notification.haveNotification&&!notification.isFetching) {
           return (<ScrollView>
             <View style={styles.container}>
