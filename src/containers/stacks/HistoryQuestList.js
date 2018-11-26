@@ -48,7 +48,7 @@ class HistoryQuestList extends Component {
                                         <Text style={{fontFamily:'asd', paddingLeft:15}}>Quest name : {info.name}</Text>
                                         <View style={{flexDirection:'row', flex:1}}>
                                         <Text style={{ fontFamily: 'asd', paddingLeft: 15,flex:0.5}}>star : {info.star}</Text>
-                                        <Text style={{fontFamily:'asd',flex:2}}>Date : {moment(info.date).format('LLL')}  </Text>
+                                        <Text style={{fontFamily:'asd',flex:2}}>Date : {moment(info.time).format('LLL')}  </Text>
                                         </View>
                                         <View key={i} style = {styles.separator}></View>
                                     </View>
@@ -58,7 +58,7 @@ class HistoryQuestList extends Component {
                                         <Text style={{fontFamily:'asd', paddingLeft:15}}>Steps : {info.stepCount}</Text>
                                         <View style={{flexDirection:'row', flex:1}}>
                                             <Text style={{ fontFamily: 'asd', paddingLeft: 15,flex:0.5}}>star : {info.star}</Text>
-                                            <Text style={{fontFamily:'asd',flex:2}}>Date : {moment(info.date).format('LLL')}  </Text>
+                                            <Text style={{fontFamily:'asd',flex:2}}>Date : {moment(info.time).format('LLL')}  </Text>
                                         </View>
                                         <View key={i} style = {styles.separator}></View>
                                     </View>

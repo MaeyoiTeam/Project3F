@@ -67,6 +67,7 @@ class QuestRest extends Component {
             const message={
                 title:'New Achievement',
                 body:'You receive: '+achieves.length+ ' achievement',
+                date: new Date().toISOString()
             }
         this.sendSuccessQuestNotification(message);
         Alert.alert(

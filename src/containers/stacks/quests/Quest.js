@@ -101,7 +101,8 @@ class Quest extends Component {
             }
             for(achieve of achieves){
                 this.props.updateNotification(this.props.authReducer.data.uid, {title:message.title,
-                body:'You receive : '+achieve.name+'    ( +'+achieve.star+' stars)'
+                body:'You receive : '+achieve.name+'    ( +'+achieve.star+' stars)',
+                    date: new Date().toISOString()
                 })
             }
         this.sendSuccessQuestNotification(message);
