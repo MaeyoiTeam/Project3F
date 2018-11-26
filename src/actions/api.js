@@ -113,18 +113,23 @@ export const updateAchieve = (uid, quest) => {
                             if (Array.isArray(condition[key])) {
                                 // เจาะจงเควส
                                 //TODO เจาะจง
-
+                                var result=[]
                                 const have = quest[key]; // นี่คือเควส
                                 if (have == null) {
-                                    const result = [];
+                                    result = [];
                                 } else {
-                                    const result = have
+                                    result = have
                                         .filter(obj => {
+                                            console.log(obj)
+                                            console.log(Object.values(require).includes(obj));
                                             return Object.values(require).includes(String(obj));
                                         })
                                         .sort()
                                         .join();
+                                        
                                 }
+                                console.log(result);
+                                        console.log(require.sort().join())
                                 return result == require.sort().join();
                             } else if (typeof condition[key] == "object") {
                                 //กรณีจำนวนwalk stacks

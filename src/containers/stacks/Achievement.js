@@ -53,10 +53,14 @@ class Achievement extends Component {
                 }
               });
             }).catch((e)=>{
-                console.log(e)
-                this.setState({
-                    showImg: false
-                });
+              achieve[1].path = "https://firebasestorage.googleapis.com/v0/b/project3f-4a950.appspot.com/o/achieve%2Ficon.png?alt=media&token=e95c5c83-7b5c-4db3-96f7-258b06b925a1";
+              this.setState({
+                showImg: true,
+                achieve: {
+                  [achieve[0]]: achieve[1],
+                  ...this.state.achieve
+                }
+              });
             })
           }
         }
@@ -120,7 +124,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     width:400,
     borderColor: '#DCDCDC',
-
+    alignItems:'center'
   },
 });
 
