@@ -45,10 +45,14 @@ class Setting extends Component {
         <View style={styles.container}>
         
             <View style={styles.pa3}></View>
-            <View style={styles.pa6}>
             
-            <CheckBox title='On/Off Notification' iconRight checked={authReducer.data.isShowNotification} onPress = {this.toggleNotification}  />
+            <View style={{flexDirection: 'row'}}>
+            <Text style = {styles.notiText}>On/Off Notifications</Text>
+            
+            <CheckBox checked={authReducer.data.isShowNotification} onPress = {this.toggleNotification} checkedIcon = 'dot-circle-o' uncheckedIcon = 'circle-o' iconRight />
+                
             </View>
+           
             <View style={styles.pa4}></View>
                 <View style={styles.container1}>
                             <AboutUs showMe={this.state.showMe} closeAboutUs={this.closeAboutUs}/>
@@ -86,9 +90,9 @@ const styles = StyleSheet.create({
     },
     pa2: {backgroundColor: 'white', flex: 0 ,flexDirection: 'row',    
     },
-    pa3: {backgroundColor: 'white', flex: 0.1,
+    pa3: {backgroundColor: 'white', flex: 0.08, textAlign: 'left'
     },
-    pa4: {backgroundColor: 'white', flex: 0.01,
+    pa4: {backgroundColor: 'white', flex: 0.005,
     },
     pa5: { alignItems: 'center' ,flex: 0.8,
     },
@@ -108,15 +112,24 @@ const styles = StyleSheet.create({
             margin:20,
             fontFamily:'asd'
         }, 
-    openText:{backgroundColor:'#FBFBFB',
+    openText:{backgroundColor:'transparent',
             color:'black',
-            padding: 13,
             paddingLeft: 20,
             margin:10,
-            borderWidth: 1,
-            borderColor: '#eaeaea', 
-            fontFamily:'asd'          
+            fontFamily:'asd',
+            fontSize: 20
+            
+                   
     },
+    notiText:{backgroundColor:'transparent',
+        color:'black',
+        paddingLeft: 20,
+        margin:10,
+        fontFamily:'asd',
+        fontSize: 20,
+        width: 300
+
+    }
 });
 
 // Used to add reducer's states into the props

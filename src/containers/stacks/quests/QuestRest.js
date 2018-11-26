@@ -8,7 +8,6 @@ import TimerCountdown from 'react-native-timer-countdown';
 import Accel from '../../../component/Accel';
 import { Notifications} from 'expo'
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
-import {clearFechReducer,clearMiddleHistory} from '../../../actions'
 class QuestRest extends Component {
   static navigationOptions = ({
       navigation
@@ -49,7 +48,6 @@ class QuestRest extends Component {
                 }
             })
              if (this.props.fetchReducer.data.isComplete) {
-                 console.log("quest Rest ")
                 const message = {
                     title: "Rest Quest Completed!",
                     body:"Quest: "+prevProps.fetchReducer.data.name+" (+ "+prevProps.fetchReducer.data.star+" stars).",
@@ -63,10 +61,6 @@ class QuestRest extends Component {
         }
     }
 
-    componentWillUnmount(){
-        this.props.clearFechReducer();
-        this.props.clearMiddleHistory();
-    }
 
     showNewAchievement=(data)=>{
         const achieves = Object.values(data);
@@ -133,7 +127,7 @@ class QuestRest extends Component {
                         size={210}
                         width={90}
                         fill={star/target *100 }
-                        tintColor="#330066"
+                        tintColor="#32CD32"
                         onAnimationComplete={() => console.log('onAnimationComplete')}
                         /* backgroundColor="#330066" */ >{
                           (fill) => (
@@ -143,7 +137,7 @@ class QuestRest extends Component {
                             fontSize:40,
                             color:'#330066',
                             textAlign:'center', 
-                            backgroundColor:'#FFE4B5',
+                            backgroundColor:'#DCDCDC',
                             borderRadius:360,
                             width:180,
                             height:180,
@@ -180,7 +174,7 @@ class QuestRest extends Component {
             <View style = {styles.kp3}></View>
                 <View style = {styles.kp1}>
                 
-                    <Text style = {{textAlign: 'center',fontSize:30,fontFamily:'asd'}}>{name}</Text>
+                <Text style = {{textAlign: 'center',fontSize:30,fontFamily:'asd'}}>{name}</Text>
                 <View style = {styles.kp2}></View>
                 <Text style = {{textAlign: 'center',fontSize:20,fontFamily:'asd'}}>Detail: {detail} </Text>
                 <View style = {styles.kp6}></View>
@@ -266,7 +260,7 @@ const mapStateToProps = (state) => ({
 });
 //Used to add dispatch (action) into props
 const mapDispatchToProps = {
-    updateQuest, fetchQuest, updateQuestDone, getQuestList, updateNotification,clearFechReducer,clearMiddleHistory
+    updateQuest, fetchQuest, updateQuestDone, getQuestList, updateNotification
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(QuestRest)
