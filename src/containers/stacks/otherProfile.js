@@ -65,7 +65,7 @@ class OtherProfile extends Component {
               <Button title="Completed Quest" onPress={this.goToHistoryQuest} buttonStyle={{ backgroundColor: "#8e8e8e", width: 240, height: 50, borderColor: "transparent" }} textStyle={{ fontFamily: "asd", color: "#ffffff" }} />
             </View>
             <Text style={{ fontFamily: "asd", textAlign: "center" }}>
-              Your WalkStacks
+              WalkStacks
             </Text>
             {fetchReducer.data.walkStacks != null && <PureChart data={this.sortWalkStacks()} type="bar" xAxisColor={"black"} height={100} yAxisColor={"red"} />}
           </ScrollView>;
